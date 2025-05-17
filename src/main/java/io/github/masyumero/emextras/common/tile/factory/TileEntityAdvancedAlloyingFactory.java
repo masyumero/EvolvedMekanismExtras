@@ -1,7 +1,6 @@
 package io.github.masyumero.emextras.common.tile.factory;
 
 import com.jerry.mekanism_extras.common.tier.AdvancedFactoryTier;
-import com.jerry.mekanism_extras.common.tile.factory.TileEntityItemToItemAdvancedFactory;
 import fr.iglee42.evolvedmekanism.interfaces.EMInputRecipeCache;
 import fr.iglee42.evolvedmekanism.interfaces.IGetEnergySlot;
 import fr.iglee42.evolvedmekanism.interfaces.ThreeInputCachedRecipe;
@@ -84,8 +83,8 @@ public class TileEntityAdvancedAlloyingFactory extends TileEntityItemToItemEMExt
         int endInventory = (imageWidth / 2 + inventorySize / 2) - 10;
         int extraSlotX = tier.ordinal() > FactoryTier.ULTIMATE.ordinal() ? endInventory + 4 : 7;
         int extraSlotY = tier.ordinal() > FactoryTier.ULTIMATE.ordinal() ? 143 : 57;
-        builder.addSlot(extraSlot = LimitedInputInventorySlot.at((tier.ordinal() + 1) * 64,this::containsRecipeB, markAllMonitorsChanged(listener), extraSlotX, extraSlotY));
-        builder.addSlot(secondExtraSlot = LimitedInputInventorySlot.at((tier.ordinal() + 1) * 64, this::containsRecipeC, markAllMonitorsChanged(listener), extraSlotX, extraSlotY - 22));
+        builder.addSlot(extraSlot = LimitedInputInventorySlot.at((tier.ordinal() + 1) * (tier.ordinal() + 1) * (tier.ordinal() + 1) * 64,this::containsRecipeB, markAllMonitorsChanged(listener), extraSlotX, extraSlotY));
+        builder.addSlot(secondExtraSlot = LimitedInputInventorySlot.at((tier.ordinal() + 1) * (tier.ordinal() + 1) * (tier.ordinal() + 1) * 64, this::containsRecipeC, markAllMonitorsChanged(listener), extraSlotX, extraSlotY - 22));
         extraSlot.setSlotType(ContainerSlotType.EXTRA);
         secondExtraSlot.setSlotType(ContainerSlotType.EXTRA);
     }
@@ -151,6 +150,7 @@ public class TileEntityAdvancedAlloyingFactory extends TileEntityItemToItemEMExt
                 .setEnergyRequirements(energyContainer::getEnergyPerTick, energyContainer)
                 .setRequiredTicks(this::getTicksRequired)
                 .setOnFinish(this::markForSave)
+                .setBaselineMaxOperations(() -> baselineMaxOperations)
                 .setOperatingTicksChanged(operatingTicks -> progress[cacheIndex] = operatingTicks);
     }
 

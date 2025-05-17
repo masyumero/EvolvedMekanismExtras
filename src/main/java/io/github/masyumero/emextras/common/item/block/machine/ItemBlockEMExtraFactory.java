@@ -1,13 +1,12 @@
 package io.github.masyumero.emextras.common.item.block.machine;
 
-import com.jerry.mekanism_extras.common.block.attribute.ExtraAttribute;
 import com.jerry.mekanism_extras.common.tier.AdvancedFactoryTier;
+import io.github.masyumero.emextras.common.block.attribute.EMExtraAttribute;
 import io.github.masyumero.emextras.common.block.attribute.EMExtraAttributeFactoryType;
 import io.github.masyumero.emextras.common.block.prefab.BlockEMExtraFactoryMachine;
 import mekanism.api.text.EnumColor;
 import mekanism.common.MekanismLang;
 import mekanism.common.block.attribute.Attribute;
-import mekanism.common.block.attribute.AttributeFactoryType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -24,7 +23,7 @@ public class ItemBlockEMExtraFactory extends EMExtraItemBlockMachine {
 
     @Override
     public AdvancedFactoryTier getAdvanceTier() {
-        return ExtraAttribute.getTier(getBlock(), AdvancedFactoryTier.class);
+        return EMExtraAttribute.getTier(getBlock(), AdvancedFactoryTier.class);
     }
 
     @Override

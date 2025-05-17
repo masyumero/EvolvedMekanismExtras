@@ -1,0 +1,15 @@
+{
+  "constants.emextras.mod_name":"Evolved Mekanism Extras",
+
+  "item.emextras.infinite_multiversal_control_circuit": "[WIP]無元制御回路",
+
+  "block.emextras.absolute_alloying_factory": "絶対合金ファクトリー",
+  "block.emextras.supreme_alloying_factory": "至高合金ファクトリー",
+  "block.emextras.cosmic_alloying_factory": "宇宙合金ファクトリー",
+  "block.emextras.infinite_alloying_factory": "無限合金ファクトリー",
+
+  "container.emextras.absolute_alloying_factory": "絶対合金ファクトリー",
+  "container.emextras.supreme_alloying_factory": "至高合金ファクトリー",
+  "container.emextras.cosmic_alloying_factory": "宇宙合金ファクトリー",
+  "container.emextras.infinite_alloying_factory": "無限合金ファクトリー"
+}

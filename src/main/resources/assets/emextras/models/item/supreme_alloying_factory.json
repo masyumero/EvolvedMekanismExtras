@@ -1,34 +1,3 @@
 {
-  "variants": {
-    "facing=north,active=false": {
-      "model": "emextras:block/factory/alloying/supreme"
-    },
-    "facing=south,active=false": {
-      "model": "emextras:block/factory/alloying/supreme",
-      "y": 180
-    },
-    "facing=east,active=false": {
-      "model": "emextras:block/factory/alloying/supreme",
-      "y": 90
-    },
-    "facing=west,active=false": {
-      "model": "emextras:block/factory/alloying/supreme",
-      "y": -90
-    },
-    "facing=north,active=true": {
-      "model": "emextras:block/factory/alloying/active/supreme"
-    },
-    "facing=south,active=true": {
-      "model": "emextras:block/factory/alloying/active/supreme",
-      "y": 180
-    },
-    "facing=east,active=true": {
-      "model": "emextras:block/factory/alloying/active/supreme",
-      "y": 90
-    },
-    "facing=west,active=true": {
-      "model": "emextras:block/factory/alloying/active/supreme",
-      "y": -90
-    }
-  }
+  "parent": "emextras:block/factory/alloying/supreme"
 }

@@ -1,9 +1,9 @@
 package io.github.masyumero.emextras.common.content.blocktype;
 
 import com.jerry.mekanism_extras.api.ExtraUpgrade;
-import com.jerry.mekanism_extras.common.block.attribute.ExtraAttributeUpgradeable;
 import com.jerry.mekanism_extras.common.tier.AdvancedFactoryTier;
 import io.github.masyumero.emextras.common.block.attribute.EMExtraAttributeFactoryType;
+import io.github.masyumero.emextras.common.block.attribute.EMExtraAttributeUpgradeable;
 import io.github.masyumero.emextras.common.registry.EMExtrasBlock;
 import mekanism.api.Upgrade;
 import mekanism.common.MekanismLang;
@@ -23,7 +23,7 @@ public class EMExtraMachine {
         public EMExtraFactoryMachine(Supplier<TileEntityTypeRegistryObject<TILE>> tileEntitySupplier, MekanismLang description, EMExtraFactoryType factoryType) {
             super(tileEntitySupplier, description);
             add(new AttributeUpgradeSupport(EnumSet.of(Upgrade.SPEED, Upgrade.ENERGY, Upgrade.MUFFLING, ExtraUpgrade.STACK, ExtraUpgrade.CREATIVE)));
-            add(new EMExtraAttributeFactoryType(factoryType), new ExtraAttributeUpgradeable(() -> EMExtrasBlock.getEMExtraFactory(AdvancedFactoryTier.ABSOLUTE, getFactoryType())));
+            add(new EMExtraAttributeFactoryType(factoryType), new EMExtraAttributeUpgradeable(() -> EMExtrasBlock.getEMExtraFactory(AdvancedFactoryTier.ABSOLUTE, getFactoryType())));
         }
 
         public EMExtraFactoryType getFactoryType() {

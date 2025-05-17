@@ -1,0 +1,15 @@
+{
+  "constants.emextras.mod_name":"Evolved Mekanism Extras",
+
+  "item.emextras.infinite_multiversal_control_circuit": "[WIP]Infinite Multiversal Control Circuit",
+
+  "block.emextras.absolute_alloying_factory": "Absolute Smelting Factory",
+  "block.emextras.supreme_alloying_factory": "Supreme Smelting Factory",
+  "block.emextras.cosmic_alloying_factory": "Cosmic Smelting Factory",
+  "block.emextras.infinite_alloying_factory": "Infinite Smelting Factory",
+
+  "container.emextras.absolute_alloying_factory": "Absolute Smelting Factory",
+  "container.emextras.supreme_alloying_factory": "Supreme Smelting Factory",
+  "container.emextras.cosmic_alloying_factory": "Cosmic Smelting Factory",
+  "container.emextras.infinite_alloying_factory": "Infinite Smelting Factory"
+}

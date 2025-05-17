@@ -1,0 +1,29 @@
+{
+  "type": "mekanism:mek_data",
+  "key": {
+    "A": {
+      "tag": "mekanism_extras:alloys/spectrum"
+    },
+    "C": {
+      "tag": "forge:circuits/infinite"
+    },
+    "I": {
+      "tag": "forge:pellets/plutonium"
+    },
+    "J": {
+      "tag": "forge:pellets/polonium"
+    },
+    "P": {
+      "item": "emextras:absolute_alloying_factory"
+    }
+  },
+  "pattern": [
+    "ACA",
+    "IPJ",
+    "ACA"
+  ],
+  "result": {
+    "count": 1,
+    "item": "emextras:supreme_alloying_factory"
+  }
+}

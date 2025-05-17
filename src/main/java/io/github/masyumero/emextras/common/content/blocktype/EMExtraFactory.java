@@ -1,13 +1,13 @@
 package io.github.masyumero.emextras.common.content.blocktype;
 
-import com.jerry.mekanism_extras.common.block.attribute.ExtraAttributeTier;
-import com.jerry.mekanism_extras.common.block.attribute.ExtraAttributeUpgradeable;
-import com.jerry.mekanism_extras.common.registry.ExtraContainerTypes;
 import com.jerry.mekanism_extras.common.tier.AdvancedFactoryTier;
 import com.jerry.mekanism_extras.common.util.ExtraEnumUtils;
 import io.github.masyumero.emextras.common.block.attribute.EMExtraAttributeFactoryType;
+import io.github.masyumero.emextras.common.block.attribute.EMExtraAttributeTier;
+import io.github.masyumero.emextras.common.block.attribute.EMExtraAttributeUpgradeable;
 import io.github.masyumero.emextras.common.registry.EMExtrasBlock;
 import io.github.masyumero.emextras.common.registry.EMExtrasBlockType;
+import io.github.masyumero.emextras.common.registry.EMExtrasContainerTypes;
 import io.github.masyumero.emextras.common.tile.factory.TileEntityEMExtraFactory;
 import mekanism.common.MekanismLang;
 import mekanism.common.block.attribute.*;
@@ -28,13 +28,12 @@ public class EMExtraFactory<TILE extends TileEntityEMExtraFactory<?>> extends EM
     public EMExtraFactory(Supplier<TileEntityTypeRegistryObject<TILE>> tileEntityRegistrar, Supplier<ContainerTypeRegistryObject<? extends MekanismContainer>> containerRegistrar,
                           EMExtraMachine.EMExtraFactoryMachine<?> origMachine, AdvancedFactoryTier tier) {
         super(tileEntityRegistrar, MekanismLang.DESCRIPTION_FACTORY, origMachine.getFactoryType());
-        this.origMachine = origMachine;
+        this.origMachine = origMachine;;
         setMachineData(tier);
-        add(new AttributeGui(containerRegistrar, null), new ExtraAttributeTier<>(tier));
+        add(new AttributeGui(containerRegistrar, null), new EMExtraAttributeTier<>(tier));
 
-        // 添加升级后的方块
         if (tier.ordinal() < ExtraEnumUtils.ADVANCED_FACTORY_TIERS.length - 1) {
-            add(new ExtraAttributeUpgradeable(() -> EMExtrasBlock.getEMExtraFactory(ExtraEnumUtils.ADVANCED_FACTORY_TIERS[tier.ordinal() + 1], origMachine.getFactoryType())));
+            add(new EMExtraAttributeUpgradeable(() -> EMExtrasBlock.getEMExtraFactory(ExtraEnumUtils.ADVANCED_FACTORY_TIERS[tier.ordinal() + 1], origMachine.getFactoryType())));
         }
     }
 
@@ -53,9 +52,12 @@ public class EMExtraFactory<TILE extends TileEntityEMExtraFactory<?>> extends EM
 
         @SuppressWarnings("unchecked")
         public static <TILE extends TileEntityEMExtraFactory<?>> EMExtraFactoryBuilder<EMExtraFactory<TILE>, TILE, ?> createFactory(Supplier<?> tileEntityRegistrar, EMExtraFactoryType type,
-                                                                                                                                      AdvancedFactoryTier tier) {
+                                                                                                                                    AdvancedFactoryTier tier) {
 
             EMExtraFactoryBuilder<EMExtraFactory<TILE>, TILE, ?> builder = getAdvancedFactoryTILEAdvancedFactoryBuilder((Supplier<TileEntityTypeRegistryObject<TILE>>) tileEntityRegistrar, type, tier);
+            if(type == EMExtraFactoryType.ALLOYING) {
+                builder.withCustomShape(BlockShapes.SMELTING_FACTORY);
+            }
 //            builder.with(switch (type) {
 //                case SMELTING, ENRICHING, CRUSHING, COMBINING, SAWING -> AttributeSideConfig.ELECTRIC_MACHINE;
 //                case COMPRESSING, INJECTING, PURIFYING, INFUSING -> AttributeSideConfig.ADVANCED_ELECTRIC_MACHINE;
@@ -72,7 +74,7 @@ public class EMExtraFactory<TILE extends TileEntityEMExtraFactory<?>> extends EM
     private static <TILE extends TileEntityEMExtraFactory<?>> @NotNull EMExtraFactoryBuilder<EMExtraFactory<TILE>, TILE, ?> getAdvancedFactoryTILEAdvancedFactoryBuilder(Supplier<TileEntityTypeRegistryObject<TILE>> tileEntityRegistrar, EMExtraFactoryType type, AdvancedFactoryTier tier) {
 
         EMExtraFactoryBuilder<EMExtraFactory<TILE>, TILE, ?> builder = new EMExtraFactoryBuilder<>(new EMExtraFactory<>(tileEntityRegistrar,
-                () -> ExtraContainerTypes.FACTORY,
+                () -> EMExtrasContainerTypes.FACTORY,
                 switch (type) {
                     case ALLOYING -> EMExtrasBlockType.ALLOYER;
                 },

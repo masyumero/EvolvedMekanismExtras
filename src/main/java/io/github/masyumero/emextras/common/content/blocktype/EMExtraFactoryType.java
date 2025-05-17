@@ -1,13 +1,9 @@
 package io.github.masyumero.emextras.common.content.blocktype;
 
-import fr.iglee42.evolvedmekanism.EvolvedMekanismLang;
 import fr.iglee42.evolvedmekanism.registries.EMBlocks;
-import io.github.masyumero.emextras.common.registry.EMExtrasBlock;
 import io.github.masyumero.emextras.common.registry.EMExtrasBlockType;
 import mekanism.api.annotations.NothingNullByDefault;
 import mekanism.api.text.IHasTranslationKey;
-import mekanism.common.MekanismLang;
-import mekanism.common.content.blocktype.Machine;
 import mekanism.common.registration.impl.BlockRegistryObject;
 
 import java.util.Locale;
@@ -15,16 +11,16 @@ import java.util.function.Supplier;
 
 @NothingNullByDefault
 public enum EMExtraFactoryType implements IHasTranslationKey {
-    ALLOYING("alloying", EvolvedMekanismLang.ALLOYING, () -> EMExtrasBlockType.ALLOYER, () -> EMBlocks.ALLOYER);
+    ALLOYING("alloying", "factory.mekanism.alloying", () -> EMExtrasBlockType.ALLOYER, () -> EMBlocks.ALLOYER);
 
     private final String registryNameComponent;
-    private final MekanismLang langEntry;
+    private final String translationKey;
     private final Supplier<EMExtraMachine.EMExtraFactoryMachine<?>> baseMachine;
     private final Supplier<BlockRegistryObject<?, ?>> baseBlock;
 
-    EMExtraFactoryType(String registryNameComponent, MekanismLang langEntry, Supplier<EMExtraMachine.EMExtraFactoryMachine<?>> baseMachine, Supplier<BlockRegistryObject<?, ?>> baseBlock) {
+    EMExtraFactoryType(String registryNameComponent, String translationKey, Supplier<EMExtraMachine.EMExtraFactoryMachine<?>> baseMachine, Supplier<BlockRegistryObject<?, ?>> baseBlock) {
         this.registryNameComponent = registryNameComponent;
-        this.langEntry = langEntry;
+        this.translationKey = translationKey;
         this.baseMachine = baseMachine;
         this.baseBlock = baseBlock;
     }
@@ -48,6 +44,6 @@ public enum EMExtraFactoryType implements IHasTranslationKey {
 
     @Override
     public String getTranslationKey() {
-        return langEntry.getTranslationKey();
+        return translationKey;
     }
 }

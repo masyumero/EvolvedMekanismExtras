@@ -1,11 +1,10 @@
 package io.github.masyumero.emextras.common.tile.factory;
 
 import com.jerry.mekanism_extras.api.ExtraUpgrade;
-import com.jerry.mekanism_extras.common.block.attribute.ExtraAttribute;
-import com.jerry.mekanism_extras.common.inventory.slot.AdvancedFactoryInputInventorySlot;
 import com.jerry.mekanism_extras.common.tier.AdvancedFactoryTier;
 import com.jerry.mekanism_extras.common.util.ExtraEnumUtils;
 import com.jerry.mekanism_extras.common.util.ExtraUpgradeUtils;
+import io.github.masyumero.emextras.common.block.attribute.EMExtraAttribute;
 import io.github.masyumero.emextras.common.block.attribute.EMExtraAttributeFactoryType;
 import io.github.masyumero.emextras.common.content.blocktype.EMExtraFactoryType;
 import io.github.masyumero.emextras.common.inventory.slot.EMExtraFactoryInputInventorySlot;
@@ -168,7 +167,7 @@ public abstract class TileEntityEMExtraFactory<RECIPE extends MekanismRecipe> ex
     @Override
     protected void presetVariables() {
         super.presetVariables();
-        tier = ExtraAttribute.getTier(getBlockType(), AdvancedFactoryTier.class);
+        tier = EMExtraAttribute.getTier(getBlockType(), AdvancedFactoryTier.class);
         Runnable setSortingNeeded = () -> sortingNeeded = true;
         recipeCacheLookupMonitors = new FactoryRecipeCacheLookupMonitor[tier.processes];
         for (int i = 0; i < recipeCacheLookupMonitors.length; i++) {
