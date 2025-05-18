@@ -8,6 +8,9 @@ import fr.iglee42.evolvedmekanism.EvolvedMekanismLang;
 import fr.iglee42.evolvedmekanism.registries.EMContainerTypes;
 import fr.iglee42.evolvedmekanism.registries.EMTileEntityTypes;
 import fr.iglee42.evolvedmekanism.tiles.machine.TileEntityAlloyer;
+import io.github.masyumero.emextras.common.config.EMExtraModConfig;
+import io.github.masyumero.emextras.common.config.EMExtraUsageConfig;
+import io.github.masyumero.emextras.common.config.LoadConfig;
 import io.github.masyumero.emextras.common.content.blocktype.EMExtraFactory;
 import io.github.masyumero.emextras.common.content.blocktype.EMExtraFactoryType;
 import io.github.masyumero.emextras.common.content.blocktype.EMExtraMachine;
@@ -16,6 +19,7 @@ import mekanism.common.config.MekanismConfig;
 import mekanism.common.content.blocktype.Factory;
 import mekanism.common.registries.MekanismSounds;
 import mekanism.common.tier.FactoryTier;
+import net.minecraftforge.fml.config.ModConfig;
 
 public class EMExtrasBlockType {
     private static final Table<AdvancedFactoryTier, EMExtraFactoryType, EMExtraFactory<?>> FACTORIES = HashBasedTable.create();
@@ -24,7 +28,7 @@ public class EMExtrasBlockType {
             .createEMExtraFactoryMachine(() -> EMTileEntityTypes.ALLOYER, EvolvedMekanismLang.DESCRIPTION_ALLOYER, EMExtraFactoryType.ALLOYING)
             .withGui(() -> EMContainerTypes.ALLOYER)
             .withSound(MekanismSounds.COMBINER)
-            .withEnergyConfig(MekanismConfig.usage.combiner, MekanismConfig.storage.combiner)
+            .withEnergyConfig(LoadConfig.emExtraUsageConfig.alloyer, LoadConfig.emExtraStorageConfig.alloyer)
             .withComputerSupport("alloyer")
             .build();
 
