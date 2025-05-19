@@ -2,7 +2,10 @@
   "constants.emextras.mod_name":"Evolved Mekanism Extras",
 
   "item.emextras.base_control_circuit": "基礎制御回路",
-  "item.emextras.infinite_multiversal_control_circuit": "[WIP]無元制御回路",
+  "item.emextras.absolute_overclocked_control_circuit": "[WIP]絶対オーバークロック制御回路",
+  "item.emextras.supreme_quantum_control_circuit": "[WIP]至高量子制御回路",
+    "item.emextras.cosmic_dense_control_circuit": "[WIP]宇宙密度制御回路",
+  "item.emextras.infinite_multiversal_control_circuit": "[WIP]無限多元制御回路",
 
   "block.emextras.absolute_alloying_factory": "絶対合金ファクトリー",
   "block.emextras.supreme_alloying_factory": "至高合金ファクトリー",

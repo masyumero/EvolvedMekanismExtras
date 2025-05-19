@@ -16,6 +16,7 @@ public class EMExtraTab {
     public static final CreativeTabRegistryObject EVOLVED_MEKANISM_EXTRAS_TAB = TAB.registerMain(EMExtrasLang.TAB, EMExtrasItem.INFINITE_MULTIVERSAL_CONTROL_CIRCUIT, builder ->
             builder.displayItems((displayParameters, output) -> {
                 CreativeTabDeferredRegister.addToDisplay(EMExtrasBlock.BLOCK, output);
+                CreativeTabDeferredRegister.addToDisplay(EMExtrasItem.ITEM, output);
             })
     );
 

@@ -2,6 +2,9 @@
   "constants.emextras.mod_name":"Evolved Mekanism Extras",
 
   "item.emextras.base_control_circuit": "Base Control Circuit",
+  "item.emextras.absolute_overclocked_control_circuit": "[WIP]Absolute Overclocked Control Circuit",
+  "item.emextras.supreme_quantum_control_circuit": "[WIP]Supreme Quantum Control Circuit",
+  "item.emextras.cosmic_dense_control_circuit": "[WIP]Cosmic Dense Control Circuit",
   "item.emextras.infinite_multiversal_control_circuit": "[WIP]Infinite Multiversal Control Circuit",
 
   "block.emextras.absolute_alloying_factory": "Absolute Alloying Factory",
