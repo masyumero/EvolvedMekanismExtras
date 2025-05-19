@@ -1,6 +1,7 @@
 {
   "constants.emextras.mod_name":"Evolved Mekanism Extras",
 
+  "item.emextras.base_control_circuit": "Base Control Circuit",
   "item.emextras.infinite_multiversal_control_circuit": "[WIP]Infinite Multiversal Control Circuit",
 
   "block.emextras.absolute_alloying_factory": "Absolute Alloying Factory",

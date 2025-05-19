@@ -1,6 +1,7 @@
 {
   "constants.emextras.mod_name":"Evolved Mekanism Extras",
 
+  "item.emextras.base_control_circuit": "基礎制御回路",
   "item.emextras.infinite_multiversal_control_circuit": "[WIP]無元制御回路",
 
   "block.emextras.absolute_alloying_factory": "絶対合金ファクトリー",

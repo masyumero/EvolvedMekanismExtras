@@ -2,16 +2,13 @@
   "type": "mekanism:mek_data",
   "key": {
     "A": {
-      "tag": "mekanism_extras:alloys/spectrum"
+      "tag": "mekanism_extras:alloys/thermonuclear"
     },
     "C": {
-      "tag": "forge:circuits/infinite"
+      "tag": "forge:circuits/supreme"
     },
     "I": {
-      "tag": "forge:pellets/plutonium"
-    },
-    "J": {
-      "tag": "forge:pellets/polonium"
+      "tag": "forge:ingots/netherite"
     },
     "P": {
       "item": "emextras:absolute_alloying_factory"
@@ -19,7 +16,7 @@
   },
   "pattern": [
     "ACA",
-    "IPJ",
+    "IPI",
     "ACA"
   ],
   "result": {

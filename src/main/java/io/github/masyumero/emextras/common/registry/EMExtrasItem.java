@@ -10,6 +10,7 @@ import net.minecraftforge.eventbus.api.IEventBus;
 public class EMExtrasItem {
     public static final ItemDeferredRegister ITEM = new ItemDeferredRegister(EMExtras.MODID);
 
+    public static final ItemRegistryObject<Item> BASE_CONTROL_CIRCUIT = registerCircuit("base", Rarity.COMMON);
     public static final ItemRegistryObject<Item> INFINITE_MULTIVERSAL_CONTROL_CIRCUIT = registerCircuit("infinite_multiversal", Rarity.EPIC);
 
     private static ItemRegistryObject<Item> registerCircuit(String name, Rarity rarity) {
