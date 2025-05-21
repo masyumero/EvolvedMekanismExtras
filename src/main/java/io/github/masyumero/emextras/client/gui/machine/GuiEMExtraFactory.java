@@ -27,7 +27,6 @@ public class GuiEMExtraFactory extends GuiConfigurableTile<TileEntityEMExtraFact
 
     public GuiEMExtraFactory(MekanismTileContainer<TileEntityEMExtraFactory<?>> container, Inventory inv, Component title) {
         super(container, inv, title);
-        //imageHeight += 11;
         inventoryLabelY = 75;
         int index = tile.tier.ordinal();
         imageWidth += (36 * (index + 2)) + (2 * index);

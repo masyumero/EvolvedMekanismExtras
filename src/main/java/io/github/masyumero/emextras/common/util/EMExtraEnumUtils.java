@@ -1,13 +1,13 @@
 package io.github.masyumero.emextras.common.util;
 
-import com.jerry.mekanism_extras.common.tier.AdvancedFactoryTier;
 import io.github.masyumero.emextras.common.content.blocktype.EMExtraFactoryType;
+import io.github.masyumero.emextras.common.tier.EMExtraFactoryTier;
 
 public class EMExtraEnumUtils {
 
     private EMExtraEnumUtils() {
     }
 
-    public static final AdvancedFactoryTier[] ADVANCED_FACTORY_TIERS = AdvancedFactoryTier.values();
+    public static final EMExtraFactoryTier[] EMEXTRA_FACTORY_TIERS = EMExtraFactoryTier.values();
     public static final EMExtraFactoryType[] FACTORY_TYPES = EMExtraFactoryType.values();
 }

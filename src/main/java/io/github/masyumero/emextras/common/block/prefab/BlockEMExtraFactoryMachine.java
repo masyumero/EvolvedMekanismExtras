@@ -4,7 +4,6 @@ import io.github.masyumero.emextras.common.content.blocktype.EMExtraFactory;
 import io.github.masyumero.emextras.common.content.blocktype.EMExtraMachine;
 import io.github.masyumero.emextras.common.tile.factory.TileEntityEMExtraFactory;
 import mekanism.common.block.prefab.BlockTile;
-import mekanism.common.block.states.IStateFluidLoggable;
 import mekanism.common.resource.BlockResourceInfo;
 import mekanism.common.tile.base.TileEntityMekanism;
 
