@@ -1,0 +1,31 @@
+{
+    "type": "mekanism:mek_data",
+    "key": {
+        "A": {
+            "item": "emextras:absolute_overclocked_control_circuit"
+        },
+        "E": {
+            "tag": "mekanism_extras:alloys/radiance"
+        },
+        "M": {
+            "tag": "evolvedmekanism:alloys/hypercharged"
+        },
+        "I": {
+            "item": "emextras:absolute_alloying_factory"
+        },
+        "F": {
+            "item": "evolvedmekanism:overclocked_alloying_factory"
+        },
+        "P": {
+            "item": "mekanism:steel_casing"
+        }
+    },
+    "pattern": [
+        "EAM",
+        "IPF",
+        "MAE"
+    ],
+    "result": {
+        "item": "emextras:absolute_overclocked_alloying_factory"
+    }
+}

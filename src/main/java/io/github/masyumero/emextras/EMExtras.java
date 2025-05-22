@@ -18,6 +18,7 @@ public class EMExtras {
 
     private static final Logger LOGGER = LogUtils.getLogger();
 
+    @SuppressWarnings("removal")
     public EMExtras() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         LoadConfig.registerConfig(ModLoadingContext.get());
@@ -28,6 +29,7 @@ public class EMExtras {
         EMExtraTab.register(modEventBus);
     }
 
+    @SuppressWarnings("removal")
     public static ResourceLocation rl(String path){
         return new ResourceLocation(EMExtras.MODID, path);
     }

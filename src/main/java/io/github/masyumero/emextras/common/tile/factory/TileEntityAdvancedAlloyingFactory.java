@@ -1,6 +1,6 @@
 package io.github.masyumero.emextras.common.tile.factory;
 
-import com.jerry.mekanism_extras.common.tier.AdvancedFactoryTier;
+import io.github.masyumero.emextras.common.tier.EMExtraFactoryTier;
 import fr.iglee42.evolvedmekanism.interfaces.EMInputRecipeCache;
 import fr.iglee42.evolvedmekanism.interfaces.IGetEnergySlot;
 import fr.iglee42.evolvedmekanism.interfaces.ThreeInputCachedRecipe;
@@ -78,13 +78,23 @@ public class TileEntityAdvancedAlloyingFactory extends TileEntityItemToItemEMExt
     @Override
     protected void addSlots(InventorySlotHelper builder, IContentsListener listener, IContentsListener updateSortingListener) {
         super.addSlots(builder, listener, updateSortingListener);
-        int imageWidth = 176 +(38 *( tier.ordinal() - AdvancedFactoryTier.ABSOLUTE.ordinal() + 1)) + 9;
-        int inventorySize = 9 * 20;
-        int endInventory = (imageWidth / 2 + inventorySize / 2) - 10;
-        int extraSlotX = tier.ordinal() > FactoryTier.ULTIMATE.ordinal() ? endInventory + 4 : 7;
-        int extraSlotY = tier.ordinal() > FactoryTier.ULTIMATE.ordinal() ? 143 : 57;
-        builder.addSlot(extraSlot = LimitedInputInventorySlot.at((tier.ordinal() + 1) * (tier.ordinal() + 1) * (tier.ordinal() + 1) * 64,this::containsRecipeB, markAllMonitorsChanged(listener), extraSlotX, extraSlotY));
-        builder.addSlot(secondExtraSlot = LimitedInputInventorySlot.at((tier.ordinal() + 1) * (tier.ordinal() + 1) * (tier.ordinal() + 1) * 64, this::containsRecipeC, markAllMonitorsChanged(listener), extraSlotX, extraSlotY - 22));
+        if (tier.isEvolved()) {
+            int imageWidth = 176 +(38 *((tier.ordinal() - 4) - EMExtraFactoryTier.ABSOLUTE.ordinal() + 1)) + 9;
+            int inventorySize = 9 * 20;
+            int endInventory = (imageWidth / 2 + inventorySize / 2) - 10;
+            int extraSlotX = (tier.ordinal() - 4) > FactoryTier.ULTIMATE.ordinal() ? endInventory + 4 : 7;
+            int extraSlotY = (tier.ordinal() - 4) > FactoryTier.ULTIMATE.ordinal() ? 143 : 57;
+            builder.addSlot(extraSlot = LimitedInputInventorySlot.at(((tier.ordinal() - 4) + 1) * ((tier.ordinal() - 4) + 1) * ((tier.ordinal() - 4) + 1) * 64,this::containsRecipeB, markAllMonitorsChanged(listener), extraSlotX, extraSlotY));
+            builder.addSlot(secondExtraSlot = LimitedInputInventorySlot.at(((tier.ordinal() - 4) + 1) * ((tier.ordinal() - 4) + 1) * ((tier.ordinal() - 4) + 1) * 64, this::containsRecipeC, markAllMonitorsChanged(listener), extraSlotX, extraSlotY - 22));
+        } else {
+            int imageWidth = 176 +(38 *( tier.ordinal() - EMExtraFactoryTier.ABSOLUTE.ordinal() + 1)) + 9;
+            int inventorySize = 9 * 20;
+            int endInventory = (imageWidth / 2 + inventorySize / 2) - 10;
+            int extraSlotX = tier.ordinal() > FactoryTier.ULTIMATE.ordinal() ? endInventory + 4 : 7;
+            int extraSlotY = tier.ordinal() > FactoryTier.ULTIMATE.ordinal() ? 143 : 57;
+            builder.addSlot(extraSlot = LimitedInputInventorySlot.at((tier.ordinal() + 1) * (tier.ordinal() + 1) * (tier.ordinal() + 1) * 64,this::containsRecipeB, markAllMonitorsChanged(listener), extraSlotX, extraSlotY));
+            builder.addSlot(secondExtraSlot = LimitedInputInventorySlot.at((tier.ordinal() + 1) * (tier.ordinal() + 1) * (tier.ordinal() + 1) * 64, this::containsRecipeC, markAllMonitorsChanged(listener), extraSlotX, extraSlotY - 22));
+        }
         extraSlot.setSlotType(ContainerSlotType.EXTRA);
         secondExtraSlot.setSlotType(ContainerSlotType.EXTRA);
     }

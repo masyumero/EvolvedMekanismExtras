@@ -28,9 +28,13 @@ public class EMExtraFactoryOutputInventorySlot extends BasicInventorySlot {
         if (factory != null) {
             return switch (factory.tier) {
                 case ABSOLUTE -> super.getLimit(stack) * 8;
+                case ABSOLUTE_OVERCLOCKED -> super.getLimit(stack) * 8;
                 case SUPREME -> super.getLimit(stack) * 16;
+                case SUPREME_QUANTUM -> super.getLimit(stack) * 16;
                 case COSMIC -> super.getLimit(stack) * 32;
+                case COSMIC_DENSE -> super.getLimit(stack) * 32;
                 case INFINITE -> super.getLimit(stack) * 64;
+                case INFINITE_MULTIVERSAL -> super.getLimit(stack) * 64;
             };
         }
         return super.getLimit(stack);

@@ -10,6 +10,7 @@ public class LoadConfig {
     public static final EMExtraUsageConfig emExtraUsageConfig = new EMExtraUsageConfig();
     public static final EMExtraStorageConfig emExtraStorageConfig = new EMExtraStorageConfig();
 
+    @SuppressWarnings("removal")
     public static void registerConfig(ModLoadingContext modLoadingContext) {
         ModContainer modContainer = modLoadingContext.getActiveContainer();
         EMExtraConfigHelper.registerConfig(modContainer, emExtraUsageConfig);

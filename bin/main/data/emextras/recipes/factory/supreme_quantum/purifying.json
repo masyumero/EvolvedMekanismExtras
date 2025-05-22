@@ -1,0 +1,31 @@
+{
+    "type": "mekanism:mek_data",
+    "key": {
+        "A": {
+            "item": "emextras:supreme_quantum_control_circuit"
+        },
+        "E": {
+            "tag": "mekanism_extras:alloys/thermonuclear"
+        },
+        "M": {
+            "tag": "evolvedmekanism:alloys/subatomic"
+        },
+        "I": {
+            "item": "mekanism_extras:supreme_purifying_factory"
+        },
+        "F": {
+            "item": "evolvedmekanism:quantum_purifying_factory"
+        },
+        "P": {
+            "item": "mekanism:steel_casing"
+        }
+    },
+    "pattern": [
+        "EAM",
+        "IPF",
+        "MAE"
+    ],
+    "result": {
+        "item": "emextras:supreme_quantum_purifying_factory"
+    }
+}

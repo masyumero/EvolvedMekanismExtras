@@ -1,0 +1,15 @@
+{
+    "type": "mekanism:sawing",
+    "input": {
+        "ingredient": {
+            "item": "emextras:absolute_overclocked_compressing_factory"
+        }
+    },
+    "mainOutput": {
+        "item": "mekanism_extras:absolute_compressing_factory"
+    },
+    "secondaryChance": 1,
+    "secondaryOutput": {
+        "item": "evolvedmekanism:overclocked_compressing_factory"
+    }
+}

@@ -1,0 +1,31 @@
+{
+    "type": "mekanism:mek_data",
+    "key": {
+        "A": {
+            "item": "emextras:absolute_overclocked_control_circuit"
+        },
+        "E": {
+            "tag": "mekanism_extras:alloys/radiance"
+        },
+        "M": {
+            "tag": "evolvedmekanism:alloys/hypercharged"
+        },
+        "I": {
+            "item": "mekanism_extras:absolute_injecting_factory"
+        },
+        "F": {
+            "item": "evolvedmekanism:overclocked_injecting_factory"
+        },
+        "P": {
+            "item": "mekanism:steel_casing"
+        }
+    },
+    "pattern": [
+        "EAM",
+        "IPF",
+        "MAE"
+    ],
+    "result": {
+        "item": "emextras:absolute_overclocked_injecting_factory"
+    }
+}

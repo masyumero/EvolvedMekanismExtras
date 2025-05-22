@@ -9,5 +9,5 @@ public class EMExtraEnumUtils {
     }
 
     public static final EMExtraFactoryTier[] EMEXTRA_FACTORY_TIERS = EMExtraFactoryTier.values();
-    public static final EMExtraFactoryType[] FACTORY_TYPES = EMExtraFactoryType.values();
+    public static final EMExtraFactoryType[] EMEXTRA_FACTORY_TYPES = EMExtraFactoryType.values();
 }

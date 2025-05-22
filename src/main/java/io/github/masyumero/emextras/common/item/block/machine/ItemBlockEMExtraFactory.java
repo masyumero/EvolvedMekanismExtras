@@ -1,6 +1,6 @@
 package io.github.masyumero.emextras.common.item.block.machine;
 
-import com.jerry.mekanism_extras.common.tier.AdvancedFactoryTier;
+import io.github.masyumero.emextras.common.tier.EMExtraFactoryTier;
 import io.github.masyumero.emextras.common.block.attribute.EMExtraAttribute;
 import io.github.masyumero.emextras.common.block.attribute.EMExtraAttributeFactoryType;
 import io.github.masyumero.emextras.common.block.prefab.BlockEMExtraFactoryMachine;
@@ -22,8 +22,8 @@ public class ItemBlockEMExtraFactory extends EMExtraItemBlockMachine {
     }
 
     @Override
-    public AdvancedFactoryTier getAdvanceTier() {
-        return EMExtraAttribute.getTier(getBlock(), AdvancedFactoryTier.class);
+    public EMExtraFactoryTier getEMExtraTier() {
+        return EMExtraAttribute.getTier(getBlock(), EMExtraFactoryTier.class);
     }
 
     @Override

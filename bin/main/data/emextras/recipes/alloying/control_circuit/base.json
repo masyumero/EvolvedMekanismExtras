@@ -1,0 +1,17 @@
+{
+  "type": "mekanism:combining",
+  "mainInput": {
+    "ingredient": {
+      "tag": "forge:circuits/basic"
+    }
+  },
+  "extraInput": {
+    "ingredient": {
+      "item": "mekanism:hdpe_sheet"
+    },
+    "amount": 4
+  },
+  "output": {
+    "item": "emextras:base_control_circuit"
+  }
+}

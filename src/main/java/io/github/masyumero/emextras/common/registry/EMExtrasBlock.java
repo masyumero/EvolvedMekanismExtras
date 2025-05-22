@@ -2,9 +2,8 @@ package io.github.masyumero.emextras.common.registry;
 
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
-import com.jerry.mekanism_extras.api.tier.IAdvancedTier;
-import com.jerry.mekanism_extras.common.tier.AdvancedFactoryTier;
-import com.jerry.mekanism_extras.common.util.ExtraEnumUtils;
+import io.github.masyumero.emextras.api.tier.IEMExtraTier;
+import io.github.masyumero.emextras.common.tier.EMExtraFactoryTier;
 import io.github.masyumero.emextras.EMExtras;
 import io.github.masyumero.emextras.common.block.attribute.EMExtraAttributeTier;
 import io.github.masyumero.emextras.common.block.prefab.BlockEMExtraFactoryMachine;
@@ -31,23 +30,29 @@ public class EMExtrasBlock {
         return BLOCK.register(tierName + suffix, blockSupplier, itemCreator);
     }
 
-    private static final Table<AdvancedFactoryTier, EMExtraFactoryType, BlockRegistryObject<BlockEMExtraFactoryMachine.BlockEMExtraFactory<?>, ItemBlockEMExtraFactory>> FACTORIES = HashBasedTable.create();
+    private static final Table<EMExtraFactoryTier, EMExtraFactoryType, BlockRegistryObject<BlockEMExtraFactoryMachine.BlockEMExtraFactory<?>, ItemBlockEMExtraFactory>> FACTORIES = HashBasedTable.create();
 
     static {
         // factories
-        for (AdvancedFactoryTier tier : ExtraEnumUtils.ADVANCED_FACTORY_TIERS) {
-            for (EMExtraFactoryType type : EMExtraEnumUtils.FACTORY_TYPES) {
-                FACTORIES.put(tier, type, registerFactory(EMExtrasBlockType.getEMExtraFactory(tier, type)));
+        for (EMExtraFactoryTier tier : EMExtraEnumUtils.EMEXTRA_FACTORY_TIERS) {
+            for (EMExtraFactoryType type : EMExtraEnumUtils.EMEXTRA_FACTORY_TYPES) {
+                if (type != EMExtraFactoryType.ALLOYING) {
+                    if (tier.isEvolved()) {
+                        FACTORIES.put(tier, type, registerFactory(EMExtrasBlockType.getEMExtraFactory(tier, type)));
+                    }
+                } else {
+                    FACTORIES.put(tier, type, registerFactory(EMExtrasBlockType.getEMExtraFactory(tier, type)));
+                }
             }
         }
     }
 
     private static <TILE extends TileEntityEMExtraFactory<?>> BlockRegistryObject<BlockEMExtraFactoryMachine.BlockEMExtraFactory<?>, ItemBlockEMExtraFactory> registerFactory(EMExtraFactory<TILE> type) {
-        IAdvancedTier tier = Objects.requireNonNull(type.get(EMExtraAttributeTier.class)).tier();
-        return registerTieredBlock(tier.getAdvanceTier().getLowerName(), "_" + type.getFactoryType().getRegistryNameComponent() + "_factory", () -> new BlockEMExtraFactoryMachine.BlockEMExtraFactory<>(type), ItemBlockEMExtraFactory::new);
+        IEMExtraTier tier = Objects.requireNonNull(type.get(EMExtraAttributeTier.class)).tier();
+        return registerTieredBlock(tier.getEMExtraTier().getLowerName(), "_" + type.getFactoryType().getRegistryNameComponent() + "_factory", () -> new BlockEMExtraFactoryMachine.BlockEMExtraFactory<>(type), ItemBlockEMExtraFactory::new);
     }
 
-    public static BlockRegistryObject<BlockEMExtraFactoryMachine.BlockEMExtraFactory<?>, ItemBlockEMExtraFactory> getEMExtraFactory(@NotNull AdvancedFactoryTier tier, @NotNull EMExtraFactoryType type) {
+    public static BlockRegistryObject<BlockEMExtraFactoryMachine.BlockEMExtraFactory<?>, ItemBlockEMExtraFactory>  getEMExtraFactory(@NotNull EMExtraFactoryTier tier, @NotNull EMExtraFactoryType type) {
         return FACTORIES.get(tier, type);
     }
 

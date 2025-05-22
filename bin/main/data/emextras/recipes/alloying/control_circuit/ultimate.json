@@ -1,0 +1,23 @@
+{
+  "type": "evolvedmekanism:alloying",
+  "extraInput": {
+    "ingredient": {
+      "tag": "forge:circuits/elite"
+    }
+  },
+  "secondExtraInput": {
+    "ingredient": {
+      "item": "emextras:base_control_circuit"
+    }
+  },
+  "mainInput": {
+    "amount": 2,
+    "ingredient": {
+      "tag": "mekanism:alloys/atomic"
+    }
+  },
+  "output": {
+    "item": "mekanism:ultimate_control_circuit",
+    "count": 2
+  }
+}

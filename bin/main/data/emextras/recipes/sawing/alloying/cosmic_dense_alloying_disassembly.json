@@ -1,0 +1,15 @@
+{
+    "type": "mekanism:sawing",
+    "input": {
+        "ingredient": {
+            "item": "emextras:cosmic_dense_alloying_factory"
+        }
+    },
+    "mainOutput": {
+        "item": "emextras:cosmic_alloying_factory"
+    },
+    "secondaryChance": 1,
+    "secondaryOutput": {
+        "item": "evolvedmekanism:dense_alloying_factory"
+    }
+}

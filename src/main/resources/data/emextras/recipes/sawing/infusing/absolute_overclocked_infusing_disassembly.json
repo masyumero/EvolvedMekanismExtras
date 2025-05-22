@@ -1,0 +1,15 @@
+{
+    "type": "mekanism:sawing",
+    "input": {
+        "ingredient": {
+            "item": "emextras:absolute_overclocked_infusing_factory"
+        }
+    },
+    "mainOutput": {
+        "item": "mekanism_extras:absolute_infusing_factory"
+    },
+    "secondaryChance": 1,
+    "secondaryOutput": {
+        "item": "evolvedmekanism:overclocked_infusing_factory"
+    }
+}

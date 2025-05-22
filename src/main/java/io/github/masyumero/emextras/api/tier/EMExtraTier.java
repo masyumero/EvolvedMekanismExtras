@@ -10,6 +10,10 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Locale;
 
 public enum EMExtraTier implements StringRepresentable, SupportsColorMap {
+    ABSOLUTE("Absolute", new int[]{95, 255, 184}, MapColor.COLOR_LIGHT_GREEN),
+    SUPREME("Supreme", new int[]{255, 128, 106}, MapColor.TERRACOTTA_PINK),
+    COSMIC("Cosmic", new int[]{75, 248, 255}, MapColor.DIAMOND),
+    INFINITE("Infinite", new int[]{247, 135, 255}, MapColor.COLOR_MAGENTA),
     ABSOLUTE_OVERCLOCKED("Absolute_Overclocked", new int[]{95, 255, 184}, MapColor.COLOR_LIGHT_GREEN),
     SUPREME_QUANTUM("Supreme_Quantum", new int[]{255, 128, 106}, MapColor.TERRACOTTA_PINK),
     COSMIC_DENSE("Cosmic_Dense", new int[]{75, 248, 255}, MapColor.DIAMOND),

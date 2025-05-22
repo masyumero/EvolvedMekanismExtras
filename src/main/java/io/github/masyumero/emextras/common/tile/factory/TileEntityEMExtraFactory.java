@@ -1,8 +1,7 @@
 package io.github.masyumero.emextras.common.tile.factory;
 
 import com.jerry.mekanism_extras.api.ExtraUpgrade;
-import com.jerry.mekanism_extras.common.tier.AdvancedFactoryTier;
-import com.jerry.mekanism_extras.common.util.ExtraEnumUtils;
+import io.github.masyumero.emextras.common.tier.EMExtraFactoryTier;
 import com.jerry.mekanism_extras.common.util.ExtraUpgradeUtils;
 import io.github.masyumero.emextras.common.block.attribute.EMExtraAttribute;
 import io.github.masyumero.emextras.common.block.attribute.EMExtraAttributeFactoryType;
@@ -10,6 +9,7 @@ import io.github.masyumero.emextras.common.content.blocktype.EMExtraFactoryType;
 import io.github.masyumero.emextras.common.inventory.slot.EMExtraFactoryInputInventorySlot;
 import io.github.masyumero.emextras.common.registry.EMExtrasBlockType;
 import io.github.masyumero.emextras.common.registry.EMExtrasTileEntityTypes;
+import io.github.masyumero.emextras.common.util.EMExtraEnumUtils;
 import it.unimi.dsi.fastutil.ints.IntArraySet;
 import it.unimi.dsi.fastutil.ints.IntSet;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
@@ -87,7 +87,7 @@ public abstract class TileEntityEMExtraFactory<RECIPE extends MekanismRecipe> ex
     /**
      * This Factory's tier.
      */
-    public @Nullable AdvancedFactoryTier tier;
+    public @Nullable EMExtraFactoryTier tier;
     /**
      * An int[] used to track all current operations' progress.
      */
@@ -167,7 +167,7 @@ public abstract class TileEntityEMExtraFactory<RECIPE extends MekanismRecipe> ex
     @Override
     protected void presetVariables() {
         super.presetVariables();
-        tier = EMExtraAttribute.getTier(getBlockType(), AdvancedFactoryTier.class);
+        tier = EMExtraAttribute.getTier(getBlockType(), EMExtraFactoryTier.class);
         Runnable setSortingNeeded = () -> sortingNeeded = true;
         recipeCacheLookupMonitors = new FactoryRecipeCacheLookupMonitor[tier.processes];
         for (int i = 0; i < recipeCacheLookupMonitors.length; i++) {
@@ -308,7 +308,6 @@ public abstract class TileEntityEMExtraFactory<RECIPE extends MekanismRecipe> ex
 
     @Nullable
     private CachedRecipe<RECIPE> getCachedRecipe(int cacheIndex) {
-        //TODO: Sanitize that cacheIndex is in bounds?
         return recipeCacheLookupMonitors[cacheIndex].getCachedRecipe(cacheIndex);
     }
 
@@ -369,6 +368,24 @@ public abstract class TileEntityEMExtraFactory<RECIPE extends MekanismRecipe> ex
     public int getTicksRequired() {
         return upgradeComponent.isUpgradeInstalled(ExtraUpgrade.CREATIVE) ? 0 :ticksRequired;
     }
+
+    //@Override
+    //public void load(@NotNull CompoundTag nbt) {
+    //    super.load(nbt);
+    //    if (nbt.contains(NBTConstants.PROGRESS, Tag.TAG_INT_ARRAY)) {
+    //        int[] savedProgress = nbt.getIntArray(NBTConstants.PROGRESS);
+    //        if (tier.processes != savedProgress.length) {
+    //            Arrays.fill(progress, 0);
+    //        }
+    //        for (int i = 0; i < tier.processes && i < savedProgress.length; i++) {
+    //            progress[i] = savedProgress[i];
+    //        }
+    //    }
+    //    if (energyContainer != null && nbt.contains(NBTConstants.ENERGY_STORED)) {
+    //        FloatingLong energy = FloatingLong.parseFloatingLong(nbt.getString(NBTConstants.ENERGY_STORED));
+    //        energyContainer.setEnergy(energy.isZero() ? FloatingLong.ZERO : energy);
+    //    }
+    //}
 
     @Override
     public void load(@NotNull CompoundTag nbt) {
@@ -439,7 +456,7 @@ public abstract class TileEntityEMExtraFactory<RECIPE extends MekanismRecipe> ex
             return true;
         }
         //Then check other factory tiers
-        for (AdvancedFactoryTier factoryTier : ExtraEnumUtils.ADVANCED_FACTORY_TIERS) {
+        for (EMExtraFactoryTier factoryTier : EMExtraEnumUtils.EMEXTRA_FACTORY_TIERS) {
             if (factoryTier != tier && EMExtrasTileEntityTypes.getEMExtraFactoryTile(factoryTier, type).get() == tileType) {
                 return true;
             }
@@ -448,6 +465,15 @@ public abstract class TileEntityEMExtraFactory<RECIPE extends MekanismRecipe> ex
         //And finally check if it is the non factory version (it will be missing sorting data, but we can gracefully ignore that)
         return switch (type) {
             case ALLOYING -> EMExtrasBlockType.ALLOYER.getTileType().get();
+            case SMELTING -> EMExtrasBlockType.ENERGIZED_SMELTER.getTileType().get();
+            case ENRICHING -> EMExtrasBlockType.ENRICHMENT_CHAMBER.getTileType().get();
+            case CRUSHING -> EMExtrasBlockType.CRUSHER.getTileType().get();
+            case COMPRESSING -> EMExtrasBlockType.OSMIUM_COMPRESSOR.getTileType().get();
+            case PURIFYING -> EMExtrasBlockType.PURIFICATION_CHAMBER.getTileType().get();
+            case INJECTING -> EMExtrasBlockType.CHEMICAL_INJECTION_CHAMBER.getTileType().get();
+            case COMBINING -> EMExtrasBlockType.COMBINER.getTileType().get();
+            case INFUSING -> EMExtrasBlockType.METALLURGIC_INFUSER.getTileType().get();
+            case SAWING -> EMExtrasBlockType.PRECISION_SAWMILL.getTileType().get();
         } == tileType;
     }
 
