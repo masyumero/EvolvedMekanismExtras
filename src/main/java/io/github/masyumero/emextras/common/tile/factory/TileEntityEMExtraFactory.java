@@ -369,24 +369,6 @@ public abstract class TileEntityEMExtraFactory<RECIPE extends MekanismRecipe> ex
         return upgradeComponent.isUpgradeInstalled(ExtraUpgrade.CREATIVE) ? 0 :ticksRequired;
     }
 
-    //@Override
-    //public void load(@NotNull CompoundTag nbt) {
-    //    super.load(nbt);
-    //    if (nbt.contains(NBTConstants.PROGRESS, Tag.TAG_INT_ARRAY)) {
-    //        int[] savedProgress = nbt.getIntArray(NBTConstants.PROGRESS);
-    //        if (tier.processes != savedProgress.length) {
-    //            Arrays.fill(progress, 0);
-    //        }
-    //        for (int i = 0; i < tier.processes && i < savedProgress.length; i++) {
-    //            progress[i] = savedProgress[i];
-    //        }
-    //    }
-    //    if (energyContainer != null && nbt.contains(NBTConstants.ENERGY_STORED)) {
-    //        FloatingLong energy = FloatingLong.parseFloatingLong(nbt.getString(NBTConstants.ENERGY_STORED));
-    //        energyContainer.setEnergy(energy.isZero() ? FloatingLong.ZERO : energy);
-    //    }
-    //}
-
     @Override
     public void load(@NotNull CompoundTag nbt) {
         super.load(nbt);
@@ -424,19 +406,26 @@ public abstract class TileEntityEMExtraFactory<RECIPE extends MekanismRecipe> ex
         return remap;
     }
 
+
     @Override
     public void recalculateUpgrades(Upgrade upgrade) {
         super.recalculateUpgrades(upgrade);
         if (upgrade == Upgrade.SPEED) {
             ticksRequired = MekanismUtils.getTicks(this, BASE_TICKS_REQUIRED);
         } else if (upgrade == ExtraUpgrade.STACK) {
-            //实际上一直是整数所以强制转化为int也不会损失什么
             baselineMaxOperations = (int) Math.pow(2, upgradeComponent.getUpgrades(ExtraUpgrade.STACK));
         } else if (upgrade == ExtraUpgrade.CREATIVE) {
             for (IEnergyContainer energyContainer : getEnergyContainers(null)) {
                 if (energyContainer instanceof MachineEnergyContainer<?> machineEnergy) {
                     machineEnergy.updateMaxEnergy();
                     machineEnergy.setEnergy(FloatingLong.MAX_VALUE);
+                    if (machineEnergy.getEnergy().isZero()) {
+                        if (upgrade == ExtraUpgrade.CREATIVE) {
+                            machineEnergy.setEnergy(FloatingLong.MAX_VALUE);
+                        } else {
+                        machineEnergy.setEnergy(FloatingLong.ZERO);
+                        }
+                    }
                 }
             }
         }
