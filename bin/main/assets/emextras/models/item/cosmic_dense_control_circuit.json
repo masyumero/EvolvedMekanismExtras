@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "emextras:item/cosmic_dense_control_circuit"
-  }
-}
