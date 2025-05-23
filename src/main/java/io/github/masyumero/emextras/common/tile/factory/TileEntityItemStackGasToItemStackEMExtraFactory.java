@@ -1,6 +1,7 @@
 package io.github.masyumero.emextras.common.tile.factory;
 
 import io.github.masyumero.emextras.common.block.attribute.EMExtraAttributeFactoryType;
+import io.github.masyumero.emextras.common.config.LoadConfig;
 import io.github.masyumero.emextras.common.content.blocktype.EMExtraFactoryType;
 import mekanism.api.IContentsListener;
 import mekanism.api.NBTConstants;
@@ -36,7 +37,6 @@ import mekanism.common.recipe.lookup.IDoubleRecipeLookupHandler;
 import mekanism.common.recipe.lookup.IRecipeLookupHandler;
 import mekanism.common.recipe.lookup.cache.InputRecipeCache;
 import mekanism.common.tile.interfaces.IHasDumpButton;
-import mekanism.common.tile.prefab.TileEntityAdvancedElectricMachine;
 import mekanism.common.upgrade.AdvancedMachineUpgradeData;
 import mekanism.common.upgrade.IUpgradeData;
 import mekanism.common.util.InventoryUtils;
@@ -118,18 +118,23 @@ public class TileEntityItemStackGasToItemStackEMExtraFactory extends TileEntityI
     @Override
     public IChemicalTankHolder<Gas, GasStack, IGasTank> getInitialGasTanks(IContentsListener listener) {
         ChemicalTankHelper<Gas, GasStack, IGasTank> builder = ChemicalTankHelper.forSideGasWithConfig(this::getDirection, this::getConfig);
-        //If the tank's contents change make sure to call our extended content listener that also marks sorting as being needed
-        // as maybe the valid recipes have changed, and we need to sort again and have all recipes know they may need to be rechecked
-        // if they are not still valid
         if (allowExtractingChemical()) {
-            gasTank = ChemicalTankBuilder.GAS.create(TileEntityAdvancedElectricMachine.MAX_GAS * tier.processes * tier.processes, this::containsRecipeB,
-                    markAllMonitorsChanged(listener));
+            gasTank = ChemicalTankBuilder.GAS.create(getGasTankCapacity(), this::containsRecipeB, markAllMonitorsChanged(listener));
         } else {
-            gasTank = ChemicalTankBuilder.GAS.input(TileEntityAdvancedElectricMachine.MAX_GAS * tier.processes * tier.processes, this::containsRecipeB,
-                    markAllMonitorsChanged(listener));
+            gasTank = ChemicalTankBuilder.GAS.create(getGasTankCapacity(), this::containsRecipeB, markAllMonitorsChanged(listener));
         }
         builder.addTank(gasTank);
         return builder.build();
+    }
+
+    private long getGasTankCapacity() {
+        return switch (tier) {
+            case INFINITE_MULTIVERSAL -> LoadConfig.emExtraTankCapacityConfig.EMExtraInfiniteMultiversalFactories.get();
+            case COSMIC_DENSE -> LoadConfig.emExtraTankCapacityConfig.EMExtraCosmicDenseOsmiumFactories.get();
+            case SUPREME_QUANTUM -> LoadConfig.emExtraTankCapacityConfig.EMExtraSupremeQuantumOsmiumFactories.get();
+            case ABSOLUTE_OVERCLOCKED -> LoadConfig.emExtraTankCapacityConfig.EMExtraAbsoluteOverclockedFactories.get();
+            case ABSOLUTE, INFINITE, COSMIC, SUPREME -> 0L;
+        };
     }
 
     @Override
