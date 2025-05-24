@@ -1,5 +1,6 @@
 package io.github.masyumero.emextras.common.tile.factory;
 
+import io.github.masyumero.emextras.common.config.LoadConfig;
 import mekanism.api.IContentsListener;
 import mekanism.api.RelativeSide;
 import mekanism.api.chemical.ChemicalTankBuilder;
@@ -30,7 +31,6 @@ import mekanism.common.recipe.MekanismRecipeType;
 import mekanism.common.recipe.lookup.IDoubleRecipeLookupHandler;
 import mekanism.common.recipe.lookup.cache.InputRecipeCache;
 import mekanism.common.tile.interfaces.IHasDumpButton;
-import mekanism.common.tile.machine.TileEntityMetallurgicInfuser;
 import mekanism.common.upgrade.IUpgradeData;
 import mekanism.common.upgrade.MetallurgicInfuserUpgradeData;
 import mekanism.common.util.InventoryUtils;
@@ -82,10 +82,21 @@ public class TileEntityMetallurgicInfuserEMExtraFactory extends TileEntityItemTo
         //If the tank's contents change make sure to call our extended content listener that also marks sorting as being needed
         // as maybe the valid recipes have changed, and we need to sort again and have all recipes know they may need to be rechecked
         // if they are not still valid
-        builder.addTank(infusionTank = ChemicalTankBuilder.INFUSION.create(TileEntityMetallurgicInfuser.MAX_INFUSE * tier.processes * tier.processes, this::containsRecipeB,
+        builder.addTank(infusionTank = ChemicalTankBuilder.INFUSION.create(getInfusionTankCapacity(), this::containsRecipeB,
                 markAllMonitorsChanged(listener)));
         return builder.build();
     }
+
+    private long getInfusionTankCapacity() {
+        return switch (tier) {
+            case INFINITE_MULTIVERSAL -> LoadConfig.emExtraTankCapacityConfig.EMExtraInfiniteMultiversalInfusingFactory.get();
+            case COSMIC_DENSE -> LoadConfig.emExtraTankCapacityConfig.EMExtraCosmicDenseInfusingFactory.get();
+            case SUPREME_QUANTUM -> LoadConfig.emExtraTankCapacityConfig.EMExtraSupremeQuantumInfusingFactory.get();
+            case ABSOLUTE_OVERCLOCKED -> LoadConfig.emExtraTankCapacityConfig.EMExtraAbsoluteOverclockedInfusingFactory.get();
+            case ABSOLUTE, SUPREME, COSMIC, INFINITE -> 0L;
+        };
+    }
+
 
     @Override
     protected void addSlots(InventorySlotHelper builder, IContentsListener listener, IContentsListener updateSortingListener) {
