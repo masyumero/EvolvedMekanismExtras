@@ -70,6 +70,8 @@ import java.util.*;
 import java.util.function.BooleanSupplier;
 import java.util.function.IntSupplier;
 
+import static io.github.masyumero.emextras.common.util.EMExtraWorldUtils.isWorldLoaded;
+
 public abstract class TileEntityEMExtraFactory<RECIPE extends MekanismRecipe> extends TileEntityConfigurableMachine implements IRecipeLookupHandler<RECIPE>, ISustainedData {
 
     protected static final int BASE_TICKS_REQUIRED = 200;
@@ -406,7 +408,6 @@ public abstract class TileEntityEMExtraFactory<RECIPE extends MekanismRecipe> ex
         return remap;
     }
 
-
     @Override
     public void recalculateUpgrades(Upgrade upgrade) {
         super.recalculateUpgrades(upgrade);
@@ -418,13 +419,10 @@ public abstract class TileEntityEMExtraFactory<RECIPE extends MekanismRecipe> ex
             for (IEnergyContainer energyContainer : getEnergyContainers(null)) {
                 if (energyContainer instanceof MachineEnergyContainer<?> machineEnergy) {
                     machineEnergy.updateMaxEnergy();
-                    machineEnergy.setEnergy(FloatingLong.MAX_VALUE);
-                    if (machineEnergy.getEnergy().isZero()) {
-                        if (upgrade == ExtraUpgrade.CREATIVE) {
-                            machineEnergy.setEnergy(FloatingLong.MAX_VALUE);
-                        } else {
+                    if (!isWorldLoaded(level) && machineEnergy.getEnergy().isZero()) {
                         machineEnergy.setEnergy(FloatingLong.ZERO);
-                        }
+                    } else {
+                        machineEnergy.setEnergy(FloatingLong.MAX_VALUE);
                     }
                 }
             }
@@ -773,7 +771,6 @@ public abstract class TileEntityEMExtraFactory<RECIPE extends MekanismRecipe> ex
         private final List<CachedRecipe.OperationTracker.RecipeError> errorTypes;
         private final IntSet globalTypes;
 
-        //TODO: See if we can get it so we only have to sync a single version of global types?
         private final boolean[][] trackedErrors;
         private final int processes;
 
