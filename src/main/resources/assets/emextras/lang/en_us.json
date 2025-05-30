@@ -1,5 +1,6 @@
 {
     "constants.emextras.mod_name": "Evolved Mekanism Extras",
+
     "block.emextras.absolute_alloying_factory": "Absolute Alloying Factory",
     "block.emextras.absolute_overclocked_alloying_factory": "Absolute Overclocked Alloying Factory",
     "block.emextras.absolute_overclocked_combining_factory": "Absolute Overclocked Combining Factory",
@@ -45,6 +46,7 @@
     "block.emextras.supreme_quantum_sawing_factory": "Supreme Quantum Sawing Factory",
     "block.emextras.supreme_quantum_smelting_factory": "Supreme Quantum Smelting Factory",
     "container.emextras.absolute_alloying_factory": "Absolute Alloying Factory",
+
     "container.emextras.absolute_overclocked_alloying_factory": "Absolute Overclocked Alloying Factory",
     "container.emextras.absolute_overclocked_combining_factory": "Absolute Overclocked Combining Factory",
     "container.emextras.absolute_overclocked_compressing_factory": "Absolute Overclocked Compressing Factory",
@@ -88,6 +90,9 @@
     "container.emextras.supreme_quantum_purifying_factory": "Supreme Quantum Purifying Factory",
     "container.emextras.supreme_quantum_sawing_factory": "Supreme Quantum Sawing Factory",
     "container.emextras.supreme_quantum_smelting_factory": "Supreme Quantum Smelting Factory",
+
+    "tooltip.emextras.infinite_multiversal_bin":"There's no point in making them.",
+
     "item.emextras.absolute_overclocked_alloying_factory": "Absolute Overclocked Alloying Factory",
     "item.emextras.absolute_overclocked_combining_factory": "Absolute Overclocked Combining Factory",
     "item.emextras.absolute_overclocked_compressing_factory": "Absolute Overclocked Compressing Factory",

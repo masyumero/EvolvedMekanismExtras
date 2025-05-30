@@ -38,6 +38,11 @@ public class EMExtrasTileEntityTypes {
         }
     }
 
+    public static final TileEntityTypeRegistryObject<EMExtraTileEntityBin> ABSOLUTE_BIN = TILE_ENTITY_TYPES.register(EMExtrasBlock.ABSOLUTE_OVERCLOCKED_BIN, (pos, state) -> new EMExtraTileEntityBin(EMExtrasBlock.ABSOLUTE_OVERCLOCKED_BIN, pos, state), TileEntityMekanism::tickServer, TileEntityMekanism::tickClient);
+    public static final TileEntityTypeRegistryObject<EMExtraTileEntityBin> SUPREME_BIN = TILE_ENTITY_TYPES.register(EMExtrasBlock.SUPREME_QUANTUM_BIN, (pos, state) -> new EMExtraTileEntityBin(EMExtrasBlock.SUPREME_QUANTUM_BIN, pos, state), TileEntityMekanism::tickServer, TileEntityMekanism::tickClient);
+    public static final TileEntityTypeRegistryObject<EMExtraTileEntityBin> COSMIC_BIN = TILE_ENTITY_TYPES.register(EMExtrasBlock.COSMIC_DENSE_BIN, (pos, state) -> new EMExtraTileEntityBin(EMExtrasBlock.COSMIC_DENSE_BIN, pos, state), TileEntityMekanism::tickServer, TileEntityMekanism::tickClient);
+    public static final TileEntityTypeRegistryObject<EMExtraTileEntityBin> INFINITE_BIN = TILE_ENTITY_TYPES.register(EMExtrasBlock.INFINITE_MULTIVERSAL_BIN, (pos, state) -> new EMExtraTileEntityBin(EMExtrasBlock.INFINITE_MULTIVERSAL_BIN, pos, state), TileEntityMekanism::tickServer, TileEntityMekanism::tickClient);
+
     public static TileEntityTypeRegistryObject<? extends TileEntityEMExtraFactory<?>> getEMExtraFactoryTile(EMExtraFactoryTier tier, EMExtraFactoryType type) {
         return FACTORIES.get(tier, type);
     }

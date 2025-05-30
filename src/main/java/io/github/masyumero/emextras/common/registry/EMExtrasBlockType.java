@@ -3,6 +3,9 @@ package io.github.masyumero.emextras.common.registry;
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
 import com.jerry.mekanism_extras.api.ExtraUpgrade;
+import io.github.masyumero.emextras.common.block.attribute.EMExtraAttributeTier;
+import io.github.masyumero.emextras.common.block.attribute.EMExtraAttributeUpgradeable;
+import io.github.masyumero.emextras.common.tier.EMExtraBTier;
 import io.github.masyumero.emextras.common.tier.EMExtraFactoryTier;
 import fr.iglee42.evolvedmekanism.EvolvedMekanismLang;
 import fr.iglee42.evolvedmekanism.registries.EMContainerTypes;
@@ -12,17 +15,25 @@ import io.github.masyumero.emextras.common.config.LoadConfig;
 import io.github.masyumero.emextras.common.content.blocktype.EMExtraFactory;
 import io.github.masyumero.emextras.common.content.blocktype.EMExtraFactoryType;
 import io.github.masyumero.emextras.common.content.blocktype.EMExtraMachine;
+import io.github.masyumero.emextras.common.tile.factory.EMExtraTileEntityBin;
 import io.github.masyumero.emextras.common.util.EMExtraEnumUtils;
 import mekanism.api.Upgrade;
 import mekanism.common.MekanismLang;
+import mekanism.common.block.attribute.AttributeParticleFX;
+import mekanism.common.block.attribute.AttributeUpgradeSupport;
+import mekanism.common.block.attribute.Attributes;
 import mekanism.common.config.MekanismConfig;
 import mekanism.common.content.blocktype.BlockShapes;
+import mekanism.common.content.blocktype.Machine;
+import mekanism.common.registration.impl.BlockRegistryObject;
+import mekanism.common.registration.impl.TileEntityTypeRegistryObject;
 import mekanism.common.registries.MekanismContainerTypes;
 import mekanism.common.registries.MekanismSounds;
 import mekanism.common.registries.MekanismTileEntityTypes;
 import mekanism.common.tile.machine.*;
 
 import java.util.EnumSet;
+import java.util.function.Supplier;
 
 public class EMExtrasBlockType {
     private static final Table<EMExtraFactoryTier, EMExtraFactoryType, EMExtraFactory<?>> FACTORIES = HashBasedTable.create();
@@ -111,6 +122,11 @@ public class EMExtrasBlockType {
             .withComputerSupport("precisionSawmill")
             .build();
 
+    public static final Machine<EMExtraTileEntityBin> ABSOLUTE_OVERCLOCKED_BIN = createBin(EMExtraBTier.ABSOLUTE_OVERCLOCKED, () -> EMExtrasTileEntityTypes.ABSOLUTE_BIN, () -> EMExtrasBlock.SUPREME_QUANTUM_BIN);
+    public static final Machine<EMExtraTileEntityBin> SUPREME_QUANTUM_BIN = createBin(EMExtraBTier.SUPREME_QUANTUM, () -> EMExtrasTileEntityTypes.SUPREME_BIN, () -> EMExtrasBlock.COSMIC_DENSE_BIN);
+    public static final Machine<EMExtraTileEntityBin> COSMIC_DENSE_BIN = createBin(EMExtraBTier.COSMIC_DENSE, () -> EMExtrasTileEntityTypes.COSMIC_BIN, () -> EMExtrasBlock.INFINITE_MULTIVERSAL_BIN);
+    public static final Machine<EMExtraTileEntityBin> INFINITE_MULTIVERSAL_BIN = createBin(EMExtraBTier.INFINITE_MULTIVERSAL, () -> EMExtrasTileEntityTypes.INFINITE_BIN, null);
+
     static {
         for (EMExtraFactoryTier tier : EMExtraEnumUtils.EMEXTRA_FACTORY_TIERS) {
             for (EMExtraFactoryType type : EMExtraEnumUtils.EMEXTRA_FACTORY_TYPES) {
@@ -124,6 +140,15 @@ public class EMExtrasBlockType {
             }
         }
     }
+
+    private static <TILE extends EMExtraTileEntityBin> Machine<TILE> createBin(EMExtraBTier tier, Supplier<TileEntityTypeRegistryObject<TILE>> tile, Supplier<BlockRegistryObject<?, ?>> upgradeBlock) {
+        return Machine.MachineBuilder.createMachine(tile, MekanismLang.DESCRIPTION_BIN)
+                .with(new EMExtraAttributeTier<>(tier), new EMExtraAttributeUpgradeable(upgradeBlock))
+                .without(AttributeParticleFX.class, Attributes.AttributeSecurity.class, AttributeUpgradeSupport.class, Attributes.AttributeRedstone.class)
+                .withComputerSupport(tier.getEMExtraTier().getLowerName() + "Bin")
+                .build();
+    }
+
     public static EMExtraFactory<?> getEMExtraFactory(EMExtraFactoryTier tier, EMExtraFactoryType type) {
         return FACTORIES.get(tier, type);
     }
