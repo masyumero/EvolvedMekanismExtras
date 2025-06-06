@@ -63,6 +63,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -260,6 +262,13 @@ public abstract class TileEntityEMExtraFactory<RECIPE extends MekanismRecipe> ex
         lastUsage = isActive ? prev.minusEqual(energyContainer.getEnergy()) : FloatingLong.ZERO;
     }
 
+    private static final Logger LOGGER = LogManager.getLogger();
+
+    public void logBlockNBT() {
+        CompoundTag nbtData = this.serializeNBT();
+        LOGGER.info("Block NBT Data: {}", nbtData);
+    }
+
     /**
      * Checks if the cached recipe (or recipe for current factory if the cache is out of date) can produce a specific output.
      *
@@ -384,7 +393,6 @@ public abstract class TileEntityEMExtraFactory<RECIPE extends MekanismRecipe> ex
             }
         }
     }
-
     @Override
     public void saveAdditional(@NotNull CompoundTag nbtTags) {
         super.saveAdditional(nbtTags);
@@ -411,18 +419,21 @@ public abstract class TileEntityEMExtraFactory<RECIPE extends MekanismRecipe> ex
     @Override
     public void recalculateUpgrades(Upgrade upgrade) {
         super.recalculateUpgrades(upgrade);
-        if (upgrade == Upgrade.SPEED) {
-            ticksRequired = MekanismUtils.getTicks(this, BASE_TICKS_REQUIRED);
-        } else if (upgrade == ExtraUpgrade.STACK) {
-            baselineMaxOperations = (int) Math.pow(2, upgradeComponent.getUpgrades(ExtraUpgrade.STACK));
-        } else if (upgrade == ExtraUpgrade.CREATIVE) {
-            for (IEnergyContainer energyContainer : getEnergyContainers(null)) {
-                if (energyContainer instanceof MachineEnergyContainer<?> machineEnergy) {
-                    machineEnergy.updateMaxEnergy();
-                    if (!isWorldLoaded(level) && machineEnergy.getEnergy().isZero()) {
-                        machineEnergy.setEnergy(FloatingLong.ZERO);
-                    } else {
-                        machineEnergy.setEnergy(FloatingLong.MAX_VALUE);
+        CompoundTag upgradesTag = this.serializeNBT().getCompound(NBTConstants.UPGRADES);
+        if (!upgradesTag.isEmpty()) {
+            if (upgrade == Upgrade.SPEED) {
+                ticksRequired = MekanismUtils.getTicks(this, BASE_TICKS_REQUIRED);
+            } else if (upgrade == ExtraUpgrade.STACK) {
+                baselineMaxOperations = (int) Math.pow(2, upgradeComponent.getUpgrades(ExtraUpgrade.STACK));
+            } else if (upgrade == ExtraUpgrade.CREATIVE) {
+                for (IEnergyContainer energyContainer : getEnergyContainers(null)) {
+                    if (energyContainer instanceof MachineEnergyContainer<?> machineEnergy) {
+                        machineEnergy.updateMaxEnergy();
+                        if (!isWorldLoaded(level) && machineEnergy.getEnergy().isZero()) {
+                            machineEnergy.setEnergy(FloatingLong.ZERO);
+                        } else {
+                            machineEnergy.setEnergy(FloatingLong.MAX_VALUE);
+                        }
                     }
                 }
             }
