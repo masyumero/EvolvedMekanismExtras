@@ -420,20 +420,16 @@ public abstract class TileEntityEMExtraFactory<RECIPE extends MekanismRecipe> ex
     public void recalculateUpgrades(Upgrade upgrade) {
         super.recalculateUpgrades(upgrade);
         CompoundTag upgradesTag = this.serializeNBT().getCompound(NBTConstants.UPGRADES);
-        if (!upgradesTag.isEmpty()) {
-            if (upgrade == Upgrade.SPEED) {
-                ticksRequired = MekanismUtils.getTicks(this, BASE_TICKS_REQUIRED);
-            } else if (upgrade == ExtraUpgrade.STACK) {
-                baselineMaxOperations = (int) Math.pow(2, upgradeComponent.getUpgrades(ExtraUpgrade.STACK));
-            } else if (upgrade == ExtraUpgrade.CREATIVE) {
-                for (IEnergyContainer energyContainer : getEnergyContainers(null)) {
-                    if (energyContainer instanceof MachineEnergyContainer<?> machineEnergy) {
-                        machineEnergy.updateMaxEnergy();
-                        if (!isWorldLoaded(level) && machineEnergy.getEnergy().isZero()) {
-                            machineEnergy.setEnergy(FloatingLong.ZERO);
-                        } else {
-                            machineEnergy.setEnergy(FloatingLong.MAX_VALUE);
-                        }
+        if (upgrade == Upgrade.SPEED) {
+            ticksRequired = MekanismUtils.getTicks(this, BASE_TICKS_REQUIRED);
+        } else if (upgrade == ExtraUpgrade.STACK) {
+            baselineMaxOperations = (int) Math.pow(2, upgradeComponent.getUpgrades(ExtraUpgrade.STACK));
+        } else if (upgrade == ExtraUpgrade.CREATIVE) {
+            for (IEnergyContainer energyContainer : getEnergyContainers(null)) {
+                if (energyContainer instanceof MachineEnergyContainer<?> machineEnergy) {
+                    machineEnergy.updateMaxEnergy();
+                    if (isWorldLoaded(level) && !upgradesTag.isEmpty() || getTicksRequired() == 0 && machineEnergy.getMaxEnergy().equals(FloatingLong.MAX_VALUE)) {
+                        machineEnergy.setEnergy(FloatingLong.MAX_VALUE);
                     }
                 }
             }
