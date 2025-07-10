@@ -3,6 +3,7 @@ package io.github.masyumero.emextras.common.tile.factory;
 import com.jerry.mekanism_extras.api.ExtraUpgrade;
 import io.github.masyumero.emextras.common.tier.EMExtraFactoryTier;
 import com.jerry.mekanism_extras.common.util.ExtraUpgradeUtils;
+//import com.jerry.mekanism_extras.api.IMixinMachineEnergyContainer;
 import io.github.masyumero.emextras.common.block.attribute.EMExtraAttribute;
 import io.github.masyumero.emextras.common.block.attribute.EMExtraAttributeFactoryType;
 import io.github.masyumero.emextras.common.content.blocktype.EMExtraFactoryType;
@@ -416,15 +417,18 @@ public abstract class TileEntityEMExtraFactory<RECIPE extends MekanismRecipe> ex
         return remap;
     }
 
+    //TODO:Changes will be made as soon as the revised version of Extra is released.
     @Override
     public void recalculateUpgrades(Upgrade upgrade) {
         super.recalculateUpgrades(upgrade);
         CompoundTag upgradesTag = this.serializeNBT().getCompound(NBTConstants.UPGRADES);
+//        if (getEnergyContainer() instanceof IMixinMachineEnergyContainer mixMach) mixMach.mekanism_Extras$extraRecalculateUpgrades(upgrade);
         if (upgrade == Upgrade.SPEED) {
             ticksRequired = MekanismUtils.getTicks(this, BASE_TICKS_REQUIRED);
         } else if (upgrade == ExtraUpgrade.STACK) {
             baselineMaxOperations = (int) Math.pow(2, upgradeComponent.getUpgrades(ExtraUpgrade.STACK));
-        } else if (upgrade == ExtraUpgrade.CREATIVE) {
+        }
+        else if (upgrade == ExtraUpgrade.CREATIVE) {
             for (IEnergyContainer energyContainer : getEnergyContainers(null)) {
                 if (energyContainer instanceof MachineEnergyContainer<?> machineEnergy) {
                     machineEnergy.updateMaxEnergy();
