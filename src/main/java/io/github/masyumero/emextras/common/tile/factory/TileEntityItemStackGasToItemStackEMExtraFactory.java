@@ -101,7 +101,7 @@ public class TileEntityItemStackGasToItemStackEMExtraFactory extends TileEntityI
         } else {
             gasUsageMultiplier = (usedSoFar, operatingTicks) -> {
                 long baseRemaining = baseTotalUsage - usedSoFar;
-                int remainingTicks = getTicksRequired() - operatingTicks;
+                int remainingTicks = type == EMExtraFactoryType.COMPRESSING ? 1 : getTicksRequired() - operatingTicks;
                 if (baseRemaining < remainingTicks) {
                     //If we already used more than we would need to use (due to removing speed upgrades or adding gas upgrades)
                     // then just don't use any gas this tick
