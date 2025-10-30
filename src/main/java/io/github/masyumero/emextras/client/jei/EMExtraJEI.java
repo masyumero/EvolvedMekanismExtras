@@ -26,22 +26,20 @@ public class EMExtraJEI implements IModPlugin {
             for (EMExtraFactoryType type : EMExtraEnumUtils.EMEXTRA_FACTORY_TYPES) {
                 if (type == EMExtraFactoryType.ALLOYING) {
                     ExtraCatalystRegistryHelper.register(registry, type.getRecipeType(type), EMExtrasBlock.getEMExtraFactory(tier, type));
-                } else if (tier.isEvolved()) {
-                    if (type == EMExtraFactoryType.INFUSING) {
-                        ExtraCatalystRegistryHelper.register(registry, type.getRecipeType(type), EMExtrasBlock.getEMExtraFactory(tier, type));
-                        ExtraCatalystRegistryHelper.register(registry, MekanismJEIRecipeType.INFUSION_CONVERSION, EMExtrasBlock.getEMExtraFactory(tier, type));
-                    } else if (type == EMExtraFactoryType.PURIFYING) {
-                        ExtraCatalystRegistryHelper.register(registry, type.getRecipeType(type), EMExtrasBlock.getEMExtraFactory(tier, type));
-                        ExtraCatalystRegistryHelper.register(registry, MekanismJEIRecipeType.GAS_CONVERSION, EMExtrasBlock.getEMExtraFactory(tier, type));
-                    } else if (type == EMExtraFactoryType.COMPRESSING) {
-                        ExtraCatalystRegistryHelper.register(registry, type.getRecipeType(type), EMExtrasBlock.getEMExtraFactory(tier, type));
-                        ExtraCatalystRegistryHelper.register(registry, MekanismJEIRecipeType.GAS_CONVERSION, EMExtrasBlock.getEMExtraFactory(tier, type));
-                    } else if (type == EMExtraFactoryType.INJECTING) {
-                        ExtraCatalystRegistryHelper.register(registry, type.getRecipeType(type), EMExtrasBlock.getEMExtraFactory(tier, type));
-                        ExtraCatalystRegistryHelper.register(registry, MekanismJEIRecipeType.GAS_CONVERSION, EMExtrasBlock.getEMExtraFactory(tier, type));
-                    } else {
-                        ExtraCatalystRegistryHelper.register(registry, type.getRecipeType(type), EMExtrasBlock.getEMExtraFactory(tier, type));
-                    }
+                } else if (type == EMExtraFactoryType.INFUSING) {
+                    ExtraCatalystRegistryHelper.register(registry, type.getRecipeType(type), EMExtrasBlock.getEMExtraFactory(tier, type));
+                    ExtraCatalystRegistryHelper.register(registry, MekanismJEIRecipeType.INFUSION_CONVERSION, EMExtrasBlock.getEMExtraFactory(tier, type));
+                } else if (type == EMExtraFactoryType.PURIFYING) {
+                    ExtraCatalystRegistryHelper.register(registry, type.getRecipeType(type), EMExtrasBlock.getEMExtraFactory(tier, type));
+                    ExtraCatalystRegistryHelper.register(registry, MekanismJEIRecipeType.GAS_CONVERSION, EMExtrasBlock.getEMExtraFactory(tier, type));
+                } else if (type == EMExtraFactoryType.COMPRESSING) {
+                    ExtraCatalystRegistryHelper.register(registry, type.getRecipeType(type), EMExtrasBlock.getEMExtraFactory(tier, type));
+                    ExtraCatalystRegistryHelper.register(registry, MekanismJEIRecipeType.GAS_CONVERSION, EMExtrasBlock.getEMExtraFactory(tier, type));
+                } else if (type == EMExtraFactoryType.INJECTING) {
+                    ExtraCatalystRegistryHelper.register(registry, type.getRecipeType(type), EMExtrasBlock.getEMExtraFactory(tier, type));
+                    ExtraCatalystRegistryHelper.register(registry, MekanismJEIRecipeType.GAS_CONVERSION, EMExtrasBlock.getEMExtraFactory(tier, type));
+                } else {
+                    ExtraCatalystRegistryHelper.register(registry, type.getRecipeType(type), EMExtrasBlock.getEMExtraFactory(tier, type));
                 }
             }
         }

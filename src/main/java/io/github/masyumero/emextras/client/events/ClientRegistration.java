@@ -16,7 +16,7 @@ public class ClientRegistration {
     private ClientRegistration() {
     }
 
-    @SubscribeEvent(priority = EventPriority.LOW)
+    @SubscribeEvent(priority = EventPriority.LOWEST)
     public static void registerContainers(RegisterEvent event) {
         event.register(Registries.MENU, helper -> {
             ClientRegistrationUtil.registerScreen(EMExtrasContainerTypes.FACTORY, GuiEMExtraFactory::new);

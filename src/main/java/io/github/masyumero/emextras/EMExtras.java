@@ -16,7 +16,7 @@ public class EMExtras {
     public static final String MODID = "emextras";
     public static final String MOD_NAME = "EvolvedMekanismExtras";
 
-    private static final Logger LOGGER = LogUtils.getLogger();
+    public static final Logger LOGGER = LogUtils.getLogger();
 
     @SuppressWarnings("removal")
     public EMExtras() {

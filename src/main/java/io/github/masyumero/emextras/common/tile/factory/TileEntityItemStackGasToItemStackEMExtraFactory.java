@@ -133,7 +133,6 @@ public class TileEntityItemStackGasToItemStackEMExtraFactory extends TileEntityI
             case COSMIC_DENSE -> LoadConfig.emExtraTankCapacityConfig.EMExtraCosmicDenseOsmiumFactories.get();
             case SUPREME_QUANTUM -> LoadConfig.emExtraTankCapacityConfig.EMExtraSupremeQuantumOsmiumFactories.get();
             case ABSOLUTE_OVERCLOCKED -> LoadConfig.emExtraTankCapacityConfig.EMExtraAbsoluteOverclockedFactories.get();
-            case ABSOLUTE, INFINITE, COSMIC, SUPREME -> 0L;
         };
     }
 

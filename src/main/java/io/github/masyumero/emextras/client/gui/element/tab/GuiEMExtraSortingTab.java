@@ -43,12 +43,12 @@ public class GuiEMExtraSortingTab extends GuiInsetElement<TileEntityEMExtraFacto
     }
 
     @Override
-    protected void renderWidget(@NotNull GuiGraphics guiGraphics, int i, int i1, float v) {
+    protected void renderWidget(GuiGraphics p_282139_, int p_268034_, int p_268009_, float p_268085_) {
 
     }
 
     @Override
-    protected void updateWidgetNarration(@NotNull NarrationElementOutput narrationElementOutput) {
+    protected void updateWidgetNarration(NarrationElementOutput p_259858_) {
 
     }
 }

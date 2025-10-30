@@ -1,15 +1,14 @@
 package io.github.masyumero.emextras.common.tile.factory;
 
-import com.jerry.mekanism_extras.common.tile.factory.TileEntityItemToItemExtraFactory;
+import io.github.masyumero.emextras.common.tier.EMExtraFactoryTier;
 import fr.iglee42.evolvedmekanism.interfaces.EMInputRecipeCache;
+import fr.iglee42.evolvedmekanism.interfaces.IGetEnergySlot;
 import fr.iglee42.evolvedmekanism.interfaces.ThreeInputCachedRecipe;
 import fr.iglee42.evolvedmekanism.interfaces.TripleItemRecipeLookupHandler;
 import fr.iglee42.evolvedmekanism.recipes.AlloyerRecipe;
 import fr.iglee42.evolvedmekanism.registries.EMRecipeType;
 import fr.iglee42.evolvedmekanism.tiles.LimitedInputInventorySlot;
 import fr.iglee42.evolvedmekanism.tiles.upgrade.AlloyerUpgradeData;
-import io.github.masyumero.emextras.common.tier.EMExtraFactoryTier;
-import io.github.masyumero.emextras.mixin.AccessorTileEntityExtraFactory;
 import mekanism.api.IContentsListener;
 import mekanism.api.inventory.IInventorySlot;
 import mekanism.api.math.MathUtils;
@@ -44,7 +43,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Set;
 
-public class TileEntityAdvancedAlloyingFactory extends TileEntityItemToItemExtraFactory<AlloyerRecipe> implements TripleItemRecipeLookupHandler<AlloyerRecipe> {
+public class TileEntityEMExtraAlloyingFactory extends TileEntityItemToItemEMExtraFactory<AlloyerRecipe> implements TripleItemRecipeLookupHandler<AlloyerRecipe> {
 
     private static final List<RecipeError> TRACKED_ERROR_TYPES = List.of(
             RecipeError.NOT_ENOUGH_ENERGY,
@@ -66,7 +65,7 @@ public class TileEntityAdvancedAlloyingFactory extends TileEntityItemToItemExtra
     @WrappingComputerMethod(wrapper = SpecialComputerMethodWrapper.ComputerIInventorySlotWrapper.class, methodNames = "getTertiaryInput", docPlaceholder = "tertiary input slot")
     LimitedInputInventorySlot secondExtraSlot;
 
-    public TileEntityAdvancedAlloyingFactory(IBlockProvider blockProvider, BlockPos pos, BlockState state) {
+    public TileEntityEMExtraAlloyingFactory(IBlockProvider blockProvider, BlockPos pos, BlockState state) {
         super(blockProvider, pos, state, TRACKED_ERROR_TYPES, GLOBAL_ERROR_TYPES);
         extraInputHandler = InputHelper.getInputHandler(extraSlot, RecipeError.NOT_ENOUGH_SECONDARY_INPUT);
         secondExtraInputHandler = InputHelper.getInputHandler(secondExtraSlot, RecipeError.NOT_ENOUGH_SECONDARY_INPUT);
@@ -171,7 +170,7 @@ public class TileEntityAdvancedAlloyingFactory extends TileEntityItemToItemExtra
     @NotNull
     @Override
     public AlloyerUpgradeData getUpgradeData() {
-        return new AlloyerUpgradeData(redstone, getControlType(), getEnergyContainer(), progress, ((AccessorTileEntityExtraFactory)this).getEnergySlot() , extraSlot,secondExtraSlot, inputSlots, outputSlots, isSorting(), getComponents());
+        return new AlloyerUpgradeData(redstone, getControlType(), getEnergyContainer(), progress, ((IGetEnergySlot)this).getEnergySlot(), extraSlot,secondExtraSlot, inputSlots, outputSlots, isSorting(), getComponents());
     }
 
     @Override

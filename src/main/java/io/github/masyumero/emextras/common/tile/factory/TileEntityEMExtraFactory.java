@@ -15,7 +15,6 @@ import it.unimi.dsi.fastutil.ints.IntArraySet;
 import it.unimi.dsi.fastutil.ints.IntSet;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import mekanism.api.*;
-import mekanism.api.energy.IEnergyContainer;
 import mekanism.api.inventory.IInventorySlot;
 import mekanism.api.math.FloatingLong;
 import mekanism.api.providers.IBlockProvider;
@@ -72,8 +71,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.*;
 import java.util.function.BooleanSupplier;
 import java.util.function.IntSupplier;
-
-import static io.github.masyumero.emextras.common.util.EMExtraWorldUtils.isWorldLoaded;
 
 public abstract class TileEntityEMExtraFactory<RECIPE extends MekanismRecipe> extends TileEntityConfigurableMachine implements IRecipeLookupHandler<RECIPE>, ISustainedData {
 
@@ -449,6 +446,7 @@ public abstract class TileEntityEMExtraFactory<RECIPE extends MekanismRecipe> ex
 
         //And finally check if it is the non factory version (it will be missing sorting data, but we can gracefully ignore that)
         return switch (type) {
+            case ADVANCED_ALLOYING -> EMExtrasBlockType.ADVANCED_ALLOYER.getTileType().get();
             case ALLOYING -> EMExtrasBlockType.ALLOYER.getTileType().get();
             case SMELTING -> EMExtrasBlockType.ENERGIZED_SMELTER.getTileType().get();
             case ENRICHING -> EMExtrasBlockType.ENRICHMENT_CHAMBER.getTileType().get();

@@ -5,6 +5,10 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "emextras.refmap.json",
   "mixins": [
+    "AccessorTileEntityExtraFactory",
+    "MixinAdvancedFactory",
+    "MixinExtraItemTierInstaller",
+    "MixinFactory",
     "MixinPacketHandler"
   ],
   "client": [

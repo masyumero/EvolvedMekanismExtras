@@ -42,14 +42,8 @@ public class GuiEMExtraFactory extends GuiConfigurableTile<TileEntityEMExtraFact
         } else {
             inventoryLabelY = 75;
         }
-        int index = tile.tier.ordinal();
-        if (tile.tier.isEvolved()) {
-            imageWidth += tile.tier.imageWidth;
-            inventoryLabelX = tile.tier.inventoryLabelX;
-        } else {
-            imageWidth += (36 * (index + 2)) + (2 * index);
-            inventoryLabelX = (22 * (index + 2)) - (3 * index);
-        }
+        imageWidth += tile.tier.imageWidth;
+        inventoryLabelX = tile.tier.inventoryLabelX;
         titleLabelY = 4;
         dynamicSlots = true;
     }
@@ -60,7 +54,6 @@ public class GuiEMExtraFactory extends GuiConfigurableTile<TileEntityEMExtraFact
         GuiUtils.renderBackgroundTexture(guiGraphics, BASE_BACKGROUND, 4, 4, leftPos, topPos, imageWidth, imageHeight, 256, 256);
     }
 
-
     @Override
     protected void addGuiElements() {
         super.addGuiElements();
@@ -69,37 +62,19 @@ public class GuiEMExtraFactory extends GuiConfigurableTile<TileEntityEMExtraFact
                 .warning(WarningTracker.WarningType.NOT_ENOUGH_ENERGY, tile.getWarningCheck(CachedRecipe.OperationTracker.RecipeError.NOT_ENOUGH_ENERGY, 0));
         addRenderableWidget(new GuiEnergyTab(this, tile.getEnergyContainer(), tile::getLastUsage));
         int index = tile.tier.ordinal();
-        if (tile.tier.isEvolved()) {
-            if (tile.hasSecondaryResourceBar()) {
-                ISupportsWarning<?> secondaryBar = null;
-                if (tile instanceof TileEntityMetallurgicInfuserEMExtraFactory factory) {
-                    secondaryBar = addRenderableWidget(new GuiChemicalBar<>(this, GuiChemicalBar.getProvider(factory.getInfusionTank(), tile.getInfusionTanks(null)),
-                            7, 76, 210 + 38 * (index - 4), 4, true));
-                    addRenderableWidget(new GuiDumpButton<>(this, factory, 220 + 38 * (index - 4), 76));
-                } else if (tile instanceof TileEntityItemStackGasToItemStackEMExtraFactory factory) {
-                    secondaryBar = addRenderableWidget(new GuiChemicalBar<>(this, GuiChemicalBar.getProvider(factory.getGasTank(), tile.getGasTanks(null)),
-                            7, 76, 210 + 38 * (index - 4), 4, true));
-                    addRenderableWidget(new GuiDumpButton<>(this, factory, 220 + 38 * (index - 4), 76));
-                }
-                if (secondaryBar != null) {
-                    secondaryBar.warning(WarningTracker.WarningType.NO_MATCHING_RECIPE, tile.getWarningCheck(CachedRecipe.OperationTracker.RecipeError.NOT_ENOUGH_SECONDARY_INPUT, 0));
-                }
+        if (tile.hasSecondaryResourceBar()) {
+            ISupportsWarning<?> secondaryBar = null;
+            if (tile instanceof TileEntityMetallurgicInfuserEMExtraFactory factory) {
+                secondaryBar = addRenderableWidget(new GuiChemicalBar<>(this, GuiChemicalBar.getProvider(factory.getInfusionTank(), tile.getInfusionTanks(null)),
+                        7, 76, 210 + 38 * index, 4, true));
+                addRenderableWidget(new GuiDumpButton<>(this, factory, 220 + 38 * index, 76));
+            } else if (tile instanceof TileEntityItemStackGasToItemStackEMExtraFactory factory) {
+                secondaryBar = addRenderableWidget(new GuiChemicalBar<>(this, GuiChemicalBar.getProvider(factory.getGasTank(), tile.getGasTanks(null)),
+                        7, 76, 210 + 38 * index, 4, true));
+                addRenderableWidget(new GuiDumpButton<>(this, factory, 220 + 38 * index, 76));
             }
-        } else {
-            if (tile.hasSecondaryResourceBar()) {
-                ISupportsWarning<?> secondaryBar = null;
-                if (tile instanceof TileEntityMetallurgicInfuserEMExtraFactory factory) {
-                    secondaryBar = addRenderableWidget(new GuiChemicalBar<>(this, GuiChemicalBar.getProvider(factory.getInfusionTank(), tile.getInfusionTanks(null)),
-                            7, 76, 210 + 38 * index, 4, true));
-                    addRenderableWidget(new GuiDumpButton<>(this, factory, 220 + 38 * index, 76));
-                } else if (tile instanceof TileEntityItemStackGasToItemStackEMExtraFactory factory) {
-                    secondaryBar = addRenderableWidget(new GuiChemicalBar<>(this, GuiChemicalBar.getProvider(factory.getGasTank(), tile.getGasTanks(null)),
-                            7, 76, 210 + 38 * index, 4, true));
-                    addRenderableWidget(new GuiDumpButton<>(this, factory, 220 + 38 * index, 76));
-                }
-                if (secondaryBar != null) {
-                    secondaryBar.warning(WarningTracker.WarningType.NO_MATCHING_RECIPE, tile.getWarningCheck(CachedRecipe.OperationTracker.RecipeError.NOT_ENOUGH_SECONDARY_INPUT, 0));
-                }
+            if (secondaryBar != null) {
+                secondaryBar.warning(WarningTracker.WarningType.NO_MATCHING_RECIPE, tile.getWarningCheck(CachedRecipe.OperationTracker.RecipeError.NOT_ENOUGH_SECONDARY_INPUT, 0));
             }
         }
 
@@ -114,7 +89,7 @@ public class GuiEMExtraFactory extends GuiConfigurableTile<TileEntityEMExtraFact
 
     private GuiProgress addProgress(GuiProgress progressBar) {
         MekanismJEIRecipeType<?> jeiType = switch (tile.getFactoryType()) {
-            case ALLOYING -> EMJEI.ALLOYING;
+            case ALLOYING, ADVANCED_ALLOYING -> EMJEI.ALLOYING;
             case SMELTING -> MekanismJEIRecipeType.SMELTING;
             case ENRICHING -> MekanismJEIRecipeType.ENRICHING;
             case CRUSHING -> MekanismJEIRecipeType.CRUSHING;

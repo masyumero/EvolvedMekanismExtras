@@ -23,7 +23,7 @@ public class EMExtraMachine {
         public EMExtraFactoryMachine(Supplier<TileEntityTypeRegistryObject<TILE>> tileEntitySupplier, MekanismLang description, EMExtraFactoryType factoryType) {
             super(tileEntitySupplier, description);
             add(new AttributeUpgradeSupport(EnumSet.of(Upgrade.SPEED, Upgrade.ENERGY, Upgrade.MUFFLING, ExtraUpgrade.STACK, ExtraUpgrade.CREATIVE)));
-            add(new EMExtraAttributeFactoryType(factoryType), new EMExtraAttributeUpgradeable(() -> EMExtrasBlock.getEMExtraFactory(EMExtraFactoryTier.ABSOLUTE, getFactoryType())));
+            add(new EMExtraAttributeFactoryType(factoryType), new EMExtraAttributeUpgradeable(() -> EMExtrasBlock.getEMExtraFactory(EMExtraFactoryTier.ABSOLUTE_OVERCLOCKED, getFactoryType())));
         }
 
         public EMExtraFactoryType getFactoryType() {

@@ -25,10 +25,6 @@ public class EMExtraFactoryContainer extends MekanismTileContainer<TileEntityEME
     @Override
     protected int getInventoryXOffset() {
         int index = tile.tier.ordinal();
-        if (tile.tier.isEvolved()) {
-            return tile.tier.inventoryLabelX;
-        } else {
-            return (22 * (index + 2)) - (3 * index);
-        }
+        return tile.tier.inventoryLabelX;
     }
 }

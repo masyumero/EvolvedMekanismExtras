@@ -93,7 +93,6 @@ public class TileEntityMetallurgicInfuserEMExtraFactory extends TileEntityItemTo
             case COSMIC_DENSE -> LoadConfig.emExtraTankCapacityConfig.EMExtraCosmicDenseInfusingFactory.get();
             case SUPREME_QUANTUM -> LoadConfig.emExtraTankCapacityConfig.EMExtraSupremeQuantumInfusingFactory.get();
             case ABSOLUTE_OVERCLOCKED -> LoadConfig.emExtraTankCapacityConfig.EMExtraAbsoluteOverclockedInfusingFactory.get();
-            case ABSOLUTE, SUPREME, COSMIC, INFINITE -> 0L;
         };
     }
 

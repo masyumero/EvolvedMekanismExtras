@@ -3,6 +3,11 @@ package io.github.masyumero.emextras.common.registry;
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
 import com.jerry.mekanism_extras.api.ExtraUpgrade;
+import com.jerry.mekanism_extras.common.content.blocktype.AdvancedFactory;
+import com.jerry.mekanism_extras.common.content.blocktype.AdvancedMachine;
+import com.jerry.mekanism_extras.common.tier.AdvancedFactoryTier;
+import com.jerry.mekanism_extras.common.util.ExtraEnumUtils;
+import fr.iglee42.evolvedmekanism.registries.EMFactoryType;
 import io.github.masyumero.emextras.common.tier.EMExtraFactoryTier;
 import fr.iglee42.evolvedmekanism.EvolvedMekanismLang;
 import fr.iglee42.evolvedmekanism.registries.EMContainerTypes;
@@ -17,6 +22,7 @@ import mekanism.api.Upgrade;
 import mekanism.common.MekanismLang;
 import mekanism.common.config.MekanismConfig;
 import mekanism.common.content.blocktype.BlockShapes;
+import mekanism.common.content.blocktype.FactoryType;
 import mekanism.common.registries.MekanismContainerTypes;
 import mekanism.common.registries.MekanismSounds;
 import mekanism.common.registries.MekanismTileEntityTypes;
@@ -27,8 +33,18 @@ import java.util.EnumSet;
 public class EMExtrasBlockType {
     private static final Table<EMExtraFactoryTier, EMExtraFactoryType, EMExtraFactory<?>> FACTORIES = HashBasedTable.create();
 
+    private static final Table<AdvancedFactoryTier, FactoryType, AdvancedFactory<?>> ADVANCED_FACTORIES = HashBasedTable.create();
+
     public static final EMExtraMachine.EMExtraFactoryMachine<TileEntityAlloyer> ALLOYER = EMExtraMachine.EMExtraMachineBuilder
             .createEMExtraFactoryMachine(() -> EMTileEntityTypes.ALLOYER, EvolvedMekanismLang.DESCRIPTION_ALLOYER, EMExtraFactoryType.ALLOYING)
+            .withGui(() -> EMContainerTypes.ALLOYER)
+            .withSound(MekanismSounds.COMBINER)
+            .withEnergyConfig(LoadConfig.emExtraUsageConfig.alloyer, LoadConfig.emExtraStorageConfig.alloyer)
+            .withComputerSupport("alloyer")
+            .build();
+
+    public static final AdvancedMachine.AdvancedFactoryMachine<TileEntityAlloyer> ADVANCED_ALLOYER = AdvancedMachine.AdvancedMachineBuilder
+            .createAdvancedFactoryMachine(() -> EMTileEntityTypes.ALLOYER, EvolvedMekanismLang.DESCRIPTION_ALLOYER, EMFactoryType.ALLOYING)
             .withGui(() -> EMContainerTypes.ALLOYER)
             .withSound(MekanismSounds.COMBINER)
             .withEnergyConfig(LoadConfig.emExtraUsageConfig.alloyer, LoadConfig.emExtraStorageConfig.alloyer)
@@ -114,17 +130,20 @@ public class EMExtrasBlockType {
     static {
         for (EMExtraFactoryTier tier : EMExtraEnumUtils.EMEXTRA_FACTORY_TIERS) {
             for (EMExtraFactoryType type : EMExtraEnumUtils.EMEXTRA_FACTORY_TYPES) {
-                if (type != EMExtraFactoryType.ALLOYING) {
-                    if (tier.isEvolved()) {
-                        FACTORIES.put(tier, type, EMExtraFactory.EMExtraFactoryBuilder.createFactory(() -> EMExtrasTileEntityTypes.getEMExtraFactoryTile(tier, type), type, tier).build());
-                    }
-                } else {
+                if (type != EMExtraFactoryType.ADVANCED_ALLOYING) {
                     FACTORIES.put(tier, type, EMExtraFactory.EMExtraFactoryBuilder.createFactory(() -> EMExtrasTileEntityTypes.getEMExtraFactoryTile(tier, type), type, tier).build());
                 }
             }
         }
+        for (AdvancedFactoryTier tier : ExtraEnumUtils.ADVANCED_FACTORY_TIERS) {
+            ADVANCED_FACTORIES.put(tier, EMFactoryType.ALLOYING, AdvancedFactory.AdvancedFactoryBuilder.createFactory(() -> EMExtrasTileEntityTypes.getAdvancedFactoryTile(tier, EMFactoryType.ALLOYING), EMFactoryType.ALLOYING, tier).build());
+        }
     }
     public static EMExtraFactory<?> getEMExtraFactory(EMExtraFactoryTier tier, EMExtraFactoryType type) {
         return FACTORIES.get(tier, type);
+    }
+
+    public static AdvancedFactory<?> getAdvancedFactory(AdvancedFactoryTier tier, FactoryType type) {
+        return ADVANCED_FACTORIES.get(tier, type);
     }
 }

@@ -1,5 +1,6 @@
 package io.github.masyumero.emextras.common.content.blocktype;
 
+import com.jerry.mekanism_extras.common.content.blocktype.AdvancedMachine;
 import fr.iglee42.evolvedmekanism.jei.EMJEI;
 import fr.iglee42.evolvedmekanism.registries.EMBlocks;
 import io.github.masyumero.emextras.common.registry.EMExtrasBlockType;
@@ -16,6 +17,7 @@ import java.util.function.Supplier;
 @NothingNullByDefault
 public enum EMExtraFactoryType implements IHasTranslationKey {
     ALLOYING("alloying", "factory.mekanism.alloying", () -> EMExtrasBlockType.ALLOYER, () -> EMBlocks.ALLOYER),
+    ADVANCED_ALLOYING("alloying", "factory.mekanism.alloying", () -> EMExtrasBlockType.ADVANCED_ALLOYER, () -> EMBlocks.ALLOYER, true),
     SMELTING("smelting", MekanismLang.SMELTING.getTranslationKey(), () -> EMExtrasBlockType.ENERGIZED_SMELTER, () -> MekanismBlocks.ENERGIZED_SMELTER),
     ENRICHING("enriching", MekanismLang.ENRICHING.getTranslationKey(), () -> EMExtrasBlockType.ENRICHMENT_CHAMBER, () -> MekanismBlocks.ENRICHMENT_CHAMBER),
     CRUSHING("crushing", MekanismLang.CRUSHING.getTranslationKey(), () -> EMExtrasBlockType.CRUSHER, () -> MekanismBlocks.CRUSHER),
@@ -30,6 +32,7 @@ public enum EMExtraFactoryType implements IHasTranslationKey {
     private final String registryNameComponent;
     private final String translationKey;
     private final Supplier<EMExtraMachine.EMExtraFactoryMachine<?>> baseMachine;
+    private final Supplier<AdvancedMachine.AdvancedFactoryMachine<?>> advancedBaseMachine;
     private final Supplier<BlockRegistryObject<?, ?>> baseBlock;
 
     EMExtraFactoryType(String registryNameComponent, String translationKey, Supplier<EMExtraMachine.EMExtraFactoryMachine<?>> baseMachine, Supplier<BlockRegistryObject<?, ?>> baseBlock) {
@@ -37,11 +40,20 @@ public enum EMExtraFactoryType implements IHasTranslationKey {
         this.translationKey = translationKey;
         this.baseMachine = baseMachine;
         this.baseBlock = baseBlock;
+        advancedBaseMachine = null;
+    }
+
+    EMExtraFactoryType(String registryNameComponent, String translationKey, Supplier<AdvancedMachine.AdvancedFactoryMachine<?>> advancedBaseMachine, Supplier<BlockRegistryObject<?, ?>> baseBlock, boolean bool) {
+        this.registryNameComponent = registryNameComponent;
+        this.translationKey = translationKey;
+        this.advancedBaseMachine = advancedBaseMachine;
+        this.baseBlock = baseBlock;
+        baseMachine = null;
     }
 
     public MekanismJEIRecipeType<?> getRecipeType(EMExtraFactoryType factoryType) {
         return switch (factoryType) {
-            case ALLOYING -> EMJEI.ALLOYING;
+            case ALLOYING, ADVANCED_ALLOYING -> EMJEI.ALLOYING;
             case SMELTING -> MekanismJEIRecipeType.SMELTING;
             case ENRICHING -> MekanismJEIRecipeType.ENRICHING;
             case CRUSHING -> MekanismJEIRecipeType.CRUSHING;

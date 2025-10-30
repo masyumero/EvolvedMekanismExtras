@@ -123,7 +123,7 @@ minecraft {
 
 mixin {
     add sourceSets.main, "${mod_id}.refmap.json"
-
+    debug.export = true
     config "${mod_id}.mixins.json"
 }
 
@@ -140,6 +140,9 @@ repositories {
     maven {
         url 'https://modmaven.dev/'
     }
+    maven {
+        url = "https://maven.bawnorton.com/releases"
+    }
 }
 
 dependencies {
@@ -153,7 +156,7 @@ dependencies {
     compileOnly "mekanism:Mekanism:${mekanism_version}"
     implementation fg.deobf("curse.maven:evolved-mekanism-1230085:7117024")
     runtimeOnly fg.deobf("curse.maven:iglee-library-541199:6987117")
-    implementation fg.deobf("curse.maven:mekanism-extras-1026040:6838499")
+    implementation fg.deobf("curse.maven:mekanism-extras-1026040:6936409")
     implementation fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
     // If you want to test/use Mekanism & its modules during `runClient` invocation, use the following
     runtimeOnly fg.deobf("mekanism:Mekanism:${mekanism_version}")// core
@@ -165,11 +168,18 @@ dependencies {
     runtimeOnly fg.deobf("curse.maven:guideme-1173950:6489464")
     runtimeOnly fg.deobf("curse.maven:emi-580555:5872526")
     runtimeOnly fg.deobf("curse.maven:jade-324717:5672013")
+
     // For more info:
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
 
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+
+    //mixinsquared
+    compileOnly(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-common:0.3.7-beta.1"))
+    implementation(jarJar("com.github.bawnorton.mixinsquared:mixinsquared-forge:0.3.7-beta.1")) {
+        jarJar.ranged(it, "[0.3.7-beta.1,)")
+    }
 
 }
 

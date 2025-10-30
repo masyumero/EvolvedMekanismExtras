@@ -31,7 +31,6 @@ public class EMExtraFactory<TILE extends TileEntityEMExtraFactory<?>> extends EM
         this.origMachine = origMachine;
         setMachineData(tier);
         add(new AttributeGui(containerRegistrar, null), new EMExtraAttributeTier<>(tier));
-
         if (tier.ordinal() < ExtraEnumUtils.ADVANCED_FACTORY_TIERS.length - 1) {
             add(new EMExtraAttributeUpgradeable(() -> EMExtrasBlock.getEMExtraFactory(EMExtraEnumUtils.EMEXTRA_FACTORY_TIERS[tier.ordinal() + 1], origMachine.getFactoryType())));
         }
@@ -74,7 +73,7 @@ public class EMExtraFactory<TILE extends TileEntityEMExtraFactory<?>> extends EM
         EMExtraFactoryBuilder<EMExtraFactory<TILE>, TILE, ?> builder = new EMExtraFactoryBuilder<>(new EMExtraFactory<>(tileEntityRegistrar,
                 () -> EMExtrasContainerTypes.FACTORY,
                 switch (type) {
-                    case ALLOYING -> EMExtrasBlockType.ALLOYER;
+                    case ALLOYING, ADVANCED_ALLOYING -> EMExtrasBlockType.ALLOYER;
                     case SMELTING -> EMExtrasBlockType.ENERGIZED_SMELTER;
                     case ENRICHING -> EMExtrasBlockType.ENRICHMENT_CHAMBER;
                     case CRUSHING -> EMExtrasBlockType.CRUSHER;
