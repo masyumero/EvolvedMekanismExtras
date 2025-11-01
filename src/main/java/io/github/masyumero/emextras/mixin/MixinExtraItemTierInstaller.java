@@ -38,7 +38,7 @@ public class MixinExtraItemTierInstaller {
      * @author masyumero
      * @reason Without this, it somehow won't work.
      */
-    @Overwrite
+    @Overwrite(remap = true)
     public InteractionResult useOn(UseOnContext context) {
         Player player = context.getPlayer();
         Level world = context.getLevel();
@@ -91,5 +91,4 @@ public class MixinExtraItemTierInstaller {
         }
         return InteractionResult.PASS;
     }
-
 }

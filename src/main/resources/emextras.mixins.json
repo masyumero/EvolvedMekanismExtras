@@ -12,6 +12,7 @@
     "MixinPacketHandler"
   ],
   "client": [
+    "client.MixinGuiAdvancedFactory"
   ],
   "injectors": {
     "defaultRequire": 1
