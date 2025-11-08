@@ -15,7 +15,7 @@ public class EMExtraMixinAnnotationAdjuster implements MixinAnnotationAdjuster {
         System.out.println(mixinClassName);
 
         if(Objects.equals(mixinClassName, "com.jerry.mekanism_extras.mixin.MixinFactory") && annotationNode.is(Inject.class)) {
-            handlerNode.name = "emextra$disabled";
+            handlerNode.name = "emextras$disabled";
             return null;
         }
         return annotationNode;

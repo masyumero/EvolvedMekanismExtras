@@ -36,7 +36,7 @@ public abstract class MixinAdvancedFactory<TILE extends TileEntityExtraFactory<?
     }
 
     @Redirect(method = "<init>", at = @At(value = "INVOKE", target = "Lcom/jerry/mekanism_extras/common/content/blocktype/AdvancedFactory;add([Lmekanism/common/block/attribute/Attribute;)V", ordinal = 1))
-    private void initInject(AdvancedFactory instance, Attribute[] attributes) {
+    private void emextras$disabled(AdvancedFactory instance, Attribute[] attributes) {
     }
 
     @Inject(method = "<init>", at = @At(value = "RETURN"))
