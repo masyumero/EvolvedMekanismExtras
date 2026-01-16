@@ -1,0 +1,22 @@
+{
+  "type": "evolvedmekanism:alloying",
+  "extraInput": {
+    "ingredient": {
+      "item": "mekanism_extras:absolute_tier_installer"
+    }
+  },
+  "mainInput": {
+    "amount": 2,
+    "ingredient": {
+      "item": "emextras:absolute_overclocked_control_circuit"
+    }
+  },
+  "output": {
+    "item": "emextras:absolute_overclocked_tier_installer"
+  },
+  "secondExtraInput": {
+    "ingredient": {
+      "item": "evolvedmekanism:overclocked_tier_installer"
+    }
+  }
+}

@@ -1,4 +1,4 @@
-package io.github.masyumero.emextras.datagen.common;
+package io.github.masyumero.emextras.datagen;
 
 import io.github.masyumero.emextras.EMExtras;
 import com.electronwill.nightconfig.core.CommentedConfig;
@@ -12,9 +12,14 @@ import java.io.OutputStream;
 import java.nio.file.Path;
 import java.util.concurrent.CompletableFuture;
 
+import io.github.masyumero.emextras.datagen.client.lang.EMExtrasLangProvider;
 import io.github.masyumero.emextras.datagen.common.loot.EMExtrasLootProvider;
+import io.github.masyumero.emextras.datagen.common.recipe.impl.EMExtrasRecipeProvider;
+import io.github.masyumero.emextras.datagen.common.registries.EMExtrasDatapackRegistryProvider;
+import io.github.masyumero.emextras.datagen.common.tag.EMExtrasTagProvider;
 import mekanism.common.Mekanism;
 import net.minecraft.Util;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
@@ -39,9 +44,14 @@ public class EMExtrasDataGenerator {
         DataGenerator gen = event.getGenerator();
         PackOutput output = gen.getPackOutput();
         ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
+        EMExtrasDatapackRegistryProvider drProvider = new EMExtrasDatapackRegistryProvider(output, event.getLookupProvider());
+        CompletableFuture<HolderLookup.Provider> lookupProvider = drProvider.getRegistryProvider();
         //Client side data generators
-
+        addProvider(gen, event.includeClient(), EMExtrasLangProvider::new);
         //Server side data generators
+        EMExtrasRecipeProvider recipeProvider = new EMExtrasRecipeProvider(output, existingFileHelper);
+        gen.addProvider(event.includeServer(), recipeProvider);
+        gen.addProvider(event.includeServer(), new EMExtrasTagProvider(output, lookupProvider, existingFileHelper));
         addProvider(gen, event.includeServer(), EMExtrasLootProvider::new);
     }
 

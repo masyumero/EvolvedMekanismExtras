@@ -1,0 +1,22 @@
+{
+  "type": "evolvedmekanism:alloying",
+  "extraInput": {
+    "ingredient": {
+      "item": "mekanism_extras:supreme_tier_installer"
+    }
+  },
+  "mainInput": {
+    "amount": 2,
+    "ingredient": {
+      "item": "emextras:supreme_quantum_control_circuit"
+    }
+  },
+  "output": {
+    "item": "emextras:supreme_quantum_tier_installer"
+  },
+  "secondExtraInput": {
+    "ingredient": {
+      "item": "evolvedmekanism:quantum_tier_installer"
+    }
+  }
+}

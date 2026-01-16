@@ -1,0 +1,22 @@
+{
+  "type": "evolvedmekanism:alloying",
+  "extraInput": {
+    "ingredient": {
+      "item": "mekanism_extras:cosmic_tier_installer"
+    }
+  },
+  "mainInput": {
+    "amount": 2,
+    "ingredient": {
+      "item": "emextras:cosmic_dense_control_circuit"
+    }
+  },
+  "output": {
+    "item": "emextras:cosmic_dense_tier_installer"
+  },
+  "secondExtraInput": {
+    "ingredient": {
+      "item": "evolvedmekanism:dense_tier_installer"
+    }
+  }
+}

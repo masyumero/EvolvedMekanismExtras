@@ -5,7 +5,7 @@ import net.minecraftforge.fml.loading.LoadingModList;
 import net.minecraftforge.fml.loading.moddiscovery.ModInfo;
 
 public enum EMExtraAddons{
-    EVOLVEDMEKANISM("EvolvedMekanism"),
+    EVOLVEDMEKANISM("evolvedmekanism"),
     MEKANISMEXTRAS("mekanism_extras");
 
     private final String modName;

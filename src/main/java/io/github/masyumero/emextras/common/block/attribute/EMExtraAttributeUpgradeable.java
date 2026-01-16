@@ -1,6 +1,6 @@
 package io.github.masyumero.emextras.common.block.attribute;
 
-import com.jerry.mekanism_extras.api.tier.AdvancedTier;
+import io.github.masyumero.emextras.api.tier.EMExtraTier;
 import mekanism.common.block.states.BlockStateHelper;
 import mekanism.common.registration.impl.BlockRegistryObject;
 import net.minecraft.world.level.block.state.BlockState;
@@ -16,7 +16,7 @@ public class EMExtraAttributeUpgradeable implements EMExtraAttribute {
     }
 
     @NotNull
-    public BlockState upgradeResult(@NotNull BlockState current, @NotNull AdvancedTier tier) {
+    public BlockState upgradeResult(@NotNull BlockState current, @NotNull EMExtraTier tier) {
         return BlockStateHelper.copyStateData(current, upgradeBlock.get());
     }
 }

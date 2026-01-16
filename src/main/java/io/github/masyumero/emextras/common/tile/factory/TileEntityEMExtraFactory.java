@@ -1,6 +1,7 @@
 package io.github.masyumero.emextras.common.tile.factory;
 
 import com.jerry.mekanism_extras.api.ExtraUpgrade;
+import fr.iglee42.evolvedmekanism.interfaces.IGetEnergySlot;
 import io.github.masyumero.emextras.common.tier.EMExtraFactoryTier;
 import com.jerry.mekanism_extras.common.util.ExtraUpgradeUtils;
 import com.jerry.mekanism_extras.api.IMixinMachineEnergyContainer;
@@ -72,7 +73,7 @@ import java.util.*;
 import java.util.function.BooleanSupplier;
 import java.util.function.IntSupplier;
 
-public abstract class TileEntityEMExtraFactory<RECIPE extends MekanismRecipe> extends TileEntityConfigurableMachine implements IRecipeLookupHandler<RECIPE>, ISustainedData {
+public abstract class TileEntityEMExtraFactory<RECIPE extends MekanismRecipe> extends TileEntityConfigurableMachine implements IRecipeLookupHandler<RECIPE>, ISustainedData, IGetEnergySlot {
 
     protected static final int BASE_TICKS_REQUIRED = 200;
 
@@ -500,6 +501,11 @@ public abstract class TileEntityEMExtraFactory<RECIPE extends MekanismRecipe> ex
         } else {
             super.parseUpgradeData(upgradeData);
         }
+    }
+
+    @Override
+    public EnergyInventorySlot getEnergySlot() {
+        return this.energySlot;
     }
 
     //Methods relating to IComputerTile
