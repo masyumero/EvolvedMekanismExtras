@@ -7,7 +7,7 @@
   "mixins": [
     "AccessorTileEntityExtraFactory",
     "MixinAdvancedFactory",
-    "MixinExtraItemTierInstaller",
+
     "MixinFactory",
     "MixinPacketHandler"
   ],

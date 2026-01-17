@@ -3,7 +3,6 @@ package io.github.masyumero.emextras.mixin;
 import com.jerry.mekanism_extras.common.block.attribute.ExtraAttributeUpgradeable;
 import com.jerry.mekanism_extras.common.content.blocktype.AdvancedFactory;
 import com.jerry.mekanism_extras.common.content.blocktype.AdvancedMachine;
-import com.jerry.mekanism_extras.common.registry.ExtraBlock;
 import com.jerry.mekanism_extras.common.registry.ExtraBlockType;
 import com.jerry.mekanism_extras.common.registry.ExtraContainerTypes;
 import com.jerry.mekanism_extras.common.tier.AdvancedFactoryTier;
@@ -13,7 +12,6 @@ import fr.iglee42.evolvedmekanism.registries.EMFactoryType;
 import io.github.masyumero.emextras.common.registry.EMExtrasBlock;
 import io.github.masyumero.emextras.common.registry.EMExtrasBlockType;
 import mekanism.common.MekanismLang;
-import mekanism.common.block.attribute.Attribute;
 import mekanism.common.content.blocktype.FactoryType;
 import mekanism.common.registration.impl.TileEntityTypeRegistryObject;
 import org.jetbrains.annotations.NotNull;
@@ -21,7 +19,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
@@ -35,17 +32,11 @@ public abstract class MixinAdvancedFactory<TILE extends TileEntityExtraFactory<?
         super(tileEntitySupplier, description, factoryType);
     }
 
-    @Redirect(method = "<init>", at = @At(value = "INVOKE", target = "Lcom/jerry/mekanism_extras/common/content/blocktype/AdvancedFactory;add([Lmekanism/common/block/attribute/Attribute;)V", ordinal = 1))
-    private void emextras$disabled(AdvancedFactory instance, Attribute[] attributes) {
-    }
-
     @Inject(method = "<init>", at = @At(value = "RETURN"))
     private void initInject(Supplier tileEntityRegistrar, Supplier containerRegistrar, AdvancedMachine.AdvancedFactoryMachine origMachine, AdvancedFactoryTier tier, CallbackInfo ci) {
         if (tier.ordinal() < ExtraEnumUtils.ADVANCED_FACTORY_TIERS.length) {
             if (origMachine.getFactoryType() == EMFactoryType.ALLOYING) {
                 add(new ExtraAttributeUpgradeable(() -> EMExtrasBlock.getAdvancedFactory(ExtraEnumUtils.ADVANCED_FACTORY_TIERS[tier.ordinal() + 1], EMFactoryType.ALLOYING)));
-            } else {
-                add(new ExtraAttributeUpgradeable(() -> ExtraBlock.getAdvancedFactory(ExtraEnumUtils.ADVANCED_FACTORY_TIERS[tier.ordinal() + 1], origMachine.getFactoryType())));
             }
         }
     }
