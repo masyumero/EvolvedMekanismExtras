@@ -1,6 +1,10 @@
 package io.github.masyumero.emextras.client.jei;
 
 import com.jerry.mekanism_extras.client.jei.ExtraCatalystRegistryHelper;
+import com.jerry.mekanism_extras.common.tier.AdvancedFactoryTier;
+import com.jerry.mekanism_extras.common.util.ExtraEnumUtils;
+import fr.iglee42.evolvedmekanism.jei.EMJEI;
+import fr.iglee42.evolvedmekanism.registries.EMFactoryType;
 import io.github.masyumero.emextras.common.tier.EMExtraFactoryTier;
 import io.github.masyumero.emextras.EMExtras;
 import io.github.masyumero.emextras.common.content.blocktype.EMExtraFactoryType;
@@ -38,10 +42,13 @@ public class EMExtraJEI implements IModPlugin {
                 } else if (type == EMExtraFactoryType.INJECTING) {
                     ExtraCatalystRegistryHelper.register(registry, type.getRecipeType(type), EMExtrasBlock.getEMExtraFactory(tier, type));
                     ExtraCatalystRegistryHelper.register(registry, MekanismJEIRecipeType.GAS_CONVERSION, EMExtrasBlock.getEMExtraFactory(tier, type));
-                } else {
+                } else if (type != EMExtraFactoryType.ADVANCED_ALLOYING){
                     ExtraCatalystRegistryHelper.register(registry, type.getRecipeType(type), EMExtrasBlock.getEMExtraFactory(tier, type));
                 }
             }
+        }
+        for (AdvancedFactoryTier tier : ExtraEnumUtils.ADVANCED_FACTORY_TIERS) {
+            ExtraCatalystRegistryHelper.register(registry, EMJEI.ALLOYING, EMExtrasBlock.getAdvancedFactory(tier, EMFactoryType.ALLOYING));
         }
     }
 }
