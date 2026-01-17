@@ -140,9 +140,6 @@ repositories {
     maven {
         url 'https://modmaven.dev/'
     }
-    maven {
-        url = "https://maven.bawnorton.com/releases"
-    }
 }
 
 dependencies {
@@ -173,12 +170,6 @@ dependencies {
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
 
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
-
-    //mixinsquared
-    compileOnly(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-common:0.3.7-beta.1"))
-    implementation(jarJar("com.github.bawnorton.mixinsquared:mixinsquared-forge:0.3.7-beta.1")) {
-        jarJar.ranged(it, "[0.3.7-beta.1,)")
-    }
 
 }
 
