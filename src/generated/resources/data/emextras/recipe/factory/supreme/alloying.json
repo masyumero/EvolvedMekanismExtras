@@ -1,0 +1,27 @@
+{
+  "type": "mekanism:mek_data",
+  "category": "misc",
+  "key": {
+    "#": {
+      "tag": "c:ingots/netherite"
+    },
+    "A": {
+      "tag": "mekanism_extras:alloys/thermonuclear"
+    },
+    "C": {
+      "tag": "c:circuits/supreme"
+    },
+    "P": {
+      "item": "emextras:absolute_alloying_factory"
+    }
+  },
+  "pattern": [
+    "ACA",
+    "#P#",
+    "ACA"
+  ],
+  "result": {
+    "count": 1,
+    "id": "emextras:supreme_alloying_factory"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "type": "evolvedmekanism:alloying",
+  "extra_input": {
+    "count": 1,
+    "tag": "c:circuits/ultimate"
+  },
+  "main_input": {
+    "count": 2,
+    "tag": "mekanism_extras:alloys/radiance"
+  },
+  "output": {
+    "count": 2,
+    "id": "mekanism_extras:absolute_control_circuit"
+  },
+  "second_extra_input": {
+    "count": 1,
+    "item": "emextras:base_control_circuit"
+  }
+}

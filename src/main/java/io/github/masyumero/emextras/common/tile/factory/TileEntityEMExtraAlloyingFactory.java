@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Set;
 
 import fr.iglee42.evolvedmekanism.interfaces.EMInputRecipeCache;
-import fr.iglee42.evolvedmekanism.interfaces.IGetEnergySlot;
 import fr.iglee42.evolvedmekanism.interfaces.ThreeInputCachedRecipe;
 import fr.iglee42.evolvedmekanism.interfaces.TripleItemRecipeLookupHandler;
 import fr.iglee42.evolvedmekanism.recipes.AlloyerRecipe;
@@ -128,8 +127,8 @@ public class TileEntityEMExtraAlloyingFactory extends TileEntityEMExtraItemToIte
         ItemStack extra = extraSlot.getStack();
         ItemStack secondExtra = secondExtraSlot.getStack();
         ItemStack output = outputSlot.getStack();
-        return ((EMInputRecipeCache.IFindRecipes<ItemStack, ItemStackIngredient,ItemStack,ItemStackIngredient,ItemStack,ItemStackIngredient,AlloyerRecipe, ItemInputCache<AlloyerRecipe>,ItemInputCache<AlloyerRecipe>,ItemInputCache<AlloyerRecipe>>)getRecipeType().getInputCache()).findTypeBasedRecipe(level, fallbackInput, extra, secondExtra,
-                recipe -> InventoryUtils.areItemsStackable(recipe.getOutput(fallbackInput, extra,secondExtra), output));
+        return ((EMInputRecipeCache.IFindRecipes<ItemStack, ItemStackIngredient, ItemStack, ItemStackIngredient, ItemStack, ItemStackIngredient, AlloyerRecipe, ItemInputCache<AlloyerRecipe>, ItemInputCache<AlloyerRecipe>, ItemInputCache<AlloyerRecipe>>) getRecipeType().getInputCache())
+                .findTypeBasedRecipe(level, fallbackInput, extra, secondExtra, recipe -> InventoryUtils.areItemsStackable(recipe.getOutput(fallbackInput, extra, secondExtra), output));
     }
 
 
@@ -142,19 +141,20 @@ public class TileEntityEMExtraAlloyingFactory extends TileEntityEMExtraItemToIte
     @Nullable
     @Override
     public AlloyerRecipe getRecipe(int cacheIndex) {
-        return findFirstRecipe(inputHandlers[cacheIndex], extraInputHandler,secondExtraInputHandler);
+        return findFirstRecipe(inputHandlers[cacheIndex], extraInputHandler, secondExtraInputHandler);
     }
 
     @NotNull
     @Override
     public CachedRecipe<AlloyerRecipe> createNewCachedRecipe(@NotNull AlloyerRecipe recipe, int cacheIndex) {
-        return ThreeInputCachedRecipe.alloyer(recipe, recheckAllRecipeErrors[cacheIndex], inputHandlers[cacheIndex], extraInputHandler,secondExtraInputHandler, outputHandlers[cacheIndex])
+        return ThreeInputCachedRecipe.alloyer(recipe, recheckAllRecipeErrors[cacheIndex], inputHandlers[cacheIndex], extraInputHandler, secondExtraInputHandler, outputHandlers[cacheIndex])
                 .setErrorsChanged(errors -> errorTracker.onErrorsChanged(errors, cacheIndex))
                 .setCanHolderFunction(this::canFunction)
                 .setActive(active -> setActiveState(active, cacheIndex))
                 .setEnergyRequirements(energyContainer::getEnergyPerTick, energyContainer)
                 .setRequiredTicks(this::getTicksRequired)
                 .setOnFinish(this::markForSave)
+                .setBaselineMaxOperations(this::getOperationsPerTick)
                 .setOperatingTicksChanged(operatingTicks -> progress[cacheIndex] = operatingTicks);
     }
 

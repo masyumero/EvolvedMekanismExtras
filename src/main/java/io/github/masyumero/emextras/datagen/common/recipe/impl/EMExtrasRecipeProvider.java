@@ -14,8 +14,6 @@ import java.util.concurrent.CompletableFuture;
 @NothingNullByDefault
 public class EMExtrasRecipeProvider extends BaseRecipeProvider {
 
-    public static final char GLASS_CHAR = 'G';
-
     public EMExtrasRecipeProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> provider, ExistingFileHelper existingFileHelper) {
         super(output, provider, existingFileHelper);
     }
@@ -27,7 +25,9 @@ public class EMExtrasRecipeProvider extends BaseRecipeProvider {
     @Override
     protected List<ISubRecipeProvider> getSubRecipeProviders() {
         return List.of(
-                new AlloyingRecipeProvider()
+                new AlloyingRecipeProvider(),
+                new CombinerRecipeProvider(),
+                new FactoryRecipeProvider()
         );
     }
 }

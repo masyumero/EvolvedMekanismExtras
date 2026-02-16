@@ -8,8 +8,10 @@ public class Pattern {
     public static final char EMPTY = ' ';
     //A misc constant character that is the majority of what the recipe is (such as for recolors or the like)
     public static final char CONSTANT = '#';
+    public static final char EXTRA_CONSTANT = '?';
     public static final char COBBLESTONE = '_';
     public static final char ALLOY = 'A';
+    public static final char EXTRA_ALLOY = 'T';
     public static final char BUCKET = 'B';
     public static final char CIRCUIT = 'C';
     public static final char DYE = 'D', DIAMOND = 'D';
@@ -21,6 +23,7 @@ public class Pattern {
     public static final char NUGGET = 'N';
     public static final char OSMIUM = 'O', OTHER = 'O';
     public static final char PREVIOUS = 'P', PLASTIC = 'P';
+    public static final char EXTRA_PREVIOUS = 'Q';
     public static final char REDSTONE = 'R';
     public static final char STEEL = 'S';
     public static final char TANK = 'T';

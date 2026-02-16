@@ -1,0 +1,33 @@
+{
+  "type": "mekanism:mek_data",
+  "category": "misc",
+  "key": {
+    "A": {
+      "tag": "mekanism_extras:alloys/spectrum"
+    },
+    "C": {
+      "tag": "c:circuits/infinite_multiversal"
+    },
+    "P": {
+      "item": "mekanism_extras:infinite_injecting_factory"
+    },
+    "Q": {
+      "item": "evolvedmekanism:multiversal_injecting_factory"
+    },
+    "T": {
+      "tag": "evolvedmekanism:alloys/exoversal"
+    },
+    "X": {
+      "item": "mekanism:steel_casing"
+    }
+  },
+  "pattern": [
+    "ACT",
+    "PXQ",
+    "TCA"
+  ],
+  "result": {
+    "count": 1,
+    "id": "emextras:infinite_multiversal_injecting_factory"
+  }
+}

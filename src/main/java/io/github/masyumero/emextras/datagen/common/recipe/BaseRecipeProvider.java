@@ -47,7 +47,7 @@ public abstract class BaseRecipeProvider extends RecipeProvider {
         @Override
         public void accept(ResourceLocation recipeId, Recipe<?> recipe, @Nullable AdvancementHolder advancementHolder, ICondition... conditions) {
             parent.accept(recipeId, recipe, advancementHolder, conditions);
-            existingFileHelper.trackGenerated(recipeId, PackType.SERVER_DATA, ".json", "recipes");
+            existingFileHelper.trackGenerated(recipeId, PackType.SERVER_DATA, ".json", "recipe");
         }
 
         @Override

@@ -1,0 +1,19 @@
+{
+  "type": "evolvedmekanism:alloying",
+  "extra_input": {
+    "count": 1,
+    "tag": "c:circuits/basic"
+  },
+  "main_input": {
+    "count": 2,
+    "tag": "mekanism:alloys/infused"
+  },
+  "output": {
+    "count": 2,
+    "id": "mekanism:advanced_control_circuit"
+  },
+  "second_extra_input": {
+    "count": 1,
+    "item": "emextras:base_control_circuit"
+  }
+}

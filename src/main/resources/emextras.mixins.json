@@ -10,6 +10,7 @@
     "MixinFactory",
     "MixinItemBlockExtraFactory",
     "MixinTileEntityExtraFactory",
+    "client.MixinMekanismEmi",
     "invoker.InvokerExtraFactory",
     "invoker.InvokerExtraFactoryBuilder"
   ],

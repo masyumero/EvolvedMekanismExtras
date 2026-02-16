@@ -1,0 +1,15 @@
+{
+  "type": "mekanism:combining",
+  "extra_input": {
+    "count": 4,
+    "item": "mekanism:hdpe_sheet"
+  },
+  "main_input": {
+    "count": 1,
+    "tag": "c:circuits/basic"
+  },
+  "output": {
+    "count": 1,
+    "id": "emextras:base_control_circuit"
+  }
+}
