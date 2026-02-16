@@ -1,14 +1,18 @@
 package io.github.masyumero.emextras.mixin.client;
 
+import com.jerry.mekextras.common.tier.ExtraFactoryTier;
+import com.jerry.mekextras.common.util.ExtraEnumUtils;
 import dev.emi.emi.api.EmiRegistry;
 import dev.emi.emi.api.recipe.EmiRecipeCategory;
 import dev.emi.emi.api.stack.EmiStack;
-import io.github.masyumero.emextras.common.block.attribute.EMExtraAttributeFactoryType;
+import fr.iglee42.evolvedmekanism.registries.EMFactoryType;
 import io.github.masyumero.emextras.common.registry.EMExtraBlocks;
 import io.github.masyumero.emextras.common.tier.EMExtraFactoryTier;
+import io.github.masyumero.emextras.common.util.EMExtraBlockUtils;
 import io.github.masyumero.emextras.common.util.EMExtraEnumUtils;
 import mekanism.client.recipe_viewer.emi.MekanismEmi;
 import mekanism.common.block.attribute.Attribute;
+import mekanism.common.block.attribute.AttributeFactoryType;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
@@ -27,10 +31,15 @@ public abstract class MixinMekanismEmi {
         for (ItemLike workstation : workstations) {
             Item item = workstation.asItem();
             if (item instanceof BlockItem blockItem) {
-                EMExtraAttributeFactoryType factoryType = Attribute.get(blockItem.getBlock(), EMExtraAttributeFactoryType.class);
+                AttributeFactoryType factoryType = Attribute.get(blockItem.getBlock(), AttributeFactoryType.class);
                 if (factoryType != null) {
+                    if (factoryType.getFactoryType() == EMFactoryType.ALLOYING) {
+                        for (ExtraFactoryTier tier : ExtraEnumUtils.EXTRA_FACTORY_TIERS) {
+                            registry.addWorkstation(category, EmiStack.of(EMExtraBlocks.getExtraFactory(tier, factoryType.getFactoryType())));
+                        }
+                    }
                     for (EMExtraFactoryTier tier : EMExtraEnumUtils.EMEXTRA_FACTORY_TIERS) {
-                        registry.addWorkstation(category, EmiStack.of(EMExtraBlocks.getEMExtraFactory(tier, factoryType.getFactoryType())));
+                        registry.addWorkstation(category, EmiStack.of(EMExtraBlockUtils.getEMExtraFactory(tier, factoryType.getFactoryType())));
                     }
                 }
             }
