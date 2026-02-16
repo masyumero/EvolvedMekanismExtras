@@ -5,14 +5,13 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "emextras.refmap.json",
   "mixins": [
-    "AccessorTileEntityExtraFactory",
-    "MixinAdvancedFactory",
-
+    "MixinExtraFactory",
+    "MixinExtraFactoryBuilder",
     "MixinFactory",
-    "MixinPacketHandler"
-  ],
-  "client": [
-    "client.MixinGuiAdvancedFactory"
+    "MixinItemBlockExtraFactory",
+    "MixinTileEntityExtraFactory",
+    "invoker.InvokerExtraFactory",
+    "invoker.InvokerExtraFactoryBuilder"
   ],
   "injectors": {
     "defaultRequire": 1

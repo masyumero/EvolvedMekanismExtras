@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public record EMExtraAttributeTier<TIER extends IEMExtraTier>(TIER tier) implements EMExtraAttribute {
+
     private static final Map<IEMExtraTier, BlockType> typeCache = new HashMap<>();
 
     public static <T extends IEMExtraTier> BlockType getPassthroughType(T tier) {

@@ -1,8 +1,10 @@
 package io.github.masyumero.emextras.api.tier;
 
+import lombok.Getter;
 import mekanism.api.SupportsColorMap;
 import mekanism.api.math.MathUtils;
 import net.minecraft.network.chat.TextColor;
+import net.minecraft.util.FastColor;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.level.material.MapColor;
 import org.jetbrains.annotations.NotNull;
@@ -18,8 +20,10 @@ public enum EMExtraTier implements StringRepresentable, SupportsColorMap {
     private static final EMExtraTier[] TIERS = values();
 
     private final String name;
+    @Getter
     private final MapColor mapColor;
     private TextColor textColor;
+    private int argb;
     private int[] rgbCode;
 
     EMExtraTier(String name, int[] rgbCode, MapColor mapColor) {
@@ -36,8 +40,9 @@ public enum EMExtraTier implements StringRepresentable, SupportsColorMap {
         return getSimpleName().toLowerCase(Locale.ROOT);
     }
 
-    public MapColor getMapColor() {
-        return mapColor;
+    @Override
+    public int getPackedColor() {
+        return argb;
     }
 
     @Override
@@ -48,6 +53,7 @@ public enum EMExtraTier implements StringRepresentable, SupportsColorMap {
     @Override
     public void setColorFromAtlas(int[] color) {
         this.rgbCode = color;
+        this.argb = FastColor.ARGB32.color(this.rgbCode[0], this.rgbCode[1], this.rgbCode[2]);
         this.textColor = TextColor.fromRgb(rgbCode[0] << 16 | rgbCode[1] << 8 | rgbCode[2]);
     }
 

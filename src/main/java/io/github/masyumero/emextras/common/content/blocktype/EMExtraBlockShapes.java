@@ -1,13 +1,12 @@
 package io.github.masyumero.emextras.common.content.blocktype;
 
-import io.github.masyumero.emextras.common.tier.EMExtraFactoryTier;
 import mekanism.common.content.blocktype.BlockShapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public final class EMExtraBlockShapes {
-    public static VoxelShape[] getShape(EMExtraFactoryTier tier, EMExtraFactoryType type) {
+    public static VoxelShape[] getShape(EMExtraFactoryType type) {
         return switch (type) {
-            case ADVANCED_ALLOYING, ALLOYING, SMELTING -> BlockShapes.SMELTING_FACTORY;
+            case EXTRA_ALLOYING, ALLOYING, SMELTING -> BlockShapes.SMELTING_FACTORY;
             case ENRICHING -> BlockShapes.ENRICHING_FACTORY;
             case CRUSHING -> BlockShapes.CRUSHING_FACTORY;
             case COMPRESSING -> BlockShapes.COMPRESSING_FACTORY;

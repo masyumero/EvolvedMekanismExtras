@@ -1,8 +1,6 @@
 package io.github.masyumero.emextras.datagen.client.lang;
 
-import net.minecraft.Util;
-import net.minecraft.data.PackOutput;
-
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -10,12 +8,16 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import net.minecraft.Util;
+import net.minecraft.data.PackOutput;
+
 public class NonAmericanLanguageProvider extends ConvertibleLanguageProvider {
 
     private static final List<WordConversion> CONVERSIONS = Util.make(new HashMap<String, String>(), map -> {
         addEntry(map, "Pressurized", "Pressurised");
         addEntry(map, "Stabilizer", "Stabiliser");
         addEntry(map, "Stabilizing", "Stabilising");
+        addEntry(map, "Stabilization", "Stabilisation");
         addEntry(map, "Crystallizer", "Crystalliser");
         addEntry(map, "Nucleosynthesizer", "Nucleosynthesiser");
         addEntry(map, "Color", "Colour");
@@ -31,6 +33,7 @@ public class NonAmericanLanguageProvider extends ConvertibleLanguageProvider {
         addEntry(map, "Armor", "Armour");
         addEntry(map, "Armored", "Armoured");
         addEntry(map, "Gray", "Grey");
+        addEntry(map, "Whooshes", "Wooshes");
     }).entrySet().stream().map(entry -> new WordConversion(entry.getKey(), entry.getValue())).toList();
 
     private static void addEntry(Map<String, String> map, String key, String value) {
@@ -43,7 +46,7 @@ public class NonAmericanLanguageProvider extends ConvertibleLanguageProvider {
     }
 
     @Override
-    public void convert(String key, List<FormatSplitter.Component> splitEnglish) {
+    public void convert(String key, String raw, List<FormatSplitter.Component> splitEnglish) {
         StringBuilder builder = new StringBuilder();
         boolean foundMatch = false;
         for (FormatSplitter.Component component : splitEnglish) {
@@ -51,8 +54,12 @@ public class NonAmericanLanguageProvider extends ConvertibleLanguageProvider {
                 builder.append(component.contents());
             } else {
                 String contents = component.contents();
-                String finalContents = contents;
-                List<WordConversion> matched = CONVERSIONS.stream().filter(e -> e.match(finalContents).find()).toList();
+                List<WordConversion> matched = new ArrayList<>();
+                for (WordConversion conversion : CONVERSIONS) {
+                    if (conversion.match(contents).find()) {
+                        matched.add(conversion);
+                    }
+                }
                 if (!matched.isEmpty()) {
                     foundMatch = true;
                     for (WordConversion conversion : matched) {

@@ -1,38 +1,72 @@
 package io.github.masyumero.emextras.datagen;
 
-import io.github.masyumero.emextras.EMExtras;
 import com.electronwill.nightconfig.core.CommentedConfig;
+import com.electronwill.nightconfig.core.InMemoryCommentedFormat;
+import com.electronwill.nightconfig.core.concurrent.SynchronizedConfig;
 import com.google.common.hash.Hashing;
 import com.google.common.hash.HashingOutputStream;
 import com.google.gson.JsonElement;
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.EnumMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Set;
 import java.util.concurrent.CompletableFuture;
+import java.util.function.Function;
 
+import io.github.masyumero.emextras.EMExtras;
 import io.github.masyumero.emextras.datagen.client.lang.EMExtrasLangProvider;
 import io.github.masyumero.emextras.datagen.common.loot.EMExtrasLootProvider;
 import io.github.masyumero.emextras.datagen.common.recipe.impl.EMExtrasRecipeProvider;
 import io.github.masyumero.emextras.datagen.common.registries.EMExtrasDatapackRegistryProvider;
 import io.github.masyumero.emextras.datagen.common.tag.EMExtrasTagProvider;
 import mekanism.common.Mekanism;
+import mekanism.common.lib.FieldReflectionHelper;
 import net.minecraft.Util;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
-import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.data.event.GatherDataEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.config.ConfigTracker;
-import net.minecraftforge.fml.config.ModConfig;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.DeferredWorkQueue;
+import net.neoforged.fml.ModContainer;
+import net.neoforged.fml.ModList;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.config.ConfigTracker;
+import net.neoforged.fml.config.ModConfig;
+import net.neoforged.fml.event.config.ModConfigEvent;
+import net.neoforged.fml.event.lifecycle.InterModEnqueueEvent;
+import net.neoforged.fml.event.lifecycle.InterModProcessEvent;
+import net.neoforged.fml.util.ObfuscationReflectionHelper;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.data.event.GatherDataEvent;
 
-@Mod.EventBusSubscriber(modid = EMExtras.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = EMExtras.MODID)
 public class EMExtrasDataGenerator {
+
+    @SuppressWarnings("UnstableApiUsage")
+    private static final FieldReflectionHelper<ConfigTracker, EnumMap<ModConfig.Type, Set<ModConfig>>> CONFIG_SETS =
+            new FieldReflectionHelper<>(ConfigTracker.class, "configSets", () -> new EnumMap<>(ModConfig.Type.class));
+    private static final Constructor<?> LOADED_CONFIG;
+    private static final Method SET_CONFIG;
+
+    static {
+        Class<?> loadedConfig;
+        try {
+            loadedConfig = Class.forName("net.neoforged.fml.config.LoadedConfig");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        LOADED_CONFIG = ObfuscationReflectionHelper.findConstructor(loadedConfig, CommentedConfig.class, Path.class, ModConfig.class);
+        SET_CONFIG = ObfuscationReflectionHelper.findMethod(ModConfig.class, "setConfig", loadedConfig, Function.class);
+    }
 
     private EMExtrasDataGenerator() {
     }
@@ -41,47 +75,67 @@ public class EMExtrasDataGenerator {
     public static void gatherData(GatherDataEvent event) {
         bootstrapConfigs(Mekanism.MODID);
         bootstrapConfigs(EMExtras.MODID);
+        bootstrapIMC();
         DataGenerator gen = event.getGenerator();
         PackOutput output = gen.getPackOutput();
         ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
         EMExtrasDatapackRegistryProvider drProvider = new EMExtrasDatapackRegistryProvider(output, event.getLookupProvider());
         CompletableFuture<HolderLookup.Provider> lookupProvider = drProvider.getRegistryProvider();
         //Client side data generators
-        addProvider(gen, event.includeClient(), EMExtrasLangProvider::new);
+        gen.addProvider(event.includeClient(), new EMExtrasLangProvider(output));
         //Server side data generators
-        EMExtrasRecipeProvider recipeProvider = new EMExtrasRecipeProvider(output, existingFileHelper);
-        gen.addProvider(event.includeServer(), recipeProvider);
+        gen.addProvider(event.includeServer(), new EMExtrasLootProvider(output, lookupProvider));
         gen.addProvider(event.includeServer(), new EMExtrasTagProvider(output, lookupProvider, existingFileHelper));
-        addProvider(gen, event.includeServer(), EMExtrasLootProvider::new);
-    }
-
-    public static <PROVIDER extends DataProvider> void addProvider(DataGenerator gen, boolean run, DataProvider.Factory<PROVIDER> factory) {
-        gen.addProvider(run, factory);
+        gen.addProvider(event.includeServer(), new EMExtrasRecipeProvider(output, lookupProvider, existingFileHelper));
     }
 
     /**
      * Used to bootstrap configs to their default values so that if we are querying if things exist we don't have issues with it happening to early or in cases we have
      * fake tiles.
      */
+    @SuppressWarnings("UnstableApiUsage")
     public static void bootstrapConfigs(String modid) {
-        ConfigTracker.INSTANCE.configSets().forEach((type, configs) -> {
+        for (Set<ModConfig> configs : CONFIG_SETS.getValue(ConfigTracker.INSTANCE).values()) {
             for (ModConfig config : configs) {
                 if (config.getModId().equals(modid)) {
                     //Similar to how ConfigTracker#loadDefaultServerConfigs works for loading default server configs on the client
                     // except we don't bother firing an event as it is private, and we are already at defaults if we had called earlier,
                     // and we also don't fully initialize the mod config as the spec is what we care about, and we can do so without having
                     // to reflect into package private methods
-                    CommentedConfig commentedConfig = CommentedConfig.inMemory();
+                    CommentedConfig commentedConfig = new SynchronizedConfig(InMemoryCommentedFormat.defaultInstance(), LinkedHashMap::new);
                     config.getSpec().correct(commentedConfig);
-                    config.getSpec().acceptConfig(commentedConfig);
+                    try {
+                        SET_CONFIG.invoke(config, LOADED_CONFIG.newInstance(commentedConfig, null, config),
+                                (Function<ModConfig, ModConfigEvent>) ModConfigEvent.Loading::new);
+                    } catch (Throwable e) {
+                        throw new RuntimeException(e);
+                    }
                 }
             }
-        });
+        }
+    }
+
+    private static void bootstrapIMC() {
+        List<ModContainer> mods = new ArrayList<>();
+        DeferredWorkQueue enqueueIMC = new DeferredWorkQueue("IMC Bootstrap: Enqueue IMC");
+        for (ModContainer mod : ModList.get().getSortedMods()) {
+            //Handle all our modules
+            if (mod.getModId().startsWith(Mekanism.MODID)) {
+                mods.add(mod);
+                mod.getEventBus().post(new InterModEnqueueEvent(mod, enqueueIMC));
+            }
+        }
+        enqueueIMC.runTasks();
+        DeferredWorkQueue processIMC = new DeferredWorkQueue("IMC Bootstrap: Process IMC");
+        for (ModContainer mod : mods) {
+            mod.getEventBus().post(new InterModProcessEvent(mod, processIMC));
+        }
+        processIMC.runTasks();
     }
 
     /**
-     * Basically a copy of {@link DataProvider#saveStable(CachedOutput, JsonElement, Path)} but it takes a consumer of the output stream instead of serializes json using GSON.
-     * Use it to write arbitrary files.
+     * Basically a copy of {@link DataProvider#saveStable(CachedOutput, JsonElement, Path)} but it takes a consumer of the output stream instead of serializes json using
+     * GSON. Use it to write arbitrary files.
      */
     @SuppressWarnings({"UnstableApiUsage", "deprecation"})
     public static CompletableFuture<?> save(CachedOutput cache, IOConsumer<OutputStream> osConsumer, Path path) {
@@ -98,7 +152,7 @@ public class EMExtrasDataGenerator {
 
     @FunctionalInterface
     public interface IOConsumer<T> {
+
         void accept(T value) throws IOException;
     }
-
 }

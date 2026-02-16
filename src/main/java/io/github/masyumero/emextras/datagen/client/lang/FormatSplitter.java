@@ -1,8 +1,5 @@
 package io.github.masyumero.emextras.datagen.client.lang;
 
-import com.google.common.collect.ImmutableList;
-import org.jetbrains.annotations.Nullable;
-
 import java.text.ChoiceFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -11,6 +8,9 @@ import java.util.List;
 import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import lombok.Getter;
+import org.jetbrains.annotations.Nullable;
 
 public class FormatSplitter {
 
@@ -45,11 +45,11 @@ public class FormatSplitter {
                 components.add(new TextComponent(text.substring(start)));
             }
         }
-        return ImmutableList.copyOf(components);
+        return List.copyOf(components);
     }
 
     public static List<Component> splitMessageFormat(String text) {
-        return ImmutableList.copyOf(splitMessageFormatInternal(text));
+        return List.copyOf(splitMessageFormatInternal(text));
     }
 
     /**
@@ -161,7 +161,7 @@ public class FormatSplitter {
 
     /**
      * Represents information about a MessageFormat formatting code. Valid MessageFormat styles:
-     * <p><ul>
+     * <ul>
      * <li> { ArgumentIndex }
      * <li> { ArgumentIndex, FormatType }
      * <li> { ArgumentIndex, FormatType, FormatStyle }
@@ -169,11 +169,13 @@ public class FormatSplitter {
      */
     public static class MessageFormatComponent extends FormatComponent {
 
+        @Getter
         private final int argumentIndex;
         @Nullable
         private final String formatType;
         @Nullable
         private final String formatStyle;
+        @Getter
         private final boolean isChoice;
 
         private MessageFormatComponent(String contents, int argumentIndex, @Nullable String formatType, @Nullable String formatStyle, boolean isChoice) {
@@ -182,10 +184,6 @@ public class FormatSplitter {
             this.formatType = formatType;
             this.formatStyle = formatStyle;
             this.isChoice = isChoice;
-        }
-
-        public int getArgumentIndex() {
-            return argumentIndex;
         }
 
         /**
@@ -201,15 +199,13 @@ public class FormatSplitter {
             return formatStyle;
         }
 
-        public boolean isChoice() {
-            return isChoice;
-        }
-
         /**
          * @param contents Contents to create a {@link MessageFormatComponent} from.
          *
          * @return A {@link MessageFormatComponent} representing the given contents, or {@code null} if the contents do not represent a valid
          * {@link MessageFormatComponent}
+         *
+         * @see net.neoforged.fml.i18n.FMLTranslations
          */
         @Nullable
         private static MessageFormatComponent fromContents(String contents) {
@@ -288,9 +284,9 @@ public class FormatSplitter {
                         return null;
                     }
                 }
-                case "featurebound", "lower", "upper", "vr" -> {
+                case "featurebound", "lower", "upper", "vr", "i18ntranslate" -> {
                     if (formatStyle != null) {
-                        //featurebound, lower, upper, and vr do not support any format style
+                        //None of these support any format style
                         return null;
                     }
                 }

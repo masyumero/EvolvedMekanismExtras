@@ -2,12 +2,12 @@ package io.github.masyumero.emextras.common.config;
 
 import mekanism.common.config.BaseMekanismConfig;
 import mekanism.common.config.value.CachedLongValue;
-import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.fml.config.ModConfig;
+import net.neoforged.fml.config.ModConfig;
+import net.neoforged.neoforge.common.ModConfigSpec;
 
 public class EMExtraTankCapacityConfig extends BaseMekanismConfig {
 
-    private final ForgeConfigSpec configSpec;
+    private final ModConfigSpec configSpec;
     public final CachedLongValue EMExtraAbsoluteOverclockedFactories;
     public final CachedLongValue EMExtraSupremeQuantumOsmiumFactories;
     public final CachedLongValue EMExtraCosmicDenseOsmiumFactories;
@@ -17,7 +17,7 @@ public class EMExtraTankCapacityConfig extends BaseMekanismConfig {
     public final CachedLongValue EMExtraCosmicDenseInfusingFactory;
     public final CachedLongValue EMExtraInfiniteMultiversalInfusingFactory;
     public EMExtraTankCapacityConfig() {
-        ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
+        ModConfigSpec.Builder builder = new ModConfigSpec.Builder();
         builder.comment("Evolved Mekanism Extras Tank Capacity Config");
         builder.push("tank");
         EMExtraAbsoluteOverclockedFactories = CachedLongValue.wrap(this, builder.comment("Chemical tank capacity (mB).").defineInRange("AbsoluteOverclockedFactories",30240,1,Long.MAX_VALUE));
@@ -37,7 +37,12 @@ public class EMExtraTankCapacityConfig extends BaseMekanismConfig {
     }
 
     @Override
-    public ForgeConfigSpec getConfigSpec() {
+    public String getTranslation() {
+        return "Capacity Config";
+    }
+
+    @Override
+    public ModConfigSpec getConfigSpec() {
         return configSpec;
     }
 

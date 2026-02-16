@@ -14,23 +14,23 @@ public class EMExtraFactoryInputInventorySlot extends InputInventorySlot {
 
     private final TileEntityEMExtraFactory<?> factory;
 
-    public static EMExtraFactoryInputInventorySlot create(TileEntityEMExtraFactory<?> factory, int process, IInventorySlot outputSlot, @Nullable IContentsListener listener, int x, int y) {
+    public static EMExtraFactoryInputInventorySlot create(TileEntityEMExtraFactory<?> factory, int process, IInventorySlot outputSlot, @Nullable IContentsListener listener,
+                                                        int x, int y) {
         return create(factory, process, outputSlot, null, listener, x, y);
     }
 
-    public static EMExtraFactoryInputInventorySlot create(TileEntityEMExtraFactory<?> factory, int process, IInventorySlot outputSlot, @Nullable IInventorySlot secondaryOutputSlot, @Nullable IContentsListener listener, int x, int y) {
+    public static EMExtraFactoryInputInventorySlot create(TileEntityEMExtraFactory<?> factory, int process, IInventorySlot outputSlot, @Nullable IInventorySlot secondaryOutputSlot,
+                                                        @Nullable IContentsListener listener, int x, int y) {
         Objects.requireNonNull(factory, "Factory cannot be null");
         Objects.requireNonNull(outputSlot, "Primary output slot cannot be null");
         return new EMExtraFactoryInputInventorySlot(factory, process, outputSlot, secondaryOutputSlot, listener, x, y);
     }
 
-    private EMExtraFactoryInputInventorySlot(TileEntityEMExtraFactory<?> factory, int process, IInventorySlot outputSlot, @Nullable IInventorySlot secondaryOutputSlot, @Nullable IContentsListener listener, int x, int y) {
-        super(stack -> factory.isValidInputItem(stack) && factory.inputProducesOutput(process, stack, outputSlot, secondaryOutputSlot, false), factory::isValidInputItem, listener, x, y);
+    private EMExtraFactoryInputInventorySlot(TileEntityEMExtraFactory<?> factory, int process, IInventorySlot outputSlot, @Nullable IInventorySlot secondaryOutputSlot,
+                                           @Nullable IContentsListener listener, int x, int y) {
+        super(stack -> factory.isItemValidForSlot(stack) && factory.inputProducesOutput(process, stack, outputSlot, secondaryOutputSlot, false),
+                factory::isValidInputItem, listener, x, y);
         this.factory = factory;
-    }
-
-    public void setStackUnchecked(@NotNull ItemStack stack) {
-        super.setStackUnchecked(stack);
     }
 
     @Override

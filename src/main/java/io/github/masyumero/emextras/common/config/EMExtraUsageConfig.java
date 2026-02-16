@@ -1,23 +1,21 @@
 package io.github.masyumero.emextras.common.config;
 
-import mekanism.api.math.FloatingLong;
 import mekanism.common.config.BaseMekanismConfig;
-import mekanism.common.config.value.CachedFloatingLongValue;
 import mekanism.common.config.value.CachedLongValue;
-import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.fml.config.ModConfig;
+import net.neoforged.fml.config.ModConfig;
+import net.neoforged.neoforge.common.ModConfigSpec;
 
 public class EMExtraUsageConfig extends BaseMekanismConfig {
 
-    private final ForgeConfigSpec configSpec;
+    private final ModConfigSpec configSpec;
 
-    public final CachedFloatingLongValue alloyer;
+    public final CachedLongValue alloyingFactory;
 
     public EMExtraUsageConfig() {
-        ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
+        ModConfigSpec.Builder builder = new ModConfigSpec.Builder();
         builder.comment("Evolved Mekanism Extras Usage Config");
         builder.push("usage");
-        alloyer = CachedFloatingLongValue.define(this, builder, "Energy per operation tick (Joules).", "alloyer", FloatingLong.createConst(50));
+        alloyingFactory = CachedLongValue.definedMin(this, builder, EMExtraConfigTranslations.ENERGY_USAGE_ALLOYING_FACTORY, "alloyingFactory", 50L, 1);
         configSpec = builder.build();
     }
 
@@ -27,7 +25,12 @@ public class EMExtraUsageConfig extends BaseMekanismConfig {
     }
 
     @Override
-    public ForgeConfigSpec getConfigSpec() {
+    public String getTranslation() {
+        return "Usage Config";
+    }
+
+    @Override
+    public ModConfigSpec getConfigSpec() {
         return configSpec;
     }
 

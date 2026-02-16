@@ -1,73 +1,50 @@
 package io.github.masyumero.emextras.datagen.common.recipe.builder;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import io.github.masyumero.emextras.datagen.DataGenJsonConstants;
-import io.github.masyumero.emextras.datagen.common.recipe.impl.EMExtrasRecipeProvider;
-import io.github.masyumero.emextras.datagen.common.recipe.pattern.Pattern;
 import io.github.masyumero.emextras.datagen.common.recipe.pattern.RecipePattern;
 import it.unimi.dsi.fastutil.chars.Char2ObjectArrayMap;
 import it.unimi.dsi.fastutil.chars.Char2ObjectMap;
 import it.unimi.dsi.fastutil.chars.CharOpenHashSet;
 import it.unimi.dsi.fastutil.chars.CharSet;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 import mekanism.api.annotations.NothingNullByDefault;
+import mekanism.common.registration.impl.BlockRegistryObject;
+import net.minecraft.core.Holder;
+import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.level.ItemLike;
-
-import java.util.ArrayList;
-import java.util.List;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.ShapedRecipe;
+import net.minecraft.world.item.crafting.ShapedRecipePattern;
 
 @NothingNullByDefault
 public class ExtendedShapedRecipeBuilder extends BaseRecipeBuilder<ExtendedShapedRecipeBuilder> {
 
-    private static final RecipePattern BLOCK_PATTERN = RecipePattern.createPattern(
-            RecipePattern.TripleLine.of(Pattern.ALLOY, Pattern.CONSTANT, Pattern.ALLOY),
-            RecipePattern.TripleLine.of(Pattern.CONSTANT, Pattern.CIRCUIT, Pattern.CONSTANT),
-            RecipePattern.TripleLine.of(Pattern.ALLOY, Pattern.CONSTANT, Pattern.ALLOY));
-
-    private static final RecipePattern CONTROLLER_PATTERN = RecipePattern.createPattern(
-            RecipePattern.TripleLine.of(Pattern.CIRCUIT, EMExtrasRecipeProvider.GLASS_CHAR, Pattern.CIRCUIT),
-            RecipePattern.TripleLine.of(Pattern.CONSTANT, Pattern.OTHER, Pattern.CONSTANT),
-            RecipePattern.TripleLine.of(Pattern.CONSTANT, Pattern.CONSTANT, Pattern.CONSTANT));
-
-    private static final RecipePattern VALVE_PATTERN = RecipePattern.createPattern(
-            RecipePattern.TripleLine.of(Pattern.EMPTY, Pattern.CONSTANT, Pattern.EMPTY),
-            RecipePattern.TripleLine.of(Pattern.CONSTANT, Pattern.OTHER, Pattern.CONSTANT),
-            RecipePattern.TripleLine.of(Pattern.EMPTY, Pattern.CONSTANT, Pattern.EMPTY));
-
     private final Char2ObjectMap<Ingredient> key = new Char2ObjectArrayMap<>(9);
     private final List<String> pattern = new ArrayList<>();
+    private boolean showNotification = true;
 
-    protected ExtendedShapedRecipeBuilder(RecipeSerializer<?> serializer, ItemLike result, int count) {
-        super(serializer, result, count);
+    protected ExtendedShapedRecipeBuilder(Holder<Item> result, int count) {
+        super(result, count);
     }
 
-    private ExtendedShapedRecipeBuilder(ItemLike result, int count) {
-        this(RecipeSerializer.SHAPED_RECIPE, result, count);
-    }
-
-    public static ExtendedShapedRecipeBuilder shapedRecipe(ItemLike result) {
+    public static ExtendedShapedRecipeBuilder shapedRecipe(BlockRegistryObject<?, ?> result) {
         return shapedRecipe(result, 1);
     }
 
-    public static ExtendedShapedRecipeBuilder shapedRecipe(ItemLike result, int count) {
+    public static ExtendedShapedRecipeBuilder shapedRecipe(BlockRegistryObject<?, ?> result, int count) {
+        return shapedRecipe(result.getItemHolder(), count);
+    }
+
+    public static ExtendedShapedRecipeBuilder shapedRecipe(Holder<Item> result) {
+        return shapedRecipe(result, 1);
+    }
+
+    public static ExtendedShapedRecipeBuilder shapedRecipe(Holder<Item> result, int count) {
         return new ExtendedShapedRecipeBuilder(result, count);
-    }
-
-    public ExtendedShapedRecipeBuilder blockPattern() {
-        return pattern(BLOCK_PATTERN);
-    }
-
-    public ExtendedShapedRecipeBuilder controllerPattern() {
-        return pattern(CONTROLLER_PATTERN);
-    }
-
-    public ExtendedShapedRecipeBuilder valvePattern() {
-        return pattern(VALVE_PATTERN);
     }
 
     public ExtendedShapedRecipeBuilder pattern(RecipePattern pattern) {
@@ -88,8 +65,16 @@ public class ExtendedShapedRecipeBuilder extends BaseRecipeBuilder<ExtendedShape
         return key(symbol, Ingredient.of(tag));
     }
 
-    public ExtendedShapedRecipeBuilder key(char symbol, ItemLike item) {
+    public ExtendedShapedRecipeBuilder key(char symbol, Item item) {
         return key(symbol, Ingredient.of(item));
+    }
+
+    public ExtendedShapedRecipeBuilder key(char symbol, BlockRegistryObject<?, ?> block) {
+        return key(symbol, block.getItemHolder());
+    }
+
+    public ExtendedShapedRecipeBuilder key(char symbol, Holder<Item> item) {
+        return key(symbol, Ingredient.of(item.value()));
     }
 
     public ExtendedShapedRecipeBuilder key(char symbol, Ingredient ingredient) {
@@ -99,6 +84,11 @@ public class ExtendedShapedRecipeBuilder extends BaseRecipeBuilder<ExtendedShape
             throw new IllegalArgumentException("Symbol ' ' (whitespace) is reserved and cannot be defined");
         }
         key.put(symbol, ingredient);
+        return this;
+    }
+
+    public ExtendedShapedRecipeBuilder showNotification(boolean show) {
+        this.showNotification = show;
         return this;
     }
 
@@ -120,35 +110,23 @@ public class ExtendedShapedRecipeBuilder extends BaseRecipeBuilder<ExtendedShape
         }
         if (!set.isEmpty()) {
             throw new IllegalStateException("Ingredients are defined but not used in pattern for recipe " + id);
-        } else if (pattern.size() == 1 && pattern.get(0).length() == 1) {
+        } else if (pattern.size() == 1 && pattern.getFirst().length() == 1) {
             throw new IllegalStateException("Shaped recipe " + id + " only takes in a single item, and should probably be a shapeless recipe instead");
         }
     }
 
     @Override
-    protected RecipeResult getResult(ResourceLocation id) {
-        return new Result(id);
+    protected Recipe<?> asRecipe() {
+        return wrapRecipe(new ShapedRecipe(
+                Objects.requireNonNullElse(this.group, ""),
+                RecipeBuilder.determineBookCategory(this.category),
+                ShapedRecipePattern.of(this.key, this.pattern),
+                resultStack(),
+                this.showNotification
+        ));
     }
 
-    public class Result extends BaseRecipeResult {
-
-        protected Result(ResourceLocation id) {
-            super(id);
-        }
-
-        @Override
-        public void serializeRecipeData(JsonObject json) {
-            super.serializeRecipeData(json);
-            JsonArray jsonPattern = new JsonArray();
-            for (String s : pattern) {
-                jsonPattern.add(s);
-            }
-            json.add(DataGenJsonConstants.PATTERN, jsonPattern);
-            JsonObject jsonobject = new JsonObject();
-            for (Char2ObjectMap.Entry<Ingredient> entry : key.char2ObjectEntrySet()) {
-                jsonobject.add(String.valueOf(entry.getCharKey()), entry.getValue().toJson());
-            }
-            json.add(DataGenJsonConstants.KEY, jsonobject);
-        }
+    protected Recipe<?> wrapRecipe(ShapedRecipe recipe) {
+        return recipe;
     }
 }

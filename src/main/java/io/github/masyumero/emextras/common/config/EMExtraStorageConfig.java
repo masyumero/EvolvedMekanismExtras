@@ -1,22 +1,21 @@
 package io.github.masyumero.emextras.common.config;
 
-import mekanism.api.math.FloatingLong;
 import mekanism.common.config.BaseMekanismConfig;
-import mekanism.common.config.value.CachedFloatingLongValue;
-import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.fml.config.ModConfig;
+import mekanism.common.config.value.CachedLongValue;
+import net.neoforged.fml.config.ModConfig;
+import net.neoforged.neoforge.common.ModConfigSpec;
 
 public class EMExtraStorageConfig extends BaseMekanismConfig {
 
-    private final ForgeConfigSpec configSpec;
+    private final ModConfigSpec configSpec;
 
-    public final CachedFloatingLongValue alloyer;
+    public final CachedLongValue alloyingFactory;
 
     public EMExtraStorageConfig() {
-        ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
+        ModConfigSpec.Builder builder = new ModConfigSpec.Builder();
         builder.comment("Evolved Mekanism Extras Storage Config");
         builder.push("storage");
-        alloyer = CachedFloatingLongValue.define(this, builder, "Base energy storage (Joules).", "alloyer", FloatingLong.createConst(40_000));
+        alloyingFactory = CachedLongValue.definedMin(this, builder, EMExtraConfigTranslations.ENERGY_STORAGE_ALLOYING_FACTORY, "alloyingFactory", 40_000L, 1);
         configSpec = builder.build();
     }
 
@@ -26,7 +25,12 @@ public class EMExtraStorageConfig extends BaseMekanismConfig {
     }
 
     @Override
-    public ForgeConfigSpec getConfigSpec() {
+    public String getTranslation() {
+        return "Storage Config";
+    }
+
+    @Override
+    public ModConfigSpec getConfigSpec() {
         return configSpec;
     }
 

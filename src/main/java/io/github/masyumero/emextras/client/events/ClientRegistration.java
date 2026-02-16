@@ -2,25 +2,20 @@ package io.github.masyumero.emextras.client.events;
 
 import io.github.masyumero.emextras.EMExtras;
 import io.github.masyumero.emextras.client.gui.machine.GuiEMExtraFactory;
-import io.github.masyumero.emextras.common.registry.EMExtrasContainerTypes;
+import io.github.masyumero.emextras.common.registry.EMExtraContainerTypes;
 import mekanism.client.ClientRegistrationUtil;
-import net.minecraft.core.registries.Registries;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.eventbus.api.EventPriority;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.RegisterEvent;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 
-@Mod.EventBusSubscriber(modid = EMExtras.MODID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = EMExtras.MODID, value = Dist.CLIENT)
 public class ClientRegistration {
     private ClientRegistration() {
     }
 
-    @SubscribeEvent(priority = EventPriority.LOWEST)
-    public static void registerContainers(RegisterEvent event) {
-        event.register(Registries.MENU, helper -> {
-            ClientRegistrationUtil.registerScreen(EMExtrasContainerTypes.FACTORY, GuiEMExtraFactory::new);
-        });
+    @SubscribeEvent
+    public static void registerContainers(RegisterMenuScreensEvent event) {
+        ClientRegistrationUtil.registerScreen(event, EMExtraContainerTypes.FACTORY, GuiEMExtraFactory::new);
     }
-
 }

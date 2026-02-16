@@ -9,6 +9,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.function.Supplier;
 
 public class EMExtraAttributeUpgradeable implements EMExtraAttribute {
+
     private final Supplier<BlockRegistryObject<?, ?>> upgradeBlock;
 
     public EMExtraAttributeUpgradeable(Supplier<BlockRegistryObject<?, ?>> upgradeBlock) {

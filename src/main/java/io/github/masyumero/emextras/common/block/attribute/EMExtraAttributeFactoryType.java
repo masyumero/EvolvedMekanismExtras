@@ -1,20 +1,17 @@
 package io.github.masyumero.emextras.common.block.attribute;
 
-import fr.iglee42.evolvedmekanism.registries.EMFactoryType;
 import io.github.masyumero.emextras.common.content.blocktype.EMExtraFactoryType;
+import lombok.Getter;
+import mekanism.api.annotations.ParametersAreNotNullByDefault;
 import mekanism.common.block.attribute.Attribute;
-import org.jetbrains.annotations.NotNull;
 
+@Getter
+@ParametersAreNotNullByDefault
 public class EMExtraAttributeFactoryType implements Attribute {
 
-    private final EMExtraFactoryType type;
+    private final EMExtraFactoryType factoryType;
 
-    public EMExtraAttributeFactoryType(EMExtraFactoryType type) {
-        this.type = type;
-    }
-
-    @NotNull
-    public EMExtraFactoryType getFactoryType() {
-        return type;
+    public EMExtraAttributeFactoryType(EMExtraFactoryType factoryType) {
+        this.factoryType = factoryType;
     }
 }

@@ -1,10 +1,10 @@
 package io.github.masyumero.emextras.mixin;
 
-import com.jerry.mekanism_extras.common.block.attribute.ExtraAttributeUpgradeable;
-import com.jerry.mekanism_extras.common.tier.AdvancedFactoryTier;
+import com.jerry.mekextras.common.block.attribute.ExtraAttributeUpgradeable;
+import com.jerry.mekextras.common.tier.ExtraFactoryTier;
 import fr.iglee42.evolvedmekanism.registries.EMFactoryType;
 import io.github.masyumero.emextras.common.block.attribute.EMExtraAttributeUpgradeable;
-import io.github.masyumero.emextras.common.registry.EMExtrasBlock;
+import io.github.masyumero.emextras.common.registry.EMExtraBlocks;
 import io.github.masyumero.emextras.common.tier.EMExtraFactoryTier;
 import io.github.masyumero.emextras.common.util.EMExtraBlockUtils;
 import mekanism.api.text.ILangEntry;
@@ -30,8 +30,8 @@ public abstract class MixinFactory extends BlockType {
     private void initInject(Supplier tileEntityRegistrar, Supplier containerRegistrar, Machine.FactoryMachine origMachine, FactoryTier tier, CallbackInfo ci) {
         if (tier == FactoryTier.ULTIMATE) {
             add(new EMExtraAttributeUpgradeable(() -> EMExtraBlockUtils.getEMExtraFactory(EMExtraFactoryTier.ABSOLUTE_OVERCLOCKED, origMachine.getFactoryType())));
-            if (origMachine.getFactoryType() == EMFactoryType.ALLOYING) {
-                add(new ExtraAttributeUpgradeable(() -> EMExtrasBlock.getAdvancedFactory(AdvancedFactoryTier.ABSOLUTE, EMFactoryType.ALLOYING)));
+            if (origMachine.getFactoryType().equals(EMFactoryType.ALLOYING)) {
+                add(new ExtraAttributeUpgradeable(() -> EMExtraBlocks.getExtraFactory(ExtraFactoryTier.ABSOLUTE, EMFactoryType.ALLOYING)));
             }
         }
     }
