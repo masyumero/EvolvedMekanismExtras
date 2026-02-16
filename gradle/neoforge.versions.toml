@@ -1,8 +1,8 @@
 [versions]
-mekanism = "1.21.1-10.7.17.83"
+mekanism = "1.21.1-10.7.18.84"
 evolvedMekanism = "7599592" # 1.2.1-fix3
 igreeLib = "7000755" # 1.2.7
-mekanismExtras = "7499894" # 1.3.2
+mekanismExtras = "7628313" # 1.3.3
 jei = "19.27.0.340"
 emi = "1.1.22+1.21.1"
 
