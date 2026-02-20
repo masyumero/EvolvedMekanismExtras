@@ -124,9 +124,7 @@ public class EMExtraBlockTypes {
     static {
         for (EMExtraFactoryTier tier : EMExtraEnumUtils.EMEXTRA_FACTORY_TIERS) {
             for (EMExtraFactoryType type : EMExtraEnumUtils.EMEXTRA_FACTORY_TYPES) {
-                if (type != EMExtraFactoryType.EXTRA_ALLOYING) {
-                    FACTORIES.put(tier, type, EMExtraFactory.EMExtraFactoryBuilder.createFactory(() -> EMExtraTileEntityTypes.getEMExtraFactoryTile(tier, type), type, tier).build());
-                }
+                FACTORIES.put(tier, type, EMExtraFactory.EMExtraFactoryBuilder.createFactory(() -> EMExtraTileEntityTypes.getEMExtraFactoryTile(tier, type), type, tier).build());
             }
         }
         for (ExtraFactoryTier tier : ExtraEnumUtils.EXTRA_FACTORY_TIERS) {

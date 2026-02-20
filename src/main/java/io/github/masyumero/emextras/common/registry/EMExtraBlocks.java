@@ -55,9 +55,7 @@ public class EMExtraBlocks {
         // factories
         for (EMExtraFactoryTier tier : EMExtraEnumUtils.EMEXTRA_FACTORY_TIERS) {
             for (EMExtraFactoryType type : EMExtraEnumUtils.EMEXTRA_FACTORY_TYPES) {
-                if (type != EMExtraFactoryType.EXTRA_ALLOYING) {
-                    FACTORIES.put(tier, type, registerEMExtraFactory(EMExtraBlockTypes.getEMExtraFactory(tier, type)));
-                }
+                FACTORIES.put(tier, type, registerEMExtraFactory(EMExtraBlockTypes.getEMExtraFactory(tier, type)));
             }
         }
         for (ExtraFactoryTier tier : ExtraEnumUtils.EXTRA_FACTORY_TIERS) {
@@ -147,7 +145,7 @@ public class EMExtraBlocks {
         factory.forItemHolder(holder -> {
             int processes = tier.processes;
             Predicate<ItemStack> recipeInputPredicate = switch (type.getFactoryType()) {
-                case ALLOYING, EXTRA_ALLOYING -> s -> EMRecipeType.ALLOYING.getInputCache().containsInputA(null, s);
+                case ALLOYING -> s -> EMRecipeType.ALLOYING.getInputCache().containsInputA(null, s);
                 case SMELTING -> s -> MekanismRecipeType.SMELTING.getInputCache().containsInput(null, s);
                 case ENRICHING -> s -> MekanismRecipeType.ENRICHING.getInputCache().containsInput(null, s);
                 case CRUSHING -> s -> MekanismRecipeType.CRUSHING.getInputCache().containsInput(null, s);
@@ -159,7 +157,7 @@ public class EMExtraBlocks {
                 case SAWING -> s -> MekanismRecipeType.SAWING.getInputCache().containsInput(null, s);
             };
             switch (type.getFactoryType()) {
-                case ALLOYING, EXTRA_ALLOYING -> holder.addAttachmentOnlyContainers(ContainerType.ITEM, () -> ItemSlotsBuilder.builder()
+                case ALLOYING -> holder.addAttachmentOnlyContainers(ContainerType.ITEM, () -> ItemSlotsBuilder.builder()
                         .addBasicFactorySlots(processes, recipeInputPredicate)
                         .addInput(EMRecipeType.ALLOYING, EMInputRecipeCache.TripleItem::containsInputB)
                         .addInput(EMRecipeType.ALLOYING, EMInputRecipeCache.TripleItem::containsInputC)

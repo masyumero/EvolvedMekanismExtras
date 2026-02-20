@@ -31,7 +31,7 @@ public class ItemBlockEMExtraFactory extends ItemBlockEMExtraTooltip<BlockTile<?
     private static AttachedSideConfig getSideConfig(BlockEMExtraFactoryMachine.BlockEMExtraFactory<?> block) {
         var factoryType = Attribute.getOrThrow(block.builtInRegistryHolder(), EMExtraAttributeFactoryType.class).getFactoryType();
         return switch (factoryType) {
-            case ALLOYING, COMBINING, EXTRA_ALLOYING -> AttachedSideConfig.EXTRA_MACHINE;
+            case ALLOYING, COMBINING -> AttachedSideConfig.EXTRA_MACHINE;
             case SMELTING, ENRICHING, CRUSHING, SAWING -> AttachedSideConfig.ELECTRIC_MACHINE;
             case COMPRESSING, INFUSING -> AttachedSideConfig.ADVANCED_MACHINE;
             case PURIFYING, INJECTING -> AttachedSideConfig.ADVANCED_MACHINE_INPUT_ONLY;

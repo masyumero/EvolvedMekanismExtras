@@ -36,10 +36,8 @@ public class EMExtrasLangProvider extends BaseLanguageProvider {
     private void addBlocks() {
         for (EMExtraFactoryTier tier : EMExtraEnumUtils.EMEXTRA_FACTORY_TIERS) {
             for (EMExtraFactoryType type : EMExtraEnumUtils.EMEXTRA_FACTORY_TYPES) {
-                if (type != EMExtraFactoryType.EXTRA_ALLOYING) {
-                    var name = tier.getEMExtraTier().getSimpleName().replace("_", " ") + " " + type.getRegistryNameComponentCapitalized() + " Factory";
-                    add(EMExtraBlocks.getEMExtraFactory(tier, type), name);
-                }
+                var name = tier.getEMExtraTier().getSimpleName().replace("_", " ") + " " + type.getRegistryNameComponentCapitalized() + " Factory";
+                add(EMExtraBlocks.getEMExtraFactory(tier, type), name);
             }
         }
         for (ExtraFactoryTier tier : ExtraEnumUtils.EXTRA_FACTORY_TIERS) {
