@@ -3,6 +3,9 @@ package io.github.masyumero.emextras;
 import com.mojang.logging.LogUtils;
 import io.github.masyumero.emextras.common.config.LoadConfig;
 import io.github.masyumero.emextras.common.integration.EMExtraHooks;
+import io.github.masyumero.emextras.common.integration.mekaf.registries.EMExtraAdvancedFactoryBlocks;
+import io.github.masyumero.emextras.common.integration.mekaf.registries.EMExtraAdvancedFactoryContainerTypes;
+import io.github.masyumero.emextras.common.integration.mekaf.registries.EMExtraAdvancedFactoryTileEntityTypes;
 import io.github.masyumero.emextras.common.network.EMExtraPacketHandler;
 import io.github.masyumero.emextras.common.registry.EMExtraBlocks;
 import io.github.masyumero.emextras.common.registry.EMExtraContainerTypes;
@@ -40,6 +43,9 @@ public class EMExtras implements IModModule {
         modEventBus.addListener(LoadConfig::onConfigLoad);
         addRegistrationListeners(modEventBus);
 
+        // MoreMachine
+        registerMoreMachineFactory(modEventBus);
+
         emExtraPacketHandler = new EMExtraPacketHandler(modEventBus, versionNumber);
     }
 
@@ -49,6 +55,14 @@ public class EMExtras implements IModModule {
         EMExtraTileEntityTypes.register(modEventBus);
         EMExtraContainerTypes.register(modEventBus);
         EMExtraTabs.register(modEventBus);
+    }
+
+    private void registerMoreMachineFactory(IEventBus modEventBus) {
+        if (hooks.mekmm.isLoaded()) {
+            EMExtraAdvancedFactoryBlocks.register(modEventBus);
+            EMExtraAdvancedFactoryContainerTypes.register(modEventBus);
+            EMExtraAdvancedFactoryTileEntityTypes.register(modEventBus);
+        }
     }
 
     public static EMExtraPacketHandler emExtraPacketHandler() {

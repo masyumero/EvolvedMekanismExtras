@@ -1,13 +1,16 @@
 package io.github.masyumero.emextras.datagen.client.lang;
 
+import com.jerry.mekaf.common.content.blocktype.AdvancedFactoryType;
 import com.jerry.mekextras.common.tier.ExtraFactoryTier;
 import com.jerry.mekextras.common.util.ExtraEnumUtils;
+import com.jerry.mekmm.common.util.MoreMachineEnumUtils;
 import fr.iglee42.evolvedmekanism.registries.EMFactoryType;
 import io.github.masyumero.emextras.EMExtras;
 import io.github.masyumero.emextras.EMExtrasLang;
 import io.github.masyumero.emextras.common.config.EMExtraConfigTranslations;
 import io.github.masyumero.emextras.common.config.LoadConfig;
 import io.github.masyumero.emextras.common.content.blocktype.EMExtraFactoryType;
+import io.github.masyumero.emextras.common.integration.mekaf.registries.EMExtraAdvancedFactoryBlocks;
 import io.github.masyumero.emextras.common.registry.EMExtraBlocks;
 import io.github.masyumero.emextras.common.registry.EMExtraItems;
 import io.github.masyumero.emextras.common.tier.EMExtraFactoryTier;
@@ -38,6 +41,15 @@ public class EMExtrasLangProvider extends BaseLanguageProvider {
             for (EMExtraFactoryType type : EMExtraEnumUtils.EMEXTRA_FACTORY_TYPES) {
                 var name = tier.getEMExtraTier().getSimpleName().replace("_", " ") + " " + type.getRegistryNameComponentCapitalized() + " Factory";
                 add(EMExtraBlocks.getEMExtraFactory(tier, type), name);
+            }
+            for (AdvancedFactoryType type : MoreMachineEnumUtils.ADVANCED_FACTORY_TYPES) {
+                String  name;
+                if (type == AdvancedFactoryType.CHEMICAL_INFUSING) {
+                    name = tier.getEMExtraTier().getSimpleName().replace("_", " ") + " Chemical Infusing Factory";
+                } else{
+                    name = tier.getEMExtraTier().getSimpleName().replace("_", " ") + " " + type.getRegistryNameComponentCapitalized() + " Factory";
+                }
+                add(EMExtraAdvancedFactoryBlocks.getEMExtraAdvancedFactory(tier, type), name);
             }
         }
         for (ExtraFactoryTier tier : ExtraEnumUtils.EXTRA_FACTORY_TIERS) {

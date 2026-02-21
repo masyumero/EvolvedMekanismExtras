@@ -25,7 +25,6 @@ public enum EMExtraFactoryType implements IHasTranslationKey {
     INFUSING("infusing", MekanismLang.INFUSING.getTranslationKey(), () -> EMExtraBlockTypes.METALLURGIC_INFUSER, () -> MekanismBlocks.METALLURGIC_INFUSER),
     SAWING("sawing", MekanismLang.SAWING.getTranslationKey(), () -> EMExtraBlockTypes.PRECISION_SAWMILL, () -> MekanismBlocks.PRECISION_SAWMILL);
 
-
     @Getter
     private final String registryNameComponent;
     private final String translationKey;

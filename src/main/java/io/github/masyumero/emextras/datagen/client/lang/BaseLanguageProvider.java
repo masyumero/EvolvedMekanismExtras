@@ -49,9 +49,7 @@ public abstract class BaseLanguageProvider extends LanguageProvider {
         this.modName = modName;
         this.basicModName = modName.replaceAll(":", "");
         altProviders = new ConvertibleLanguageProvider[]{
-                new UpsideDownLanguageProvider(output, modid),
-                new NonAmericanLanguageProvider(output, modid, "en_au"),
-                new NonAmericanLanguageProvider(output, modid, "en_gb")
+                new UpsideDownLanguageProvider(output, modid)
         };
     }
 
