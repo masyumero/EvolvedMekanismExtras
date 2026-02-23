@@ -9,7 +9,6 @@ import mekanism.api.text.IHasTranslationKey;
 import mekanism.client.recipe_viewer.alias.IAliasedTranslation;
 import mekanism.common.Mekanism;
 import mekanism.common.advancements.MekanismAdvancement;
-import mekanism.common.base.IModModule;
 import mekanism.common.block.attribute.Attribute;
 import mekanism.common.block.attribute.AttributeGui;
 import mekanism.common.config.IConfigTranslation;
@@ -37,10 +36,6 @@ public abstract class BaseLanguageProvider extends LanguageProvider {
 
     protected BaseLanguageProvider(PackOutput output, String modid) {
         this(output, modid, Mekanism.MOD_NAME);
-    }
-
-    protected BaseLanguageProvider(PackOutput output, String modid, IModModule module) {
-        this(output, modid, Mekanism.MOD_NAME + ": " + module.getName());
     }
 
     private BaseLanguageProvider(PackOutput output, String modid, String modName) {

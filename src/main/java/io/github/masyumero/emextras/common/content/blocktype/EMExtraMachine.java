@@ -67,5 +67,4 @@ public class EMExtraMachine {
             return new EMExtraMachineBuilder<>(new EMExtraFactoryMachine<>(tileEntityRegistrar, description, factoryType));
         }
     }
-
 }

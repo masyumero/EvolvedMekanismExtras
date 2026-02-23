@@ -6,6 +6,9 @@ import io.github.masyumero.emextras.common.integration.EMExtraHooks;
 import io.github.masyumero.emextras.common.integration.mekaf.registries.EMExtraAdvancedFactoryBlocks;
 import io.github.masyumero.emextras.common.integration.mekaf.registries.EMExtraAdvancedFactoryContainerTypes;
 import io.github.masyumero.emextras.common.integration.mekaf.registries.EMExtraAdvancedFactoryTileEntityTypes;
+import io.github.masyumero.emextras.common.integration.mekmm.registries.EMExtraMoreMachineBlocks;
+import io.github.masyumero.emextras.common.integration.mekmm.registries.EMExtraMoreMachineContainerTypes;
+import io.github.masyumero.emextras.common.integration.mekmm.registries.EMExtraMoreMachineTileEntityTypes;
 import io.github.masyumero.emextras.common.network.EMExtraPacketHandler;
 import io.github.masyumero.emextras.common.registry.EMExtraBlocks;
 import io.github.masyumero.emextras.common.registry.EMExtraContainerTypes;
@@ -44,6 +47,7 @@ public class EMExtras implements IModModule {
         addRegistrationListeners(modEventBus);
 
         // MoreMachine
+        registerAdvancedFactory(modEventBus);
         registerMoreMachineFactory(modEventBus);
 
         emExtraPacketHandler = new EMExtraPacketHandler(modEventBus, versionNumber);
@@ -57,11 +61,19 @@ public class EMExtras implements IModModule {
         EMExtraTabs.register(modEventBus);
     }
 
-    private void registerMoreMachineFactory(IEventBus modEventBus) {
+    private void registerAdvancedFactory(IEventBus modEventBus) {
         if (hooks.mekmm.isLoaded()) {
             EMExtraAdvancedFactoryBlocks.register(modEventBus);
             EMExtraAdvancedFactoryContainerTypes.register(modEventBus);
             EMExtraAdvancedFactoryTileEntityTypes.register(modEventBus);
+        }
+    }
+
+    private void registerMoreMachineFactory(IEventBus modEventBus) {
+        if (hooks.mekmm.isLoaded()) {
+            EMExtraMoreMachineBlocks.register(modEventBus);
+            EMExtraMoreMachineContainerTypes.register(modEventBus);
+            EMExtraMoreMachineTileEntityTypes.register(modEventBus);
         }
     }
 
