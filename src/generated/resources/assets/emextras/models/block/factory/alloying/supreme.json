@@ -1,0 +1,19 @@
+{
+  "parent": "minecraft:block/block",
+  "children": {
+    "base": {
+      "parent": "evolvedmekanism:block/factory/alloying/base"
+    },
+    "front_led": {
+      "parent": "mekanism_extras:block/factory/front_led/supreme"
+    }
+  },
+  "item_render_order": [
+    "base",
+    "front_led"
+  ],
+  "loader": "neoforge:composite",
+  "textures": {
+    "particle": "mekanism:block/factory/factory_front_back"
+  }
+}

@@ -107,8 +107,8 @@ public class TileEntityEMExtraWashingFactory extends TileEntityEMExtraChemicalTo
 
     @Override
     protected void addSlots(InventorySlotHelper builder, IContentsListener listener, IContentsListener updateSortingListener) {
-        builder.addSlot(fluidSlot = FluidInventorySlot.fill(fluidTank, listener, 214 + 38 * (tier.ordinal() + 1), 71));
-        builder.addSlot(fluidOutputSlot = OutputInventorySlot.at(listener, 214 + 38 * (tier.ordinal() + 1), 102));
+        builder.addSlot(fluidSlot = FluidInventorySlot.fill(fluidTank, listener, 180 + tier.imageWidth, 71));
+        builder.addSlot(fluidOutputSlot = OutputInventorySlot.at(listener, 180 + tier.imageWidth, 102));
         fluidSlot.setSlotOverlay(SlotOverlay.MINUS);
     }
 

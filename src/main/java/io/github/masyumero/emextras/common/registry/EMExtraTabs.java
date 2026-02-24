@@ -2,6 +2,9 @@ package io.github.masyumero.emextras.common.registry;
 
 import io.github.masyumero.emextras.EMExtras;
 import io.github.masyumero.emextras.EMExtrasLang;
+import io.github.masyumero.emextras.common.integration.mekaf.registries.EMExtraAdvancedFactoryBlocks;
+import io.github.masyumero.emextras.common.integration.mekmm.registries.EMExtraMoreMachineBlocks;
+
 import mekanism.common.registration.MekanismDeferredHolder;
 import mekanism.common.registration.impl.CreativeTabDeferredRegister;
 import net.minecraft.world.item.CreativeModeTab;
@@ -16,6 +19,10 @@ public class EMExtraTabs {
             builder.displayItems((displayParameters, output) -> {
                 CreativeTabDeferredRegister.addToDisplay(EMExtraBlocks.BLOCK, output);
                 CreativeTabDeferredRegister.addToDisplay(EMExtraItems.ITEM, output);
+                if (EMExtras.hooks.mekmm.isLoaded()) {
+                    CreativeTabDeferredRegister.addToDisplay(EMExtraAdvancedFactoryBlocks.AF_BLOCKS, output);
+                    CreativeTabDeferredRegister.addToDisplay(EMExtraMoreMachineBlocks.MM_BLOCKS, output);
+                }
             })
     );
 

@@ -21,11 +21,14 @@ import java.util.concurrent.CompletableFuture;
 import java.util.function.Function;
 
 import io.github.masyumero.emextras.EMExtras;
-import io.github.masyumero.emextras.datagen.client.lang.EMExtrasLangProvider;
-import io.github.masyumero.emextras.datagen.common.loot.EMExtrasLootProvider;
-import io.github.masyumero.emextras.datagen.common.recipe.impl.EMExtrasRecipeProvider;
-import io.github.masyumero.emextras.datagen.common.registries.EMExtrasDatapackRegistryProvider;
-import io.github.masyumero.emextras.datagen.common.tag.EMExtrasTagProvider;
+import io.github.masyumero.emextras.datagen.client.lang.EMExtraLangProvider;
+import io.github.masyumero.emextras.datagen.client.models.block.EMExtraBlockModelProvider;
+import io.github.masyumero.emextras.datagen.client.models.item.EMExtraItemModelProvider;
+import io.github.masyumero.emextras.datagen.common.loot.EMExtraLootProvider;
+import io.github.masyumero.emextras.datagen.common.recipe.impl.EMExtraRecipeProvider;
+import io.github.masyumero.emextras.datagen.common.registries.EMExtraDatapackRegistryProvider;
+import io.github.masyumero.emextras.datagen.common.tag.EMExtraTagProvider;
+
 import mekanism.common.Mekanism;
 import mekanism.common.lib.FieldReflectionHelper;
 import net.minecraft.Util;
@@ -79,14 +82,16 @@ public class EMExtrasDataGenerator {
         DataGenerator gen = event.getGenerator();
         PackOutput output = gen.getPackOutput();
         ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
-        EMExtrasDatapackRegistryProvider drProvider = new EMExtrasDatapackRegistryProvider(output, event.getLookupProvider());
+        EMExtraDatapackRegistryProvider drProvider = new EMExtraDatapackRegistryProvider(output, event.getLookupProvider());
         CompletableFuture<HolderLookup.Provider> lookupProvider = drProvider.getRegistryProvider();
         //Client side data generators
-        gen.addProvider(event.includeClient(), new EMExtrasLangProvider(output));
+        gen.addProvider(event.includeClient(), new EMExtraLangProvider(output));
+        gen.addProvider(event.includeClient(), new EMExtraBlockModelProvider(output, existingFileHelper));
+        gen.addProvider(event.includeClient(), new EMExtraItemModelProvider(output, existingFileHelper));
         //Server side data generators
-        gen.addProvider(event.includeServer(), new EMExtrasLootProvider(output, lookupProvider));
-        gen.addProvider(event.includeServer(), new EMExtrasTagProvider(output, lookupProvider, existingFileHelper));
-        gen.addProvider(event.includeServer(), new EMExtrasRecipeProvider(output, lookupProvider, existingFileHelper));
+        gen.addProvider(event.includeServer(), new EMExtraLootProvider(output, lookupProvider));
+        gen.addProvider(event.includeServer(), new EMExtraTagProvider(output, lookupProvider, existingFileHelper));
+        gen.addProvider(event.includeServer(), new EMExtraRecipeProvider(output, lookupProvider, existingFileHelper));
     }
 
     /**

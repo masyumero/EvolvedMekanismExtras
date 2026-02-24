@@ -39,6 +39,7 @@ public class GuiEMExtraFactory extends GuiConfigurableTile<TileEntityEMExtraFact
         }
         imageWidth += tile.tier.imageWidth;
         inventoryLabelX = tile.tier.inventoryLabelX;
+
         titleLabelY = 4;
         dynamicSlots = true;
     }
