@@ -40,7 +40,7 @@ public class EMExtraCatalystRegistryHelper {
                     }
                     for (EMExtraFactoryTier tier : EMExtraEnumUtils.EMEXTRA_FACTORY_TIERS) {
                         registry.addRecipeCatalyst(EMExtraBlockUtils.getEMExtraFactory(tier, factoryType.getFactoryType()), recipeType);
-                }
+                    }
                 }
             }
         }
