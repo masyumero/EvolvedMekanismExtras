@@ -1,0 +1,33 @@
+{
+  "type": "mekanism:mek_data",
+  "category": "misc",
+  "key": {
+    "A": {
+      "tag": "mekanism_extras:alloys/shining"
+    },
+    "C": {
+      "tag": "c:circuits/cosmic_dense"
+    },
+    "P": {
+      "item": "mekanism_extras:cosmic_crystallizing_factory"
+    },
+    "Q": {
+      "item": "mekmm:dense_crystallizing_factory"
+    },
+    "T": {
+      "tag": "evolvedmekanism:alloys/singular"
+    },
+    "X": {
+      "item": "mekanism:steel_casing"
+    }
+  },
+  "pattern": [
+    "ACT",
+    "PXQ",
+    "TCA"
+  ],
+  "result": {
+    "count": 1,
+    "id": "emextras:cosmic_dense_crystallizing_factory"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "type": "mekanism:mek_data",
+  "category": "misc",
+  "key": {
+    "A": {
+      "tag": "mekanism_extras:alloys/radiance"
+    },
+    "C": {
+      "tag": "c:circuits/absolute_overclocked"
+    },
+    "P": {
+      "item": "mekanism_extras:absolute_centrifuging_factory"
+    },
+    "Q": {
+      "item": "mekmm:overclocked_centrifuging_factory"
+    },
+    "T": {
+      "tag": "evolvedmekanism:alloys/hypercharged"
+    },
+    "X": {
+      "item": "mekanism:steel_casing"
+    }
+  },
+  "pattern": [
+    "ACT",
+    "PXQ",
+    "TCA"
+  ],
+  "result": {
+    "count": 1,
+    "id": "emextras:absolute_overclocked_centrifuging_factory"
+  }
+}
