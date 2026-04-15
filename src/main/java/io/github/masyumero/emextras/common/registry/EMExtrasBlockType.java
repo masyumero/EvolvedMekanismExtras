@@ -8,6 +8,7 @@ import com.jerry.mekanism_extras.common.content.blocktype.AdvancedMachine;
 import com.jerry.mekanism_extras.common.tier.AdvancedFactoryTier;
 import com.jerry.mekanism_extras.common.util.ExtraEnumUtils;
 import fr.iglee42.evolvedmekanism.registries.EMFactoryType;
+import io.github.masyumero.emextras.common.block.attribute.EMExtraAttributeTier;
 import io.github.masyumero.emextras.common.tier.EMExtraFactoryTier;
 import fr.iglee42.evolvedmekanism.EvolvedMekanismLang;
 import fr.iglee42.evolvedmekanism.registries.EMContainerTypes;
@@ -17,18 +18,25 @@ import io.github.masyumero.emextras.common.config.LoadConfig;
 import io.github.masyumero.emextras.common.content.blocktype.EMExtraFactory;
 import io.github.masyumero.emextras.common.content.blocktype.EMExtraFactoryType;
 import io.github.masyumero.emextras.common.content.blocktype.EMExtraMachine;
+import io.github.masyumero.emextras.common.tier.EMExtraICTier;
+import io.github.masyumero.emextras.common.tier.EMExtraIPTier;
+import io.github.masyumero.emextras.common.tile.multiblock.TileEntityEMExtraInductionCell;
+import io.github.masyumero.emextras.common.tile.multiblock.TileEntityEMExtraInductionProvider;
 import io.github.masyumero.emextras.common.util.EMExtraEnumUtils;
 import mekanism.api.Upgrade;
 import mekanism.common.MekanismLang;
 import mekanism.common.config.MekanismConfig;
 import mekanism.common.content.blocktype.BlockShapes;
+import mekanism.common.content.blocktype.BlockTypeTile;
 import mekanism.common.content.blocktype.FactoryType;
+import mekanism.common.registration.impl.TileEntityTypeRegistryObject;
 import mekanism.common.registries.MekanismContainerTypes;
 import mekanism.common.registries.MekanismSounds;
 import mekanism.common.registries.MekanismTileEntityTypes;
 import mekanism.common.tile.machine.*;
 
 import java.util.EnumSet;
+import java.util.function.Supplier;
 
 public class EMExtrasBlockType {
     private static final Table<EMExtraFactoryTier, EMExtraFactoryType, EMExtraFactory<?>> FACTORIES = HashBasedTable.create();
@@ -127,6 +135,17 @@ public class EMExtrasBlockType {
             .withComputerSupport("precisionSawmill")
             .build();
 
+    // Induction Cells
+    public static final BlockTypeTile<TileEntityEMExtraInductionCell> ABSOLUTE_OVERCLOCKED_INDUCTION_CELL = createInductionCell(EMExtraICTier.ABSOLUTE_OVERCLOCKED, () -> EMExtrasTileEntityTypes.ABSOLUTE_OVERCLOCKED_INDUCTION_CELL);
+    public static final BlockTypeTile<TileEntityEMExtraInductionCell> SUPREME_QUANTUM_INDUCTION_CELL = createInductionCell(EMExtraICTier.SUPREME_QUANTUM, () -> EMExtrasTileEntityTypes.SUPREME_QUANTUM_INDUCTION_CELL);
+    public static final BlockTypeTile<TileEntityEMExtraInductionCell> COSMIC_DENSE_INDUCTION_CELL = createInductionCell(EMExtraICTier.COSMIC_DENSE, () -> EMExtrasTileEntityTypes.COSMIC_DENSE_INDUCTION_CELL);
+    public static final BlockTypeTile<TileEntityEMExtraInductionCell> INFINITE_MULTIVERSAL_INDUCTION_CELL = createInductionCell(EMExtraICTier.INFINITE_MULTIVERSAL, () -> EMExtrasTileEntityTypes.INFINITE_MULTIVERSAL_INDUCTION_CELL);
+    // Induction Provide
+    public static final BlockTypeTile<TileEntityEMExtraInductionProvider> ABSOLUTE_OVERCLOCKED_INDUCTION_PROVIDER = createInductionProvider(EMExtraIPTier.ABSOLUTE_OVERCLOCKED, () -> EMExtrasTileEntityTypes.ABSOLUTE_OVERCLOCKED_INDUCTION_PROVIDER);
+    public static final BlockTypeTile<TileEntityEMExtraInductionProvider> SUPREME_QUANTUM_INDUCTION_PROVIDER = createInductionProvider(EMExtraIPTier.SUPREME_QUANTUM, () -> EMExtrasTileEntityTypes.SUPREME_QUANTUM_INDUCTION_PROVIDER);
+    public static final BlockTypeTile<TileEntityEMExtraInductionProvider> COSMIC_DENSE_INDUCTION_PROVIDER = createInductionProvider(EMExtraIPTier.COSMIC_DENSE, () -> EMExtrasTileEntityTypes.COSMIC_DENSE_INDUCTION_PROVIDER);
+    public static final BlockTypeTile<TileEntityEMExtraInductionProvider> INFINITE_MULTIVERSAL_INDUCTION_PROVIDER = createInductionProvider(EMExtraIPTier.INFINITE_MULTIVERSAL, () -> EMExtrasTileEntityTypes.INFINITE_MULTIVERSAL_INDUCTION_PROVIDER);
+
     static {
         for (EMExtraFactoryTier tier : EMExtraEnumUtils.EMEXTRA_FACTORY_TIERS) {
             for (EMExtraFactoryType type : EMExtraEnumUtils.EMEXTRA_FACTORY_TYPES) {
@@ -139,11 +158,27 @@ public class EMExtrasBlockType {
             ADVANCED_FACTORIES.put(tier, EMFactoryType.ALLOYING, AdvancedFactory.AdvancedFactoryBuilder.createFactory(() -> EMExtrasTileEntityTypes.getAdvancedFactoryTile(tier, EMFactoryType.ALLOYING), EMFactoryType.ALLOYING, tier).build());
         }
     }
+
     public static EMExtraFactory<?> getEMExtraFactory(EMExtraFactoryTier tier, EMExtraFactoryType type) {
         return FACTORIES.get(tier, type);
     }
 
     public static AdvancedFactory<?> getAdvancedFactory(AdvancedFactoryTier tier, FactoryType type) {
         return ADVANCED_FACTORIES.get(tier, type);
+    }
+
+    private static <TILE extends TileEntityEMExtraInductionCell> BlockTypeTile<TILE> createInductionCell(EMExtraICTier tier, Supplier<TileEntityTypeRegistryObject<TILE>> tile) {
+        return BlockTypeTile.BlockTileBuilder.createBlock(tile, MekanismLang.DESCRIPTION_INDUCTION_CELL)
+                .withEnergyConfig(tier::getMaxEnergy)
+                .with(new EMExtraAttributeTier<>(tier))
+                .internalMultiblock()
+                .build();
+    }
+
+    private static <TILE extends TileEntityEMExtraInductionProvider> BlockTypeTile<TILE> createInductionProvider(EMExtraIPTier tier, Supplier<TileEntityTypeRegistryObject<TILE>> tile) {
+        return BlockTypeTile.BlockTileBuilder.createBlock(tile, MekanismLang.DESCRIPTION_INDUCTION_PROVIDER)
+                .with(new EMExtraAttributeTier<>(tier))
+                .internalMultiblock()
+                .build();
     }
 }

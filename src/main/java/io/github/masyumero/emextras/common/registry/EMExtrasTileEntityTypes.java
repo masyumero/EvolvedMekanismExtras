@@ -11,6 +11,8 @@ import fr.iglee42.evolvedmekanism.registries.EMTileEntityTypes;
 import io.github.masyumero.emextras.EMExtras;
 import io.github.masyumero.emextras.common.content.blocktype.EMExtraFactoryType;
 import io.github.masyumero.emextras.common.tile.factory.*;
+import io.github.masyumero.emextras.common.tile.multiblock.TileEntityEMExtraInductionCell;
+import io.github.masyumero.emextras.common.tile.multiblock.TileEntityEMExtraInductionProvider;
 import io.github.masyumero.emextras.common.util.EMExtraEnumUtils;
 import mekanism.common.content.blocktype.FactoryType;
 import mekanism.common.registration.impl.TileEntityTypeDeferredRegister;
@@ -43,6 +45,16 @@ public class EMExtrasTileEntityTypes {
             ADVANCED_FACTORIES.put(tier, EMFactoryType.ALLOYING, EMTileEntityTypes.TILE_ENTITY_TYPES.register(EMExtrasBlock.getAdvancedFactory(tier, EMFactoryType.ALLOYING), (pos, state) -> new TileEntityAdvancedAlloyingFactory(EMExtrasBlock.getAdvancedFactory(tier, EMFactoryType.ALLOYING), pos, state), TileEntityMekanism::tickServer, TileEntityMekanism::tickClient));
         }
     }
+    // Induction Cells
+    public static final TileEntityTypeRegistryObject<TileEntityEMExtraInductionCell> ABSOLUTE_OVERCLOCKED_INDUCTION_CELL = TILE_ENTITY_TYPES.register(EMExtrasBlock.ABSOLUTE_OVERCLOCKED_INDUCTION_CELL, (pos, state) -> new TileEntityEMExtraInductionCell(EMExtrasBlock.ABSOLUTE_OVERCLOCKED_INDUCTION_CELL, pos, state), TileEntityMekanism::tickServer, TileEntityMekanism::tickClient);
+    public static final TileEntityTypeRegistryObject<TileEntityEMExtraInductionCell> SUPREME_QUANTUM_INDUCTION_CELL = TILE_ENTITY_TYPES.register(EMExtrasBlock.SUPREME_QUANTUM_INDUCTION_CELL, (pos, state) -> new TileEntityEMExtraInductionCell(EMExtrasBlock.SUPREME_QUANTUM_INDUCTION_CELL, pos, state), TileEntityMekanism::tickServer, TileEntityMekanism::tickClient);
+    public static final TileEntityTypeRegistryObject<TileEntityEMExtraInductionCell> COSMIC_DENSE_INDUCTION_CELL = TILE_ENTITY_TYPES.register(EMExtrasBlock.COSMIC_DENSE_INDUCTION_CELL, (pos, state) -> new TileEntityEMExtraInductionCell(EMExtrasBlock.COSMIC_DENSE_INDUCTION_CELL, pos, state), TileEntityMekanism::tickServer, TileEntityMekanism::tickClient);
+    public static final TileEntityTypeRegistryObject<TileEntityEMExtraInductionCell> INFINITE_MULTIVERSAL_INDUCTION_CELL = TILE_ENTITY_TYPES.register(EMExtrasBlock.INFINITE_MULTIVERSAL_INDUCTION_CELL, (pos, state) -> new TileEntityEMExtraInductionCell(EMExtrasBlock.INFINITE_MULTIVERSAL_INDUCTION_CELL, pos, state), TileEntityMekanism::tickServer, TileEntityMekanism::tickClient);
+    // Induction Providers
+    public static final TileEntityTypeRegistryObject<TileEntityEMExtraInductionProvider> ABSOLUTE_OVERCLOCKED_INDUCTION_PROVIDER = TILE_ENTITY_TYPES.register(EMExtrasBlock.ABSOLUTE_OVERCLOCKED_INDUCTION_PROVIDER, (pos, state) -> new TileEntityEMExtraInductionProvider(EMExtrasBlock.ABSOLUTE_OVERCLOCKED_INDUCTION_PROVIDER, pos, state), TileEntityMekanism::tickServer, TileEntityMekanism::tickClient);
+    public static final TileEntityTypeRegistryObject<TileEntityEMExtraInductionProvider> SUPREME_QUANTUM_INDUCTION_PROVIDER = TILE_ENTITY_TYPES.register(EMExtrasBlock.SUPREME_QUANTUM_INDUCTION_PROVIDER, (pos, state) -> new TileEntityEMExtraInductionProvider(EMExtrasBlock.SUPREME_QUANTUM_INDUCTION_PROVIDER, pos, state), TileEntityMekanism::tickServer, TileEntityMekanism::tickClient);
+    public static final TileEntityTypeRegistryObject<TileEntityEMExtraInductionProvider> COSMIC_DENSE_INDUCTION_PROVIDER = TILE_ENTITY_TYPES.register(EMExtrasBlock.COSMIC_DENSE_INDUCTION_PROVIDER, (pos, state) -> new TileEntityEMExtraInductionProvider(EMExtrasBlock.COSMIC_DENSE_INDUCTION_PROVIDER, pos, state), TileEntityMekanism::tickServer, TileEntityMekanism::tickClient);
+    public static final TileEntityTypeRegistryObject<TileEntityEMExtraInductionProvider> INFINITE_MULTIVERSAL_INDUCTION_PROVIDER = TILE_ENTITY_TYPES.register(EMExtrasBlock.INFINITE_MULTIVERSAL_INDUCTION_PROVIDER, (pos, state) -> new TileEntityEMExtraInductionProvider(EMExtrasBlock.INFINITE_MULTIVERSAL_INDUCTION_PROVIDER, pos, state), TileEntityMekanism::tickServer, TileEntityMekanism::tickClient);
 
     public static TileEntityTypeRegistryObject<? extends TileEntityEMExtraFactory<?>> getEMExtraFactoryTile(EMExtraFactoryTier tier, EMExtraFactoryType type) {
         return FACTORIES.get(tier, type);

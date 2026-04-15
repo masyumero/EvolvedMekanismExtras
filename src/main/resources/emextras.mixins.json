@@ -7,9 +7,15 @@
   "mixins": [
     "AccessorTileEntityExtraFactory",
     "MixinAdvancedFactory",
-
     "MixinFactory",
-    "MixinPacketHandler"
+    "MixinPacketHandler",
+    "matrix.MixinTargetMatrixEnergyContainer$MixinExtraMatrixEnergyContainer",
+    "matrix.MixinTargetMatrixEnergyContainer$MixinMatrixEnergyContainer",
+    "matrix.MixinTargetMatrixMultiblockData$MixinExtraMatrixMultiblockData",
+    "matrix.MixinTargetMatrixMultiblockData$MixinMatrixMultiblockData",
+    "matrix.MixinTargetMatrixValidator$MixinExtraMatrixValidatorPostcheck",
+    "matrix.MixinTargetMatrixValidator$MixinMatrixValidator",
+    "matrix.MixinTargetMatrixValidator$MixinMatrixValidatorPostcheck"
   ],
   "client": [
     "client.MixinGuiAdvancedFactory"
