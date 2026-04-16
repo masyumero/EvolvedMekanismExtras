@@ -62,6 +62,12 @@ versionRange = "${minecraft_version_range}"
 ordering = "NONE"
 side = "BOTH"
 [[dependencies."${mod_id}"]]
+modId = "mekanism"
+mandatory = true
+versionRange = "${mekanism_version},)"
+ordering = "AFTER"
+side = "BOTH"
+[[dependencies."${mod_id}"]]
 modId = "evolvedmekanism"
 mandatory = true
 versionRange = "[1.2-fix1,)"

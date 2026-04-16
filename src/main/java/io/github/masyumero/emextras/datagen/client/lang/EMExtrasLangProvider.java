@@ -38,6 +38,14 @@ public class EMExtrasLangProvider extends BaseLanguageProvider {
             var name = tier.getAdvanceTier().getSimpleName() + " " +  "Alloying Factory";
             add(EMExtrasBlock.getAdvancedFactory(tier, EMFactoryType.ALLOYING), name);
         }
+        add(EMExtrasBlock.ABSOLUTE_OVERCLOCKED_INDUCTION_PROVIDER);
+        add(EMExtrasBlock.SUPREME_QUANTUM_INDUCTION_PROVIDER);
+        add(EMExtrasBlock.COSMIC_DENSE_INDUCTION_PROVIDER);
+        add(EMExtrasBlock.INFINITE_MULTIVERSAL_INDUCTION_PROVIDER);
+        add(EMExtrasBlock.ABSOLUTE_OVERCLOCKED_INDUCTION_CELL);
+        add(EMExtrasBlock.SUPREME_QUANTUM_INDUCTION_CELL);
+        add(EMExtrasBlock.COSMIC_DENSE_INDUCTION_CELL);
+        add(EMExtrasBlock.INFINITE_MULTIVERSAL_INDUCTION_CELL);
     }
 
     private void addItem() {

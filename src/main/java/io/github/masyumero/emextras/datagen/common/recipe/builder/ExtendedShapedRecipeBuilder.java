@@ -46,7 +46,7 @@ public class ExtendedShapedRecipeBuilder extends BaseRecipeBuilder<ExtendedShape
         super(serializer, result, count);
     }
 
-    private ExtendedShapedRecipeBuilder(ItemLike result, int count) {
+    protected ExtendedShapedRecipeBuilder(ItemLike result, int count) {
         this(RecipeSerializer.SHAPED_RECIPE, result, count);
     }
 

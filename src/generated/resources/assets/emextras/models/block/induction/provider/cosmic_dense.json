@@ -1,0 +1,10 @@
+{
+  "parent": "mekanism:block/induction/provider/base",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "all": "emextras:block/cosmic_dense_induction_provider",
+    "glow": "mekanism:block/induction_provider_glow",
+    "led": "emextras:block/cosmic_dense_induction_provider_led",
+    "particle": "emextras:block/cosmic_dense_induction_provider"
+  }
+}

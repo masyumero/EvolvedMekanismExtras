@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "active=false,facing=east": {
+      "model": "emextras:block/factory/smelting/cosmic_dense",
+      "y": 90
+    },
+    "active=false,facing=north": {
+      "model": "emextras:block/factory/smelting/cosmic_dense"
+    },
+    "active=false,facing=south": {
+      "model": "emextras:block/factory/smelting/cosmic_dense",
+      "y": 180
+    },
+    "active=false,facing=west": {
+      "model": "emextras:block/factory/smelting/cosmic_dense",
+      "y": -90
+    },
+    "active=true,facing=east": {
+      "model": "emextras:block/factory/smelting/active/cosmic_dense",
+      "y": 90
+    },
+    "active=true,facing=north": {
+      "model": "emextras:block/factory/smelting/active/cosmic_dense"
+    },
+    "active=true,facing=south": {
+      "model": "emextras:block/factory/smelting/active/cosmic_dense",
+      "y": 180
+    },
+    "active=true,facing=west": {
+      "model": "emextras:block/factory/smelting/active/cosmic_dense",
+      "y": -90
+    }
+  }
+}

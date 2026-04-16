@@ -1,0 +1,25 @@
+{
+  "type": "mekanism:mek_data",
+  "key": {
+    "#": {
+      "item": "mekanism:ultimate_induction_cell"
+    },
+    "E": {
+      "item": "mekanism:energy_tablet"
+    },
+    "O": {
+      "item": "mekanism_extras:absolute_induction_cell"
+    },
+    "P": {
+      "item": "evolvedmekanism:overclocked_induction_cell"
+    }
+  },
+  "pattern": [
+    "EOE",
+    "P#P",
+    "EOE"
+  ],
+  "result": {
+    "item": "emextras:absolute_overclocked_induction_cell"
+  }
+}

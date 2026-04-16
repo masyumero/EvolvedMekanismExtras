@@ -1,0 +1,25 @@
+{
+  "type": "mekanism:mek_data",
+  "key": {
+    "#": {
+      "item": "emextras:supreme_quantum_induction_provider"
+    },
+    "C": {
+      "item": "emextras:cosmic_dense_control_circuit"
+    },
+    "O": {
+      "item": "mekanism_extras:cosmic_induction_provider"
+    },
+    "P": {
+      "item": "evolvedmekanism:dense_induction_provider"
+    }
+  },
+  "pattern": [
+    "COC",
+    "P#P",
+    "COC"
+  ],
+  "result": {
+    "item": "emextras:cosmic_dense_induction_provider"
+  }
+}

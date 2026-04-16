@@ -1,0 +1,8 @@
+{
+  "parent": "mekanism:block/induction/cell/basic",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "all": "emextras:block/cosmic_dense_induction_cell",
+    "particle": "emextras:block/cosmic_dense_induction_cell"
+  }
+}

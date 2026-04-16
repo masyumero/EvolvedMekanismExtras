@@ -1,0 +1,25 @@
+{
+  "type": "mekanism:mek_data",
+  "key": {
+    "#": {
+      "item": "emextras:cosmic_dense_induction_cell"
+    },
+    "E": {
+      "item": "mekanism:energy_tablet"
+    },
+    "O": {
+      "item": "mekanism_extras:infinite_induction_cell"
+    },
+    "P": {
+      "item": "evolvedmekanism:multiversal_induction_cell"
+    }
+  },
+  "pattern": [
+    "EOE",
+    "P#P",
+    "EOE"
+  ],
+  "result": {
+    "item": "emextras:infinite_multiversal_induction_cell"
+  }
+}

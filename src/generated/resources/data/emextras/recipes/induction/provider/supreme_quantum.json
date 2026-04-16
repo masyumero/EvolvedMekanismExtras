@@ -1,0 +1,25 @@
+{
+  "type": "mekanism:mek_data",
+  "key": {
+    "#": {
+      "item": "emextras:absolute_overclocked_induction_provider"
+    },
+    "C": {
+      "item": "emextras:supreme_quantum_control_circuit"
+    },
+    "O": {
+      "item": "mekanism_extras:supreme_induction_provider"
+    },
+    "P": {
+      "item": "evolvedmekanism:quantum_induction_provider"
+    }
+  },
+  "pattern": [
+    "COC",
+    "P#P",
+    "COC"
+  ],
+  "result": {
+    "item": "emextras:supreme_quantum_induction_provider"
+  }
+}

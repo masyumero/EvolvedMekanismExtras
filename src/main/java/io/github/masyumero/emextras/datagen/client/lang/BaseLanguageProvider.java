@@ -1,6 +1,8 @@
 package io.github.masyumero.emextras.datagen.client.lang;
 
+import io.github.masyumero.emextras.common.util.EMExtraTextUtils;
 import mekanism.api.gear.ModuleData;
+import mekanism.api.providers.IBaseProvider;
 import mekanism.api.providers.IBlockProvider;
 import mekanism.api.providers.IModuleDataProvider;
 import mekanism.api.text.IHasTranslationKey;
@@ -57,6 +59,12 @@ public abstract class BaseLanguageProvider extends LanguageProvider {
     protected void addPackData(IHasTranslationKey name, IHasTranslationKey packDescription) {
         add(name, modName);
         add(packDescription, "Resources used for " + modName);
+    }
+
+    protected void add(IHasTranslationKey key) {
+        if (key instanceof IBaseProvider baseProvider) {
+            add(key, EMExtraTextUtils.toEnglishName(baseProvider.getName()));
+        }
     }
 
     protected void add(IHasTranslationKey key, String value) {

@@ -1,0 +1,146 @@
+package io.github.masyumero.emextras.datagen.client.models.block;
+
+import com.jerry.mekanism_extras.MekanismExtras;
+import com.jerry.mekanism_extras.common.block.attribute.ExtraAttribute;
+import com.jerry.mekanism_extras.common.tier.AdvancedFactoryTier;
+import fr.iglee42.evolvedmekanism.EvolvedMekanism;
+import fr.iglee42.evolvedmekanism.registries.EMFactoryType;
+import io.github.masyumero.emextras.EMExtras;
+import io.github.masyumero.emextras.api.mixin.IMixinCompositeModelBuilder;
+import io.github.masyumero.emextras.api.tier.EMExtraTier;
+import io.github.masyumero.emextras.common.block.attribute.EMExtraAttribute;
+import io.github.masyumero.emextras.common.block.attribute.EMExtraAttributeFactoryType;
+import io.github.masyumero.emextras.common.content.blocktype.EMExtraFactoryType;
+import io.github.masyumero.emextras.common.tier.EMExtraFactoryTier;
+import io.github.masyumero.emextras.common.tier.EMExtraICTier;
+import io.github.masyumero.emextras.common.tier.EMExtraIPTier;
+import mekanism.common.Mekanism;
+import mekanism.common.block.attribute.Attribute;
+import mekanism.common.block.states.BlockStateHelper;
+import mekanism.common.content.blocktype.FactoryType;
+import mekanism.common.registration.impl.BlockRegistryObject;
+import net.minecraft.data.PackOutput;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraftforge.client.model.generators.BlockStateProvider;
+import net.minecraftforge.client.model.generators.ConfiguredModel;
+import net.minecraftforge.client.model.generators.ModelFile;
+import net.minecraftforge.client.model.generators.VariantBlockStateBuilder;
+import net.minecraftforge.client.model.generators.loaders.CompositeModelBuilder;
+import net.minecraftforge.common.data.ExistingFileHelper;
+
+public abstract class BaseBlockModelsProvider extends BlockStateProvider {
+
+    public BaseBlockModelsProvider(PackOutput output, String modid, ExistingFileHelper exFileHelper) {
+        super(output, modid, exFileHelper);
+    }
+
+    protected void inductionCellAndProvider(BlockRegistryObject<?, ?> cellBlockRO, BlockRegistryObject<?, ?> providerBlockRO) {
+        ConfiguredModel.Builder<?> builder = ConfiguredModel.builder();
+        EMExtraTier cellTier = EMExtraAttribute.getTier(cellBlockRO.getBlock(), EMExtraICTier.class).getEMExtraTier();
+        EMExtraTier providerTier = EMExtraAttribute.getTier(providerBlockRO.getBlock(), EMExtraIPTier.class).getEMExtraTier();
+        ResourceLocation cellPath = EMExtras.rl("block/induction/cell/" + cellTier.getLowerName());
+        ResourceLocation providerPath = EMExtras.rl("block/induction/provider/" + providerTier.getLowerName());
+
+        ResourceLocation cellTexture = EMExtras.rl("block/" + cellBlockRO.getName());
+        ResourceLocation providerTexture = EMExtras.rl("block/" + providerBlockRO.getName());
+
+        simpleBlockItem(cellBlockRO.getBlock(),
+                models().withExistingParent(cellPath.getPath() , Mekanism.rl("block/induction/cell/basic"))
+                .renderType(mcLoc("cutout"))
+                .texture("particle", cellTexture)
+                .texture("all", cellTexture));
+
+        getVariantBuilder(cellBlockRO.getBlock())
+                .forAllStatesExcept(state -> builder.modelFile(models().getExistingFile(cellPath)).build());
+
+        simpleBlockItem(providerBlockRO.getBlock(),
+                models().withExistingParent(providerPath.getPath() , Mekanism.rl("block/induction/provider/base"))
+                .renderType(mcLoc("cutout"))
+                .texture("particle", providerTexture)
+                .texture("all", providerTexture)
+                .texture("glow", Mekanism.rl("block/induction_provider_glow"))
+                .texture("led", providerTexture + "_led"));
+
+        getVariantBuilder(providerBlockRO.getBlock())
+                .forAllStatesExcept(state -> builder.modelFile(models().getExistingFile(providerPath)).build());
+    }
+
+    protected void simpleFactoryMachineBlock(BlockRegistryObject<?, ?> blockRO) {
+        EMExtraFactoryType type = Attribute.get(blockRO, EMExtraAttributeFactoryType.class).getFactoryType();
+        EMExtraFactoryTier tier = EMExtraAttribute.getTier(blockRO.getBlock(), EMExtraFactoryTier.class);
+
+        String blockPath = "block/factory/" + type.getRegistryNameComponent();
+
+        factoryMachineState(blockRO, getActiveFactoryBlockModel(blockPath, tier, type), getFactoryBlockModel(blockPath, tier, type));
+    }
+
+    private ModelFile getFactoryBlockModel(String blockPath, EMExtraFactoryTier tier, EMExtraFactoryType emExtraFactoryType) {
+        CompositeModelBuilder<?> blockModel = models().withExistingParent(blockPath + "/" + tier.getEMExtraTier().getLowerName(), this.mcLoc("block/block"))
+                .texture("particle", Mekanism.rl("block/factory/factory_front_back"))
+                .customLoader(CompositeModelBuilder::begin);
+        ((IMixinCompositeModelBuilder<?>)blockModel).emextras$childParent("base", models().getExistingFile(emExtraFactoryType == EMExtraFactoryType.ALLOYING ? EvolvedMekanism.rl("block/factory/" + emExtraFactoryType.getRegistryNameComponent() + "/base") : Mekanism.rl("block/factory/" + emExtraFactoryType.getRegistryNameComponent() + "/base")))
+                .emextras$childParent("front_led", models().getExistingFile(EMExtras.rl("block/factory/front_led/" + tier.getEMExtraTier().getLowerName())));
+        return blockModel.end();
+    }
+
+    private ModelFile getActiveFactoryBlockModel(String blockPath, EMExtraFactoryTier tier, EMExtraFactoryType emExtraFactoryType) {
+        CompositeModelBuilder<?> activeBlockModel = models().withExistingParent(blockPath + "/active/" + tier.getEMExtraTier().getLowerName(), this.mcLoc("block/block"))
+                .texture("particle", Mekanism.rl("block/factory/factory_front_back"))
+                .customLoader(CompositeModelBuilder::begin);
+        ((IMixinCompositeModelBuilder<?>)activeBlockModel).emextras$childParent("base", models().getExistingFile(emExtraFactoryType == EMExtraFactoryType.ALLOYING ? EvolvedMekanism.rl("block/factory/" + emExtraFactoryType.getRegistryNameComponent() + "/base") : Mekanism.rl("block/factory/" + emExtraFactoryType.getRegistryNameComponent() + "/base")))
+                .emextras$childParent("front_led", models().getExistingFile(EMExtras.rl("block/factory/front_led/active/" + tier.getEMExtraTier().getLowerName())));
+        return activeBlockModel.end();
+    }
+
+    protected void alloyingFactoryMachineBlock(BlockRegistryObject<?, ?> blockRO) {
+        AdvancedFactoryTier tier = ExtraAttribute.getTier(blockRO.getBlock(), AdvancedFactoryTier.class);
+
+        String blockPath = "block/factory/alloying";
+
+        factoryMachineState(blockRO, getActiveExtraAlloyingFactoryBlockModel(blockPath, tier, EMFactoryType.ALLOYING), getExtraAlloyingFactoryBlockModel(blockPath, tier, EMFactoryType.ALLOYING));
+    }
+
+    private ModelFile getExtraAlloyingFactoryBlockModel(String blockPath, AdvancedFactoryTier tier, FactoryType factoryType) {
+        CompositeModelBuilder<?> blockModel = models().withExistingParent(blockPath + "/" + tier.getAdvanceTier().getLowerName(), this.mcLoc("block/block"))
+                .texture("particle", Mekanism.rl("block/factory/factory_front_back"))
+                .customLoader(CompositeModelBuilder::begin);
+        ((IMixinCompositeModelBuilder<?>)blockModel).emextras$childParent("base", models().getExistingFile(EvolvedMekanism.rl("block/factory/alloying/base")))
+                .emextras$childParent("front_led", models().getExistingFile(MekanismExtras.rl("block/factory/front_led/" + tier.getAdvanceTier().getLowerName())));
+        return blockModel.end();
+    }
+
+    private ModelFile getActiveExtraAlloyingFactoryBlockModel(String blockPath, AdvancedFactoryTier tier, FactoryType factoryType) {
+        CompositeModelBuilder<?> activeBlockModel = models().withExistingParent(blockPath + "/active/" + tier.getAdvanceTier().getLowerName(), this.mcLoc("block/block"))
+                .texture("particle", Mekanism.rl("block/factory/factory_front_back"))
+                .customLoader(CompositeModelBuilder::begin);
+        ((IMixinCompositeModelBuilder<?>)activeBlockModel).emextras$childParent("base", models().getExistingFile(EvolvedMekanism.rl("block/factory/alloying/base")))
+                .emextras$childParent("front_led", models().getExistingFile(MekanismExtras.rl("block/factory/front_led/active/" + tier.getAdvanceTier().getLowerName())));
+        return activeBlockModel.end();
+    }
+
+    private void factoryMachineState(BlockRegistryObject<?, ?> blockRO, ModelFile activeBlockModel, ModelFile blockModel) {
+        ConfiguredModel.Builder<?> builder = ConfiguredModel.builder();
+        VariantBlockStateBuilder variantBuilder = getVariantBuilder(blockRO.getBlock());
+
+        variantBuilder.forAllStatesExcept(state -> {
+            var yRot = switch ((int) state.getValue(BlockStateProperties.HORIZONTAL_FACING).toYRot()) {
+                case 0 -> 180;
+                case 90 -> -90;
+                case 180 -> 0;
+                case 270 -> 90;
+                default ->
+                        throw new IllegalStateException("Unexpected value: " + (int) state.getValue(BlockStateProperties.HORIZONTAL_FACING).toYRot());
+            };
+            if (Attribute.isActive(state)) {
+                return builder
+                        .modelFile(activeBlockModel)
+                        .rotationY(yRot).build();
+            } else {
+                return builder
+                        .modelFile(blockModel)
+                        .rotationY(yRot).build();
+            }
+        }, BlockStateHelper.FLUID_LOGGED);
+    }
+}

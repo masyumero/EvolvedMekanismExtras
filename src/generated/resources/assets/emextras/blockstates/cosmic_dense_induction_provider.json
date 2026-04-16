@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "emextras:block/induction/provider/cosmic_dense"
+    }
+  }
+}
