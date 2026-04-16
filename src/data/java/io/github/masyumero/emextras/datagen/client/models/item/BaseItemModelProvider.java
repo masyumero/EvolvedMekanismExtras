@@ -8,8 +8,6 @@ import io.github.masyumero.emextras.common.block.attribute.EMExtraAttributeFacto
 import io.github.masyumero.emextras.common.content.blocktype.EMExtraFactoryType;
 import io.github.masyumero.emextras.common.tier.EMExtraFactoryTier;
 import mekanism.common.block.attribute.Attribute;
-import mekanism.common.block.attribute.AttributeFactoryType;
-import mekanism.common.content.blocktype.FactoryType;
 import mekanism.common.registration.impl.BlockRegistryObject;
 import net.minecraft.data.PackOutput;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
