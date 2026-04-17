@@ -9,7 +9,6 @@
     "MixinAdvancedFactory",
     "MixinFactory",
     "MixinPacketHandler",
-    "datagen.MixinCompositeModelBuilder",
     "matrix.MixinTargetMatrixEnergyContainer$MixinExtraMatrixEnergyContainer",
     "matrix.MixinTargetMatrixEnergyContainer$MixinMatrixEnergyContainer",
     "matrix.MixinTargetMatrixMultiblockData$MixinExtraMatrixMultiblockData",
