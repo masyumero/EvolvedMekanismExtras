@@ -40,25 +40,28 @@ public class EMExtraLangProvider extends BaseLanguageProvider {
 
     private void addBlocks() {
         for (EMExtraFactoryTier tier : EMExtraEnumUtils.EMEXTRA_FACTORY_TIERS) {
+            var base = tier.getEMExtraTier().getSimpleName().replace("_", " ");
             for (EMExtraFactoryType type : EMExtraEnumUtils.EMEXTRA_FACTORY_TYPES) {
-                var name = tier.getEMExtraTier().getSimpleName().replace("_", " ") + " " + type.getRegistryNameComponentCapitalized() + " Factory";
+                var name = base + " " + type.getRegistryNameComponentCapitalized() + " Factory";
                 add(EMExtraBlocks.getEMExtraFactory(tier, type), name);
             }
             for (AdvancedFactoryType type : MoreMachineEnumUtils.ADVANCED_FACTORY_TYPES) {
-                String  name;
-                if (type == AdvancedFactoryType.CHEMICAL_INFUSING) {
-                    name = tier.getEMExtraTier().getSimpleName().replace("_", " ") + " Chemical Infusing Factory";
-                } else{
-                    name = tier.getEMExtraTier().getSimpleName().replace("_", " ") + " " + type.getRegistryNameComponentCapitalized() + " Factory";
+                String name;
+                if (type == AdvancedFactoryType.PIGMENT_EXTRACTING) {
+                    name = base + " Pigment Extracting Factory";
+                } else if (type == AdvancedFactoryType.PRESSURISED_REACTING) {
+                    name = base + " Pressurised Reacting Factory";
+                } else {
+                    name = base + " " + type.getRegistryNameComponentCapitalized() + " Factory";
                 }
                 add(EMExtraAdvancedFactoryBlocks.getEMExtraAdvancedFactory(tier, type), name);
             }
             for (MoreMachineFactoryType type : MoreMachineEnumUtils.MM_FACTORY_TYPES) {
-                String  name;
+                String name;
                 if (type == MoreMachineFactoryType.CNC_ROLLING_MILL) {
-                    name = tier.getEMExtraTier().getSimpleName().replace("_", " ") + " Rolling Mill";
+                    name = base + " Rolling Mill Factory";
                 } else{
-                    name = tier.getEMExtraTier().getSimpleName().replace("_", " ") + " " + type.getRegistryNameComponentCapitalized() + " Factory";
+                    name = base + " " + type.getRegistryNameComponentCapitalized() + " Factory";
                 }
                 add(EMExtraMoreMachineBlocks.getEMExtraMoreMachineFactory(tier, type), name);
             }

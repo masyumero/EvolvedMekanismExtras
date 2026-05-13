@@ -3,6 +3,7 @@ package io.github.masyumero.emextras.common.integration.mekaf.tile.factory;
 import com.jerry.mekextras.api.recipes.cache.StackableItemStackConstantChemicalToObjectCachedRecipe;
 import com.jerry.mekextras.api.recipes.cache.StackableItemStackConstantChemicalToObjectCachedRecipe.StackableChemicalUsageMultiplier;
 
+import io.github.masyumero.emextras.common.integration.mekaf.tile.factory.base.TileEntityEMExtraItemToChemicalFactory;
 import mekanism.api.IContentsListener;
 import mekanism.api.SerializationConstants;
 import mekanism.api.Upgrade;

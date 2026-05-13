@@ -1,6 +1,6 @@
 package io.github.masyumero.emextras.common.integration.mekaf.inventory.slot;
 
-import io.github.masyumero.emextras.common.integration.mekaf.tile.factory.TileEntityEMExtraAdvancedBase;
+import io.github.masyumero.emextras.common.integration.mekaf.tile.factory.base.TileEntityEMExtraAdvancedFactoryBase;
 
 import mekanism.api.IContentsListener;
 import mekanism.api.annotations.NothingNullByDefault;
@@ -15,13 +15,13 @@ import org.jetbrains.annotations.Nullable;
 @NothingNullByDefault
 public class EMExtraAdvancedFactoryOutputInventorySlot extends BasicInventorySlot {
 
-    private final TileEntityEMExtraAdvancedBase<?> factory;
+    private final TileEntityEMExtraAdvancedFactoryBase<?> factory;
 
-    public static EMExtraAdvancedFactoryOutputInventorySlot at(TileEntityEMExtraAdvancedBase<?> factory, @Nullable IContentsListener listener, int x, int y) {
+    public static EMExtraAdvancedFactoryOutputInventorySlot at(TileEntityEMExtraAdvancedFactoryBase<?> factory, @Nullable IContentsListener listener, int x, int y) {
         return new EMExtraAdvancedFactoryOutputInventorySlot(factory, listener, x, y);
     }
 
-    private EMExtraAdvancedFactoryOutputInventorySlot(TileEntityEMExtraAdvancedBase<?> factory, @Nullable IContentsListener listener, int x, int y) {
+    private EMExtraAdvancedFactoryOutputInventorySlot(TileEntityEMExtraAdvancedFactoryBase<?> factory, @Nullable IContentsListener listener, int x, int y) {
         super(ConstantPredicates.alwaysTrueBi(), ConstantPredicates.internalOnly(), ConstantPredicates.alwaysTrue(), listener, x, y);
         setSlotType(ContainerSlotType.OUTPUT);
         this.factory = factory;

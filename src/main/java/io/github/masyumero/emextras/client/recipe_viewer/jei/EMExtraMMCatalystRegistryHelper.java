@@ -19,18 +19,15 @@ import java.util.List;
 
 public class EMExtraMMCatalystRegistryHelper {
 
-    public static void register(IRecipeCatalystRegistration registry, boolean needOrdinary, IRecipeViewerRecipeType<?>... categories) {
+    public static void register(IRecipeCatalystRegistration registry, IRecipeViewerRecipeType<?>... categories) {
         for (IRecipeViewerRecipeType<?> category : categories) {
-            register(registry, MekanismJEI.genericRecipeType(category), category.workstations(), needOrdinary);
+            register(registry, MekanismJEI.genericRecipeType(category), category.workstations());
         }
     }
 
-    public static void register(IRecipeCatalystRegistration registry, RecipeType<?> recipeType, List<ItemLike> workstations, boolean needOrdinary) {
+    public static void register(IRecipeCatalystRegistration registry, RecipeType<?> recipeType, List<ItemLike> workstations) {
         for (ItemLike workstation : workstations) {
             Item item = workstation.asItem();
-            if (needOrdinary) {
-                registry.addRecipeCatalyst(item, recipeType);
-            }
             if (item instanceof BlockItem blockItem) {
                 MoreMachineAttributeFactoryType factoryType = Attribute.get(blockItem.getBlock(), MoreMachineAttributeFactoryType.class);
                 if (factoryType != null) {

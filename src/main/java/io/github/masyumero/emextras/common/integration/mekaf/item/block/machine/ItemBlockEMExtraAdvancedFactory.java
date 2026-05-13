@@ -18,7 +18,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 
-import com.jerry.mekaf.common.attachments.component.AdvancedFactoryAttachedSideConfig;
 import com.jerry.mekaf.common.block.attribute.AttributeAdvancedFactoryType;
 import org.jetbrains.annotations.NotNull;
 
@@ -30,12 +29,13 @@ public class ItemBlockEMExtraAdvancedFactory extends ItemBlockEMExtraTooltip<Blo
         return switch (Attribute.getOrThrow(block.builtInRegistryHolder(), AttributeAdvancedFactoryType.class).getAdvancedFactoryType()) {
             case OXIDIZING -> AttachedSideConfig.CHEMICAL_OUT_MACHINE;
             case DISSOLVING -> AttachedSideConfig.DISSOLUTION;
-            case CHEMICAL_INFUSING -> AdvancedFactoryAttachedSideConfig.CHEMICAL_INFUSING;
             case WASHING -> AttachedSideConfig.WASHER;
             case PRESSURISED_REACTING -> AttachedSideConfig.REACTION;
             case CRYSTALLIZING -> AttachedSideConfig.CRYSTALLIZER;
             case CENTRIFUGING -> AttachedSideConfig.CENTRIFUGE;
             case LIQUIFYING -> AttachedSideConfig.LIQUIFIER;
+            case PIGMENT_EXTRACTING -> AttachedSideConfig.PIGMENT_MIXER;
+            case PAINTING -> AttachedSideConfig.PAINTING;
         };
     }
 

@@ -1,7 +1,7 @@
 package io.github.masyumero.emextras.mixin;
 
 import com.jerry.mekaf.common.content.blocktype.AdvancedFactory;
-import com.jerry.mekaf.common.tile.factory.TileEntityAdvancedFactoryBase;
+import com.jerry.mekaf.common.tile.factory.base.TileEntityAdvancedFactoryBase;
 import com.jerry.mekmm.common.content.blocktype.MoreMachineFactoryType;
 import com.jerry.mekmm.common.content.blocktype.MoreMachineMachine;
 

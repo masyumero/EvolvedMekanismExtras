@@ -1,7 +1,7 @@
 package io.github.masyumero.emextras.common.network.to_server;
 
 import io.github.masyumero.emextras.EMExtras;
-import io.github.masyumero.emextras.common.integration.mekaf.tile.factory.TileEntityEMExtraAdvancedBase;
+import io.github.masyumero.emextras.common.integration.mekaf.tile.factory.base.TileEntityEMExtraAdvancedFactoryBase;
 import io.github.masyumero.emextras.common.integration.mekmm.tile.factory.TileEntityEMExtraMoreMachineFactory;
 import io.github.masyumero.emextras.common.tile.factory.TileEntityEMExtraFactory;
 
@@ -154,7 +154,7 @@ public class EMExtraPacketGuiInteract implements IMekanismPacket {
             if (tile instanceof TileEntityEMExtraFactory<?> factory) {
                 factory.toggleSorting();
             } else if (EMExtras.hooks.mekmm.isLoaded()) {
-                if (tile instanceof TileEntityEMExtraAdvancedBase<?> factory) factory.toggleSorting();
+                if (tile instanceof TileEntityEMExtraAdvancedFactoryBase<?> factory) factory.toggleSorting();
                 if (tile instanceof TileEntityEMExtraMoreMachineFactory<?> factory) factory.toggleSorting();
             }
         }),

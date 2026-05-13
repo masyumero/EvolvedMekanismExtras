@@ -3,6 +3,7 @@ package io.github.masyumero.emextras.common.integration.mekaf.tile.factory;
 import io.github.masyumero.emextras.common.integration.mekaf.inventory.slot.EMExtraAdvancedFactoryInputInventorySlot;
 import io.github.masyumero.emextras.common.integration.mekaf.inventory.slot.EMExtraAdvancedFactoryOutputInventorySlot;
 
+import io.github.masyumero.emextras.common.integration.mekaf.tile.factory.base.TileEntityEMExtraAdvancedFactoryBase;
 import mekanism.api.Action;
 import mekanism.api.IContentsListener;
 import mekanism.api.RelativeSide;
@@ -58,7 +59,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.ToIntBiFunction;
 
-public class TileEntityEMExtraLiquifyingFactory extends TileEntityEMExtraAdvancedBase<BasicItemStackToFluidOptionalItemRecipe> implements ItemRecipeLookupHandler<BasicItemStackToFluidOptionalItemRecipe> {
+public class TileEntityEMExtraLiquifyingFactory extends TileEntityEMExtraAdvancedFactoryBase<BasicItemStackToFluidOptionalItemRecipe> implements ItemRecipeLookupHandler<BasicItemStackToFluidOptionalItemRecipe> {
 
     public static final RecipeError NOT_ENOUGH_SPACE_ITEM_OUTPUT_ERROR = RecipeError.create();
     // 单个槽位报错，例如输入槽和输出槽

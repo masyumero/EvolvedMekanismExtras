@@ -12,7 +12,6 @@ import com.jerry.mekmm.common.content.blocktype.MoreMachineFactoryType;
 import fr.iglee42.evolvedmekanism.EvolvedMekanism;
 
 import io.github.masyumero.emextras.EMExtras;
-import io.github.masyumero.emextras.api.mixin.IMixinCompositeModelBuilder;
 import io.github.masyumero.emextras.common.block.attribute.EMExtraAttribute;
 import io.github.masyumero.emextras.common.block.attribute.EMExtraAttributeFactoryType;
 import io.github.masyumero.emextras.common.content.blocktype.EMExtraFactoryType;
@@ -46,21 +45,19 @@ public abstract class BaseBlockModelsProvider extends BlockStateProvider {
     }
 
     private ModelFile getFactoryBlockModel(String blockPath, EMExtraFactoryTier tier, EMExtraFactoryType emExtraFactoryType) {
-        CompositeModelBuilder<?> blockModel = models().withExistingParent(blockPath + "/" + tier.getEMExtraTier().getLowerName(), this.mcLoc("block/block"))
+        return models().withExistingParent(blockPath + "/" + tier.getEMExtraTier().getLowerName(), this.mcLoc("block/block"))
                 .texture("particle", Mekanism.rl("block/factory/factory_front_back"))
-                .customLoader(CompositeModelBuilder::begin);
-        ((IMixinCompositeModelBuilder<?>)blockModel).emextras$childParent("base", models().getExistingFile(emExtraFactoryType == EMExtraFactoryType.ALLOYING ? EvolvedMekanism.rl("block/factory/" + emExtraFactoryType.getRegistryNameComponent() + "/base") : Mekanism.rl("block/factory/" + emExtraFactoryType.getRegistryNameComponent() + "/base")))
-                .emextras$childParent("front_led", models().getExistingFile(EMExtras.rl("block/factory/front_led/" + tier.getEMExtraTier().getLowerName())));
-        return blockModel.end();
+                .customLoader(CompositeModelBuilder::begin)
+                .child("base", models().nested().parent(new ModelFile.UncheckedModelFile(emExtraFactoryType == EMExtraFactoryType.ALLOYING ? EvolvedMekanism.rl("block/factory/" + emExtraFactoryType.getRegistryNameComponent() + "/base") : Mekanism.rl("block/factory/" + emExtraFactoryType.getRegistryNameComponent() + "/base"))))
+                .child("front_led", models().nested().parent(new ModelFile.UncheckedModelFile(EMExtras.rl("block/factory/front_led/" + tier.getEMExtraTier().getLowerName())))).end();
     }
 
     private ModelFile getActiveFactoryBlockModel(String blockPath, EMExtraFactoryTier tier, EMExtraFactoryType emExtraFactoryType) {
-        CompositeModelBuilder<?> activeBlockModel = models().withExistingParent(blockPath + "/active/" + tier.getEMExtraTier().getLowerName(), this.mcLoc("block/block"))
+        return models().withExistingParent(blockPath + "/active/" + tier.getEMExtraTier().getLowerName(), this.mcLoc("block/block"))
                 .texture("particle", Mekanism.rl("block/factory/factory_front_back"))
-                .customLoader(CompositeModelBuilder::begin);
-        ((IMixinCompositeModelBuilder<?>)activeBlockModel).emextras$childParent("base", models().getExistingFile(emExtraFactoryType == EMExtraFactoryType.ALLOYING ? EvolvedMekanism.rl("block/factory/" + emExtraFactoryType.getRegistryNameComponent() + "/base") : Mekanism.rl("block/factory/" + emExtraFactoryType.getRegistryNameComponent() + "/base")))
-                .emextras$childParent("front_led", models().getExistingFile(EMExtras.rl("block/factory/front_led/active/" + tier.getEMExtraTier().getLowerName())));
-        return activeBlockModel.end();
+                .customLoader(CompositeModelBuilder::begin)
+                .child("base", models().nested().parent(new ModelFile.UncheckedModelFile(emExtraFactoryType == EMExtraFactoryType.ALLOYING ? EvolvedMekanism.rl("block/factory/" + emExtraFactoryType.getRegistryNameComponent() + "/base") : Mekanism.rl("block/factory/" + emExtraFactoryType.getRegistryNameComponent() + "/base"))))
+                .child("front_led", models().nested().parent(new ModelFile.UncheckedModelFile(EMExtras.rl("block/factory/front_led/active/" + tier.getEMExtraTier().getLowerName())))).end();
     }
 
     public void simpleExtraFactoryMachineBlock(BlockRegistryObject<?, ?> blockRO) {
@@ -73,21 +70,19 @@ public abstract class BaseBlockModelsProvider extends BlockStateProvider {
     }
 
     private ModelFile getExtraFactoryBlockModel(String blockPath, ExtraFactoryTier tier, FactoryType factoryType) {
-        CompositeModelBuilder<?> blockModel = models().withExistingParent(blockPath + "/" + tier.getAdvanceTier().getLowerName(), this.mcLoc("block/block"))
+        return models().withExistingParent(blockPath + "/" + tier.getAdvanceTier().getLowerName(), this.mcLoc("block/block"))
                 .texture("particle", Mekanism.rl("block/factory/factory_front_back"))
-                .customLoader(CompositeModelBuilder::begin);
-        ((IMixinCompositeModelBuilder<?>)blockModel).emextras$childParent("base", models().getExistingFile(EvolvedMekanism.rl("block/factory/" + factoryType.getRegistryNameComponent() + "/base")))
-                .emextras$childParent("front_led", models().getExistingFile(MekanismExtras.rl("block/factory/front_led/" + tier.getAdvanceTier().getLowerName())));
-        return blockModel.end();
+                .customLoader(CompositeModelBuilder::begin)
+                .child("base", models().nested().parent(new ModelFile.UncheckedModelFile(EvolvedMekanism.rl("block/factory/" + factoryType.getRegistryNameComponent() + "/base"))))
+                .child("front_led", models().nested().parent(new ModelFile.UncheckedModelFile(MekanismExtras.rl("block/factory/front_led/" + tier.getAdvanceTier().getLowerName())))).end();
     }
 
     private ModelFile getActiveExtraFactoryBlockModel(String blockPath, ExtraFactoryTier tier, FactoryType factoryType) {
-        CompositeModelBuilder<?> activeBlockModel = models().withExistingParent(blockPath + "/active/" + tier.getAdvanceTier().getLowerName(), this.mcLoc("block/block"))
+        return models().withExistingParent(blockPath + "/active/" + tier.getAdvanceTier().getLowerName(), this.mcLoc("block/block"))
                 .texture("particle", Mekanism.rl("block/factory/factory_front_back"))
-                .customLoader(CompositeModelBuilder::begin);
-        ((IMixinCompositeModelBuilder<?>)activeBlockModel).emextras$childParent("base", models().getExistingFile(EvolvedMekanism.rl("block/factory/" + factoryType.getRegistryNameComponent() + "/base")))
-                .emextras$childParent("front_led", models().getExistingFile(MekanismExtras.rl("block/factory/front_led/active/" + tier.getAdvanceTier().getLowerName())));
-        return activeBlockModel.end();
+                .customLoader(CompositeModelBuilder::begin)
+                .child("base", models().nested().parent(new ModelFile.UncheckedModelFile(EvolvedMekanism.rl("block/factory/" + factoryType.getRegistryNameComponent() + "/base"))))
+                .child("front_led", models().nested().parent(new ModelFile.UncheckedModelFile(MekanismExtras.rl("block/factory/front_led/active/" + tier.getAdvanceTier().getLowerName())))).end();
     }
 
     public void simpleAdvancedFactoryMachineBlock(BlockRegistryObject<?, ?> blockRO) {
@@ -100,21 +95,19 @@ public abstract class BaseBlockModelsProvider extends BlockStateProvider {
     }
 
     private ModelFile getAdvancedFactoryBlockModel(String blockPath, EMExtraFactoryTier tier, AdvancedFactoryType advancedFactoryType) {
-        CompositeModelBuilder<?> blockModel = models().withExistingParent(blockPath + "/" + tier.getEMExtraTier().getLowerName(), this.mcLoc("block/block"))
+        return models().withExistingParent(blockPath + "/" + tier.getEMExtraTier().getLowerName(), this.mcLoc("block/block"))
                 .texture("particle", Mekanism.rl("block/factory/factory_front_back"))
-                .customLoader(CompositeModelBuilder::begin);
-        ((IMixinCompositeModelBuilder<?>)blockModel).emextras$childParent("base", models().getExistingFile(Mekmm.rl("block/factory/" + advancedFactoryType.getRegistryNameComponent() + "/base")))
-                .emextras$childParent("front_led", models().getExistingFile(EMExtras.rl("block/factory/front_led/" + tier.getEMExtraTier().getLowerName())));
-        return blockModel.end();
+                .customLoader(CompositeModelBuilder::begin)
+                .child("base", models().nested().parent(new ModelFile.UncheckedModelFile(Mekmm.rl("block/factory/" + advancedFactoryType.getRegistryNameComponent() + "/base"))))
+                .child("front_led", models().nested().parent(new ModelFile.UncheckedModelFile(EMExtras.rl("block/factory/front_led/" + tier.getEMExtraTier().getLowerName())))).end();
     }
 
     private ModelFile getActiveAdvancedFactoryBlockModel(String blockPath, EMExtraFactoryTier tier, AdvancedFactoryType advancedFactoryType) {
-        CompositeModelBuilder<?> activeBlockModel = models().withExistingParent(blockPath + "/active/" + tier.getEMExtraTier().getLowerName(), this.mcLoc("block/block"))
+        return models().withExistingParent(blockPath + "/active/" + tier.getEMExtraTier().getLowerName(), this.mcLoc("block/block"))
                 .texture("particle", Mekanism.rl("block/factory/factory_front_back"))
-                .customLoader(CompositeModelBuilder::begin);
-        ((IMixinCompositeModelBuilder<?>)activeBlockModel).emextras$childParent("base", models().getExistingFile(Mekmm.rl("block/factory/" + advancedFactoryType.getRegistryNameComponent() + "/base")))
-                .emextras$childParent("front_led", models().getExistingFile(EMExtras.rl("block/factory/front_led/active/" + tier.getEMExtraTier().getLowerName())));
-        return activeBlockModel.end();
+                .customLoader(CompositeModelBuilder::begin)
+                .child("base", models().nested().parent(new ModelFile.UncheckedModelFile(Mekmm.rl("block/factory/" + advancedFactoryType.getRegistryNameComponent() + "/base"))))
+                .child("front_led", models().nested().parent(new ModelFile.UncheckedModelFile(EMExtras.rl("block/factory/front_led/active/" + tier.getEMExtraTier().getLowerName())))).end();
     }
 
     public void simpleMoreMachineFactoryMachineBlock(BlockRegistryObject<?, ?> blockRO) {
@@ -127,21 +120,19 @@ public abstract class BaseBlockModelsProvider extends BlockStateProvider {
     }
 
     private ModelFile getMoreMachineFactoryBlockModel(String blockPath, EMExtraFactoryTier tier, MoreMachineFactoryType moreMachineFactoryType) {
-        CompositeModelBuilder<?> blockModel = models().withExistingParent(blockPath + "/" + tier.getEMExtraTier().getLowerName(), this.mcLoc("block/block"))
+        return models().withExistingParent(blockPath + "/" + tier.getEMExtraTier().getLowerName(), this.mcLoc("block/block"))
                 .texture("particle", Mekanism.rl("block/factory/factory_front_back"))
-                .customLoader(CompositeModelBuilder::begin);
-        ((IMixinCompositeModelBuilder<?>)blockModel).emextras$childParent("base", models().getExistingFile(Mekmm.rl("block/factory/" + moreMachineFactoryType.getRegistryNameComponent() + "/base")))
-                .emextras$childParent("front_led", models().getExistingFile(EMExtras.rl("block/factory/front_led/" + tier.getEMExtraTier().getLowerName())));
-        return blockModel.end();
+                .customLoader(CompositeModelBuilder::begin)
+                .child("base", models().nested().parent(new ModelFile.UncheckedModelFile(Mekmm.rl("block/factory/" + moreMachineFactoryType.getRegistryNameComponent() + "/base"))))
+                .child("front_led", models().nested().parent(new ModelFile.UncheckedModelFile(EMExtras.rl("block/factory/front_led/" + tier.getEMExtraTier().getLowerName())))).end();
     }
 
     private ModelFile getActiveMoreMachineFactoryBlockModel(String blockPath, EMExtraFactoryTier tier, MoreMachineFactoryType moreMachineFactoryType) {
-        CompositeModelBuilder<?> activeBlockModel = models().withExistingParent(blockPath + "/active/" + tier.getEMExtraTier().getLowerName(), this.mcLoc("block/block"))
+        return models().withExistingParent(blockPath + "/active/" + tier.getEMExtraTier().getLowerName(), this.mcLoc("block/block"))
                 .texture("particle", Mekanism.rl("block/factory/factory_front_back"))
-                .customLoader(CompositeModelBuilder::begin);
-        ((IMixinCompositeModelBuilder<?>)activeBlockModel).emextras$childParent("base", models().getExistingFile(Mekmm.rl("block/factory/" + moreMachineFactoryType.getRegistryNameComponent() + "/base")))
-                .emextras$childParent("front_led", models().getExistingFile(EMExtras.rl("block/factory/front_led/active/" + tier.getEMExtraTier().getLowerName())));
-        return activeBlockModel.end();
+                .customLoader(CompositeModelBuilder::begin)
+                .child("base", models().nested().parent(new ModelFile.UncheckedModelFile(Mekmm.rl("block/factory/" + moreMachineFactoryType.getRegistryNameComponent() + "/base"))))
+                .child("front_led", models().nested().parent(new ModelFile.UncheckedModelFile(EMExtras.rl("block/factory/front_led/active/" + tier.getEMExtraTier().getLowerName())))).end();
     }
 
     public void factoryMachineState(BlockRegistryObject<?, ?> blockRO, ModelFile activeBlockModel, ModelFile blockModel) {

@@ -8,6 +8,8 @@ import io.github.masyumero.emextras.common.util.EMExtraEnumUtils;
 
 import mekanism.common.MekanismLang;
 import mekanism.common.block.attribute.AttributeHasBounding;
+import mekanism.common.block.attribute.AttributeSideConfig;
+import mekanism.common.block.attribute.AttributeUpgradeSupport;
 import mekanism.common.config.MekanismConfig;
 import mekanism.common.registries.MekanismContainerTypes;
 import mekanism.common.registries.MekanismSounds;
@@ -41,15 +43,6 @@ public class EMExtraAdvancedFactoryBlockTypes {
             .withSound(MekanismSounds.CHEMICAL_DISSOLUTION_CHAMBER)
             .withEnergyConfig(MekanismConfig.usage.chemicalDissolutionChamber, MekanismConfig.storage.chemicalDissolutionChamber)
             .with(ExtraAttributeUpgradeSupport.EXTRA_ADVANCED_MACHINE_UPGRADES)
-            .build();
-
-    // Chemical Infuser
-    public static final EMExtraMachine.EMExtraFactoryMachine<TileEntityChemicalInfuser> CHEMICAL_INFUSER = EMExtraMachine.EMExtraMachineBuilder
-            .createEMExtraAdvancedFactoryMachine(() -> MekanismTileEntityTypes.CHEMICAL_INFUSER, MekanismLang.DESCRIPTION_CHEMICAL_INFUSER, AdvancedFactoryType.CHEMICAL_INFUSING)
-            .withGui(() -> MekanismContainerTypes.CHEMICAL_INFUSER)
-            .withSound(MekanismSounds.CHEMICAL_INFUSER)
-            .withEnergyConfig(MekanismConfig.usage.chemicalInfuser, MekanismConfig.storage.chemicalInfuser)
-            .with(ExtraAttributeUpgradeSupport.EXTRA_MACHINE_NO_STACK_UPGRADES)
             .build();
 
     // Chemical Washer
@@ -96,6 +89,28 @@ public class EMExtraAdvancedFactoryBlockTypes {
             .withEnergyConfig(MekanismConfig.usage.nutritionalLiquifier, MekanismConfig.storage.nutritionalLiquifier)
             .with(ExtraAttributeUpgradeSupport.EXTRA_MACHINE_UPGRADES)
             .withSound(MekanismSounds.NUTRITIONAL_LIQUIFIER)
+            .build();
+
+    // Pigment Extractor
+    public static final EMExtraMachine.EMExtraFactoryMachine<TileEntityPigmentExtractor> PIGMENT_EXTRACTOR = EMExtraMachine.EMExtraMachineBuilder
+            .createEMExtraAdvancedFactoryMachine(() -> MekanismTileEntityTypes.PIGMENT_EXTRACTOR, MekanismLang.DESCRIPTION_PIGMENT_EXTRACTOR, AdvancedFactoryType.PIGMENT_EXTRACTING)
+            .withGui(() -> MekanismContainerTypes.PIGMENT_EXTRACTOR)
+            .withSound(MekanismSounds.PIGMENT_EXTRACTOR)
+            .withEnergyConfig(MekanismConfig.usage.pigmentExtractor, MekanismConfig.storage.pigmentExtractor)
+            .with(AttributeUpgradeSupport.DEFAULT_MACHINE_UPGRADES)
+            .with(AttributeSideConfig.ADVANCED_ELECTRIC_MACHINE)
+            .withComputerSupport("pigmentExtractor")
+            .build();
+
+    // Painting Machine
+    public static final EMExtraMachine.EMExtraFactoryMachine<TileEntityPaintingMachine> PAINTING_MACHINE = EMExtraMachine.EMExtraMachineBuilder
+            .createEMExtraAdvancedFactoryMachine(() -> MekanismTileEntityTypes.PAINTING_MACHINE, MekanismLang.DESCRIPTION_PAINTING_MACHINE, AdvancedFactoryType.PAINTING)
+            .withGui(() -> MekanismContainerTypes.PAINTING_MACHINE)
+            .withSound(MekanismSounds.PAINTING_MACHINE)
+            .withEnergyConfig(MekanismConfig.usage.paintingMachine, MekanismConfig.storage.paintingMachine)
+            .with(AttributeUpgradeSupport.DEFAULT_MACHINE_UPGRADES)
+            .with(AttributeSideConfig.ADVANCED_ELECTRIC_MACHINE)
+            .withComputerSupport("paintingMachine")
             .build();
 
     static {

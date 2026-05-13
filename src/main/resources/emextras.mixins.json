@@ -17,8 +17,6 @@
     "MixinTileEntityExtraFactory",
     "client.MixinMekanismEmi",
     "client.MixinMoreMachineEMI",
-    "client.MixinMoreMachineJEI",
-    "datagen.MixinCompositeModelBuilder",
     "invoker.InvokerExtraFactory",
     "invoker.InvokerExtraFactoryBuilder"
   ],

@@ -4,6 +4,7 @@ import io.github.masyumero.emextras.EMExtras;
 import io.github.masyumero.emextras.common.block.prefab.BlockEMExtraAdvancedFactoryMachine;
 import io.github.masyumero.emextras.common.integration.mekaf.item.block.machine.ItemBlockEMExtraAdvancedFactory;
 import io.github.masyumero.emextras.common.integration.mekaf.tile.factory.*;
+import io.github.masyumero.emextras.common.integration.mekaf.tile.factory.base.*;
 import io.github.masyumero.emextras.common.tier.EMExtraFactoryTier;
 import io.github.masyumero.emextras.common.util.EMExtraEnumUtils;
 
@@ -30,24 +31,25 @@ public class EMExtraAdvancedFactoryTileEntityTypes {
 
     public static final TileEntityTypeDeferredRegister AF_TILE_ENTITY_TYPES = new TileEntityTypeDeferredRegister(EMExtras.MODID);
 
-    private static final Table<EMExtraFactoryTier, AdvancedFactoryType, TileEntityTypeRegistryObject<? extends TileEntityEMExtraAdvancedBase<?>>> AF_FACTORIES = HashBasedTable.create();
+    private static final Table<EMExtraFactoryTier, AdvancedFactoryType, TileEntityTypeRegistryObject<? extends TileEntityEMExtraAdvancedFactoryBase<?>>> AF_FACTORIES = HashBasedTable.create();
 
     static {
         for (EMExtraFactoryTier tier : EMExtraEnumUtils.EMEXTRA_FACTORY_TIERS) {
-            registerFactory(tier, AdvancedFactoryType.OXIDIZING, TileEntityEMExtraOxidizingFactory::new);
+            registerFactory(tier, AdvancedFactoryType.OXIDIZING, TileEntityEMExtraItemStackToChemicalStackFactory::new);
             registerFactory(tier, AdvancedFactoryType.DISSOLVING, TileEntityEMExtraDissolvingFactory::new);
-            registerFactory(tier, AdvancedFactoryType.CHEMICAL_INFUSING, TileEntityEMExtraChemicalInfusingFactory::new);
             registerFactory(tier, AdvancedFactoryType.WASHING, TileEntityEMExtraWashingFactory::new);
             registerFactory(tier, AdvancedFactoryType.PRESSURISED_REACTING, TileEntityEMExtraPRCFactory::new);
             registerFactory(tier, AdvancedFactoryType.CRYSTALLIZING, TileEntityEMExtraCrystallizingFactory::new);
             registerFactory(tier, AdvancedFactoryType.CENTRIFUGING, TileEntityEMExtraCentrifugingFactory::new);
             registerFactory(tier, AdvancedFactoryType.LIQUIFYING, TileEntityEMExtraLiquifyingFactory::new);
+            registerFactory(tier, AdvancedFactoryType.PIGMENT_EXTRACTING, TileEntityEMExtraItemStackToChemicalStackFactory::new);
+            registerFactory(tier, AdvancedFactoryType.PAINTING, TileEntityEMExtraPaintingFactory::new);
         }
     }
 
-    private static void registerFactory(EMExtraFactoryTier tier, AdvancedFactoryType type, EMExtraAdvancedBlockEntityFactory<? extends TileEntityEMExtraAdvancedBase<?>> factoryConstructor) {
+    private static void registerFactory(EMExtraFactoryTier tier, AdvancedFactoryType type, EMExtraAdvancedBlockEntityFactory<? extends TileEntityEMExtraAdvancedFactoryBase<?>> factoryConstructor) {
         BlockRegistryObject<BlockEMExtraAdvancedFactoryMachine.BlockEMExtraAdvancedFactory<?>, ItemBlockEMExtraAdvancedFactory> block = EMExtraAdvancedFactoryBlocks.getEMExtraAdvancedFactory(tier, type);
-        TileEntityTypeRegistryObject<? extends TileEntityEMExtraAdvancedBase<?>> tileRO = AF_TILE_ENTITY_TYPES.mekBuilder(block, (pos, state) -> factoryConstructor.create(block, pos, state))
+        TileEntityTypeRegistryObject<? extends TileEntityEMExtraAdvancedFactoryBase<?>> tileRO = AF_TILE_ENTITY_TYPES.mekBuilder(block, (pos, state) -> factoryConstructor.create(block, pos, state))
                 .clientTicker(TileEntityMekanism::tickClient)
                 .serverTicker(TileEntityMekanism::tickServer)
                 .withSimple(Capabilities.CONFIG_CARD)
@@ -55,12 +57,12 @@ public class EMExtraAdvancedFactoryTileEntityTypes {
         AF_FACTORIES.put(tier, type, tileRO);
     }
 
-    public static TileEntityTypeRegistryObject<? extends TileEntityEMExtraAdvancedBase<?>> getEMExtraAdvancedFactoryTile(EMExtraFactoryTier tier, AdvancedFactoryType type) {
+    public static TileEntityTypeRegistryObject<? extends TileEntityEMExtraAdvancedFactoryBase<?>> getEMExtraAdvancedFactoryTile(EMExtraFactoryTier tier, AdvancedFactoryType type) {
         return AF_FACTORIES.get(tier, type);
     }
 
     @SuppressWarnings("unchecked")
-    public static TileEntityTypeRegistryObject<? extends TileEntityEMExtraAdvancedBase<?>>[] getEMExtraAdvancedFactoryTiles() {
+    public static TileEntityTypeRegistryObject<? extends TileEntityEMExtraAdvancedFactoryBase<?>>[] getEMExtraAdvancedFactoryTiles() {
         return AF_FACTORIES.values().toArray(new TileEntityTypeRegistryObject[0]);
     }
 

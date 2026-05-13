@@ -4,6 +4,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.CompletableFuture;
+
+import io.github.masyumero.emextras.EMExtras;
 import mekanism.api.gear.ModuleData;
 import mekanism.api.text.IHasTranslationKey;
 import mekanism.client.recipe_viewer.alias.IAliasedTranslation;
@@ -35,7 +37,7 @@ public abstract class BaseLanguageProvider extends LanguageProvider {
     private final String modid;
 
     protected BaseLanguageProvider(PackOutput output, String modid) {
-        this(output, modid, Mekanism.MOD_NAME);
+        this(output, modid, EMExtras.MOD_NAME);
     }
 
     private BaseLanguageProvider(PackOutput output, String modid, String modName) {

@@ -6,7 +6,7 @@ import io.github.masyumero.emextras.common.block.attribute.EMExtraAttributeTier;
 import io.github.masyumero.emextras.common.block.prefab.BlockEMExtraAdvancedFactoryMachine.BlockEMExtraAdvancedFactory;
 import io.github.masyumero.emextras.common.integration.mekaf.content.blocktype.EMExtraAdvancedFactory;
 import io.github.masyumero.emextras.common.integration.mekaf.item.block.machine.ItemBlockEMExtraAdvancedFactory;
-import io.github.masyumero.emextras.common.integration.mekaf.tile.factory.TileEntityEMExtraAdvancedBase;
+import io.github.masyumero.emextras.common.integration.mekaf.tile.factory.base.TileEntityEMExtraAdvancedFactoryBase;
 import io.github.masyumero.emextras.common.tier.EMExtraFactoryTier;
 import io.github.masyumero.emextras.common.util.EMExtraEnumUtils;
 
@@ -29,7 +29,7 @@ import com.google.common.collect.Table;
 import com.jerry.mekaf.common.attachments.containers.chemical.AFChemicalTanksBuilder;
 import com.jerry.mekaf.common.attachments.containers.item.AFItemSlotsBuilder;
 import com.jerry.mekaf.common.content.blocktype.AdvancedFactoryType;
-import com.jerry.mekaf.common.tile.factory.TileEntityAdvancedFactoryBase;
+import com.jerry.mekaf.common.tile.factory.base.TileEntityAdvancedFactoryBase;
 import com.jerry.mekaf.common.tile.factory.TileEntityLiquifyingFactory;
 import com.jerry.mekmm.common.util.MoreMachineEnumUtils;
 import net.neoforged.bus.api.IEventBus;
@@ -57,7 +57,7 @@ public class EMExtraAdvancedFactoryBlocks {
         }
     }
 
-    private static <TILE extends TileEntityEMExtraAdvancedBase<?>> BlockRegistryObject<BlockEMExtraAdvancedFactory<?>, ItemBlockEMExtraAdvancedFactory> registerAdvancedFactory(EMExtraAdvancedFactory<TILE> type) {
+    private static <TILE extends TileEntityEMExtraAdvancedFactoryBase<?>> BlockRegistryObject<BlockEMExtraAdvancedFactory<?>, ItemBlockEMExtraAdvancedFactory> registerAdvancedFactory(EMExtraAdvancedFactory<TILE> type) {
         EMExtraFactoryTier tier = (EMExtraFactoryTier) Objects.requireNonNull(type.get(EMExtraAttributeTier.class)).tier();
         BlockRegistryObject<BlockEMExtraAdvancedFactory<?>, ItemBlockEMExtraAdvancedFactory> factory = registerTieredBlock(tier, "_" + type.getAdvancedFactoryType().getRegistryNameComponent() + "_factory", () -> new BlockEMExtraAdvancedFactory<>(type), ItemBlockEMExtraAdvancedFactory::new);
         factory.forItemHolder(holder -> {
@@ -67,15 +67,17 @@ public class EMExtraAdvancedFactoryBlocks {
                 case DISSOLVING -> s -> MekanismRecipeType.DISSOLUTION.getInputCache().containsInputA(null, s);
                 case PRESSURISED_REACTING -> s -> MekanismRecipeType.REACTION.getInputCache().containsInputA(null, s);
                 case LIQUIFYING -> TileEntityLiquifyingFactory::isValidInputStatic;
+                case PIGMENT_EXTRACTING -> s -> MekanismRecipeType.PIGMENT_EXTRACTING.getInputCache().containsInput(null, s);
+                case PAINTING -> s -> MekanismRecipeType.PAINTING.getInputCache().containsInputA(null, s);
                 default -> null;
             };
             Predicate<ChemicalStack> recipeChemicalInputPredicate = switch (type.getAdvancedFactoryType()) {
-                case CHEMICAL_INFUSING -> s -> MekanismRecipeType.CHEMICAL_INFUSING.getInputCache().containsInput(null, s);
                 case DISSOLVING -> s -> MekanismRecipeType.DISSOLUTION.getInputCache().containsInputB(null, s);
                 case WASHING -> s -> MekanismRecipeType.WASHING.getInputCache().containsInputB(null, s);
                 case CRYSTALLIZING -> s -> MekanismRecipeType.CRYSTALLIZING.getInputCache().containsInput(null, s);
                 case PRESSURISED_REACTING -> s -> MekanismRecipeType.REACTION.getInputCache().containsInputC(null, s);
                 case CENTRIFUGING -> s -> MekanismRecipeType.CENTRIFUGING.getInputCache().containsInput(null, s);
+                case PAINTING -> s -> MekanismRecipeType.PAINTING.getInputCache().containsInputB(null, s);
                 default -> null;
             };
             switch (type.getAdvancedFactoryType()) {
@@ -101,20 +103,6 @@ public class EMExtraAdvancedFactoryBlocks {
                         .addAttachmentOnlyContainers(ContainerType.ITEM, () -> AFItemSlotsBuilder.builder()
                                 .addInputFactorySlots(processes, recipeItemInputPredicate)
                                 .addChemicalFillOrConvertSlot(0)
-                                .addEnergy()
-                                .build());
-                // 输出储罐错位
-                case CHEMICAL_INFUSING -> holder
-                        .addAttachmentOnlyContainers(ContainerType.CHEMICAL, () -> AFChemicalTanksBuilder.builder()
-                                // Left
-                                .addInputFactoryTank(processes, TileEntityAdvancedFactoryBase.MAX_CHEMICAL * processes, recipeChemicalInputPredicate)
-                                .addOutputFactoryTank(processes, TileEntityAdvancedFactoryBase.MAX_CHEMICAL * processes)
-                                // Right
-                                .addBasic(TileEntityAdvancedFactoryBase.MAX_CHEMICAL * processes, recipeChemicalInputPredicate)
-                                .build())
-                        .addAttachmentOnlyContainers(ContainerType.ITEM, () -> ItemSlotsBuilder.builder()
-                                // 将右侧的储罐槽保留
-                                .addChemicalFillOrConvertSlot(1)
                                 .addEnergy()
                                 .build());
                 // 没问题
@@ -164,6 +152,22 @@ public class EMExtraAdvancedFactoryBlocks {
                 case LIQUIFYING -> holder
                         .addAttachmentOnlyContainers(ContainerType.FLUID, () -> FluidTanksBuilder.builder()
                                 .addBasic(TileEntityLiquifyingFactory.MAX_FLUID * processes * processes)
+                                .build())
+                        .addAttachmentOnlyContainers(ContainerType.ITEM, () -> ItemSlotsBuilder.builder()
+                                .addBasicFactorySlots(processes, recipeItemInputPredicate)
+                                .addEnergy()
+                                .build());
+                case PIGMENT_EXTRACTING -> holder
+                        .addAttachmentOnlyContainers(ContainerType.CHEMICAL, () -> AFChemicalTanksBuilder.builder()
+                                .addOutputFactoryTank(processes, TileEntityEMExtraAdvancedFactoryBase.MAX_CHEMICAL * tier.processes)
+                                .build())
+                        .addAttachmentOnlyContainers(ContainerType.ITEM, () -> AFItemSlotsBuilder.builder()
+                                .addInputFactorySlots(processes, recipeItemInputPredicate)
+                                .addEnergy()
+                                .build());
+                case PAINTING -> holder
+                        .addAttachmentOnlyContainers(ContainerType.CHEMICAL, () -> AFChemicalTanksBuilder.builder()
+                                .addInputFactoryTank(tier.processes, TileEntityEMExtraAdvancedFactoryBase.MAX_CHEMICAL * tier.processes, recipeChemicalInputPredicate)
                                 .build())
                         .addAttachmentOnlyContainers(ContainerType.ITEM, () -> ItemSlotsBuilder.builder()
                                 .addBasicFactorySlots(processes, recipeItemInputPredicate)

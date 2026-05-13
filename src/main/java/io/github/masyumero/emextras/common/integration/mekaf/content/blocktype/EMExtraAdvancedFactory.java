@@ -6,7 +6,7 @@ import io.github.masyumero.emextras.common.content.blocktype.EMExtraMachine;
 import io.github.masyumero.emextras.common.integration.mekaf.registries.EMExtraAdvancedFactoryBlockTypes;
 import io.github.masyumero.emextras.common.integration.mekaf.registries.EMExtraAdvancedFactoryBlocks;
 import io.github.masyumero.emextras.common.integration.mekaf.registries.EMExtraAdvancedFactoryContainerTypes;
-import io.github.masyumero.emextras.common.integration.mekaf.tile.factory.TileEntityEMExtraAdvancedBase;
+import io.github.masyumero.emextras.common.integration.mekaf.tile.factory.base.TileEntityEMExtraAdvancedFactoryBase;
 import io.github.masyumero.emextras.common.tier.EMExtraFactoryTier;
 import io.github.masyumero.emextras.common.util.EMExtraEnumUtils;
 
@@ -28,7 +28,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Supplier;
 
-public class EMExtraAdvancedFactory<TILE extends TileEntityEMExtraAdvancedBase<?>> extends EMExtraMachine.EMExtraFactoryMachine<TILE> {
+public class EMExtraAdvancedFactory<TILE extends TileEntityEMExtraAdvancedFactoryBase<?>> extends EMExtraMachine.EMExtraFactoryMachine<TILE> {
 
     private final EMExtraMachine.EMExtraFactoryMachine<?> origMachine;
 
@@ -53,7 +53,7 @@ public class EMExtraAdvancedFactory<TILE extends TileEntityEMExtraAdvancedBase<?
         }
     }
 
-    public static class EMExtraAdvancedFactoryBuilder<FACTORY extends EMExtraAdvancedFactory<TILE>, TILE extends TileEntityEMExtraAdvancedBase<?>, T extends EMExtraMachine.EMExtraMachineBuilder<FACTORY, TILE, T>>
+    public static class EMExtraAdvancedFactoryBuilder<FACTORY extends EMExtraAdvancedFactory<TILE>, TILE extends TileEntityEMExtraAdvancedFactoryBase<?>, T extends EMExtraMachine.EMExtraMachineBuilder<FACTORY, TILE, T>>
             extends BlockTileBuilder<FACTORY, TILE, T> {
 
         protected EMExtraAdvancedFactoryBuilder(FACTORY holder) {
@@ -61,15 +61,15 @@ public class EMExtraAdvancedFactory<TILE extends TileEntityEMExtraAdvancedBase<?
         }
 
         @SuppressWarnings("unchecked")
-        public static <TILE extends TileEntityEMExtraAdvancedBase<?>> EMExtraAdvancedFactoryBuilder<EMExtraAdvancedFactory<TILE>, TILE, ?> createAdvancedFactory(Supplier<?> tileEntityRegistrar, AdvancedFactoryType type,
-                                                                                                                                                                 EMExtraFactoryTier tier) {
+        public static <TILE extends TileEntityEMExtraAdvancedFactoryBase<?>> EMExtraAdvancedFactoryBuilder<EMExtraAdvancedFactory<TILE>, TILE, ?> createAdvancedFactory(Supplier<?> tileEntityRegistrar, AdvancedFactoryType type,
+                                                                                                                                                                        EMExtraFactoryTier tier) {
             // this is dirty but unfortunately necessary for things to play right
             EMExtraAdvancedFactoryBuilder<EMExtraAdvancedFactory<TILE>, TILE, ?> builder = getEMExtraAdvancedFactoryTILEAdvancedFactoryBuilder((Supplier<TileEntityTypeRegistryObject<TILE>>) tileEntityRegistrar, type, tier);
             builder.withComputerSupport(tier.getEMExtraTier().getLowerName() + type.getRegistryNameComponentCapitalized() + "Factory");
             builder.withCustomShape(AdvancedFactoryBlockShapes.getShape(type));
             builder.with(switch (type) {
-                case OXIDIZING, DISSOLVING, CRYSTALLIZING -> AttributeSideConfig.ADVANCED_ELECTRIC_MACHINE;
-                case CHEMICAL_INFUSING, CENTRIFUGING -> AttributeSideConfig.create(TransmissionType.CHEMICAL, TransmissionType.ITEM, TransmissionType.ENERGY);
+                case OXIDIZING, DISSOLVING, CRYSTALLIZING, PAINTING, PIGMENT_EXTRACTING -> AttributeSideConfig.ADVANCED_ELECTRIC_MACHINE;
+                case CENTRIFUGING -> AttributeSideConfig.create(TransmissionType.CHEMICAL, TransmissionType.ITEM, TransmissionType.ENERGY);
                 case WASHING -> AttributeSideConfig.create(TransmissionType.CHEMICAL, TransmissionType.FLUID, TransmissionType.ITEM, TransmissionType.ENERGY);
                 case PRESSURISED_REACTING -> AttributeSideConfig.create(TransmissionType.ITEM, TransmissionType.CHEMICAL, TransmissionType.FLUID, TransmissionType.ENERGY);
                 case LIQUIFYING -> AttributeSideConfig.create(TransmissionType.FLUID, TransmissionType.ITEM, TransmissionType.ENERGY);
@@ -86,7 +86,7 @@ public class EMExtraAdvancedFactory<TILE extends TileEntityEMExtraAdvancedBase<?
         }
     }
 
-    private static <TILE extends TileEntityEMExtraAdvancedBase<?>> @NotNull EMExtraAdvancedFactoryBuilder<EMExtraAdvancedFactory<TILE>, TILE, ?> getEMExtraAdvancedFactoryTILEAdvancedFactoryBuilder(Supplier<TileEntityTypeRegistryObject<TILE>> tileEntityRegistrar, AdvancedFactoryType type, EMExtraFactoryTier tier) {
+    private static <TILE extends TileEntityEMExtraAdvancedFactoryBase<?>> @NotNull EMExtraAdvancedFactoryBuilder<EMExtraAdvancedFactory<TILE>, TILE, ?> getEMExtraAdvancedFactoryTILEAdvancedFactoryBuilder(Supplier<TileEntityTypeRegistryObject<TILE>> tileEntityRegistrar, AdvancedFactoryType type, EMExtraFactoryTier tier) {
         EMExtraAdvancedFactoryBuilder<EMExtraAdvancedFactory<TILE>, TILE, ?> builder = new EMExtraAdvancedFactoryBuilder<>(new EMExtraAdvancedFactory<>(tileEntityRegistrar,
                 () -> EMExtraAdvancedFactoryContainerTypes.ADVANCED_FACTORY,
                 getBaseMachine(type),
@@ -98,13 +98,14 @@ public class EMExtraAdvancedFactory<TILE extends TileEntityEMExtraAdvancedBase<?
     private static EMExtraMachine.EMExtraFactoryMachine<?> getBaseMachine(AdvancedFactoryType type) {
         return switch (type) {
             case OXIDIZING -> EMExtraAdvancedFactoryBlockTypes.CHEMICAL_OXIDIZER;
-            case CHEMICAL_INFUSING -> EMExtraAdvancedFactoryBlockTypes.CHEMICAL_INFUSER;
             case DISSOLVING -> EMExtraAdvancedFactoryBlockTypes.CHEMICAL_DISSOLUTION_CHAMBER;
             case WASHING -> EMExtraAdvancedFactoryBlockTypes.CHEMICAL_WASHER;
             case CRYSTALLIZING -> EMExtraAdvancedFactoryBlockTypes.CHEMICAL_CRYSTALLIZER;
             case PRESSURISED_REACTING -> EMExtraAdvancedFactoryBlockTypes.PRESSURIZED_REACTION_CHAMBER;
             case CENTRIFUGING -> EMExtraAdvancedFactoryBlockTypes.ISOTOPIC_CENTRIFUGE;
             case LIQUIFYING -> EMExtraAdvancedFactoryBlockTypes.NUTRITIONAL_LIQUIFIER;
+            case PIGMENT_EXTRACTING -> EMExtraAdvancedFactoryBlockTypes.PIGMENT_EXTRACTOR;
+            case PAINTING -> EMExtraAdvancedFactoryBlockTypes.PAINTING_MACHINE;
         };
     }
 }

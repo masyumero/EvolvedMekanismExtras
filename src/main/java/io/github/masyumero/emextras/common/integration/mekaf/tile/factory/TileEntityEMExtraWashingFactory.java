@@ -1,5 +1,6 @@
 package io.github.masyumero.emextras.common.integration.mekaf.tile.factory;
 
+import io.github.masyumero.emextras.common.integration.mekaf.tile.factory.base.TileEntityEMExtraChemicalToChemicalFactory;
 import mekanism.api.IContentsListener;
 import mekanism.api.Upgrade;
 import mekanism.api.chemical.ChemicalStack;

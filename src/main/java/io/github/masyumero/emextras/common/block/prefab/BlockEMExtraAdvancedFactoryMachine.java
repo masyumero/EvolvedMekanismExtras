@@ -2,7 +2,7 @@ package io.github.masyumero.emextras.common.block.prefab;
 
 import io.github.masyumero.emextras.common.content.blocktype.EMExtraMachine;
 import io.github.masyumero.emextras.common.integration.mekaf.content.blocktype.EMExtraAdvancedFactory;
-import io.github.masyumero.emextras.common.integration.mekaf.tile.factory.TileEntityEMExtraAdvancedBase;
+import io.github.masyumero.emextras.common.integration.mekaf.tile.factory.base.TileEntityEMExtraAdvancedFactoryBase;
 import mekanism.common.block.prefab.BlockTile;
 import mekanism.common.block.states.IStateFluidLoggable;
 import mekanism.common.resource.BlockResourceInfo;
@@ -23,7 +23,7 @@ public class BlockEMExtraAdvancedFactoryMachine<TILE extends TileEntityMekanism,
         }
     }
 
-    public static class BlockEMExtraAdvancedFactory<TILE extends TileEntityEMExtraAdvancedBase<?>> extends MoreMachineBlockAdvancedFactoryMachineModel<TILE, EMExtraAdvancedFactory<TILE>> {
+    public static class BlockEMExtraAdvancedFactory<TILE extends TileEntityEMExtraAdvancedFactoryBase<?>> extends MoreMachineBlockAdvancedFactoryMachineModel<TILE, EMExtraAdvancedFactory<TILE>> {
 
         public BlockEMExtraAdvancedFactory(EMExtraAdvancedFactory<TILE> factoryType) {
             super(factoryType, properties -> properties.mapColor(BlockResourceInfo.STEEL.getMapColor()));

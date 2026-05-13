@@ -2,6 +2,7 @@ package io.github.masyumero.emextras.common.integration.mekaf.tile.factory;
 
 import io.github.masyumero.emextras.common.integration.mekaf.inventory.slot.EMExtraAdvancedFactoryInputInventorySlot;
 import io.github.masyumero.emextras.common.integration.mekaf.inventory.slot.EMExtraAdvancedFactoryOutputInventorySlot;
+import io.github.masyumero.emextras.common.integration.mekaf.tile.factory.base.TileEntityEMExtraAdvancedFactoryBase;
 
 import mekanism.api.Action;
 import mekanism.api.IContentsListener;
@@ -30,6 +31,8 @@ import mekanism.common.capabilities.holder.chemical.ChemicalTankHelper;
 import mekanism.common.capabilities.holder.fluid.FluidTankHelper;
 import mekanism.common.capabilities.holder.fluid.IFluidTankHolder;
 import mekanism.common.capabilities.holder.slot.InventorySlotHelper;
+import mekanism.common.integration.computer.ComputerException;
+import mekanism.common.integration.computer.annotation.ComputerMethod;
 import mekanism.common.inventory.warning.WarningTracker.WarningType;
 import mekanism.common.lib.transmitter.TransmissionType;
 import mekanism.common.recipe.IMekanismRecipeTypeProvider;
@@ -67,7 +70,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.ToIntBiFunction;
 
-public class TileEntityEMExtraPRCFactory extends TileEntityEMExtraAdvancedBase<PressurizedReactionRecipe> implements IHasDumpButton,
+public class TileEntityEMExtraPRCFactory extends TileEntityEMExtraAdvancedFactoryBase<PressurizedReactionRecipe> implements IHasDumpButton,
         ItemFluidChemicalRecipeLookupHandler<PressurizedReactionRecipe> {
 
     public static final RecipeError NOT_ENOUGH_ITEM_INPUT_ERROR = RecipeError.create();
@@ -171,6 +174,11 @@ public class TileEntityEMExtraPRCFactory extends TileEntityEMExtraAdvancedBase<P
             reactionOutputHandlers[i] = OutputHelper.getOutputHandler(outputSlot, NOT_ENOUGH_SPACE_ITEM_OUTPUT_ERROR, outputChemicalTank, NOT_ENOUGH_SPACE_GAS_OUTPUT_ERROR);
             processInfoSlots[i] = new PRCProcessInfo(i, inputSlot, outputSlot);
         }
+    }
+
+    @Override
+    public int getBarCount() {
+        return 2;
     }
 
     @Override
@@ -344,6 +352,20 @@ public class TileEntityEMExtraPRCFactory extends TileEntityEMExtraAdvancedBase<P
         inputChemicalTank.setEmpty();
     }
 
+    // Methods relating to IComputerTile
+    @ComputerMethod
+    ItemStack getInput(int process) throws ComputerException {
+        validateValidProcess(process);
+        return processInfoSlots[process].inputSlot().getStack();
+    }
+
+    @ComputerMethod
+    ItemStack getOutput(int process) throws ComputerException {
+        validateValidProcess(process);
+        return processInfoSlots[process].outputSlot().getStack();
+    }
+    // End methods IComputerTile
+
     @Override
     protected void sortInventoryOrTank() {
         Map<ItemStack, PRCRecipeProcessInfo> processes = ItemStackMap.createTypeAndTagMap();
@@ -388,7 +410,7 @@ public class TileEntityEMExtraPRCFactory extends TileEntityEMExtraAdvancedBase<P
                     // until it is needed. That way if we have no empty slots and all our input slots are filled
                     // we don't do any extra processing here, and can properly short circuit
                     ItemStack item = (ItemStack) info.item;
-                    ItemStack largerInput = item.copyWithCount(Math.min(item.getMaxStackSize(), info.totalCount));
+                    ItemStack largerInput = item.copyWithCount(Math.min(item.getMaxStackSize() * 8 << tier.ordinal(), info.totalCount));
                     PRCProcessInfo processInfo = info.processes.getFirst();
                     // Try getting a recipe for our input with a larger size, and update the cache if we find one
                     info.recipe = factory.getRecipeForInput(processInfo.process(), largerInput, processInfo.outputSlot(), outputChemicalTank, true);
@@ -463,12 +485,7 @@ public class TileEntityEMExtraPRCFactory extends TileEntityEMExtraAdvancedBase<P
             ItemStack item = entry.getKey();
             // Note: This isn't based on any limits the slot may have (but we currently don't have any reduced ones
             // here, so it doesn't matter)
-            int maxStackSize = switch (tier) {
-                case ABSOLUTE_OVERCLOCKED -> item.getMaxStackSize() * 8;
-                case SUPREME_QUANTUM -> item.getMaxStackSize() * 16;
-                case COSMIC_DENSE -> item.getMaxStackSize() * 32;
-                case INFINITE_MULTIVERSAL -> item.getMaxStackSize() * 64;
-            };
+            int maxStackSize = item.getMaxStackSize() * 8 << tier.ordinal();
             int numberPerSlot = recipeProcessInfo.totalCount / processCount;
             if (numberPerSlot == maxStackSize) {
                 // If all the slots are already maxed out; short-circuit, no balancing is needed
