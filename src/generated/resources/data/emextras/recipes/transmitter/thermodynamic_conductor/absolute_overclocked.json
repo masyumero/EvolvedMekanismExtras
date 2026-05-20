@@ -1,0 +1,23 @@
+{
+  "type": "evolvedmekanism:alloying",
+  "extraInput": {
+    "ingredient": {
+      "tag": "forge:alloys/absolute"
+    }
+  },
+  "mainInput": {
+    "amount": 8,
+    "ingredient": {
+      "item": "mekanism:ultimate_thermodynamic_conductor"
+    }
+  },
+  "output": {
+    "count": 8,
+    "item": "emextras:absolute_overclocked_thermodynamic_conductor"
+  },
+  "secondExtraInput": {
+    "ingredient": {
+      "tag": "forge:alloys/overclocked"
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "parent": "mekanism:block/transmitter/small/small",
+  "textures": {
+    "center_down": "emextras:block/models/multipart/infinite_multiversal_thermodynamic_conductor",
+    "center_opaque": "emextras:block/models/multipart/infinite_multiversal_thermodynamic_conductor",
+    "side": "emextras:block/models/multipart/infinite_multiversal_thermodynamic_conductor_vertical",
+    "side_opaque": "emextras:block/models/multipart/opaque/infinite_multiversal_thermodynamic_conductor_vertical"
+  }
+}

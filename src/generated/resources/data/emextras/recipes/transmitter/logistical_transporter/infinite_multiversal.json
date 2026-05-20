@@ -1,0 +1,23 @@
+{
+  "type": "evolvedmekanism:alloying",
+  "extraInput": {
+    "ingredient": {
+      "tag": "forge:alloys/infinite"
+    }
+  },
+  "mainInput": {
+    "amount": 8,
+    "ingredient": {
+      "item": "emextras:cosmic_dense_logistical_transporter"
+    }
+  },
+  "output": {
+    "count": 8,
+    "item": "emextras:infinite_multiversal_logistical_transporter"
+  },
+  "secondExtraInput": {
+    "ingredient": {
+      "tag": "forge:alloys/multiversal"
+    }
+  }
+}

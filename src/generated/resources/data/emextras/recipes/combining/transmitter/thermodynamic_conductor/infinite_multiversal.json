@@ -1,0 +1,19 @@
+{
+  "type": "mekanism:combining",
+  "extraInput": {
+    "amount": 4,
+    "ingredient": {
+      "item": "evolvedmekanism:multiversal_thermodynamic_conductor"
+    }
+  },
+  "mainInput": {
+    "amount": 4,
+    "ingredient": {
+      "item": "mekanism_extras:infinite_thermodynamic_conductor"
+    }
+  },
+  "output": {
+    "count": 8,
+    "item": "emextras:infinite_multiversal_thermodynamic_conductor"
+  }
+}

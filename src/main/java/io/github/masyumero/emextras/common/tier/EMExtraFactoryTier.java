@@ -3,7 +3,7 @@ package io.github.masyumero.emextras.common.tier;
 import io.github.masyumero.emextras.api.tier.EMExtraTier;
 import io.github.masyumero.emextras.api.tier.IEMExtraTier;
 
-public enum EMExtraFactoryTier implements IEMExtraTier{
+public enum EMExtraFactoryTier implements IEMExtraTier {
     ABSOLUTE_OVERCLOCKED(EMExtraTier.ABSOLUTE_OVERCLOCKED, 12, 91, 53),
     SUPREME_QUANTUM(EMExtraTier.SUPREME_QUANTUM, 14, 129, 72),
     COSMIC_DENSE(EMExtraTier.COSMIC_DENSE, 16, 167, 91),

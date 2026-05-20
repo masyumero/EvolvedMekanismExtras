@@ -1,0 +1,23 @@
+{
+  "type": "evolvedmekanism:alloying",
+  "extraInput": {
+    "ingredient": {
+      "tag": "forge:alloys/infinite"
+    }
+  },
+  "mainInput": {
+    "amount": 8,
+    "ingredient": {
+      "item": "emextras:cosmic_dense_thermodynamic_conductor"
+    }
+  },
+  "output": {
+    "count": 8,
+    "item": "emextras:infinite_multiversal_thermodynamic_conductor"
+  },
+  "secondExtraInput": {
+    "ingredient": {
+      "tag": "forge:alloys/multiversal"
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "type": "mekanism:combining",
+  "extraInput": {
+    "amount": 4,
+    "ingredient": {
+      "item": "evolvedmekanism:dense_pressurized_tube"
+    }
+  },
+  "mainInput": {
+    "amount": 4,
+    "ingredient": {
+      "item": "mekanism_extras:cosmic_pressurized_tube"
+    }
+  },
+  "output": {
+    "count": 8,
+    "item": "emextras:cosmic_dense_pressurized_tube"
+  }
+}

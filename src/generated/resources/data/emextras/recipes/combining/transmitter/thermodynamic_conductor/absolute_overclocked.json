@@ -1,0 +1,19 @@
+{
+  "type": "mekanism:combining",
+  "extraInput": {
+    "amount": 4,
+    "ingredient": {
+      "item": "evolvedmekanism:overclocked_thermodynamic_conductor"
+    }
+  },
+  "mainInput": {
+    "amount": 4,
+    "ingredient": {
+      "item": "mekanism_extras:absolute_thermodynamic_conductor"
+    }
+  },
+  "output": {
+    "count": 8,
+    "item": "emextras:absolute_overclocked_thermodynamic_conductor"
+  }
+}

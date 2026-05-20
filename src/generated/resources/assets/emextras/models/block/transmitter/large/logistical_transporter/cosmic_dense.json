@@ -1,0 +1,9 @@
+{
+  "parent": "mekanism:block/transmitter/large/logistical_transporter/transporter",
+  "textures": {
+    "center_down": "emextras:block/models/multipart/cosmic_dense_logistical_transporter",
+    "center_opaque": "emextras:block/models/multipart/opaque/cosmic_dense_logistical_transporter",
+    "side": "emextras:block/models/multipart/cosmic_dense_logistical_transporter_vertical",
+    "side_opaque": "emextras:block/models/multipart/opaque/cosmic_dense_logistical_transporter_vertical"
+  }
+}

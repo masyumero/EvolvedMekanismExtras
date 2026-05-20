@@ -1,0 +1,9 @@
+{
+  "parent": "mekanism:block/transmitter/small/small",
+  "textures": {
+    "center_down": "emextras:block/models/multipart/supreme_quantum_thermodynamic_conductor",
+    "center_opaque": "emextras:block/models/multipart/supreme_quantum_thermodynamic_conductor",
+    "side": "emextras:block/models/multipart/supreme_quantum_thermodynamic_conductor_vertical",
+    "side_opaque": "emextras:block/models/multipart/opaque/supreme_quantum_thermodynamic_conductor_vertical"
+  }
+}

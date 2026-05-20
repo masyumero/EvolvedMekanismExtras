@@ -1,0 +1,19 @@
+{
+  "type": "mekanism:combining",
+  "extraInput": {
+    "amount": 4,
+    "ingredient": {
+      "item": "evolvedmekanism:dense_universal_cable"
+    }
+  },
+  "mainInput": {
+    "amount": 4,
+    "ingredient": {
+      "item": "mekanism_extras:cosmic_universal_cable"
+    }
+  },
+  "output": {
+    "count": 8,
+    "item": "emextras:cosmic_dense_universal_cable"
+  }
+}

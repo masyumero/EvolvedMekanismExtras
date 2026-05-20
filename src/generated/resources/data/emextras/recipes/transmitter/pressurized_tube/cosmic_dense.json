@@ -1,0 +1,23 @@
+{
+  "type": "evolvedmekanism:alloying",
+  "extraInput": {
+    "ingredient": {
+      "tag": "forge:alloys/cosmic"
+    }
+  },
+  "mainInput": {
+    "amount": 8,
+    "ingredient": {
+      "item": "emextras:supreme_quantum_pressurized_tube"
+    }
+  },
+  "output": {
+    "count": 8,
+    "item": "emextras:cosmic_dense_pressurized_tube"
+  },
+  "secondExtraInput": {
+    "ingredient": {
+      "tag": "forge:alloys/dense"
+    }
+  }
+}

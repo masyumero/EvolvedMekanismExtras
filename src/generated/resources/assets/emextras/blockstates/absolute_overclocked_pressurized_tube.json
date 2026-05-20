@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "fluid_logged=empty": {
+      "model": "emextras:block/transmitter/small/pressurized_tube/absolute_overclocked"
+    },
+    "fluid_logged=lava": {
+      "model": "emextras:block/transmitter/small/pressurized_tube/absolute_overclocked"
+    },
+    "fluid_logged=water": {
+      "model": "emextras:block/transmitter/small/pressurized_tube/absolute_overclocked"
+    }
+  }
+}

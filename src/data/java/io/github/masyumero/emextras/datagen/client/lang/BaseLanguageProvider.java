@@ -14,18 +14,13 @@ import mekanism.common.block.attribute.AttributeGui;
 import mekanism.common.registration.impl.FluidRegistryObject;
 import mekanism.common.util.RegistryUtils;
 import net.minecraft.Util;
-import net.minecraft.data.CachedOutput;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.data.LanguageProvider;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.List;
-import java.util.concurrent.CompletableFuture;
-
 public abstract class BaseLanguageProvider extends LanguageProvider {
 
-    private final ConvertibleLanguageProvider[] altProviders;
     protected final String modName;
     protected final String basicModName;
     private final String modid;
@@ -43,11 +38,6 @@ public abstract class BaseLanguageProvider extends LanguageProvider {
         this.modid = modid;
         this.modName = modName;
         this.basicModName = modName.replaceAll(":", "");
-        altProviders = new ConvertibleLanguageProvider[]{
-                new UpsideDownLanguageProvider(output, modid),
-                new NonAmericanLanguageProvider(output, modid, "en_au"),
-                new NonAmericanLanguageProvider(output, modid, "en_gb")
-        };
     }
 
     @NotNull
@@ -109,26 +99,5 @@ public abstract class BaseLanguageProvider extends LanguageProvider {
             throw new IllegalArgumentException("Values containing substitutions should use explicit numbered indices: " + key + " - " + value);
         }
         super.add(key, value);
-        if (altProviders.length > 0) {
-            List<FormatSplitter.Component> splitEnglish = FormatSplitter.split(value);
-            for (ConvertibleLanguageProvider provider : altProviders) {
-                provider.convert(key, splitEnglish);
-            }
-        }
-    }
-
-    @NotNull
-    @Override
-    public CompletableFuture<?> run(@NotNull CachedOutput cache) {
-        CompletableFuture<?> future = super.run(cache);
-        if (altProviders.length > 0) {
-            CompletableFuture<?>[] futures = new CompletableFuture[altProviders.length + 1];
-            futures[0] = future;
-            for (int i = 0; i < altProviders.length; i++) {
-                futures[i + 1] = altProviders[i].run(cache);
-            }
-            return CompletableFuture.allOf(futures);
-        }
-        return future;
     }
 }

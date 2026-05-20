@@ -1,7 +1,7 @@
 package io.github.masyumero.emextras.common.util;
 
 import io.github.masyumero.emextras.common.content.blocktype.EMExtraFactoryType;
-import io.github.masyumero.emextras.common.tier.EMExtraFactoryTier;
+import io.github.masyumero.emextras.common.tier.*;
 
 public class EMExtraEnumUtils {
 

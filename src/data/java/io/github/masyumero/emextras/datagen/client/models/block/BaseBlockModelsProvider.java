@@ -13,6 +13,8 @@ import io.github.masyumero.emextras.common.content.blocktype.EMExtraFactoryType;
 import io.github.masyumero.emextras.common.tier.EMExtraFactoryTier;
 import io.github.masyumero.emextras.common.tier.EMExtraICTier;
 import io.github.masyumero.emextras.common.tier.EMExtraIPTier;
+import io.github.masyumero.emextras.common.util.EMExtraTransporterUtils;
+import mekanism.api.tier.ITier;
 import mekanism.common.Mekanism;
 import mekanism.common.block.attribute.Attribute;
 import mekanism.common.block.states.BlockStateHelper;
@@ -21,10 +23,7 @@ import mekanism.common.registration.impl.BlockRegistryObject;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraftforge.client.model.generators.BlockStateProvider;
-import net.minecraftforge.client.model.generators.ConfiguredModel;
-import net.minecraftforge.client.model.generators.ModelFile;
-import net.minecraftforge.client.model.generators.VariantBlockStateBuilder;
+import net.minecraftforge.client.model.generators.*;
 import net.minecraftforge.client.model.generators.loaders.CompositeModelBuilder;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
@@ -32,6 +31,23 @@ public abstract class BaseBlockModelsProvider extends BlockStateProvider {
 
     public BaseBlockModelsProvider(PackOutput output, String modid, ExistingFileHelper exFileHelper) {
         super(output, modid, exFileHelper);
+    }
+
+    protected void transmitters(BlockRegistryObject<?, ?> transmitter, String type, ITier tier, ResourceLocation parent, boolean isSmall) {
+        ConfiguredModel.Builder<?> builder = ConfiguredModel.builder();
+        EMExtraTier emExtraTier = EMExtraTransporterUtils.baseToEMExtraTier(tier.getBaseTier());
+        ResourceLocation path = EMExtras.rl("block/transmitter/" + (isSmall ? "small/" : "large/") + type + "/" + emExtraTier.getLowerName());
+        String name = transmitter.getName();
+
+        simpleBlockItem(transmitter.getBlock(),
+                models().withExistingParent(path.getPath(), parent)
+                .texture("side", EMExtras.rl("block/models/multipart/" + name + "_vertical"))
+                .texture("center_down", EMExtras.rl("block/models/multipart/" + name))
+                .texture("side_opaque",  EMExtras.rl("block/models/multipart/opaque/" + name + "_vertical"))
+                .texture("center_opaque", EMExtras.rl("block/models/multipart/" + (isSmall ? "" : "opaque/") + name)));
+
+        getVariantBuilder(transmitter.getBlock())
+                .forAllStatesExcept(state -> builder.modelFile(models().getExistingFile(path)).build());
     }
 
     protected void inductionCellAndProvider(BlockRegistryObject<?, ?> cellBlockRO, BlockRegistryObject<?, ?> providerBlockRO) {

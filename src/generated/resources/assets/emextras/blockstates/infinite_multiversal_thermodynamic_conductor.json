@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "fluid_logged=empty": {
+      "model": "emextras:block/transmitter/small/thermodynamic_conductor/infinite_multiversal"
+    },
+    "fluid_logged=lava": {
+      "model": "emextras:block/transmitter/small/thermodynamic_conductor/infinite_multiversal"
+    },
+    "fluid_logged=water": {
+      "model": "emextras:block/transmitter/small/thermodynamic_conductor/infinite_multiversal"
+    }
+  }
+}

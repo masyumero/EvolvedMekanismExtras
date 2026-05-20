@@ -1,0 +1,19 @@
+{
+  "type": "mekanism:combining",
+  "extraInput": {
+    "amount": 4,
+    "ingredient": {
+      "item": "evolvedmekanism:multiversal_universal_cable"
+    }
+  },
+  "mainInput": {
+    "amount": 4,
+    "ingredient": {
+      "item": "mekanism_extras:infinite_universal_cable"
+    }
+  },
+  "output": {
+    "count": 8,
+    "item": "emextras:infinite_multiversal_universal_cable"
+  }
+}

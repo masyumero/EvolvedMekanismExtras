@@ -7,6 +7,7 @@ public class LoadConfig {
     private LoadConfig() {
     }
 
+    public static final EMExtraConfig emExtraConfig = new EMExtraConfig();
     public static final EMExtraUsageConfig emExtraUsageConfig = new EMExtraUsageConfig();
     public static final EMExtraStorageConfig emExtraStorageConfig = new EMExtraStorageConfig();
     public static final EMExtraTankCapacityConfig emExtraTankCapacityConfig = new EMExtraTankCapacityConfig();
@@ -14,6 +15,7 @@ public class LoadConfig {
     @SuppressWarnings("removal")
     public static void registerConfig(ModLoadingContext modLoadingContext) {
         ModContainer modContainer = modLoadingContext.getActiveContainer();
+        EMExtraConfigHelper.registerConfig(modContainer, emExtraConfig);
         EMExtraConfigHelper.registerConfig(modContainer, emExtraUsageConfig);
         EMExtraConfigHelper.registerConfig(modContainer, emExtraStorageConfig);
         EMExtraConfigHelper.registerConfig(modContainer, emExtraTankCapacityConfig);

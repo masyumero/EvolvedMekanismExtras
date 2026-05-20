@@ -1,0 +1,9 @@
+{
+  "parent": "mekanism:block/transmitter/large/large",
+  "textures": {
+    "center_down": "emextras:block/models/multipart/cosmic_dense_mechanical_pipe",
+    "center_opaque": "emextras:block/models/multipart/opaque/cosmic_dense_mechanical_pipe",
+    "side": "emextras:block/models/multipart/cosmic_dense_mechanical_pipe_vertical",
+    "side_opaque": "emextras:block/models/multipart/opaque/cosmic_dense_mechanical_pipe_vertical"
+  }
+}

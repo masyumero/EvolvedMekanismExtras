@@ -1,0 +1,19 @@
+{
+  "type": "mekanism:combining",
+  "extraInput": {
+    "amount": 4,
+    "ingredient": {
+      "item": "evolvedmekanism:dense_thermodynamic_conductor"
+    }
+  },
+  "mainInput": {
+    "amount": 4,
+    "ingredient": {
+      "item": "mekanism_extras:cosmic_thermodynamic_conductor"
+    }
+  },
+  "output": {
+    "count": 8,
+    "item": "emextras:cosmic_dense_thermodynamic_conductor"
+  }
+}

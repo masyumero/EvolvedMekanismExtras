@@ -1,0 +1,9 @@
+{
+  "parent": "mekanism:block/transmitter/small/small",
+  "textures": {
+    "center_down": "emextras:block/models/multipart/absolute_overclocked_pressurized_tube",
+    "center_opaque": "emextras:block/models/multipart/absolute_overclocked_pressurized_tube",
+    "side": "emextras:block/models/multipart/absolute_overclocked_pressurized_tube_vertical",
+    "side_opaque": "emextras:block/models/multipart/opaque/absolute_overclocked_pressurized_tube_vertical"
+  }
+}

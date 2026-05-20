@@ -1,0 +1,19 @@
+{
+  "type": "mekanism:combining",
+  "extraInput": {
+    "amount": 4,
+    "ingredient": {
+      "item": "evolvedmekanism:overclocked_logistical_transporter"
+    }
+  },
+  "mainInput": {
+    "amount": 4,
+    "ingredient": {
+      "item": "mekanism_extras:absolute_logistical_transporter"
+    }
+  },
+  "output": {
+    "count": 8,
+    "item": "emextras:absolute_overclocked_logistical_transporter"
+  }
+}

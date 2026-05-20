@@ -1,0 +1,19 @@
+{
+  "type": "mekanism:combining",
+  "extraInput": {
+    "amount": 4,
+    "ingredient": {
+      "item": "evolvedmekanism:quantum_logistical_transporter"
+    }
+  },
+  "mainInput": {
+    "amount": 4,
+    "ingredient": {
+      "item": "mekanism_extras:supreme_logistical_transporter"
+    }
+  },
+  "output": {
+    "count": 8,
+    "item": "emextras:supreme_quantum_logistical_transporter"
+  }
+}

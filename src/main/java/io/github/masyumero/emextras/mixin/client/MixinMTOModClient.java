@@ -10,7 +10,9 @@ import com.llamalad7.mixinextras.sugar.Share;
 import com.llamalad7.mixinextras.sugar.ref.LocalRef;
 import io.github.masyumero.emextras.api.tier.EMExtraTier;
 import io.github.masyumero.emextras.common.block.attribute.EMExtraAttribute;
+import io.github.masyumero.emextras.common.block.transmitter.*;
 import io.github.masyumero.emextras.common.util.EMExtraColorUtils;
+import io.github.masyumero.emextras.common.util.EMExtraTransporterUtils;
 import irislgtm.mto.MTOModClient;
 import mekanism.api.tier.BaseTier;
 import net.minecraft.world.level.block.state.BlockState;
@@ -33,10 +35,15 @@ public class MixinMTOModClient {
     @Definition(id = "tier", local = @Local(type = BaseTier.class, name = "tier"))
     @Expression("tier.getRgbCode()")
     @WrapOperation(method = "onBlockHighlight", at = @At(value = "MIXINEXTRAS:EXPRESSION"))
-    private int[] onBlockHighlightWrapOperation(BaseTier instance, Operation<int[]> original, @Share("emExtraTier") LocalRef<EMExtraTier> emExtraTierRef) {
+    private int[] onBlockHighlightWrapOperation(BaseTier instance, Operation<int[]> original, @Local(name = "state") BlockState state, @Local(name = "tier") BaseTier tier, @Share("emExtraTier") LocalRef<EMExtraTier> emExtraTierRef) {
         EMExtraTier emExtraTier = emExtraTierRef.get();
         if (emExtraTier != null) {
             return EMExtraColorUtils.getRGBColor(emExtraTier.getRgbSupplier().getAsInt());
+        }
+        if (tier != null) {
+            if (state.getBlock().getClass().getPackageName().equals("io.github.masyumero.emextras.common.block.transmitter")) {
+                return EMExtraColorUtils.getRGBColor(EMExtraTransporterUtils.baseToEMExtraTier(tier).getRgbSupplier().getAsInt());
+            }
         }
         return original.call(instance);
     }

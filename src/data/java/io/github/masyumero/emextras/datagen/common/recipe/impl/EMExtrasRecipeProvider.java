@@ -56,7 +56,8 @@ public class EMExtrasRecipeProvider extends BaseRecipeProvider {
     @Override
     protected List<ISubRecipeProvider> getSubRecipeProviders() {
         return List.of(
-                new AlloyingRecipeProvider()
+                new AlloyingRecipeProvider(),
+                new CombinerRecipeProvider()
         );
     }
 

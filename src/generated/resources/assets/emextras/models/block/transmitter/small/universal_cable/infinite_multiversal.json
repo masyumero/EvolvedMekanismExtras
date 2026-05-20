@@ -1,0 +1,9 @@
+{
+  "parent": "mekanism:block/transmitter/small/small",
+  "textures": {
+    "center_down": "emextras:block/models/multipart/infinite_multiversal_universal_cable",
+    "center_opaque": "emextras:block/models/multipart/infinite_multiversal_universal_cable",
+    "side": "emextras:block/models/multipart/infinite_multiversal_universal_cable_vertical",
+    "side_opaque": "emextras:block/models/multipart/opaque/infinite_multiversal_universal_cable_vertical"
+  }
+}

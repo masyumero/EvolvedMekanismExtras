@@ -1,0 +1,9 @@
+{
+  "parent": "mekanism:block/transmitter/large/logistical_transporter/transporter",
+  "textures": {
+    "center_down": "emextras:block/models/multipart/infinite_multiversal_logistical_transporter",
+    "center_opaque": "emextras:block/models/multipart/opaque/infinite_multiversal_logistical_transporter",
+    "side": "emextras:block/models/multipart/infinite_multiversal_logistical_transporter_vertical",
+    "side_opaque": "emextras:block/models/multipart/opaque/infinite_multiversal_logistical_transporter_vertical"
+  }
+}

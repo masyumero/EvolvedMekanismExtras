@@ -1,0 +1,19 @@
+{
+  "type": "mekanism:combining",
+  "extraInput": {
+    "amount": 4,
+    "ingredient": {
+      "item": "evolvedmekanism:dense_logistical_transporter"
+    }
+  },
+  "mainInput": {
+    "amount": 4,
+    "ingredient": {
+      "item": "mekanism_extras:cosmic_logistical_transporter"
+    }
+  },
+  "output": {
+    "count": 8,
+    "item": "emextras:cosmic_dense_logistical_transporter"
+  }
+}

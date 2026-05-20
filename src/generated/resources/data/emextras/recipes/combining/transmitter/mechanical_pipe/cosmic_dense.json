@@ -1,0 +1,19 @@
+{
+  "type": "mekanism:combining",
+  "extraInput": {
+    "amount": 4,
+    "ingredient": {
+      "item": "evolvedmekanism:dense_mechanical_pipe"
+    }
+  },
+  "mainInput": {
+    "amount": 4,
+    "ingredient": {
+      "item": "mekanism_extras:cosmic_mechanical_pipe"
+    }
+  },
+  "output": {
+    "count": 8,
+    "item": "emextras:cosmic_dense_mechanical_pipe"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "type": "mekanism:combining",
+  "extraInput": {
+    "amount": 4,
+    "ingredient": {
+      "item": "evolvedmekanism:quantum_universal_cable"
+    }
+  },
+  "mainInput": {
+    "amount": 4,
+    "ingredient": {
+      "item": "mekanism_extras:supreme_universal_cable"
+    }
+  },
+  "output": {
+    "count": 8,
+    "item": "emextras:supreme_quantum_universal_cable"
+  }
+}

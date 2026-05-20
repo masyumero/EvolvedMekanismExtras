@@ -1,0 +1,23 @@
+{
+  "type": "evolvedmekanism:alloying",
+  "extraInput": {
+    "ingredient": {
+      "tag": "forge:alloys/supreme"
+    }
+  },
+  "mainInput": {
+    "amount": 8,
+    "ingredient": {
+      "item": "emextras:absolute_overclocked_mechanical_pipe"
+    }
+  },
+  "output": {
+    "count": 8,
+    "item": "emextras:supreme_quantum_mechanical_pipe"
+  },
+  "secondExtraInput": {
+    "ingredient": {
+      "tag": "forge:alloys/quantum"
+    }
+  }
+}

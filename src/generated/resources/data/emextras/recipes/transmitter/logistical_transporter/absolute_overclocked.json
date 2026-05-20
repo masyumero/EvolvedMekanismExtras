@@ -1,0 +1,23 @@
+{
+  "type": "evolvedmekanism:alloying",
+  "extraInput": {
+    "ingredient": {
+      "tag": "forge:alloys/absolute"
+    }
+  },
+  "mainInput": {
+    "amount": 8,
+    "ingredient": {
+      "item": "mekanism:ultimate_logistical_transporter"
+    }
+  },
+  "output": {
+    "count": 8,
+    "item": "emextras:absolute_overclocked_logistical_transporter"
+  },
+  "secondExtraInput": {
+    "ingredient": {
+      "tag": "forge:alloys/overclocked"
+    }
+  }
+}

@@ -13,11 +13,15 @@ import io.github.masyumero.emextras.common.content.blocktype.EMExtraFactoryType;
 import io.github.masyumero.emextras.common.tile.factory.*;
 import io.github.masyumero.emextras.common.tile.multiblock.TileEntityEMExtraInductionCell;
 import io.github.masyumero.emextras.common.tile.multiblock.TileEntityEMExtraInductionProvider;
+import io.github.masyumero.emextras.common.tile.transmitter.*;
 import io.github.masyumero.emextras.common.util.EMExtraEnumUtils;
 import mekanism.common.content.blocktype.FactoryType;
+import mekanism.common.registration.impl.BlockRegistryObject;
 import mekanism.common.registration.impl.TileEntityTypeDeferredRegister;
 import mekanism.common.registration.impl.TileEntityTypeRegistryObject;
 import mekanism.common.tile.base.TileEntityMekanism;
+import mekanism.common.tile.transmitter.TileEntityTransmitter;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.eventbus.api.IEventBus;
 
 public class EMExtrasTileEntityTypes {
@@ -45,6 +49,12 @@ public class EMExtrasTileEntityTypes {
             ADVANCED_FACTORIES.put(tier, EMFactoryType.ALLOYING, EMTileEntityTypes.TILE_ENTITY_TYPES.register(EMExtrasBlock.getAdvancedFactory(tier, EMFactoryType.ALLOYING), (pos, state) -> new TileEntityAdvancedAlloyingFactory(EMExtrasBlock.getAdvancedFactory(tier, EMFactoryType.ALLOYING), pos, state), TileEntityMekanism::tickServer, TileEntityMekanism::tickClient));
         }
     }
+
+    private static <BE extends TileEntityTransmitter> TileEntityTypeRegistryObject<BE> registerTransmitter(BlockRegistryObject<?, ?> block, BlockEntityType.BlockEntitySupplier<? extends BE> factory) {
+        // Note: There is no data fixer type as forge does not currently have a way exposing data fixers to mods yet
+        return TILE_ENTITY_TYPES.<BE>builder(block, factory).serverTicker(TileEntityTransmitter::tickServer).build();
+    }
+
     // Induction Cells
     public static final TileEntityTypeRegistryObject<TileEntityEMExtraInductionCell> ABSOLUTE_OVERCLOCKED_INDUCTION_CELL = TILE_ENTITY_TYPES.register(EMExtrasBlock.ABSOLUTE_OVERCLOCKED_INDUCTION_CELL, (pos, state) -> new TileEntityEMExtraInductionCell(EMExtrasBlock.ABSOLUTE_OVERCLOCKED_INDUCTION_CELL, pos, state), TileEntityMekanism::tickServer, TileEntityMekanism::tickClient);
     public static final TileEntityTypeRegistryObject<TileEntityEMExtraInductionCell> SUPREME_QUANTUM_INDUCTION_CELL = TILE_ENTITY_TYPES.register(EMExtrasBlock.SUPREME_QUANTUM_INDUCTION_CELL, (pos, state) -> new TileEntityEMExtraInductionCell(EMExtrasBlock.SUPREME_QUANTUM_INDUCTION_CELL, pos, state), TileEntityMekanism::tickServer, TileEntityMekanism::tickClient);
@@ -55,7 +65,32 @@ public class EMExtrasTileEntityTypes {
     public static final TileEntityTypeRegistryObject<TileEntityEMExtraInductionProvider> SUPREME_QUANTUM_INDUCTION_PROVIDER = TILE_ENTITY_TYPES.register(EMExtrasBlock.SUPREME_QUANTUM_INDUCTION_PROVIDER, (pos, state) -> new TileEntityEMExtraInductionProvider(EMExtrasBlock.SUPREME_QUANTUM_INDUCTION_PROVIDER, pos, state), TileEntityMekanism::tickServer, TileEntityMekanism::tickClient);
     public static final TileEntityTypeRegistryObject<TileEntityEMExtraInductionProvider> COSMIC_DENSE_INDUCTION_PROVIDER = TILE_ENTITY_TYPES.register(EMExtrasBlock.COSMIC_DENSE_INDUCTION_PROVIDER, (pos, state) -> new TileEntityEMExtraInductionProvider(EMExtrasBlock.COSMIC_DENSE_INDUCTION_PROVIDER, pos, state), TileEntityMekanism::tickServer, TileEntityMekanism::tickClient);
     public static final TileEntityTypeRegistryObject<TileEntityEMExtraInductionProvider> INFINITE_MULTIVERSAL_INDUCTION_PROVIDER = TILE_ENTITY_TYPES.register(EMExtrasBlock.INFINITE_MULTIVERSAL_INDUCTION_PROVIDER, (pos, state) -> new TileEntityEMExtraInductionProvider(EMExtrasBlock.INFINITE_MULTIVERSAL_INDUCTION_PROVIDER, pos, state), TileEntityMekanism::tickServer, TileEntityMekanism::tickClient);
-
+    // universal cables
+    public static final TileEntityTypeRegistryObject<TileEntityEMExtraUniversalCable> ABSOLUTE_OVERCLOCKED_UNIVERSAL_CABLE = registerTransmitter(EMExtrasBlock.ABSOLUTE_OVERCLOCKED_UNIVERSAL_CABLE, (pos, state) -> new TileEntityEMExtraUniversalCable(EMExtrasBlock.ABSOLUTE_OVERCLOCKED_UNIVERSAL_CABLE, pos, state));
+    public static final TileEntityTypeRegistryObject<TileEntityEMExtraUniversalCable> SUPREME_QUANTUM_UNIVERSAL_CABLE = registerTransmitter(EMExtrasBlock.SUPREME_QUANTUM_UNIVERSAL_CABLE, (pos, state) -> new TileEntityEMExtraUniversalCable(EMExtrasBlock.SUPREME_QUANTUM_UNIVERSAL_CABLE, pos, state));
+    public static final TileEntityTypeRegistryObject<TileEntityEMExtraUniversalCable> COSMIC_DENSE_UNIVERSAL_CABLE = registerTransmitter(EMExtrasBlock.COSMIC_DENSE_UNIVERSAL_CABLE, (pos, state) -> new TileEntityEMExtraUniversalCable(EMExtrasBlock.COSMIC_DENSE_UNIVERSAL_CABLE, pos, state));
+    public static final TileEntityTypeRegistryObject<TileEntityEMExtraUniversalCable> INFINITE_MULTIVERSAL_UNIVERSAL_CABLE = registerTransmitter(EMExtrasBlock.INFINITE_MULTIVERSAL_UNIVERSAL_CABLE, (pos, state) -> new TileEntityEMExtraUniversalCable(EMExtrasBlock.INFINITE_MULTIVERSAL_UNIVERSAL_CABLE, pos, state));
+    // mechanical pipes
+    public static final TileEntityTypeRegistryObject<TileEntityEMExtraMechanicalPipe> ABSOLUTE_OVERCLOCKED_MECHANICAL_PIPE = registerTransmitter(EMExtrasBlock.ABSOLUTE_OVERCLOCKED_MECHANICAL_PIPE, (pos, state) -> new TileEntityEMExtraMechanicalPipe(EMExtrasBlock.ABSOLUTE_OVERCLOCKED_MECHANICAL_PIPE, pos, state));
+    public static final TileEntityTypeRegistryObject<TileEntityEMExtraMechanicalPipe> SUPREME_QUANTUM_MECHANICAL_PIPE = registerTransmitter(EMExtrasBlock.SUPREME_QUANTUM_MECHANICAL_PIPE, (pos, state) -> new TileEntityEMExtraMechanicalPipe(EMExtrasBlock.SUPREME_QUANTUM_MECHANICAL_PIPE, pos, state));
+    public static final TileEntityTypeRegistryObject<TileEntityEMExtraMechanicalPipe> COSMIC_DENSE_MECHANICAL_PIPE = registerTransmitter(EMExtrasBlock.COSMIC_DENSE_MECHANICAL_PIPE, (pos, state) -> new TileEntityEMExtraMechanicalPipe(EMExtrasBlock.COSMIC_DENSE_MECHANICAL_PIPE, pos, state));
+    public static final TileEntityTypeRegistryObject<TileEntityEMExtraMechanicalPipe> INFINITE_MULTIVERSAL_MECHANICAL_PIPE = registerTransmitter(EMExtrasBlock.INFINITE_MULTIVERSAL_MECHANICAL_PIPE, (pos, state) -> new TileEntityEMExtraMechanicalPipe(EMExtrasBlock.INFINITE_MULTIVERSAL_MECHANICAL_PIPE, pos, state));
+    // pressurized tubes
+    public static final TileEntityTypeRegistryObject<TileEntityEMExtraPressurizedTube> ABSOLUTE_OVERCLOCKED_PRESSURIZED_TUBE = registerTransmitter(EMExtrasBlock.ABSOLUTE_OVERCLOCKED_PRESSURIZED_TUBE, (pos, state) -> new TileEntityEMExtraPressurizedTube(EMExtrasBlock.ABSOLUTE_OVERCLOCKED_PRESSURIZED_TUBE, pos, state));
+    public static final TileEntityTypeRegistryObject<TileEntityEMExtraPressurizedTube> SUPREME_QUANTUM_PRESSURIZED_TUBE = registerTransmitter(EMExtrasBlock.SUPREME_QUANTUM_PRESSURIZED_TUBE, (pos, state) -> new TileEntityEMExtraPressurizedTube(EMExtrasBlock.SUPREME_QUANTUM_PRESSURIZED_TUBE, pos, state));
+    public static final TileEntityTypeRegistryObject<TileEntityEMExtraPressurizedTube> COSMIC_DENSE_PRESSURIZED_TUBE = registerTransmitter(EMExtrasBlock.COSMIC_DENSE_PRESSURIZED_TUBE, (pos, state) -> new TileEntityEMExtraPressurizedTube(EMExtrasBlock.COSMIC_DENSE_PRESSURIZED_TUBE, pos, state));
+    public static final TileEntityTypeRegistryObject<TileEntityEMExtraPressurizedTube> INFINITE_MULTIVERSAL_PRESSURIZED_TUBE = registerTransmitter(EMExtrasBlock.INFINITE_MULTIVERSAL_PRESSURIZED_TUBE, (pos, state) -> new TileEntityEMExtraPressurizedTube(EMExtrasBlock.INFINITE_MULTIVERSAL_PRESSURIZED_TUBE, pos, state));
+    // logistic transporters
+    public static final TileEntityTypeRegistryObject<TileEntityEMExtraLogisticalTransporter> ABSOLUTE_OVERCLOCKED_LOGISTICAL_TRANSPORTER = TILE_ENTITY_TYPES.builder(EMExtrasBlock.ABSOLUTE_OVERCLOCKED_LOGISTICAL_TRANSPORTER, (pos, state) -> new TileEntityEMExtraLogisticalTransporter(EMExtrasBlock.ABSOLUTE_OVERCLOCKED_LOGISTICAL_TRANSPORTER, pos, state)).clientTicker(TileEntityEMExtraLogisticalTransporterBase::tickClient).serverTicker(TileEntityEMExtraTransmitter::extraTickServer).build();
+    public static final TileEntityTypeRegistryObject<TileEntityEMExtraLogisticalTransporter> SUPREME_QUANTUM_LOGISTICAL_TRANSPORTER = TILE_ENTITY_TYPES.builder(EMExtrasBlock.SUPREME_QUANTUM_LOGISTICAL_TRANSPORTER, (pos, state) -> new TileEntityEMExtraLogisticalTransporter(EMExtrasBlock.SUPREME_QUANTUM_LOGISTICAL_TRANSPORTER, pos, state)).clientTicker(TileEntityEMExtraLogisticalTransporterBase::tickClient).serverTicker(TileEntityEMExtraTransmitter::extraTickServer).build();
+    public static final TileEntityTypeRegistryObject<TileEntityEMExtraLogisticalTransporter> COSMIC_DENSE_LOGISTICAL_TRANSPORTER = TILE_ENTITY_TYPES.builder(EMExtrasBlock.COSMIC_DENSE_LOGISTICAL_TRANSPORTER, (pos, state) -> new TileEntityEMExtraLogisticalTransporter(EMExtrasBlock.COSMIC_DENSE_LOGISTICAL_TRANSPORTER, pos, state)).clientTicker(TileEntityEMExtraLogisticalTransporterBase::tickClient).serverTicker(TileEntityEMExtraTransmitter::extraTickServer).build();
+    public static final TileEntityTypeRegistryObject<TileEntityEMExtraLogisticalTransporter> INFINITE_MULTIVERSAL_LOGISTICAL_TRANSPORTER = TILE_ENTITY_TYPES.builder(EMExtrasBlock.INFINITE_MULTIVERSAL_LOGISTICAL_TRANSPORTER, (pos, state) -> new TileEntityEMExtraLogisticalTransporter(EMExtrasBlock.INFINITE_MULTIVERSAL_LOGISTICAL_TRANSPORTER, pos, state)).clientTicker(TileEntityEMExtraLogisticalTransporterBase::tickClient).serverTicker(TileEntityEMExtraTransmitter::extraTickServer).build();
+    // thermodynamic conductors
+    public static final TileEntityTypeRegistryObject<TileEntityEMExtraThermodynamicConductor> ABSOLUTE_OVERCLOCKED_THERMODYNAMIC_CONDUCTOR = registerTransmitter(EMExtrasBlock.ABSOLUTE_OVERCLOCKED_THERMODYNAMIC_CONDUCTOR, (pos, state) -> new TileEntityEMExtraThermodynamicConductor(EMExtrasBlock.ABSOLUTE_OVERCLOCKED_THERMODYNAMIC_CONDUCTOR, pos, state));
+    public static final TileEntityTypeRegistryObject<TileEntityEMExtraThermodynamicConductor> SUPREME_QUANTUM_THERMODYNAMIC_CONDUCTOR = registerTransmitter(EMExtrasBlock.SUPREME_QUANTUM_THERMODYNAMIC_CONDUCTOR, (pos, state) -> new TileEntityEMExtraThermodynamicConductor(EMExtrasBlock.SUPREME_QUANTUM_THERMODYNAMIC_CONDUCTOR, pos, state));
+    public static final TileEntityTypeRegistryObject<TileEntityEMExtraThermodynamicConductor> COSMIC_DENSE_THERMODYNAMIC_CONDUCTOR = registerTransmitter(EMExtrasBlock.COSMIC_DENSE_THERMODYNAMIC_CONDUCTOR, (pos, state) -> new TileEntityEMExtraThermodynamicConductor(EMExtrasBlock.COSMIC_DENSE_THERMODYNAMIC_CONDUCTOR, pos, state));
+    public static final TileEntityTypeRegistryObject<TileEntityEMExtraThermodynamicConductor> INFINITE_MULTIVERSAL_THERMODYNAMIC_CONDUCTOR = registerTransmitter(EMExtrasBlock.INFINITE_MULTIVERSAL_THERMODYNAMIC_CONDUCTOR, (pos, state) -> new TileEntityEMExtraThermodynamicConductor(EMExtrasBlock.INFINITE_MULTIVERSAL_THERMODYNAMIC_CONDUCTOR, pos, state));
+    
     public static TileEntityTypeRegistryObject<? extends TileEntityEMExtraFactory<?>> getEMExtraFactoryTile(EMExtraFactoryTier tier, EMExtraFactoryType type) {
         return FACTORIES.get(tier, type);
     }

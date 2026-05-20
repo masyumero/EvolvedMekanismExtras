@@ -1,0 +1,19 @@
+{
+  "type": "mekanism:combining",
+  "extraInput": {
+    "amount": 4,
+    "ingredient": {
+      "item": "evolvedmekanism:multiversal_mechanical_pipe"
+    }
+  },
+  "mainInput": {
+    "amount": 4,
+    "ingredient": {
+      "item": "mekanism_extras:infinite_mechanical_pipe"
+    }
+  },
+  "output": {
+    "count": 8,
+    "item": "emextras:infinite_multiversal_mechanical_pipe"
+  }
+}

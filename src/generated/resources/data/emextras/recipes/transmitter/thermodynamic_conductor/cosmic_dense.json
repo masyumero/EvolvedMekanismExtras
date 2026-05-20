@@ -1,0 +1,23 @@
+{
+  "type": "evolvedmekanism:alloying",
+  "extraInput": {
+    "ingredient": {
+      "tag": "forge:alloys/cosmic"
+    }
+  },
+  "mainInput": {
+    "amount": 8,
+    "ingredient": {
+      "item": "emextras:supreme_quantum_thermodynamic_conductor"
+    }
+  },
+  "output": {
+    "count": 8,
+    "item": "emextras:cosmic_dense_thermodynamic_conductor"
+  },
+  "secondExtraInput": {
+    "ingredient": {
+      "tag": "forge:alloys/dense"
+    }
+  }
+}
