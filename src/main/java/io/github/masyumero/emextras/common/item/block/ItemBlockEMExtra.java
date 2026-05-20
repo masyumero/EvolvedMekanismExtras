@@ -55,7 +55,7 @@ public class ItemBlockEMExtra  <BLOCK extends Block> extends BlockItem {
 
     public TextColor getTextColor(ItemStack stack) {
         IEMExtraTier tier = getEMExtraTier();
-        return tier == null ? null : tier.getEMExtraTier().getColor();
+        return tier == null ? null : TextColor.fromRgb(tier.getEMExtraTier().getRgbSupplier().getAsInt());
     }
 
     @NotNull

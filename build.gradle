@@ -186,13 +186,13 @@ dependencies {
     dataImplementation fg.deobf("curse.maven:mekanism-extras-1026040:6936409")
     dataImplementation fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
     dataRuntimeOnly fg.deobf("curse.maven:iglee-library-541199:6987117")
-    dataAnnotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
     implementation fg.deobf("mekanism:Mekanism:${mekanism_version}")
     implementation fg.deobf("curse.maven:evolved-mekanism-1230085:7117024")
     runtimeOnly fg.deobf("curse.maven:iglee-library-541199:6987117")
     implementation fg.deobf("curse.maven:mekanism-extras-1026040:6936409")
     implementation fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
+    implementation fg.deobf("curse.maven:mekanism-tiered-outlines-mto-1547011:8109335")
     // If you want to test/use Mekanism & its modules during `runClient` invocation, use the following
     runtimeOnly fg.deobf("mekanism:Mekanism:${mekanism_version}:additions")// Mekanism: Additions
     runtimeOnly fg.deobf("mekanism:Mekanism:${mekanism_version}:generators")// Mekanism: Generators
@@ -208,7 +208,10 @@ dependencies {
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
 
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
-
+    compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.5.4"))
+    implementation(jarJar("io.github.llamalad7:mixinextras-forge:0.5.4")) {
+        jarJar.ranged(it, "[0.5.4,)")
+    }
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.

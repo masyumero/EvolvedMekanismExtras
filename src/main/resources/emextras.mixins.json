@@ -18,9 +18,13 @@
     "matrix.MixinTargetMatrixValidator$MixinMatrixValidatorPostcheck"
   ],
   "client": [
-    "client.MixinGuiAdvancedFactory"
+    "client.MixinGuiAdvancedFactory",
+    "client.MixinMTOModClient"
   ],
   "injectors": {
     "defaultRequire": 1
+  },
+  "mixinextras": {
+    "minVersion": "0.5.4"
   }
 }
