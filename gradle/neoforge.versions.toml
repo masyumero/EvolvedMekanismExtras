@@ -4,19 +4,21 @@ evolvedMekanism = "7599592" # 1.2.1-fix3
 igreeLib = "7000755" # 1.2.7
 mekanismExtras = "7921191" # 1.4.0
 mekanismMoreMachine = "7919872" # 1.3.3
+mekanismTieredOutline = "8109327" # 0.1.0
 jei = "19.27.0.340"
 emi = "1.1.22+1.21.1"
 
 [libraries]
-mekanism            = { module = "mekanism:Mekanism", version.ref = "mekanism"}
-evolvedMekanism     = { module = "curse.maven:evolved-mekanism-1230085", version.ref = "evolvedMekanism"}
-igreeLib            = { module = "curse.maven:iglee-library-541199", version.ref = "igreeLib"}
-mekanismExtras      = { module = "curse.maven:mekanism-extras-1026040", version.ref = "mekanismExtras"}
-mekanismMoreMachine = { module = "curse.maven:mekanism-more-machine-1275257", version.ref = "mekanismMoreMachine"}
-jei-common-api      = { module = "mezz.jei:jei-1.21.1-common-api", version.ref = "jei" }
-jei-neoforge-api    = { module = "mezz.jei:jei-1.21.1-neoforge-api", version.ref = "jei" }
-jei-neoforge-impl   = { module = "mezz.jei:jei-1.21.1-neoforge", version.ref = "jei" }
-emi                 = { module = "dev.emi:emi-neoforge", version.ref = "emi" }
+mekanism                = { module = "mekanism:Mekanism", version.ref = "mekanism"}
+evolvedMekanism         = { module = "curse.maven:evolved-mekanism-1230085", version.ref = "evolvedMekanism"}
+igreeLib                = { module = "curse.maven:iglee-library-541199", version.ref = "igreeLib"}
+mekanismExtras          = { module = "curse.maven:mekanism-extras-1026040", version.ref = "mekanismExtras"}
+mekanismMoreMachine     = { module = "curse.maven:mekanism-more-machine-1275257", version.ref = "mekanismMoreMachine"}
+mekanismTieredOutline   = { module = "curse.maven:mekanism-tiered-outlines-mto-1547011", version.ref = "mekanismTieredOutline"}
+jei-common-api          = { module = "mezz.jei:jei-1.21.1-common-api", version.ref = "jei" }
+jei-neoforge-api        = { module = "mezz.jei:jei-1.21.1-neoforge-api", version.ref = "jei" }
+jei-neoforge-impl       = { module = "mezz.jei:jei-1.21.1-neoforge", version.ref = "jei" }
+emi                     = { module = "dev.emi:emi-neoforge", version.ref = "emi" }
 
 [bundles]
 jei = ["jei-common-api", "jei-neoforge-api", "jei-neoforge-impl"]

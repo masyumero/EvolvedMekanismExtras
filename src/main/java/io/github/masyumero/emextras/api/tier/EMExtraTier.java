@@ -1,5 +1,6 @@
 package io.github.masyumero.emextras.api.tier;
 
+import io.github.masyumero.emextras.common.util.EMExtraColorUtils;
 import lombok.Getter;
 import mekanism.api.SupportsColorMap;
 import mekanism.api.math.MathUtils;
@@ -10,26 +11,30 @@ import net.minecraft.world.level.material.MapColor;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Locale;
+import java.util.function.IntSupplier;
 
 public enum EMExtraTier implements StringRepresentable, SupportsColorMap {
-    ABSOLUTE_OVERCLOCKED("Absolute_Overclocked", new int[]{95, 255, 184}, MapColor.COLOR_LIGHT_GREEN),
-    SUPREME_QUANTUM("Supreme_Quantum", new int[]{255, 128, 106}, MapColor.TERRACOTTA_PINK),
-    COSMIC_DENSE("Cosmic_Dense", new int[]{75, 248, 255}, MapColor.DIAMOND),
-    INFINITE_MULTIVERSAL("Infinite_Multiversal", new int[]{247, 135, 255}, MapColor.COLOR_MAGENTA);
+    ABSOLUTE_OVERCLOCKED("Absolute_Overclocked", EMExtraTierColorMap.absoluteOverclockedColor, MapColor.COLOR_LIGHT_GREEN),
+    SUPREME_QUANTUM("Supreme_Quantum", EMExtraTierColorMap.supremeQuantumColor, MapColor.TERRACOTTA_PINK),
+    COSMIC_DENSE("Cosmic_Dense", EMExtraTierColorMap.cosmicDenseColor, MapColor.DIAMOND),
+    INFINITE_MULTIVERSAL("Infinite_Multiversal", EMExtraTierColorMap.infiniteMultiversalColor, MapColor.COLOR_MAGENTA);
 
     private static final EMExtraTier[] TIERS = values();
 
     private final String name;
     @Getter
     private final MapColor mapColor;
+    @Getter
+    private final IntSupplier rgbSupplier;
     private TextColor textColor;
     private int argb;
     private int[] rgbCode;
 
-    EMExtraTier(String name, int[] rgbCode, MapColor mapColor) {
+    EMExtraTier(String name, IntSupplier rgbCode, MapColor mapColor) {
         this.name = name;
         this.mapColor = mapColor;
-        setColorFromAtlas(rgbCode);
+        this.rgbSupplier = rgbCode;
+        setColorFromAtlas(EMExtraColorUtils.getRGBColor(rgbCode.getAsInt()));
     }
 
     public String getSimpleName() {

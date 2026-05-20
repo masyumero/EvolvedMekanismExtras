@@ -1,8 +1,8 @@
 [versions]
 minecraft = "1.21.1"
-neoForge = "21.1.217"
+neoForge = "21.1.230"
 parchment = "2024.11.17"
-neoversion = "21.1.219"
+neoversion = "21.1.230"
 modDevGradle = "2.0.118"
 lombok = "8.13.1"
 jetbrains-annotations = "26.0.1"

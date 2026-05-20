@@ -20,6 +20,9 @@
     "invoker.InvokerExtraFactory",
     "invoker.InvokerExtraFactoryBuilder"
   ],
+  "client": [
+    "client.MixinMTOModClient"
+  ],
   "injectors": {
     "defaultRequire": 1
   }

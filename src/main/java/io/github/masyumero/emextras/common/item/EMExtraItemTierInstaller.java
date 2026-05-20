@@ -22,6 +22,7 @@ import mekanism.common.util.WorldUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextColor;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -55,7 +56,8 @@ public class EMExtraItemTierInstaller extends Item {
     @NotNull
     @Override
     public Component getName(@NotNull ItemStack stack) {
-        return TextComponentUtil.build(toTier.getColor(), super.getName(stack));
+        TextColor color = TextColor.fromRgb(toTier.getRgbSupplier().getAsInt());
+        return TextComponentUtil.build(color, super.getName(stack));
     }
 
     @NotNull

@@ -18,6 +18,7 @@ import mekanism.common.block.prefab.BlockTile;
 import mekanism.common.registries.MekanismDataComponents;
 
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextColor;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 
@@ -59,7 +60,8 @@ public class ItemBlockEMExtraFactory extends ItemBlockEMExtraTooltip<BlockTile<?
         if (tier == null) {
             return super.getName(stack);
         }
-        return TextComponentUtil.build(tier.getEMExtraTier().getColor(), super.getName(stack));
+        TextColor color = TextColor.fromRgb(tier.getEMExtraTier().getRgbSupplier().getAsInt());
+        return TextComponentUtil.build(color, super.getName(stack));
     }
 
     @Override

@@ -151,6 +151,7 @@ dependencies {
     runtimeOnly(forge.igreeLib)
     implementation(forge.mekanismExtras)
     implementation(forge.mekanismMoreMachine)
+    implementation(forge.mekanismTieredOutline)
     //// If you want to test/use Mekanism & its modules during `runClient` invocation, use the following
     runtimeOnly(variantOf(forge.mekanism) { classifier("additions")})
     runtimeOnly(variantOf(forge.mekanism) { classifier("generators")})

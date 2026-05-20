@@ -5,6 +5,7 @@ import mekanism.api.text.TextComponentUtil;
 import mekanism.common.block.interfaces.IColoredBlock;
 
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextColor;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
@@ -38,6 +39,7 @@ public class ItemBlockEMExtra<BLOCK extends Block> extends BlockItem {
         if (tier == null) {
             return super.getName(stack);
         }
-        return TextComponentUtil.build(tier.getEMExtraTier().getColor(), super.getName(stack));
+        TextColor color = TextColor.fromRgb(tier.getEMExtraTier().getRgbSupplier().getAsInt());
+        return TextComponentUtil.build(color, super.getName(stack));
     }
 }
