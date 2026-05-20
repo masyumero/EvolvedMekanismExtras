@@ -32,11 +32,4 @@ public class EMExtraColorUtils {
 
         return (red << 16) | (green << 8) | blue;
     }
-
-    public static int createARGBColor(int rgbColor, int alpha) {
-        int red = (rgbColor >> 16) & 0xFF;
-        int green = (rgbColor >> 8) & 0xFF;
-        int blue = rgbColor & 0xFF;
-        return (alpha << 24) | (red << 16) | (green << 8) | blue;
-    }
 }

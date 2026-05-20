@@ -15,18 +15,10 @@ import irislgtm.mto.MTOModClient;
 import mekanism.api.tier.BaseTier;
 import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(value = MTOModClient.class, remap = false)
 public class MixinMTOModClient {
-
-    @Unique
-    private static int emextras$rColor;
-    @Unique
-    private static int emextras$gColor;
-    @Unique
-    private static int emextras$bColor;
 
     @Definition(id = "tier", local = @Local(type = BaseTier.class, name = "tier"))
     @Expression("tier != null")
