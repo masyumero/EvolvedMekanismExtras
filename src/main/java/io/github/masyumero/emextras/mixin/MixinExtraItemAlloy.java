@@ -37,7 +37,7 @@ public abstract class MixinExtraItemAlloy extends Item {
     @Definition(id = "capability", local = @Local(type = LazyOptional.class, name = "capability"))
     @Definition(id = "isPresent", method = "Lnet/minecraftforge/common/util/LazyOptional;isPresent()Z")
     @Expression("capability.isPresent()")
-    @Inject(method = "useOn", at = @At(value = "MIXINEXTRAS:EXPRESSION"), cancellable = true)
+    @Inject(method = "useOn", at = @At(value = "MIXINEXTRAS:EXPRESSION"), cancellable = true, remap = true)
     private void useOnInject(UseOnContext context, CallbackInfoReturnable<InteractionResult> cir, @Local(name = "tile") BlockEntity tile, @Local(name = "player") Player player, @Local(name = "world") Level world) {
         if (player.getOffhandItem().getItem() instanceof ItemAlloy alloy && alloy.getTier().ordinal() > 2) {
             LazyOptional<IEMExtraAlloyInteraction> capability = CapabilityUtils.getCapability(tile, EMExtraCapabilities.EMEXTRA_ALLOY_INTERACTION, context.getClickedFace());

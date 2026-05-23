@@ -41,7 +41,7 @@ public abstract class MixinItemAlloyRadiance extends Item {
     @Definition(id = "world", local = @Local(type = Level.class, name = "world"))
     @Definition(id = "isClientSide", field = "Lnet/minecraft/world/level/Level;isClientSide:Z")
     @Expression("world.isClientSide")
-    @Inject(method = "useOn", at = @At(value = "MIXINEXTRAS:EXPRESSION"))
+    @Inject(method = "useOn", at = @At(value = "MIXINEXTRAS:EXPRESSION"), remap = true)
     private void useOnInject(UseOnContext context, CallbackInfoReturnable<InteractionResult> cir, @Local(name = "player") Player player) {
         emextras$isEMExtra = player.getOffhandItem().getItem() instanceof ItemAlloy alloy && alloy.getTier().ordinal() > 2;
     }
