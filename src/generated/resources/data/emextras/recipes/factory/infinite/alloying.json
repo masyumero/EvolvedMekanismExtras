@@ -1,0 +1,28 @@
+{
+  "type": "mekanism:mek_data",
+  "key": {
+    "#": {
+      "tag": "forge:pellets/plutonium"
+    },
+    "?": {
+      "tag": "forge:pellets/polonium"
+    },
+    "A": {
+      "tag": "forge:alloys/infinite"
+    },
+    "C": {
+      "tag": "forge:circuits/infinite"
+    },
+    "P": {
+      "item": "emextras:cosmic_alloying_factory"
+    }
+  },
+  "pattern": [
+    "ACA",
+    "#P?",
+    "ACA"
+  ],
+  "result": {
+    "item": "emextras:infinite_alloying_factory"
+  }
+}

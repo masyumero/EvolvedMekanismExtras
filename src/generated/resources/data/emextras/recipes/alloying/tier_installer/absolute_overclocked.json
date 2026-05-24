@@ -8,7 +8,7 @@
   "mainInput": {
     "amount": 2,
     "ingredient": {
-      "item": "emextras:absolute_overclocked_control_circuit"
+      "tag": "forge:circuits/absolute_overclocked"
     }
   },
   "output": {

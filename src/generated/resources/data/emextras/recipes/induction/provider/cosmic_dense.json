@@ -5,7 +5,7 @@
       "item": "emextras:supreme_quantum_induction_provider"
     },
     "C": {
-      "item": "emextras:cosmic_dense_control_circuit"
+      "tag": "forge:circuits/cosmic_dense"
     },
     "O": {
       "item": "mekanism_extras:cosmic_induction_provider"

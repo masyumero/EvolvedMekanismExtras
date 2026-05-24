@@ -1,0 +1,25 @@
+{
+  "type": "mekanism:mek_data",
+  "key": {
+    "#": {
+      "tag": "forge:ingots/refined_obsidian"
+    },
+    "A": {
+      "tag": "forge:alloys/cosmic"
+    },
+    "C": {
+      "tag": "forge:circuits/cosmic"
+    },
+    "P": {
+      "item": "emextras:supreme_alloying_factory"
+    }
+  },
+  "pattern": [
+    "ACA",
+    "#P#",
+    "ACA"
+  ],
+  "result": {
+    "item": "emextras:cosmic_alloying_factory"
+  }
+}

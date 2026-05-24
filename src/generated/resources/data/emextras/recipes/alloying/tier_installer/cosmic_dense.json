@@ -8,7 +8,7 @@
   "mainInput": {
     "amount": 2,
     "ingredient": {
-      "item": "emextras:cosmic_dense_control_circuit"
+      "tag": "forge:circuits/cosmic_dense"
     }
   },
   "output": {

@@ -183,6 +183,13 @@ public abstract class BaseTagProvider implements DataProvider {
         getItemBuilder(tag).addTyped(ItemLike::asItem, itemProviders);
     }
 
+    @SafeVarargs
+    protected final void addToTag(ItemLike itemProvider, TagKey<Item>... tags) {
+        for (TagKey<Item> tag : tags) {
+            getItemBuilder(tag).addTyped(ItemLike::asItem, itemProvider);
+        }
+    }
+
     protected void addToTag(TagKey<Block> tag, IBlockProvider... blockProviders) {
         getBlockBuilder(tag).addTyped(IBlockProvider::getBlock, blockProviders);
     }

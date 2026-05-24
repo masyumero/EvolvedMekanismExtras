@@ -5,7 +5,7 @@
       "item": "emextras:cosmic_dense_induction_provider"
     },
     "C": {
-      "item": "emextras:infinite_multiversal_control_circuit"
+      "tag": "forge:circuits/infinite_multiversal"
     },
     "O": {
       "item": "mekanism_extras:infinite_induction_provider"

@@ -3,9 +3,9 @@ package io.github.masyumero.emextras.datagen.common.recipe.impl;
 import com.jerry.mekanism_extras.common.registry.ExtraBlock;
 import fr.iglee42.evolvedmekanism.registries.EMBlocks;
 import io.github.masyumero.emextras.EMExtras;
+import io.github.masyumero.emextras.common.EMExtraTags;
 import io.github.masyumero.emextras.common.block.attribute.EMExtraAttribute;
 import io.github.masyumero.emextras.common.registry.EMExtrasBlock;
-import io.github.masyumero.emextras.common.registry.EMExtrasItem;
 import io.github.masyumero.emextras.common.tier.EMExtraICTier;
 import io.github.masyumero.emextras.common.tier.EMExtraIPTier;
 import io.github.masyumero.emextras.datagen.common.recipe.BaseRecipeProvider;
@@ -57,7 +57,8 @@ public class EMExtrasRecipeProvider extends BaseRecipeProvider {
     protected List<ISubRecipeProvider> getSubRecipeProviders() {
         return List.of(
                 new AlloyingRecipeProvider(),
-                new CombinerRecipeProvider()
+                new CombinerRecipeProvider(),
+                new FactoryRecipeProvider()
         );
     }
 
@@ -97,28 +98,28 @@ public class EMExtrasRecipeProvider extends BaseRecipeProvider {
 
         // Providers
         MekDataShapedRecipeBuilder.shapedRecipe(EMExtrasBlock.ABSOLUTE_OVERCLOCKED_INDUCTION_PROVIDER).pattern(inductionProviderPattern)
-                .key(Pattern.CIRCUIT, EMExtrasItem.ABSOLUTE_OVERCLOCKED_CONTROL_CIRCUIT)
+                .key(Pattern.CIRCUIT, EMExtraTags.Items.ABSOLUTE_OVERCLOCKED_CONTROL_CIRCUIT)
                 .key(OTHER_PREVIOUS_CHAR, ExtraBlock.ABSOLUTE_INDUCTION_PROVIDER)
                 .key(Pattern.PREVIOUS, EMBlocks.OVERCLOCKED_INDUCTION_PROVIDER)
                 .key(Pattern.CONSTANT, MekanismBlocks.ULTIMATE_INDUCTION_PROVIDER)
                 .build(consumer, providerPath.apply(EMExtrasBlock.ABSOLUTE_OVERCLOCKED_INDUCTION_PROVIDER.getBlock()));
 
         MekDataShapedRecipeBuilder.shapedRecipe(EMExtrasBlock.SUPREME_QUANTUM_INDUCTION_PROVIDER).pattern(inductionProviderPattern)
-                .key(Pattern.CIRCUIT, EMExtrasItem.SUPREME_QUANTUM_CONTROL_CIRCUIT)
+                .key(Pattern.CIRCUIT, EMExtraTags.Items.SUPREME_QUANTUM_CONTROL_CIRCUIT)
                 .key(OTHER_PREVIOUS_CHAR, ExtraBlock.SUPREME_INDUCTION_PROVIDER)
                 .key(Pattern.PREVIOUS, EMBlocks.QUANTUM_INDUCTION_PROVIDER)
                 .key(Pattern.CONSTANT, EMExtrasBlock.ABSOLUTE_OVERCLOCKED_INDUCTION_PROVIDER)
                 .build(consumer, providerPath.apply(EMExtrasBlock.SUPREME_QUANTUM_INDUCTION_PROVIDER.getBlock()));
 
         MekDataShapedRecipeBuilder.shapedRecipe(EMExtrasBlock.COSMIC_DENSE_INDUCTION_PROVIDER).pattern(inductionProviderPattern)
-                .key(Pattern.CIRCUIT, EMExtrasItem.COSMIC_DENSE_CONTROL_CIRCUIT)
+                .key(Pattern.CIRCUIT, EMExtraTags.Items.COSMIC_DENSE_CONTROL_CIRCUIT)
                 .key(OTHER_PREVIOUS_CHAR, ExtraBlock.COSMIC_INDUCTION_PROVIDER)
                 .key(Pattern.PREVIOUS, EMBlocks.DENSE_INDUCTION_PROVIDER)
                 .key(Pattern.CONSTANT, EMExtrasBlock.SUPREME_QUANTUM_INDUCTION_PROVIDER)
                 .build(consumer, providerPath.apply(EMExtrasBlock.COSMIC_DENSE_INDUCTION_PROVIDER.getBlock()));
 
         MekDataShapedRecipeBuilder.shapedRecipe(EMExtrasBlock.INFINITE_MULTIVERSAL_INDUCTION_PROVIDER).pattern(inductionProviderPattern)
-                .key(Pattern.CIRCUIT, EMExtrasItem.INFINITE_MULTIVERSAL_CONTROL_CIRCUIT)
+                .key(Pattern.CIRCUIT, EMExtraTags.Items.INFINITE_MULTIVERSAL_CONTROL_CIRCUIT)
                 .key(OTHER_PREVIOUS_CHAR, ExtraBlock.INFINITE_INDUCTION_PROVIDER)
                 .key(Pattern.PREVIOUS, EMBlocks.MULTIVERSAL_INDUCTION_PROVIDER)
                 .key(Pattern.CONSTANT, EMExtrasBlock.COSMIC_DENSE_INDUCTION_PROVIDER)

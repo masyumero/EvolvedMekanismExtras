@@ -1,0 +1,25 @@
+{
+  "type": "mekanism:mek_data",
+  "key": {
+    "#": {
+      "tag": "forge:ingots/netherite"
+    },
+    "A": {
+      "tag": "forge:alloys/supreme"
+    },
+    "C": {
+      "tag": "forge:circuits/supreme"
+    },
+    "P": {
+      "item": "emextras:absolute_alloying_factory"
+    }
+  },
+  "pattern": [
+    "ACA",
+    "#P#",
+    "ACA"
+  ],
+  "result": {
+    "item": "emextras:supreme_alloying_factory"
+  }
+}

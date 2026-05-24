@@ -1,0 +1,25 @@
+{
+  "type": "mekanism:mek_data",
+  "key": {
+    "#": {
+      "tag": "forge:gems/emerald"
+    },
+    "A": {
+      "tag": "forge:alloys/absolute"
+    },
+    "C": {
+      "tag": "forge:circuits/absolute"
+    },
+    "P": {
+      "item": "mekanism:ultimate_alloying_factory"
+    }
+  },
+  "pattern": [
+    "ACA",
+    "#P#",
+    "ACA"
+  ],
+  "result": {
+    "item": "emextras:absolute_alloying_factory"
+  }
+}

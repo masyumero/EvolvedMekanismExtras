@@ -1,0 +1,31 @@
+{
+  "type": "mekanism:mek_data",
+  "key": {
+    "A": {
+      "tag": "forge:alloys/absolute"
+    },
+    "C": {
+      "tag": "forge:circuits/absolute_overclocked"
+    },
+    "P": {
+      "item": "mekanism_extras:absolute_infusing_factory"
+    },
+    "Q": {
+      "item": "evolvedmekanism:overclocked_infusing_factory"
+    },
+    "T": {
+      "tag": "evolvedmekanism:alloys/hypercharged"
+    },
+    "X": {
+      "item": "mekanism:steel_casing"
+    }
+  },
+  "pattern": [
+    "ACT",
+    "PXQ",
+    "TCA"
+  ],
+  "result": {
+    "item": "emextras:absolute_overclocked_infusing_factory"
+  }
+}

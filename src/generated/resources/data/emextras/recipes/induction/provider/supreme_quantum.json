@@ -5,7 +5,7 @@
       "item": "emextras:absolute_overclocked_induction_provider"
     },
     "C": {
-      "item": "emextras:supreme_quantum_control_circuit"
+      "tag": "forge:circuits/supreme_quantum"
     },
     "O": {
       "item": "mekanism_extras:supreme_induction_provider"

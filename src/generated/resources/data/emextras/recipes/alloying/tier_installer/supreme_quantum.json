@@ -8,7 +8,7 @@
   "mainInput": {
     "amount": 2,
     "ingredient": {
-      "item": "emextras:supreme_quantum_control_circuit"
+      "tag": "forge:circuits/supreme_quantum"
     }
   },
   "output": {

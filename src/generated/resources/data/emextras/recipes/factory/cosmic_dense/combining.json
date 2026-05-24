@@ -1,0 +1,31 @@
+{
+  "type": "mekanism:mek_data",
+  "key": {
+    "A": {
+      "tag": "forge:alloys/cosmic"
+    },
+    "C": {
+      "tag": "forge:circuits/cosmic_dense"
+    },
+    "P": {
+      "item": "mekanism_extras:cosmic_combining_factory"
+    },
+    "Q": {
+      "item": "evolvedmekanism:dense_combining_factory"
+    },
+    "T": {
+      "tag": "evolvedmekanism:alloys/singular"
+    },
+    "X": {
+      "item": "mekanism:steel_casing"
+    }
+  },
+  "pattern": [
+    "ACT",
+    "PXQ",
+    "TCA"
+  ],
+  "result": {
+    "item": "emextras:cosmic_dense_combining_factory"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "type": "mekanism:mek_data",
+  "key": {
+    "A": {
+      "tag": "forge:alloys/supreme"
+    },
+    "C": {
+      "tag": "forge:circuits/supreme_quantum"
+    },
+    "P": {
+      "item": "mekanism_extras:supreme_enriching_factory"
+    },
+    "Q": {
+      "item": "evolvedmekanism:quantum_enriching_factory"
+    },
+    "T": {
+      "tag": "evolvedmekanism:alloys/subatomic"
+    },
+    "X": {
+      "item": "mekanism:steel_casing"
+    }
+  },
+  "pattern": [
+    "ACT",
+    "PXQ",
+    "TCA"
+  ],
+  "result": {
+    "item": "emextras:supreme_quantum_enriching_factory"
+  }
+}
