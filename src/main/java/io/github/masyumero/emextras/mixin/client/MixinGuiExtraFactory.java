@@ -1,6 +1,6 @@
 package io.github.masyumero.emextras.mixin.client;
 
-import com.jerry.mekanism_extras.client.gui.machine.GuiAdvancedFactory;
+import com.jerry.mekanism_extras.client.gui.machine.GuiExtraFactory;
 import com.jerry.mekanism_extras.common.tile.factory.TileEntityExtraFactory;
 import fr.iglee42.evolvedmekanism.jei.EMJEI;
 import mekanism.client.gui.GuiConfigurableTile;
@@ -14,10 +14,10 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(value = GuiAdvancedFactory.class, remap = false)
-public abstract class MixinGuiAdvancedFactory extends GuiConfigurableTile<TileEntityExtraFactory<?>, MekanismTileContainer<TileEntityExtraFactory<?>>> {
+@Mixin(value = GuiExtraFactory.class, remap = false)
+public abstract class MixinGuiExtraFactory extends GuiConfigurableTile<TileEntityExtraFactory<?>, MekanismTileContainer<TileEntityExtraFactory<?>>> {
 
-    protected MixinGuiAdvancedFactory(MekanismTileContainer<TileEntityExtraFactory<?>> container, Inventory inv, Component title) {
+    protected MixinGuiExtraFactory(MekanismTileContainer<TileEntityExtraFactory<?>> container, Inventory inv, Component title) {
         super(container, inv, title);
     }
 

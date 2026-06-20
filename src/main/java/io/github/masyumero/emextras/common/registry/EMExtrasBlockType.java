@@ -3,9 +3,9 @@ package io.github.masyumero.emextras.common.registry;
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
 import com.jerry.mekanism_extras.api.ExtraUpgrade;
-import com.jerry.mekanism_extras.common.content.blocktype.AdvancedFactory;
-import com.jerry.mekanism_extras.common.content.blocktype.AdvancedMachine;
-import com.jerry.mekanism_extras.common.tier.AdvancedFactoryTier;
+import com.jerry.mekanism_extras.common.content.blocktype.ExtraFactory;
+import com.jerry.mekanism_extras.common.content.blocktype.ExtraMachine;
+import com.jerry.mekanism_extras.common.tier.ExtraFactoryTier;
 import com.jerry.mekanism_extras.common.util.ExtraEnumUtils;
 import fr.iglee42.evolvedmekanism.registries.EMFactoryType;
 import io.github.masyumero.emextras.common.block.attribute.EMExtraAttributeTier;
@@ -41,7 +41,7 @@ import java.util.function.Supplier;
 public class EMExtrasBlockType {
     private static final Table<EMExtraFactoryTier, EMExtraFactoryType, EMExtraFactory<?>> FACTORIES = HashBasedTable.create();
 
-    private static final Table<AdvancedFactoryTier, FactoryType, AdvancedFactory<?>> ADVANCED_FACTORIES = HashBasedTable.create();
+    private static final Table<ExtraFactoryTier, FactoryType, ExtraFactory<?>> ADVANCED_FACTORIES = HashBasedTable.create();
 
     public static final EMExtraMachine.EMExtraFactoryMachine<TileEntityAlloyer> ALLOYER = EMExtraMachine.EMExtraMachineBuilder
             .createEMExtraFactoryMachine(() -> EMTileEntityTypes.ALLOYER, EvolvedMekanismLang.DESCRIPTION_ALLOYER, EMExtraFactoryType.ALLOYING)
@@ -51,8 +51,8 @@ public class EMExtrasBlockType {
             .withComputerSupport("alloyer")
             .build();
 
-    public static final AdvancedMachine.AdvancedFactoryMachine<TileEntityAlloyer> ADVANCED_ALLOYER = AdvancedMachine.AdvancedMachineBuilder
-            .createAdvancedFactoryMachine(() -> EMTileEntityTypes.ALLOYER, EvolvedMekanismLang.DESCRIPTION_ALLOYER, EMFactoryType.ALLOYING)
+    public static final ExtraMachine.ExtraFactoryMachine<TileEntityAlloyer> ADVANCED_ALLOYER = ExtraMachine.ExtraMachineBuilder
+            .createExtraFactoryMachine(() -> EMTileEntityTypes.ALLOYER, EvolvedMekanismLang.DESCRIPTION_ALLOYER, EMFactoryType.ALLOYING)
             .withGui(() -> EMContainerTypes.ALLOYER)
             .withSound(MekanismSounds.COMBINER)
             .withEnergyConfig(LoadConfig.emExtraUsageConfig.alloyer, LoadConfig.emExtraStorageConfig.alloyer)
@@ -154,8 +154,8 @@ public class EMExtrasBlockType {
                 }
             }
         }
-        for (AdvancedFactoryTier tier : ExtraEnumUtils.ADVANCED_FACTORY_TIERS) {
-            ADVANCED_FACTORIES.put(tier, EMFactoryType.ALLOYING, AdvancedFactory.AdvancedFactoryBuilder.createFactory(() -> EMExtrasTileEntityTypes.getAdvancedFactoryTile(tier, EMFactoryType.ALLOYING), EMFactoryType.ALLOYING, tier).build());
+        for (ExtraFactoryTier tier : ExtraEnumUtils.EXTRA_FACTORY_TIERS) {
+            ADVANCED_FACTORIES.put(tier, EMFactoryType.ALLOYING, ExtraFactory.AdvancedFactoryBuilder.createFactory(() -> EMExtrasTileEntityTypes.getExtraFactoryTile(tier, EMFactoryType.ALLOYING), EMFactoryType.ALLOYING, tier).build());
         }
     }
 
@@ -163,7 +163,7 @@ public class EMExtrasBlockType {
         return FACTORIES.get(tier, type);
     }
 
-    public static AdvancedFactory<?> getAdvancedFactory(AdvancedFactoryTier tier, FactoryType type) {
+    public static ExtraFactory<?> getExtraFactory(ExtraFactoryTier tier, FactoryType type) {
         return ADVANCED_FACTORIES.get(tier, type);
     }
 

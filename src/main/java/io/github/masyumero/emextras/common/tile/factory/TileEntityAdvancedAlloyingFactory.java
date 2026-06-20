@@ -1,6 +1,6 @@
 package io.github.masyumero.emextras.common.tile.factory;
 
-import com.jerry.mekanism_extras.common.tile.factory.TileEntityItemToItemExtraFactory;
+import com.jerry.mekanism_extras.common.tile.factory.TileEntityExtraItemToItemFactory;
 import fr.iglee42.evolvedmekanism.interfaces.EMInputRecipeCache;
 import fr.iglee42.evolvedmekanism.interfaces.ThreeInputCachedRecipe;
 import fr.iglee42.evolvedmekanism.interfaces.TripleItemRecipeLookupHandler;
@@ -44,7 +44,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Set;
 
-public class TileEntityAdvancedAlloyingFactory extends TileEntityItemToItemExtraFactory<AlloyerRecipe> implements TripleItemRecipeLookupHandler<AlloyerRecipe> {
+public class TileEntityAdvancedAlloyingFactory extends TileEntityExtraItemToItemFactory<AlloyerRecipe> implements TripleItemRecipeLookupHandler<AlloyerRecipe> {
 
     private static final List<RecipeError> TRACKED_ERROR_TYPES = List.of(
             RecipeError.NOT_ENOUGH_ENERGY,

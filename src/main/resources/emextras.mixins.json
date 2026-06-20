@@ -6,7 +6,7 @@
   "refmap": "emextras.refmap.json",
   "mixins": [
     "AccessorTileEntityExtraFactory",
-    "MixinAdvancedFactory",
+    "MixinExtraFactory",
     "MixinExtraItemAlloy",
     "MixinFactory",
     "MixinItemAlloyRadiance",
@@ -20,7 +20,7 @@
     "matrix.MixinTargetMatrixValidator$MixinMatrixValidatorPostcheck"
   ],
   "client": [
-    "client.MixinGuiAdvancedFactory",
+    "client.MixinGuiExtraFactory",
     "client.MixinMTOModClient"
   ],
   "injectors": {

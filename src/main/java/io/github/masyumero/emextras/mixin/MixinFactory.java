@@ -1,7 +1,7 @@
 package io.github.masyumero.emextras.mixin;
 
 import com.jerry.mekanism_extras.common.block.attribute.ExtraAttributeUpgradeable;
-import com.jerry.mekanism_extras.common.tier.AdvancedFactoryTier;
+import com.jerry.mekanism_extras.common.tier.ExtraFactoryTier;
 import fr.iglee42.evolvedmekanism.registries.EMFactoryType;
 import io.github.masyumero.emextras.common.block.attribute.EMExtraAttributeUpgradeable;
 import io.github.masyumero.emextras.common.registry.EMExtrasBlock;
@@ -31,7 +31,7 @@ public abstract class MixinFactory extends BlockType {
         if (tier == FactoryTier.ULTIMATE) {
             add(new EMExtraAttributeUpgradeable(() -> EMExtraBlockUtils.getEMExtraFactory(EMExtraFactoryTier.ABSOLUTE_OVERCLOCKED, origMachine.getFactoryType())));
             if (origMachine.getFactoryType() == EMFactoryType.ALLOYING) {
-                add(new ExtraAttributeUpgradeable(() -> EMExtrasBlock.getAdvancedFactory(AdvancedFactoryTier.ABSOLUTE, EMFactoryType.ALLOYING)));
+                add(new ExtraAttributeUpgradeable(() -> EMExtrasBlock.getExtraFactory(ExtraFactoryTier.ABSOLUTE, EMFactoryType.ALLOYING)));
             }
         }
     }

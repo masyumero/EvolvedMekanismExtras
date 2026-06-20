@@ -1,9 +1,10 @@
 package io.github.masyumero.emextras.common.content.blocktype;
 
-import com.jerry.mekanism_extras.common.content.blocktype.AdvancedMachine;
+import com.jerry.mekanism_extras.common.content.blocktype.ExtraMachine;
 import fr.iglee42.evolvedmekanism.jei.EMJEI;
 import fr.iglee42.evolvedmekanism.registries.EMBlocks;
 import io.github.masyumero.emextras.common.registry.EMExtrasBlockType;
+import lombok.Getter;
 import mekanism.api.annotations.NothingNullByDefault;
 import mekanism.api.text.IHasTranslationKey;
 import mekanism.client.jei.MekanismJEIRecipeType;
@@ -29,10 +30,11 @@ public enum EMExtraFactoryType implements IHasTranslationKey {
     SAWING("sawing", MekanismLang.SAWING.getTranslationKey(), () -> EMExtrasBlockType.PRECISION_SAWMILL, () -> MekanismBlocks.PRECISION_SAWMILL);
 
 
+    @Getter
     private final String registryNameComponent;
     private final String translationKey;
     private final Supplier<EMExtraMachine.EMExtraFactoryMachine<?>> baseMachine;
-    private final Supplier<AdvancedMachine.AdvancedFactoryMachine<?>> advancedBaseMachine;
+    private final Supplier<ExtraMachine.ExtraFactoryMachine<?>> advancedBaseMachine;
     private final Supplier<BlockRegistryObject<?, ?>> baseBlock;
 
     EMExtraFactoryType(String registryNameComponent, String translationKey, Supplier<EMExtraMachine.EMExtraFactoryMachine<?>> baseMachine, Supplier<BlockRegistryObject<?, ?>> baseBlock) {
@@ -43,7 +45,7 @@ public enum EMExtraFactoryType implements IHasTranslationKey {
         advancedBaseMachine = null;
     }
 
-    EMExtraFactoryType(String registryNameComponent, String translationKey, Supplier<AdvancedMachine.AdvancedFactoryMachine<?>> advancedBaseMachine, Supplier<BlockRegistryObject<?, ?>> baseBlock, boolean bool) {
+    EMExtraFactoryType(String registryNameComponent, String translationKey, Supplier<ExtraMachine.ExtraFactoryMachine<?>> advancedBaseMachine, Supplier<BlockRegistryObject<?, ?>> baseBlock, boolean bool) {
         this.registryNameComponent = registryNameComponent;
         this.translationKey = translationKey;
         this.advancedBaseMachine = advancedBaseMachine;
@@ -64,10 +66,6 @@ public enum EMExtraFactoryType implements IHasTranslationKey {
             case INFUSING -> MekanismJEIRecipeType.METALLURGIC_INFUSING;
             case SAWING -> MekanismJEIRecipeType.SAWING;
         };
-    }
-
-    public String getRegistryNameComponent() {
-        return registryNameComponent;
     }
 
     public String getRegistryNameComponentCapitalized() {

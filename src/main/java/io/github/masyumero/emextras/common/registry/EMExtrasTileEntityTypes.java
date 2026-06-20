@@ -2,7 +2,7 @@ package io.github.masyumero.emextras.common.registry;
 
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
-import com.jerry.mekanism_extras.common.tier.AdvancedFactoryTier;
+import com.jerry.mekanism_extras.common.tier.ExtraFactoryTier;
 import com.jerry.mekanism_extras.common.tile.factory.TileEntityExtraFactory;
 import com.jerry.mekanism_extras.common.util.ExtraEnumUtils;
 import fr.iglee42.evolvedmekanism.registries.EMFactoryType;
@@ -30,7 +30,7 @@ public class EMExtrasTileEntityTypes {
 
     private static final Table<EMExtraFactoryTier, EMExtraFactoryType, TileEntityTypeRegistryObject<? extends TileEntityEMExtraFactory<?>>> FACTORIES = HashBasedTable.create();
 
-    private static final Table<AdvancedFactoryTier, FactoryType, TileEntityTypeRegistryObject<? extends TileEntityExtraFactory<?>>> ADVANCED_FACTORIES = HashBasedTable.create();
+    private static final Table<ExtraFactoryTier, FactoryType, TileEntityTypeRegistryObject<? extends TileEntityExtraFactory<?>>> ADVANCED_FACTORIES = HashBasedTable.create();
 
     static {
         for (EMExtraFactoryTier tier : EMExtraEnumUtils.EMEXTRA_FACTORY_TIERS) {
@@ -45,8 +45,8 @@ public class EMExtrasTileEntityTypes {
             FACTORIES.put(tier, EMExtraFactoryType.SAWING, TILE_ENTITY_TYPES.register(EMExtrasBlock.getEMExtraFactory(tier, EMExtraFactoryType.SAWING), (pos, state) -> new TileEntitySawingEMExtraFactory(EMExtrasBlock.getEMExtraFactory(tier, EMExtraFactoryType.SAWING), pos, state), TileEntityMekanism::tickServer, TileEntityMekanism::tickClient));
             FACTORIES.put(tier, EMExtraFactoryType.ALLOYING, EMTileEntityTypes.TILE_ENTITY_TYPES.register(EMExtrasBlock.getEMExtraFactory(tier, EMExtraFactoryType.ALLOYING), (pos, state) -> new TileEntityEMExtraAlloyingFactory(EMExtrasBlock.getEMExtraFactory(tier, EMExtraFactoryType.ALLOYING), pos, state), TileEntityMekanism::tickServer, TileEntityMekanism::tickClient));
         }
-        for (AdvancedFactoryTier tier  : ExtraEnumUtils.ADVANCED_FACTORY_TIERS) {
-            ADVANCED_FACTORIES.put(tier, EMFactoryType.ALLOYING, EMTileEntityTypes.TILE_ENTITY_TYPES.register(EMExtrasBlock.getAdvancedFactory(tier, EMFactoryType.ALLOYING), (pos, state) -> new TileEntityAdvancedAlloyingFactory(EMExtrasBlock.getAdvancedFactory(tier, EMFactoryType.ALLOYING), pos, state), TileEntityMekanism::tickServer, TileEntityMekanism::tickClient));
+        for (ExtraFactoryTier tier  : ExtraEnumUtils.EXTRA_FACTORY_TIERS) {
+            ADVANCED_FACTORIES.put(tier, EMFactoryType.ALLOYING, EMTileEntityTypes.TILE_ENTITY_TYPES.register(EMExtrasBlock.getExtraFactory(tier, EMFactoryType.ALLOYING), (pos, state) -> new TileEntityAdvancedAlloyingFactory(EMExtrasBlock.getExtraFactory(tier, EMFactoryType.ALLOYING), pos, state), TileEntityMekanism::tickServer, TileEntityMekanism::tickClient));
         }
     }
 
@@ -95,7 +95,7 @@ public class EMExtrasTileEntityTypes {
         return FACTORIES.get(tier, type);
     }
 
-    public static TileEntityTypeRegistryObject<? extends TileEntityExtraFactory<?>> getAdvancedFactoryTile(AdvancedFactoryTier tier, FactoryType type) {
+    public static TileEntityTypeRegistryObject<? extends TileEntityExtraFactory<?>> getExtraFactoryTile(ExtraFactoryTier tier, FactoryType type) {
         return ADVANCED_FACTORIES.get(tier, type);
     }
 

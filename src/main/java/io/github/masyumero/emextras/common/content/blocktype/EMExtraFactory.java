@@ -31,7 +31,7 @@ public class EMExtraFactory<TILE extends TileEntityEMExtraFactory<?>> extends EM
         this.origMachine = origMachine;
         setMachineData(tier);
         add(new AttributeGui(containerRegistrar, null), new EMExtraAttributeTier<>(tier));
-        if (tier.ordinal() < ExtraEnumUtils.ADVANCED_FACTORY_TIERS.length - 1) {
+        if (tier.ordinal() < ExtraEnumUtils.EXTRA_FACTORY_TIERS.length - 1) {
             add(new EMExtraAttributeUpgradeable(() -> EMExtrasBlock.getEMExtraFactory(EMExtraEnumUtils.EMEXTRA_FACTORY_TIERS[tier.ordinal() + 1], origMachine.getFactoryType())));
         }
     }

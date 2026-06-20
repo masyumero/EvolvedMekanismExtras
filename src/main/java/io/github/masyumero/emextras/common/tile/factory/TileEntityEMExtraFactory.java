@@ -1,6 +1,7 @@
 package io.github.masyumero.emextras.common.tile.factory;
 
 import com.jerry.mekanism_extras.api.ExtraUpgrade;
+import com.jerry.mekanism_extras.common.util.ExtraContainerSyncUtils;
 import fr.iglee42.evolvedmekanism.interfaces.IGetEnergySlot;
 import io.github.masyumero.emextras.common.tier.EMExtraFactoryTier;
 import com.jerry.mekanism_extras.common.util.ExtraUpgradeUtils;
@@ -15,6 +16,7 @@ import io.github.masyumero.emextras.common.util.EMExtraEnumUtils;
 import it.unimi.dsi.fastutil.ints.IntArraySet;
 import it.unimi.dsi.fastutil.ints.IntSet;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
+import lombok.Getter;
 import mekanism.api.*;
 import mekanism.api.inventory.IInventorySlot;
 import mekanism.api.math.FloatingLong;
@@ -109,6 +111,7 @@ public abstract class TileEntityEMExtraFactory<RECIPE extends MekanismRecipe> ex
     @NotNull
     protected final EMExtraFactoryType type;
 
+    @Getter
     protected MachineEnergyContainer<TileEntityEMExtraFactory<?>> energyContainer;
     protected final List<IInventorySlot> inputSlots;
     protected final List<IInventorySlot> outputSlots;
@@ -465,13 +468,10 @@ public abstract class TileEntityEMExtraFactory<RECIPE extends MekanismRecipe> ex
         return false;
     }
 
-    public MachineEnergyContainer<TileEntityEMExtraFactory<?>> getEnergyContainer() {
-        return energyContainer;
-    }
-
     @Override
     public void addContainerTrackers(MekanismContainer container) {
         super.addContainerTrackers(container);
+        ExtraContainerSyncUtils.trackLargeInventorySlots(container);
         container.trackArray(progress);
         errorTracker.track(container);
         container.track(SyncableFloatingLong.create(this::getLastUsage, value -> lastUsage = value));
