@@ -21,10 +21,12 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
+import org.slf4j.Logger;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
@@ -59,10 +61,30 @@ public abstract class MixinItemAlloyRadiance extends Item {
     @Expression("upgradedTransmitter instanceof IUpgradeableTransmitter")
     @Inject(method = "onExtraAlloyInteraction", at = @At(value = "MIXINEXTRAS:EXPRESSION"))
     private void onExtraAlloyInteractionInject(Player player, ItemStack stack, Level level, BlockPos worldPosition, TileEntityTransmitter tileEntityTransmitter, CallbackInfo ci, @Local(name = "upgradedTransmitter") Transmitter<?, ?, ?> upgradedTransmitter, @Local(name = "upgradeData") TransmitterUpgradeData upgradeData) {
-        if (upgradedTransmitter instanceof IUpgradeableTransmitter && emextras$isEMExtra) {
-            emextras$transferUpgradeData((IEMExtraUpgradeableTransmitter<?>) upgradedTransmitter, upgradeData);
-        } else {
-            Mekanism.logger.warn("Unhandled upgrade data.", new IllegalStateException());
+        if (emextras$isEMExtra) {
+            if (upgradedTransmitter instanceof IUpgradeableTransmitter) {
+                emextras$transferUpgradeData((IEMExtraUpgradeableTransmitter<?>) upgradedTransmitter, upgradeData);
+            } else {
+                Mekanism.logger.warn("Unhandled upgrade data.", new IllegalStateException());
+            }
+        }
+    }
+
+    @Inject(method = "onExtraAlloyInteraction", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;shrink(I)V"))
+    private void shirinkOffHandItemInject(Player player, ItemStack stack, Level level, BlockPos worldPosition, TileEntityTransmitter tileEntityTransmitter, CallbackInfo ci) {
+        if (emextras$isEMExtra) {
+            player.getOffhandItem().shrink(1);
+        }
+    }
+
+    @Definition(id = "logger", field = "Lmekanism/common/Mekanism;logger:Lorg/slf4j/Logger;")
+    @Definition(id = "warn", method = "Lorg/slf4j/Logger;warn(Ljava/lang/String;Ljava/lang/Throwable;)V")
+    @Definition(id = "IllegalStateException", type = IllegalStateException.class)
+    @Expression("logger.warn('Unhandled upgrade data.', new IllegalStateException())")
+    @Redirect(method = "onExtraAlloyInteraction", at = @At("MIXINEXTRAS:EXPRESSION"))
+    private void loggerRedirect(Logger instance, String s, Throwable throwable) {
+        if (!emextras$isEMExtra) {
+            instance.warn(s, throwable);
         }
     }
 
@@ -84,6 +106,7 @@ public abstract class MixinItemAlloyRadiance extends Item {
     }
 
     @Unique
+    @SuppressWarnings("unchecked")
     private <DATA extends TransmitterUpgradeData> void emextras$transferUpgradeData(IEMExtraUpgradeableTransmitter<DATA> upgradeableTransmitter, TransmitterUpgradeData data) {
         if (upgradeableTransmitter.dataTypeMatches(data)) {
             upgradeableTransmitter.parseUpgradeData((DATA) data);

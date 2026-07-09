@@ -185,7 +185,6 @@ dependencies {
     dataImplementation fg.deobf(forge.mekanism)
     dataImplementation fg.deobf(forge.evolvedMekanism)
     dataImplementation fg.deobf(forge.mekanismExtras)
-    implementation fg.deobf(forge.bundles.jei)
     dataRuntimeOnly fg.deobf(forge.igreeLib)
 
     implementation fg.deobf(forge.mekanism)
