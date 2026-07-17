@@ -1,8 +1,7 @@
 package io.github.masyumero.emextras.datagen.common.recipe.impl;
 
-import com.jerry.mekanism_extras.common.registry.ExtraBlock;
-import com.jerry.mekanism_extras.common.tier.AdvancedFactoryTier;
-import fr.iglee42.evolvedmekanism.registries.EMBlocks;
+import com.jerry.mekanism_extras.common.registries.ExtraBlocks;
+import com.jerry.mekanism_extras.common.tier.ExtraFactoryTier;
 import fr.iglee42.evolvedmekanism.registries.EMFactoryType;
 import fr.iglee42.evolvedmekanism.registries.EMTags;
 import fr.iglee42.evolvedmekanism.tiers.EMFactoryTier;
@@ -58,30 +57,30 @@ public class FactoryRecipeProvider implements ISubRecipeProvider {
             if (type == EMFactoryType.ALLOYING) {
                 continue;
             }
-            addFactoryRecipes(consumer, basePath, type, EMExtraFactoryTier.ABSOLUTE_OVERCLOCKED, AdvancedFactoryTier.ABSOLUTE, EMFactoryTier.OVERCLOCKED,
+            addFactoryRecipes(consumer, basePath, type, EMExtraFactoryTier.ABSOLUTE_OVERCLOCKED, ExtraFactoryTier.ABSOLUTE, EMFactoryTier.OVERCLOCKED,
                     EMExtraTagUtils.ALLOYS_RADIANCE, EMTags.Items.ALLOYS_HYPERCHARGED, EMExtraTags.Items.ABSOLUTE_OVERCLOCKED_CONTROL_CIRCUIT);
-            addFactoryRecipes(consumer, basePath, type, EMExtraFactoryTier.SUPREME_QUANTUM, AdvancedFactoryTier.SUPREME, EMFactoryTier.QUANTUM,
+            addFactoryRecipes(consumer, basePath, type, EMExtraFactoryTier.SUPREME_QUANTUM, ExtraFactoryTier.SUPREME, EMFactoryTier.QUANTUM,
                     EMExtraTagUtils.ALLOYS_THERMONUCLEAR, EMTags.Items.ALLOYS_SUBATOMIC, EMExtraTags.Items.SUPREME_QUANTUM_CONTROL_CIRCUIT);
-            addFactoryRecipes(consumer, basePath, type, EMExtraFactoryTier.COSMIC_DENSE, AdvancedFactoryTier.COSMIC, EMFactoryTier.DENSE,
+            addFactoryRecipes(consumer, basePath, type, EMExtraFactoryTier.COSMIC_DENSE, ExtraFactoryTier.COSMIC, EMFactoryTier.DENSE,
                     EMExtraTagUtils.ALLOYS_SHINING, EMTags.Items.ALLOYS_SINGULAR, EMExtraTags.Items.COSMIC_DENSE_CONTROL_CIRCUIT);
-            addFactoryRecipes(consumer, basePath, type, EMExtraFactoryTier.INFINITE_MULTIVERSAL, AdvancedFactoryTier.INFINITE, EMFactoryTier.MULTIVERSAL,
+            addFactoryRecipes(consumer, basePath, type, EMExtraFactoryTier.INFINITE_MULTIVERSAL, ExtraFactoryTier.INFINITE, EMFactoryTier.MULTIVERSAL,
                     EMExtraTagUtils.ALLOYS_SPECTRUM, EMTags.Items.ALLOYS_EXOVERSAL, EMExtraTags.Items.INFINITE_MULTIVERSAL_CONTROL_CIRCUIT);
         }
 
         // Alloying
-        addEMExtraAlloyingFactoryRecipes(consumer, basePath, EMExtraFactoryTier.ABSOLUTE_OVERCLOCKED, AdvancedFactoryTier.ABSOLUTE, EMFactoryTier.OVERCLOCKED,
+        addEMExtraAlloyingFactoryRecipes(consumer, basePath, EMExtraFactoryTier.ABSOLUTE_OVERCLOCKED, ExtraFactoryTier.ABSOLUTE, EMFactoryTier.OVERCLOCKED,
                 EMExtraTagUtils.ALLOYS_RADIANCE, EMTags.Items.ALLOYS_HYPERCHARGED, EMExtraTags.Items.ABSOLUTE_OVERCLOCKED_CONTROL_CIRCUIT);
-        addEMExtraAlloyingFactoryRecipes(consumer, basePath, EMExtraFactoryTier.SUPREME_QUANTUM, AdvancedFactoryTier.SUPREME, EMFactoryTier.QUANTUM,
+        addEMExtraAlloyingFactoryRecipes(consumer, basePath, EMExtraFactoryTier.SUPREME_QUANTUM, ExtraFactoryTier.SUPREME, EMFactoryTier.QUANTUM,
                 EMExtraTagUtils.ALLOYS_THERMONUCLEAR, EMTags.Items.ALLOYS_SUBATOMIC, EMExtraTags.Items.SUPREME_QUANTUM_CONTROL_CIRCUIT);
-        addEMExtraAlloyingFactoryRecipes(consumer, basePath, EMExtraFactoryTier.COSMIC_DENSE, AdvancedFactoryTier.COSMIC, EMFactoryTier.DENSE,
+        addEMExtraAlloyingFactoryRecipes(consumer, basePath, EMExtraFactoryTier.COSMIC_DENSE, ExtraFactoryTier.COSMIC, EMFactoryTier.DENSE,
                 EMExtraTagUtils.ALLOYS_SHINING, EMTags.Items.ALLOYS_SINGULAR, EMExtraTags.Items.COSMIC_DENSE_CONTROL_CIRCUIT);
-        addEMExtraAlloyingFactoryRecipes(consumer, basePath, EMExtraFactoryTier.INFINITE_MULTIVERSAL, AdvancedFactoryTier.INFINITE, EMFactoryTier.MULTIVERSAL,
+        addEMExtraAlloyingFactoryRecipes(consumer, basePath, EMExtraFactoryTier.INFINITE_MULTIVERSAL, ExtraFactoryTier.INFINITE, EMFactoryTier.MULTIVERSAL,
                 EMExtraTagUtils.ALLOYS_SPECTRUM, EMTags.Items.ALLOYS_EXOVERSAL, EMExtraTags.Items.INFINITE_MULTIVERSAL_CONTROL_CIRCUIT);
 
-        addExtraFactoryRecipes(consumer, basePath, MekanismBlocks.getFactory(FactoryTier.ULTIMATE, EMFactoryType.ALLOYING), EMFactoryType.ALLOYING, AdvancedFactoryTier.ABSOLUTE, EMExtraTagUtils.ALLOYS_RADIANCE, EMExtraTagUtils.CIRCUITS_ABSOLUTE, Tags.Items.GEMS_EMERALD);
-        addExtraFactoryRecipes(consumer, basePath, EMExtrasBlock.getAdvancedFactory(AdvancedFactoryTier.ABSOLUTE, EMFactoryType.ALLOYING), EMFactoryType.ALLOYING, AdvancedFactoryTier.SUPREME, EMExtraTagUtils.ALLOYS_THERMONUCLEAR, EMExtraTagUtils.CIRCUITS_SUPREME, Tags.Items.INGOTS_NETHERITE);
-        addExtraFactoryRecipes(consumer, basePath, EMExtrasBlock.getAdvancedFactory(AdvancedFactoryTier.SUPREME, EMFactoryType.ALLOYING), EMFactoryType.ALLOYING, AdvancedFactoryTier.COSMIC, EMExtraTagUtils.ALLOYS_SHINING, EMExtraTagUtils.CIRCUITS_COSMIC, MekanismTags.Items.INGOTS_REFINED_OBSIDIAN);
-        var factory = EMExtrasBlock.getAdvancedFactory(AdvancedFactoryTier.INFINITE, EMFactoryType.ALLOYING);
+        addExtraFactoryRecipes(consumer, basePath, MekanismBlocks.getFactory(FactoryTier.ULTIMATE, EMFactoryType.ALLOYING), EMFactoryType.ALLOYING, ExtraFactoryTier.ABSOLUTE, EMExtraTagUtils.ALLOYS_RADIANCE, EMExtraTagUtils.CIRCUITS_ABSOLUTE, Tags.Items.GEMS_EMERALD);
+        addExtraFactoryRecipes(consumer, basePath, EMExtrasBlock.getExtraFactory(ExtraFactoryTier.ABSOLUTE, EMFactoryType.ALLOYING), EMFactoryType.ALLOYING, ExtraFactoryTier.SUPREME, EMExtraTagUtils.ALLOYS_THERMONUCLEAR, EMExtraTagUtils.CIRCUITS_SUPREME, Tags.Items.INGOTS_NETHERITE);
+        addExtraFactoryRecipes(consumer, basePath, EMExtrasBlock.getExtraFactory(ExtraFactoryTier.SUPREME, EMFactoryType.ALLOYING), EMFactoryType.ALLOYING, ExtraFactoryTier.COSMIC, EMExtraTagUtils.ALLOYS_SHINING, EMExtraTagUtils.CIRCUITS_COSMIC, MekanismTags.Items.INGOTS_REFINED_OBSIDIAN);
+        var factory = EMExtrasBlock.getExtraFactory(ExtraFactoryTier.INFINITE, EMFactoryType.ALLOYING);
         MekDataShapedRecipeBuilder.shapedRecipe(factory)
                 .pattern(RecipePattern.createPattern(
                         RecipePattern.TripleLine.of(Pattern.ALLOY, Pattern.CIRCUIT, Pattern.ALLOY),
@@ -92,13 +91,13 @@ public class FactoryRecipeProvider implements ISubRecipeProvider {
                 .key(Pattern.CIRCUIT, EMExtraTagUtils.CIRCUITS_INFINITE)
                 .key(Pattern.CONSTANT, MekanismTags.Items.PELLETS_PLUTONIUM)
                 .key(Pattern.EXTRA_CONSTANT, MekanismTags.Items.PELLETS_POLONIUM)
-                .key(Pattern.PREVIOUS, EMExtrasBlock.getAdvancedFactory(AdvancedFactoryTier.COSMIC, EMFactoryType.ALLOYING))
+                .key(Pattern.PREVIOUS, EMExtrasBlock.getExtraFactory(ExtraFactoryTier.COSMIC, EMFactoryType.ALLOYING))
                 .build(consumer, EMExtras.rl(basePath + "infinite/" + Attribute.get(factory, AttributeFactoryType.class).getFactoryType().getRegistryNameComponent()));
     }
 
     private void addExtraFactoryRecipes(Consumer<FinishedRecipe> consumer, String basePath, BlockRegistryObject<?, ?> toUpgrade , FactoryType type,
-                                        AdvancedFactoryTier tier, TagKey<Item> alloyTag, TagKey<Item> circuitTag, TagKey<Item> ingotTag) {
-        var factory = EMExtrasBlock.getAdvancedFactory(tier, type);
+                                        ExtraFactoryTier tier, TagKey<Item> alloyTag, TagKey<Item> circuitTag, TagKey<Item> ingotTag) {
+        var factory = EMExtrasBlock.getExtraFactory(tier, type);
         MekDataShapedRecipeBuilder.shapedRecipe(factory)
                 .pattern(FACTORY_PATTERN)
                 .key(Pattern.ALLOY, alloyTag)
@@ -123,9 +122,9 @@ public class FactoryRecipeProvider implements ISubRecipeProvider {
     }
 
     private void addFactoryRecipes(Consumer<FinishedRecipe> consumer, String basePath, FactoryType type,
-                                   EMExtraFactoryTier tier, AdvancedFactoryTier toExtraUpgradeTier, FactoryTier toUpgradeTier,
+                                   EMExtraFactoryTier tier, ExtraFactoryTier toExtraUpgradeTier, FactoryTier toUpgradeTier,
                                    TagKey<Item> alloyTag, TagKey<Item> extraAlloyTag, TagKey<Item> circuitTag) {
-        addFactoryRecipes(consumer, basePath, tier, factoryTier -> EMExtraBlockUtils.getEMExtraFactory(factoryTier, type), MekanismBlocks.getFactory(toUpgradeTier, type), ExtraBlock.getAdvancedFactory(toExtraUpgradeTier, type), alloyTag, extraAlloyTag, circuitTag);
+        addFactoryRecipes(consumer, basePath, tier, factoryTier -> EMExtraBlockUtils.getEMExtraFactory(factoryTier, type), MekanismBlocks.getFactory(toUpgradeTier, type), ExtraBlocks.getAdvancedFactory(toExtraUpgradeTier, type), alloyTag, extraAlloyTag, circuitTag);
     }
 
     private void addFactoryRecipes(Consumer<FinishedRecipe> consumer, String basePath, EMExtraFactoryTier tier,
@@ -135,8 +134,8 @@ public class FactoryRecipeProvider implements ISubRecipeProvider {
     }
 
     private void addEMExtraAlloyingFactoryRecipes(Consumer<FinishedRecipe> consumer, String basePath,
-                                                  EMExtraFactoryTier tier, AdvancedFactoryTier toExtraUpgradeTier, FactoryTier toUpgradeTier,
+                                                  EMExtraFactoryTier tier, ExtraFactoryTier toExtraUpgradeTier, FactoryTier toUpgradeTier,
                                                   TagKey<Item> alloyTag, TagKey<Item> extraAlloyTag, TagKey<Item> circuitTag) {
-        addFactoryRecipes(consumer, basePath, tier, factoryTier -> EMExtrasBlock.getEMExtraFactory(factoryTier, EMExtraFactoryType.ALLOYING), MekanismBlocks.getFactory(toUpgradeTier, EMFactoryType.ALLOYING), EMExtrasBlock.getAdvancedFactory(toExtraUpgradeTier, EMFactoryType.ALLOYING), alloyTag, extraAlloyTag, circuitTag);
+        addFactoryRecipes(consumer, basePath, tier, factoryTier -> EMExtrasBlock.getEMExtraFactory(factoryTier, EMExtraFactoryType.ALLOYING), MekanismBlocks.getFactory(toUpgradeTier, EMFactoryType.ALLOYING), EMExtrasBlock.getExtraFactory(toExtraUpgradeTier, EMFactoryType.ALLOYING), alloyTag, extraAlloyTag, circuitTag);
     }
 }

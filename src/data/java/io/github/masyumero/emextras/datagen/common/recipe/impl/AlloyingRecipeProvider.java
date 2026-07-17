@@ -1,6 +1,6 @@
 package io.github.masyumero.emextras.datagen.common.recipe.impl;
 
-import com.jerry.mekanism_extras.common.registry.ExtraItem;
+import com.jerry.mekanism_extras.common.registries.ExtraItems;
 import fr.iglee42.evolvedmekanism.registries.EMItems;
 import fr.iglee42.evolvedmekanism.registries.EMTags;
 import io.github.masyumero.emextras.EMExtras;
@@ -31,22 +31,22 @@ public class AlloyingRecipeProvider implements ISubRecipeProvider {
         String basePath = "alloying/";
         AlloyerRecipeBuilder.alloying(
                 IngredientCreatorAccess.item().from(EMExtraTags.Items.ABSOLUTE_OVERCLOCKED_CONTROL_CIRCUIT, 2),
-                IngredientCreatorAccess.item().from(ExtraItem.ABSOLUTE_TIER_INSTALLER),
+                IngredientCreatorAccess.item().from(ExtraItems.ABSOLUTE_TIER_INSTALLER),
                 IngredientCreatorAccess.item().from(EMItems.OVERCLOCKED_TIER_INSTALLER),
                 EMExtrasItem.ABSOLUTE_OVERCLOCKED_TIER_INSTALLER.getItemStack()).build(consumer, EMExtras.rl(basePath + "tier_installer/absolute_overclocked"));
         AlloyerRecipeBuilder.alloying(
                 IngredientCreatorAccess.item().from(EMExtraTags.Items.SUPREME_QUANTUM_CONTROL_CIRCUIT, 2),
-                IngredientCreatorAccess.item().from(ExtraItem.SUPREME_TIER_INSTALLER),
+                IngredientCreatorAccess.item().from(ExtraItems.SUPREME_TIER_INSTALLER),
                 IngredientCreatorAccess.item().from(EMItems.QUANTUM_TIER_INSTALLER),
                 EMExtrasItem.SUPREME_QUANTUM_TIER_INSTALLER.getItemStack()).build(consumer, EMExtras.rl(basePath + "tier_installer/supreme_quantum"));
         AlloyerRecipeBuilder.alloying(
                 IngredientCreatorAccess.item().from(EMExtraTags.Items.COSMIC_DENSE_CONTROL_CIRCUIT, 2),
-                IngredientCreatorAccess.item().from(ExtraItem.COSMIC_TIER_INSTALLER),
+                IngredientCreatorAccess.item().from(ExtraItems.COSMIC_TIER_INSTALLER),
                 IngredientCreatorAccess.item().from(EMItems.DENSE_TIER_INSTALLER),
                 EMExtrasItem.COSMIC_DENSE_TIER_INSTALLER.getItemStack()).build(consumer, EMExtras.rl(basePath + "tier_installer/cosmic_dense"));
         AlloyerRecipeBuilder.alloying(
                 IngredientCreatorAccess.item().from(EMExtraTags.Items.INFINITE_MULTIVERSAL_CONTROL_CIRCUIT, 2),
-                IngredientCreatorAccess.item().from(ExtraItem.INFINITE_TIER_INSTALLER),
+                IngredientCreatorAccess.item().from(ExtraItems.INFINITE_TIER_INSTALLER),
                 IngredientCreatorAccess.item().from(EMItems.MULTIVERSAL_TIER_INSTALLER),
                 EMExtrasItem.INFINITE_MULTIVERSAL_TIER_INSTALLER.getItemStack()).build(consumer, EMExtras.rl(basePath + "tier_installer/infinite_multiversal"));
         // transmitters
