@@ -7,6 +7,9 @@ import io.github.masyumero.emextras.common.integration.Addons;
 import io.github.masyumero.emextras.common.integration.mekaf.regisrty.EMExtraAdvancedFactoryBlocks;
 import io.github.masyumero.emextras.common.integration.mekaf.regisrty.EMExtraAdvancedFactoryContainerTypes;
 import io.github.masyumero.emextras.common.integration.mekaf.regisrty.EMExtraAdvancedFactoryTileEntityTypes;
+import io.github.masyumero.emextras.common.integration.mekmm.registry.EMExtraMoreMachineBlocks;
+import io.github.masyumero.emextras.common.integration.mekmm.registry.EMExtraMoreMachineContainerTypes;
+import io.github.masyumero.emextras.common.integration.mekmm.registry.EMExtraMoreMachineTileEntityTypes;
 import io.github.masyumero.emextras.common.registry.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -44,9 +47,9 @@ public class EMExtras {
 
     private static void conditionalRegistry(IEventBus modEventBus) {
         if (Addons.MEKMM.isLoaded()) {
-            //EMExtraMoreMachineBlocks.register(modEventBus);
-            //EMExtraMoreMachineContainerTypes.register(modEventBus);
-            //EMExtraMoreMachineTileEntityTypes.register(modEventBus);
+            EMExtraMoreMachineBlocks.register(modEventBus);
+            EMExtraMoreMachineContainerTypes.register(modEventBus);
+            EMExtraMoreMachineTileEntityTypes.register(modEventBus);
             EMExtraAdvancedFactoryBlocks.register(modEventBus);
             EMExtraAdvancedFactoryContainerTypes.register(modEventBus);
             EMExtraAdvancedFactoryTileEntityTypes.register(modEventBus);

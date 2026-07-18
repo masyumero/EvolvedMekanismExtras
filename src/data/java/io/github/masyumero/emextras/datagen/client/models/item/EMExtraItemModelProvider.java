@@ -3,11 +3,13 @@ package io.github.masyumero.emextras.datagen.client.models.item;
 import com.jerry.mekaf.common.content.blocktype.AdvancedFactoryType;
 import com.jerry.mekanism_extras.common.tier.ExtraFactoryTier;
 import com.jerry.mekanism_extras.common.util.ExtraEnumUtils;
+import com.jerry.mekmm.common.content.blocktype.MoreMachineFactoryType;
 import com.jerry.mekmm.common.util.MoreMachineEnumUtils;
 
 import io.github.masyumero.emextras.EMExtras;
 import io.github.masyumero.emextras.common.content.blocktype.EMExtraFactoryType;
 import io.github.masyumero.emextras.common.integration.mekaf.regisrty.EMExtraAdvancedFactoryBlocks;
+import io.github.masyumero.emextras.common.integration.mekmm.registry.EMExtraMoreMachineBlocks;
 import io.github.masyumero.emextras.common.registry.EMExtrasBlock;
 import io.github.masyumero.emextras.common.registry.EMExtrasItem;
 import io.github.masyumero.emextras.common.tier.EMExtraFactoryTier;
@@ -39,12 +41,12 @@ public class EMExtraItemModelProvider extends BaseItemModelProvider {
                 }
                 advancedFactoryBlock(EMExtraAdvancedFactoryBlocks.getEMExtraAdvancedFactory(tier, type));
             }
-            //for (MoreMachineFactoryType type : MoreMachineEnumUtils.MM_FACTORY_TYPES) {
-            //    if (type == MoreMachineFactoryType.PLANTING) {
-            //        continue;
-            //    }
-            //    moreMachineFactoryBlock(EMExtraMoreMachineBlocks.getEMExtraMoreMachineFactory(tier, type));
-            //}
+            for (MoreMachineFactoryType type : MoreMachineEnumUtils.MM_FACTORY_TYPES) {
+                if (type == MoreMachineFactoryType.PLANTING) {
+                    continue;
+                }
+                moreMachineFactoryBlock(EMExtraMoreMachineBlocks.getEMExtraMoreMachineFactory(tier, type));
+            }
         }
         for (ExtraFactoryTier tier : ExtraEnumUtils.EXTRA_FACTORY_TIERS) {
             extraAlloyingFactoryBlock(EMExtrasBlock.getExtraFactory(tier, EMFactoryType.ALLOYING));

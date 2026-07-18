@@ -23,7 +23,7 @@
       ]
     }
   },
-  "loader": "neoforge:composite",
+  "loader": "forge:composite",
   "gui_light": "side",
   "textures": {
     "particle": "mekanism:block/factory/factory_front_back"

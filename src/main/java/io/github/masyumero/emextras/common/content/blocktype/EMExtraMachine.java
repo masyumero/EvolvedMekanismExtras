@@ -7,6 +7,7 @@ import com.jerry.mekmm.common.block.attribute.AttributeMoreMachineFactoryType;
 import com.jerry.mekmm.common.content.blocktype.MoreMachineFactoryType;
 
 import io.github.masyumero.emextras.common.integration.mekaf.regisrty.EMExtraAdvancedFactoryBlocks;
+import io.github.masyumero.emextras.common.integration.mekmm.registry.EMExtraMoreMachineBlocks;
 import io.github.masyumero.emextras.common.tier.EMExtraFactoryTier;
 import io.github.masyumero.emextras.common.block.attribute.EMExtraAttributeFactoryType;
 import io.github.masyumero.emextras.common.block.attribute.EMExtraAttributeUpgradeable;
@@ -48,11 +49,11 @@ public class EMExtraMachine<TILE extends TileEntityMekanism> extends BlockTypeTi
             add(new EMExtraAttributeFactoryType(factoryType), new EMExtraAttributeUpgradeable(() -> EMExtrasBlock.getEMExtraFactory(EMExtraFactoryTier.ABSOLUTE_OVERCLOCKED, getFactoryType())));
         }
 
-        //public EMExtraFactoryMachine(Supplier<TileEntityTypeRegistryObject<TILE>> tileEntitySupplier, ILangEntry description, MoreMachineFactoryType factoryType) {
-        //    super(tileEntitySupplier, description);
-        //    add(new AttributeUpgradeSupport(EnumSet.of(Upgrade.SPEED, Upgrade.ENERGY, Upgrade.MUFFLING, ExtraUpgrade.CREATIVE)));
-        //    add(new AttributeMoreMachineFactoryType(factoryType), new EMExtraAttributeUpgradeable(() -> EMExtraMoreMachineBlocks.getExtraMoreMachineFactory(EMExtraFactoryTier.ABSOLUTE_OVERCLOCKED, getMoreMachineFactoryType())));
-        //}
+        public EMExtraFactoryMachine(Supplier<TileEntityTypeRegistryObject<TILE>> tileEntitySupplier, ILangEntry description, MoreMachineFactoryType factoryType) {
+            super(tileEntitySupplier, description);
+            add(new AttributeUpgradeSupport(EnumSet.of(Upgrade.SPEED, Upgrade.ENERGY, Upgrade.MUFFLING, ExtraUpgrade.CREATIVE)));
+            add(new AttributeMoreMachineFactoryType(factoryType), new EMExtraAttributeUpgradeable(() -> EMExtraMoreMachineBlocks.getEMExtraMoreMachineFactory(EMExtraFactoryTier.ABSOLUTE_OVERCLOCKED, getMoreMachineFactoryType())));
+        }
 
         public EMExtraFactoryMachine(Supplier<TileEntityTypeRegistryObject<TILE>> tileEntitySupplier, ILangEntry description, AdvancedFactoryType factoryType) {
             super(tileEntitySupplier, description);
@@ -84,10 +85,10 @@ public class EMExtraMachine<TILE extends TileEntityMekanism> extends BlockTypeTi
             return new EMExtraMachineBuilder<>(new EMExtraFactoryMachine<>(tileEntityRegistrar, description, factoryType));
         }
 
-        //public static <TILE extends TileEntityMekanism> EMExtraMachineBuilder<EMExtraFactoryMachine<TILE>, TILE, ?> createEMExtraMoreMachineFactoryMachine(Supplier<TileEntityTypeRegistryObject<TILE>> tileEntityRegistrar,
-        //                                                                                                                                                 ILangEntry description, MoreMachineFactoryType factoryType) {
-        //    return new EMExtraMachineBuilder<>(new EMExtraFactoryMachine<>(tileEntityRegistrar, description, factoryType));
-        //}
+        public static <TILE extends TileEntityMekanism> EMExtraMachineBuilder<EMExtraFactoryMachine<TILE>, TILE, ?> createEMExtraMoreMachineFactoryMachine(Supplier<TileEntityTypeRegistryObject<TILE>> tileEntityRegistrar,
+                                                                                                                                                         ILangEntry description, MoreMachineFactoryType factoryType) {
+            return new EMExtraMachineBuilder<>(new EMExtraFactoryMachine<>(tileEntityRegistrar, description, factoryType));
+        }
 
         public static <TILE extends TileEntityMekanism> EMExtraMachineBuilder<EMExtraFactoryMachine<TILE>, TILE, ?> createEMExtraAdvancedFactoryMachine(Supplier<TileEntityTypeRegistryObject<TILE>> tileEntityRegistrar,
                                                                                                                                                   ILangEntry description, AdvancedFactoryType factoryType) {

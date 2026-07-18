@@ -3,11 +3,13 @@ package io.github.masyumero.emextras.datagen.client.models.block;
 import com.jerry.mekaf.common.content.blocktype.AdvancedFactoryType;
 import com.jerry.mekanism_extras.common.tier.ExtraFactoryTier;
 import com.jerry.mekanism_extras.common.util.ExtraEnumUtils;
+import com.jerry.mekmm.common.content.blocktype.MoreMachineFactoryType;
 import com.jerry.mekmm.common.util.MoreMachineEnumUtils;
 
 import io.github.masyumero.emextras.EMExtras;
 import io.github.masyumero.emextras.common.content.blocktype.EMExtraFactoryType;
 import io.github.masyumero.emextras.common.integration.mekaf.regisrty.EMExtraAdvancedFactoryBlocks;
+import io.github.masyumero.emextras.common.integration.mekmm.registry.EMExtraMoreMachineBlocks;
 import io.github.masyumero.emextras.common.registry.EMExtrasBlock;
 import io.github.masyumero.emextras.common.tier.EMExtraFactoryTier;
 import io.github.masyumero.emextras.common.util.EMExtraEnumUtils;
@@ -42,12 +44,12 @@ public class EMExtraBlockModelProvider extends BaseBlockModelsProvider {
                 }
                 simpleAdvancedFactoryMachineBlock(EMExtraAdvancedFactoryBlocks.getEMExtraAdvancedFactory(tier, type));
             }
-            //for (MoreMachineFactoryType type : MoreMachineEnumUtils.MM_FACTORY_TYPES) {
-            //    if (type == MoreMachineFactoryType.PLANTING) {
-            //        continue;
-            //    }
-            //    simpleMoreMachineFactoryMachineBlock(EMExtraMoreMachineBlocks.getEMExtraMoreMachineFactory(tier, type));
-            //}
+            for (MoreMachineFactoryType type : MoreMachineEnumUtils.MM_FACTORY_TYPES) {
+                if (type == MoreMachineFactoryType.PLANTING) {
+                    continue;
+                }
+                simpleMoreMachineFactoryMachineBlock(EMExtraMoreMachineBlocks.getEMExtraMoreMachineFactory(tier, type));
+            }
         }
         for (ExtraFactoryTier tier : ExtraEnumUtils.EXTRA_FACTORY_TIERS) {
             alloyingFactoryMachineBlock(EMExtrasBlock.getExtraFactory(tier, EMFactoryType.ALLOYING));
