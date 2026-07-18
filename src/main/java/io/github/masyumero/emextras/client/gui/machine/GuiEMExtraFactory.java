@@ -1,7 +1,7 @@
 package io.github.masyumero.emextras.client.gui.machine;
 
 import fr.iglee42.evolvedmekanism.jei.EMJEI;
-import io.github.masyumero.emextras.client.gui.element.tab.GuiEMExtraSortingTab;
+import io.github.masyumero.emextras.client.gui.element.tab.EMExtraGuiSortingTab;
 import io.github.masyumero.emextras.common.tile.factory.TileEntityEMExtraFactory;
 import io.github.masyumero.emextras.common.tile.factory.TileEntityItemStackGasToItemStackEMExtraFactory;
 import io.github.masyumero.emextras.common.tile.factory.TileEntityMetallurgicInfuserEMExtraFactory;
@@ -45,7 +45,7 @@ public class GuiEMExtraFactory extends GuiConfigurableTile<TileEntityEMExtraFact
     @Override
     protected void addGuiElements() {
         super.addGuiElements();
-        addRenderableWidget(new GuiEMExtraSortingTab(this, tile));
+        addRenderableWidget(new EMExtraGuiSortingTab(this, tile));
         addRenderableWidget(new GuiVerticalPowerBar(this, tile.getEnergyContainer(), imageWidth - 12, 16,  52))
                 .warning(WarningTracker.WarningType.NOT_ENOUGH_ENERGY, tile.getWarningCheck(CachedRecipe.OperationTracker.RecipeError.NOT_ENOUGH_ENERGY, 0));
         addRenderableWidget(new GuiEnergyTab(this, tile.getEnergyContainer(), tile::getLastUsage));

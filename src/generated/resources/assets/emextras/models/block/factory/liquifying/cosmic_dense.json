@@ -1,0 +1,19 @@
+{
+  "parent": "minecraft:block/block",
+  "children": {
+    "base": {
+      "parent": "mekmm:block/factory/liquifying/base"
+    },
+    "front_led": {
+      "parent": "emextras:block/factory/front_led/cosmic_dense"
+    }
+  },
+  "item_render_order": [
+    "base",
+    "front_led"
+  ],
+  "loader": "forge:composite",
+  "textures": {
+    "particle": "mekanism:block/factory/factory_front_back"
+  }
+}

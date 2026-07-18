@@ -193,7 +193,7 @@ dependencies {
     implementation fg.deobf(forge.mekanismExtras)
     implementation fg.deobf(forge.bundles.jei)
     implementation fg.deobf(forge.mekTieredOutline)
-    compileOnly fg.deobf(forge.mekmm)
+    implementation fg.deobf(forge.mekmm)
     // If you want to test/use Mekanism & its modules during `runClient` invocation, use the following
     runtimeOnly fg.deobf(variantOf(forge.mekanism) { classifier("additions")})
     runtimeOnly fg.deobf(variantOf(forge.mekanism) { classifier("generators")})

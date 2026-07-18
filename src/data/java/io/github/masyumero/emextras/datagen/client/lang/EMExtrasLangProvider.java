@@ -2,6 +2,7 @@ package io.github.masyumero.emextras.datagen.client.lang;
 
 import io.github.masyumero.emextras.EMExtras;
 import io.github.masyumero.emextras.EMExtrasLang;
+import io.github.masyumero.emextras.common.integration.mekaf.regisrty.EMExtraAdvancedFactoryBlocks;
 import io.github.masyumero.emextras.common.registry.EMExtrasBlock;
 import io.github.masyumero.emextras.common.registry.EMExtrasItem;
 import net.minecraft.data.PackOutput;
@@ -21,6 +22,7 @@ public class EMExtrasLangProvider extends BaseLanguageProvider {
 
     private void addBlocks() {
         EMExtrasBlock.BLOCK.getAllBlocks().forEach(this::add);
+        EMExtraAdvancedFactoryBlocks.BLOCKS.getAllBlocks().forEach(this::add);
     }
 
     private void addItem() {

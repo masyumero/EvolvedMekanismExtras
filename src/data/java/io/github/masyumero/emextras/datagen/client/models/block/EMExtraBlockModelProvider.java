@@ -1,13 +1,18 @@
 package io.github.masyumero.emextras.datagen.client.models.block;
 
-import com.jerry.mekanism_extras.common.tier.AdvancedFactoryTier;
+import com.jerry.mekaf.common.content.blocktype.AdvancedFactoryType;
+import com.jerry.mekanism_extras.common.tier.ExtraFactoryTier;
 import com.jerry.mekanism_extras.common.util.ExtraEnumUtils;
-import fr.iglee42.evolvedmekanism.registries.EMFactoryType;
+import com.jerry.mekmm.common.util.MoreMachineEnumUtils;
+
 import io.github.masyumero.emextras.EMExtras;
 import io.github.masyumero.emextras.common.content.blocktype.EMExtraFactoryType;
+import io.github.masyumero.emextras.common.integration.mekaf.regisrty.EMExtraAdvancedFactoryBlocks;
 import io.github.masyumero.emextras.common.registry.EMExtrasBlock;
 import io.github.masyumero.emextras.common.tier.EMExtraFactoryTier;
 import io.github.masyumero.emextras.common.util.EMExtraEnumUtils;
+
+import fr.iglee42.evolvedmekanism.registries.EMFactoryType;
 import mekanism.api.tier.ITier;
 import mekanism.common.Mekanism;
 import mekanism.common.block.attribute.Attribute;
@@ -31,9 +36,21 @@ public class EMExtraBlockModelProvider extends BaseBlockModelsProvider {
                 }
                 simpleFactoryMachineBlock(EMExtrasBlock.getEMExtraFactory(tier, type));
             }
+            for (AdvancedFactoryType type : MoreMachineEnumUtils.ADVANCED_FACTORY_TYPES) {
+                if (type == AdvancedFactoryType.CENTRIFUGING) {
+                    continue;
+                }
+                simpleAdvancedFactoryMachineBlock(EMExtraAdvancedFactoryBlocks.getEMExtraAdvancedFactory(tier, type));
+            }
+            //for (MoreMachineFactoryType type : MoreMachineEnumUtils.MM_FACTORY_TYPES) {
+            //    if (type == MoreMachineFactoryType.PLANTING) {
+            //        continue;
+            //    }
+            //    simpleMoreMachineFactoryMachineBlock(EMExtraMoreMachineBlocks.getEMExtraMoreMachineFactory(tier, type));
+            //}
         }
-        for (AdvancedFactoryTier tier : ExtraEnumUtils.ADVANCED_FACTORY_TIERS) {
-            alloyingFactoryMachineBlock(EMExtrasBlock.getAdvancedFactory(tier, EMFactoryType.ALLOYING));
+        for (ExtraFactoryTier tier : ExtraEnumUtils.EXTRA_FACTORY_TIERS) {
+            alloyingFactoryMachineBlock(EMExtrasBlock.getExtraFactory(tier, EMFactoryType.ALLOYING));
         }
         inductionCellAndProvider(EMExtrasBlock.ABSOLUTE_OVERCLOCKED_INDUCTION_CELL, EMExtrasBlock.ABSOLUTE_OVERCLOCKED_INDUCTION_PROVIDER);
         inductionCellAndProvider(EMExtrasBlock.SUPREME_QUANTUM_INDUCTION_CELL, EMExtrasBlock.SUPREME_QUANTUM_INDUCTION_PROVIDER);

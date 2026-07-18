@@ -1,8 +1,11 @@
 package io.github.masyumero.emextras.client.events;
 
 import io.github.masyumero.emextras.EMExtras;
+import io.github.masyumero.emextras.client.gui.machine.GuiEMExtraAdvancedFactory;
 import io.github.masyumero.emextras.client.gui.machine.GuiEMExtraFactory;
 import io.github.masyumero.emextras.client.render.transmitter.*;
+import io.github.masyumero.emextras.common.integration.Addons;
+import io.github.masyumero.emextras.common.integration.mekaf.regisrty.EMExtraAdvancedFactoryContainerTypes;
 import io.github.masyumero.emextras.common.registry.EMExtrasBlock;
 import io.github.masyumero.emextras.common.registry.EMExtrasContainerTypes;
 import io.github.masyumero.emextras.common.registry.EMExtrasTileEntityTypes;
@@ -58,6 +61,9 @@ public class ClientRegistration {
     public static void registerContainers(RegisterEvent event) {
         event.register(Registries.MENU, helper -> {
             ClientRegistrationUtil.registerScreen(EMExtrasContainerTypes.FACTORY, GuiEMExtraFactory::new);
+            if (Addons.MEKMM.isLoaded()) {
+                ClientRegistrationUtil.registerScreen(EMExtraAdvancedFactoryContainerTypes.ADVANCED_FACTORY, GuiEMExtraAdvancedFactory::new);
+            }
         });
     }
 

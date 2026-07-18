@@ -3,6 +3,10 @@ package io.github.masyumero.emextras;
 import com.mojang.logging.LogUtils;
 import io.github.masyumero.emextras.common.EMExtraTags;
 import io.github.masyumero.emextras.common.config.LoadConfig;
+import io.github.masyumero.emextras.common.integration.Addons;
+import io.github.masyumero.emextras.common.integration.mekaf.regisrty.EMExtraAdvancedFactoryBlocks;
+import io.github.masyumero.emextras.common.integration.mekaf.regisrty.EMExtraAdvancedFactoryContainerTypes;
+import io.github.masyumero.emextras.common.integration.mekaf.regisrty.EMExtraAdvancedFactoryTileEntityTypes;
 import io.github.masyumero.emextras.common.registry.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -31,10 +35,22 @@ public class EMExtras {
         EMExtrasTileEntityTypes.register(modEventBus);
         EMExtrasContainerTypes.register(modEventBus);
         EMExtraTab.register(modEventBus);
+        conditionalRegistry(modEventBus);
     }
 
     private void commonSetup(FMLCommonSetupEvent event) {
         event.enqueueWork(EMExtraTags::init);
+    }
+
+    private static void conditionalRegistry(IEventBus modEventBus) {
+        if (Addons.MEKMM.isLoaded()) {
+            //EMExtraMoreMachineBlocks.register(modEventBus);
+            //EMExtraMoreMachineContainerTypes.register(modEventBus);
+            //EMExtraMoreMachineTileEntityTypes.register(modEventBus);
+            EMExtraAdvancedFactoryBlocks.register(modEventBus);
+            EMExtraAdvancedFactoryContainerTypes.register(modEventBus);
+            EMExtraAdvancedFactoryTileEntityTypes.register(modEventBus);
+        }
     }
 
     @SuppressWarnings("removal")

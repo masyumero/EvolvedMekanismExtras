@@ -1,7 +1,11 @@
 package io.github.masyumero.emextras.datagen.client.models.item;
 
+import com.jerry.mekaf.common.block.attribute.AttributeAdvancedFactoryType;
+import com.jerry.mekaf.common.content.blocktype.AdvancedFactoryType;
 import com.jerry.mekanism_extras.common.block.attribute.ExtraAttribute;
-import com.jerry.mekanism_extras.common.tier.AdvancedFactoryTier;
+import com.jerry.mekanism_extras.common.tier.ExtraFactoryTier;
+import com.jerry.mekmm.common.block.attribute.AttributeMoreMachineFactoryType;
+import com.jerry.mekmm.common.content.blocktype.MoreMachineFactoryType;
 import io.github.masyumero.emextras.EMExtras;
 import io.github.masyumero.emextras.common.block.attribute.EMExtraAttribute;
 import io.github.masyumero.emextras.common.block.attribute.EMExtraAttributeFactoryType;
@@ -28,8 +32,23 @@ public abstract class BaseItemModelProvider extends ItemModelProvider {
     }
 
     public ItemModelBuilder extraAlloyingFactoryBlock(BlockRegistryObject<?, ?> blockRO) {
-        AdvancedFactoryTier tier = ExtraAttribute.getTier(blockRO.getBlock(), AdvancedFactoryTier.class);
+        ExtraFactoryTier tier = ExtraAttribute.getTier(blockRO.getBlock(), ExtraFactoryTier.class);
 
         return this.withExistingParent(blockRO.getName(), EMExtras.rl("block/factory/alloying/" + tier.getAdvanceTier().getLowerName()));
+    }
+
+
+    public ItemModelBuilder advancedFactoryBlock(BlockRegistryObject<?, ?> blockRO) {
+        AdvancedFactoryType type = Attribute.get(blockRO, AttributeAdvancedFactoryType.class).getAdvancedFactoryType();
+        EMExtraFactoryTier tier = EMExtraAttribute.getTier(blockRO.getBlock(), EMExtraFactoryTier.class);
+
+        return this.withExistingParent(blockRO.getName(), EMExtras.rl("block/factory/" + type.getRegistryNameComponent() +  "/" + tier.getEMExtraTier().getLowerName()));
+    }
+
+    public ItemModelBuilder moreMachineFactoryBlock(BlockRegistryObject<?, ?> blockRO) {
+        MoreMachineFactoryType type = Attribute.get(blockRO, AttributeMoreMachineFactoryType.class).getMoreMachineFactoryType();
+        EMExtraFactoryTier tier = EMExtraAttribute.getTier(blockRO.getBlock(), EMExtraFactoryTier.class);
+
+        return this.withExistingParent(blockRO.getName(), EMExtras.rl("block/factory/" + type.getRegistryNameComponent() +  "/" + tier.getEMExtraTier().getLowerName()));
     }
 }

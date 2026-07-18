@@ -1,7 +1,8 @@
 package io.github.masyumero.emextras.client.gui.element.tab;
 
+import io.github.masyumero.emextras.common.integration.mekaf.tile.factory.base.TileEntityEMExtraAdvancedFactoryBase;
 import io.github.masyumero.emextras.common.network.to_server.EMExtraPacketGuiInteract;
-import io.github.masyumero.emextras.common.tile.factory.TileEntityEMExtraFactory;
+
 import mekanism.client.SpecialColors;
 import mekanism.client.gui.IGuiWrapper;
 import mekanism.client.gui.element.GuiInsetElement;
@@ -13,9 +14,9 @@ import mekanism.common.util.text.BooleanStateDisplay;
 import net.minecraft.client.gui.GuiGraphics;
 import org.jetbrains.annotations.NotNull;
 
-public class GuiEMExtraSortingTab extends GuiInsetElement<TileEntityEMExtraFactory<?>> {
+public class EMExtraAdvancedFactoryGuiSortingTab extends GuiInsetElement<TileEntityEMExtraAdvancedFactoryBase<?>> {
 
-    public GuiEMExtraSortingTab(IGuiWrapper gui, TileEntityEMExtraFactory<?> tile) {
+    public EMExtraAdvancedFactoryGuiSortingTab(IGuiWrapper gui, TileEntityEMExtraAdvancedFactoryBase<?> tile) {
         super(MekanismUtils.getResource(MekanismUtils.ResourceType.GUI, "sorting.png"), gui, tile, -26, 62, 35, 18, true);
     }
 
