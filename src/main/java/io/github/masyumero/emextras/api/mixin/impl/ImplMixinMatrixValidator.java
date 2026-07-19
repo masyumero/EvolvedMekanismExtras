@@ -1,6 +1,6 @@
 package io.github.masyumero.emextras.api.mixin.impl;
 
-import io.github.masyumero.emextras.common.registry.EMExtrasBlockType;
+import io.github.masyumero.emextras.common.registry.EMExtraBlockTypes;
 import io.github.masyumero.emextras.common.tile.multiblock.TileEntityEMExtraInductionCell;
 import io.github.masyumero.emextras.common.tile.multiblock.TileEntityEMExtraInductionProvider;
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
@@ -17,9 +17,9 @@ import java.util.List;
 public class ImplMixinMatrixValidator {
 
     public static boolean emextras$validateInner(BlockState state, Long2ObjectMap<ChunkAccess> chunkMap, BlockPos pos, Level world, List<TileEntityEMExtraInductionCell> cells, List<TileEntityEMExtraInductionProvider> providers) {
-        if (BlockType.is(state.getBlock(), EMExtrasBlockType.ABSOLUTE_OVERCLOCKED_INDUCTION_CELL, EMExtrasBlockType.SUPREME_QUANTUM_INDUCTION_CELL,
-                EMExtrasBlockType.COSMIC_DENSE_INDUCTION_CELL, EMExtrasBlockType.INFINITE_MULTIVERSAL_INDUCTION_CELL, EMExtrasBlockType.ABSOLUTE_OVERCLOCKED_INDUCTION_PROVIDER,
-                EMExtrasBlockType.SUPREME_QUANTUM_INDUCTION_PROVIDER, EMExtrasBlockType.COSMIC_DENSE_INDUCTION_PROVIDER, EMExtrasBlockType.INFINITE_MULTIVERSAL_INDUCTION_PROVIDER)) {//Compare blocks against the type before bothering to look up the tile
+        if (BlockType.is(state.getBlock(), EMExtraBlockTypes.ABSOLUTE_OVERCLOCKED_INDUCTION_CELL, EMExtraBlockTypes.SUPREME_QUANTUM_INDUCTION_CELL,
+                EMExtraBlockTypes.COSMIC_DENSE_INDUCTION_CELL, EMExtraBlockTypes.INFINITE_MULTIVERSAL_INDUCTION_CELL, EMExtraBlockTypes.ABSOLUTE_OVERCLOCKED_INDUCTION_PROVIDER,
+                EMExtraBlockTypes.SUPREME_QUANTUM_INDUCTION_PROVIDER, EMExtraBlockTypes.COSMIC_DENSE_INDUCTION_PROVIDER, EMExtraBlockTypes.INFINITE_MULTIVERSAL_INDUCTION_PROVIDER)) {//Compare blocks against the type before bothering to look up the tile
             BlockEntity tile = WorldUtils.getTileEntity(world, chunkMap, pos);
             if (tile instanceof TileEntityEMExtraInductionCell cell) {
                 cells.add(cell);

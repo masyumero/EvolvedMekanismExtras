@@ -8,9 +8,9 @@ import io.github.masyumero.emextras.client.render.transmitter.*;
 import io.github.masyumero.emextras.common.integration.Addons;
 import io.github.masyumero.emextras.common.integration.mekaf.regisrty.EMExtraAdvancedFactoryContainerTypes;
 import io.github.masyumero.emextras.common.integration.mekmm.registry.EMExtraMoreMachineContainerTypes;
-import io.github.masyumero.emextras.common.registry.EMExtrasBlock;
-import io.github.masyumero.emextras.common.registry.EMExtrasContainerTypes;
-import io.github.masyumero.emextras.common.registry.EMExtrasTileEntityTypes;
+import io.github.masyumero.emextras.common.registry.EMExtraBlocks;
+import io.github.masyumero.emextras.common.registry.EMExtraContainerTypes;
+import io.github.masyumero.emextras.common.registry.EMExtraTileEntityTypes;
 
 import io.github.masyumero.emextras.common.tile.transmitter.TileEntityEMExtraLogisticalTransporter;
 import mekanism.api.text.EnumColor;
@@ -36,20 +36,20 @@ public class ClientRegistration {
     @SubscribeEvent
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
         // universal cable
-        ClientRegistrationUtil.bindTileEntityRenderer(event, RenderEMExtraUniversalCable::new, EMExtrasTileEntityTypes.ABSOLUTE_OVERCLOCKED_UNIVERSAL_CABLE,
-                EMExtrasTileEntityTypes.SUPREME_QUANTUM_UNIVERSAL_CABLE, EMExtrasTileEntityTypes.COSMIC_DENSE_UNIVERSAL_CABLE, EMExtrasTileEntityTypes.INFINITE_MULTIVERSAL_UNIVERSAL_CABLE);
+        ClientRegistrationUtil.bindTileEntityRenderer(event, RenderEMExtraUniversalCable::new, EMExtraTileEntityTypes.ABSOLUTE_OVERCLOCKED_UNIVERSAL_CABLE,
+                EMExtraTileEntityTypes.SUPREME_QUANTUM_UNIVERSAL_CABLE, EMExtraTileEntityTypes.COSMIC_DENSE_UNIVERSAL_CABLE, EMExtraTileEntityTypes.INFINITE_MULTIVERSAL_UNIVERSAL_CABLE);
         // logistical transporter
-        ClientRegistrationUtil.bindTileEntityRenderer(event, RenderEMExtraLogisticalTransporter::new, EMExtrasTileEntityTypes.ABSOLUTE_OVERCLOCKED_LOGISTICAL_TRANSPORTER,
-                EMExtrasTileEntityTypes.SUPREME_QUANTUM_LOGISTICAL_TRANSPORTER, EMExtrasTileEntityTypes.COSMIC_DENSE_LOGISTICAL_TRANSPORTER, EMExtrasTileEntityTypes.INFINITE_MULTIVERSAL_LOGISTICAL_TRANSPORTER);
+        ClientRegistrationUtil.bindTileEntityRenderer(event, RenderEMExtraLogisticalTransporter::new, EMExtraTileEntityTypes.ABSOLUTE_OVERCLOCKED_LOGISTICAL_TRANSPORTER,
+                EMExtraTileEntityTypes.SUPREME_QUANTUM_LOGISTICAL_TRANSPORTER, EMExtraTileEntityTypes.COSMIC_DENSE_LOGISTICAL_TRANSPORTER, EMExtraTileEntityTypes.INFINITE_MULTIVERSAL_LOGISTICAL_TRANSPORTER);
         // mechanical pipe
-        ClientRegistrationUtil.bindTileEntityRenderer(event, RenderEMExtraMechanicalPipe::new, EMExtrasTileEntityTypes.ABSOLUTE_OVERCLOCKED_MECHANICAL_PIPE,
-                EMExtrasTileEntityTypes.SUPREME_QUANTUM_MECHANICAL_PIPE, EMExtrasTileEntityTypes.COSMIC_DENSE_MECHANICAL_PIPE, EMExtrasTileEntityTypes.INFINITE_MULTIVERSAL_MECHANICAL_PIPE);
+        ClientRegistrationUtil.bindTileEntityRenderer(event, RenderEMExtraMechanicalPipe::new, EMExtraTileEntityTypes.ABSOLUTE_OVERCLOCKED_MECHANICAL_PIPE,
+                EMExtraTileEntityTypes.SUPREME_QUANTUM_MECHANICAL_PIPE, EMExtraTileEntityTypes.COSMIC_DENSE_MECHANICAL_PIPE, EMExtraTileEntityTypes.INFINITE_MULTIVERSAL_MECHANICAL_PIPE);
         // pressurized tube
-        ClientRegistrationUtil.bindTileEntityRenderer(event, RenderEMExtraPressurizedTube::new, EMExtrasTileEntityTypes.ABSOLUTE_OVERCLOCKED_PRESSURIZED_TUBE,
-                EMExtrasTileEntityTypes.SUPREME_QUANTUM_PRESSURIZED_TUBE, EMExtrasTileEntityTypes.COSMIC_DENSE_PRESSURIZED_TUBE, EMExtrasTileEntityTypes.INFINITE_MULTIVERSAL_PRESSURIZED_TUBE);
+        ClientRegistrationUtil.bindTileEntityRenderer(event, RenderEMExtraPressurizedTube::new, EMExtraTileEntityTypes.ABSOLUTE_OVERCLOCKED_PRESSURIZED_TUBE,
+                EMExtraTileEntityTypes.SUPREME_QUANTUM_PRESSURIZED_TUBE, EMExtraTileEntityTypes.COSMIC_DENSE_PRESSURIZED_TUBE, EMExtraTileEntityTypes.INFINITE_MULTIVERSAL_PRESSURIZED_TUBE);
         // thermodynamic conductor
-        ClientRegistrationUtil.bindTileEntityRenderer(event, RenderEMExtraThermodynamicConductor::new, EMExtrasTileEntityTypes.ABSOLUTE_OVERCLOCKED_THERMODYNAMIC_CONDUCTOR,
-                EMExtrasTileEntityTypes.SUPREME_QUANTUM_THERMODYNAMIC_CONDUCTOR, EMExtrasTileEntityTypes.COSMIC_DENSE_THERMODYNAMIC_CONDUCTOR, EMExtrasTileEntityTypes.INFINITE_MULTIVERSAL_THERMODYNAMIC_CONDUCTOR);
+        ClientRegistrationUtil.bindTileEntityRenderer(event, RenderEMExtraThermodynamicConductor::new, EMExtraTileEntityTypes.ABSOLUTE_OVERCLOCKED_THERMODYNAMIC_CONDUCTOR,
+                EMExtraTileEntityTypes.SUPREME_QUANTUM_THERMODYNAMIC_CONDUCTOR, EMExtraTileEntityTypes.COSMIC_DENSE_THERMODYNAMIC_CONDUCTOR, EMExtraTileEntityTypes.INFINITE_MULTIVERSAL_THERMODYNAMIC_CONDUCTOR);
     }
 
     @SubscribeEvent
@@ -62,7 +62,7 @@ public class ClientRegistration {
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public static void registerContainers(RegisterEvent event) {
         event.register(Registries.MENU, helper -> {
-            ClientRegistrationUtil.registerScreen(EMExtrasContainerTypes.FACTORY, GuiEMExtraFactory::new);
+            ClientRegistrationUtil.registerScreen(EMExtraContainerTypes.FACTORY, GuiEMExtraFactory::new);
             if (Addons.MEKMM.isLoaded()) {
                 ClientRegistrationUtil.registerScreen(EMExtraAdvancedFactoryContainerTypes.ADVANCED_FACTORY, GuiEMExtraAdvancedFactory::new);
                 ClientRegistrationUtil.registerScreen(EMExtraMoreMachineContainerTypes.MORE_MACHINE_FACTORY, GuiEMExtraMoreMachineFactory::new);
@@ -83,15 +83,15 @@ public class ClientRegistration {
                         }
                     }
                     return -1;
-                }, EMExtrasBlock.ABSOLUTE_OVERCLOCKED_LOGISTICAL_TRANSPORTER, EMExtrasBlock.SUPREME_QUANTUM_LOGISTICAL_TRANSPORTER, EMExtrasBlock.COSMIC_DENSE_LOGISTICAL_TRANSPORTER,
-                EMExtrasBlock.INFINITE_MULTIVERSAL_LOGISTICAL_TRANSPORTER);
+                }, EMExtraBlocks.ABSOLUTE_OVERCLOCKED_LOGISTICAL_TRANSPORTER, EMExtraBlocks.SUPREME_QUANTUM_LOGISTICAL_TRANSPORTER, EMExtraBlocks.COSMIC_DENSE_LOGISTICAL_TRANSPORTER,
+                EMExtraBlocks.INFINITE_MULTIVERSAL_LOGISTICAL_TRANSPORTER);
     }
 
     @SubscribeEvent
     public static void registerItemDecorations(RegisterItemDecorationsEvent event) {
-        TransmitterTypeDecorator.registerDecorators(event, EMExtrasBlock.ABSOLUTE_OVERCLOCKED_PRESSURIZED_TUBE, EMExtrasBlock.SUPREME_QUANTUM_PRESSURIZED_TUBE,
-                EMExtrasBlock.COSMIC_DENSE_PRESSURIZED_TUBE, EMExtrasBlock.INFINITE_MULTIVERSAL_PRESSURIZED_TUBE, EMExtrasBlock.ABSOLUTE_OVERCLOCKED_THERMODYNAMIC_CONDUCTOR,
-                EMExtrasBlock.SUPREME_QUANTUM_THERMODYNAMIC_CONDUCTOR, EMExtrasBlock.COSMIC_DENSE_THERMODYNAMIC_CONDUCTOR, EMExtrasBlock.INFINITE_MULTIVERSAL_THERMODYNAMIC_CONDUCTOR,
-                EMExtrasBlock.ABSOLUTE_OVERCLOCKED_UNIVERSAL_CABLE, EMExtrasBlock.SUPREME_QUANTUM_UNIVERSAL_CABLE, EMExtrasBlock.COSMIC_DENSE_UNIVERSAL_CABLE, EMExtrasBlock.INFINITE_MULTIVERSAL_UNIVERSAL_CABLE);
+        TransmitterTypeDecorator.registerDecorators(event, EMExtraBlocks.ABSOLUTE_OVERCLOCKED_PRESSURIZED_TUBE, EMExtraBlocks.SUPREME_QUANTUM_PRESSURIZED_TUBE,
+                EMExtraBlocks.COSMIC_DENSE_PRESSURIZED_TUBE, EMExtraBlocks.INFINITE_MULTIVERSAL_PRESSURIZED_TUBE, EMExtraBlocks.ABSOLUTE_OVERCLOCKED_THERMODYNAMIC_CONDUCTOR,
+                EMExtraBlocks.SUPREME_QUANTUM_THERMODYNAMIC_CONDUCTOR, EMExtraBlocks.COSMIC_DENSE_THERMODYNAMIC_CONDUCTOR, EMExtraBlocks.INFINITE_MULTIVERSAL_THERMODYNAMIC_CONDUCTOR,
+                EMExtraBlocks.ABSOLUTE_OVERCLOCKED_UNIVERSAL_CABLE, EMExtraBlocks.SUPREME_QUANTUM_UNIVERSAL_CABLE, EMExtraBlocks.COSMIC_DENSE_UNIVERSAL_CABLE, EMExtraBlocks.INFINITE_MULTIVERSAL_UNIVERSAL_CABLE);
     }
 }

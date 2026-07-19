@@ -10,8 +10,8 @@ import io.github.masyumero.emextras.common.block.attribute.EMExtraAttribute;
 import io.github.masyumero.emextras.common.block.attribute.EMExtraAttributeFactoryType;
 import io.github.masyumero.emextras.common.content.blocktype.EMExtraFactoryType;
 import io.github.masyumero.emextras.common.inventory.slot.EMExtraFactoryInputInventorySlot;
-import io.github.masyumero.emextras.common.registry.EMExtrasBlockType;
-import io.github.masyumero.emextras.common.registry.EMExtrasTileEntityTypes;
+import io.github.masyumero.emextras.common.registry.EMExtraBlockTypes;
+import io.github.masyumero.emextras.common.registry.EMExtraTileEntityTypes;
 import io.github.masyumero.emextras.common.util.EMExtraEnumUtils;
 import it.unimi.dsi.fastutil.ints.IntArraySet;
 import it.unimi.dsi.fastutil.ints.IntSet;
@@ -443,24 +443,24 @@ public abstract class TileEntityEMExtraFactory<RECIPE extends MekanismRecipe> ex
         }
         //Then check other factory tiers
         for (EMExtraFactoryTier factoryTier : EMExtraEnumUtils.EMEXTRA_FACTORY_TIERS) {
-            if (factoryTier != tier && EMExtrasTileEntityTypes.getEMExtraFactoryTile(factoryTier, type).get() == tileType) {
+            if (factoryTier != tier && EMExtraTileEntityTypes.getEMExtraFactoryTile(factoryTier, type).get() == tileType) {
                 return true;
             }
         }
 
         //And finally check if it is the non factory version (it will be missing sorting data, but we can gracefully ignore that)
         return switch (type) {
-            case ADVANCED_ALLOYING -> EMExtrasBlockType.ADVANCED_ALLOYER.getTileType().get();
-            case ALLOYING -> EMExtrasBlockType.ALLOYER.getTileType().get();
-            case SMELTING -> EMExtrasBlockType.ENERGIZED_SMELTER.getTileType().get();
-            case ENRICHING -> EMExtrasBlockType.ENRICHMENT_CHAMBER.getTileType().get();
-            case CRUSHING -> EMExtrasBlockType.CRUSHER.getTileType().get();
-            case COMPRESSING -> EMExtrasBlockType.OSMIUM_COMPRESSOR.getTileType().get();
-            case PURIFYING -> EMExtrasBlockType.PURIFICATION_CHAMBER.getTileType().get();
-            case INJECTING -> EMExtrasBlockType.CHEMICAL_INJECTION_CHAMBER.getTileType().get();
-            case COMBINING -> EMExtrasBlockType.COMBINER.getTileType().get();
-            case INFUSING -> EMExtrasBlockType.METALLURGIC_INFUSER.getTileType().get();
-            case SAWING -> EMExtrasBlockType.PRECISION_SAWMILL.getTileType().get();
+            case ADVANCED_ALLOYING -> EMExtraBlockTypes.ADVANCED_ALLOYER.getTileType().get();
+            case ALLOYING -> EMExtraBlockTypes.ALLOYER.getTileType().get();
+            case SMELTING -> EMExtraBlockTypes.ENERGIZED_SMELTER.getTileType().get();
+            case ENRICHING -> EMExtraBlockTypes.ENRICHMENT_CHAMBER.getTileType().get();
+            case CRUSHING -> EMExtraBlockTypes.CRUSHER.getTileType().get();
+            case COMPRESSING -> EMExtraBlockTypes.OSMIUM_COMPRESSOR.getTileType().get();
+            case PURIFYING -> EMExtraBlockTypes.PURIFICATION_CHAMBER.getTileType().get();
+            case INJECTING -> EMExtraBlockTypes.CHEMICAL_INJECTION_CHAMBER.getTileType().get();
+            case COMBINING -> EMExtraBlockTypes.COMBINER.getTileType().get();
+            case INFUSING -> EMExtraBlockTypes.METALLURGIC_INFUSER.getTileType().get();
+            case SAWING -> EMExtraBlockTypes.PRECISION_SAWMILL.getTileType().get();
         } == tileType;
     }
 

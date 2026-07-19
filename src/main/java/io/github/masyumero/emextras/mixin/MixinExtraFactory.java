@@ -9,8 +9,8 @@ import com.jerry.mekanism_extras.common.tier.ExtraFactoryTier;
 import com.jerry.mekanism_extras.common.tile.factory.TileEntityExtraFactory;
 import com.jerry.mekanism_extras.common.util.ExtraEnumUtils;
 import fr.iglee42.evolvedmekanism.registries.EMFactoryType;
-import io.github.masyumero.emextras.common.registry.EMExtrasBlock;
-import io.github.masyumero.emextras.common.registry.EMExtrasBlockType;
+import io.github.masyumero.emextras.common.registry.EMExtraBlocks;
+import io.github.masyumero.emextras.common.registry.EMExtraBlockTypes;
 import mekanism.api.text.ILangEntry;
 import mekanism.common.content.blocktype.FactoryType;
 import mekanism.common.registration.impl.TileEntityTypeRegistryObject;
@@ -36,7 +36,7 @@ public abstract class MixinExtraFactory<TILE extends TileEntityExtraFactory<?>> 
     private void initInject(Supplier tileEntityRegistrar, Supplier containerRegistrar, ExtraMachine.ExtraFactoryMachine origMachine, ExtraFactoryTier tier, CallbackInfo ci) {
         if (tier.ordinal() < ExtraEnumUtils.EXTRA_FACTORY_TIERS.length) {
             if (origMachine.getFactoryType() == EMFactoryType.ALLOYING) {
-                add(new ExtraAttributeUpgradeable(() -> EMExtrasBlock.getExtraFactory(ExtraEnumUtils.EXTRA_FACTORY_TIERS[tier.ordinal() + 1], EMFactoryType.ALLOYING)));
+                add(new ExtraAttributeUpgradeable(() -> EMExtraBlocks.getExtraFactory(ExtraEnumUtils.EXTRA_FACTORY_TIERS[tier.ordinal() + 1], EMFactoryType.ALLOYING)));
             }
         }
     }
@@ -77,7 +77,7 @@ public abstract class MixinExtraFactory<TILE extends TileEntityExtraFactory<?>> 
             case PURIFYING -> blockType = ExtraBlockTypes.PURIFICATION_CHAMBER;
             case INJECTING -> blockType = ExtraBlockTypes.CHEMICAL_INJECTION_CHAMBER;
             case INFUSING -> blockType = ExtraBlockTypes.METALLURGIC_INFUSER;
-            default -> blockType = EMExtrasBlockType.ADVANCED_ALLOYER;
+            default -> blockType = EMExtraBlockTypes.ADVANCED_ALLOYER;
         }
 
         return new ExtraFactory<>(tileEntityRegistrar, () -> ExtraContainerTypes.FACTORY, blockType, tier);

@@ -1,6 +1,6 @@
 package io.github.masyumero.emextras.common.block.transmitter;
 
-import io.github.masyumero.emextras.common.registry.EMExtrasTileEntityTypes;
+import io.github.masyumero.emextras.common.registry.EMExtraTileEntityTypes;
 import io.github.masyumero.emextras.common.tile.transmitter.TileEntityEMExtraThermodynamicConductor;
 
 import lombok.Getter;
@@ -30,10 +30,10 @@ public class EMExtraBlockThermodynamicConductor extends BlockSmallTransmitter im
     @Override
     public TileEntityTypeRegistryObject<TileEntityEMExtraThermodynamicConductor> getTileType() {
         return switch (tier) {
-            case BASIC -> EMExtrasTileEntityTypes.ABSOLUTE_OVERCLOCKED_THERMODYNAMIC_CONDUCTOR;
-            case ADVANCED -> EMExtrasTileEntityTypes.SUPREME_QUANTUM_THERMODYNAMIC_CONDUCTOR;
-            case ELITE -> EMExtrasTileEntityTypes.COSMIC_DENSE_THERMODYNAMIC_CONDUCTOR;
-            case ULTIMATE -> EMExtrasTileEntityTypes.INFINITE_MULTIVERSAL_THERMODYNAMIC_CONDUCTOR;
+            case BASIC -> EMExtraTileEntityTypes.ABSOLUTE_OVERCLOCKED_THERMODYNAMIC_CONDUCTOR;
+            case ADVANCED -> EMExtraTileEntityTypes.SUPREME_QUANTUM_THERMODYNAMIC_CONDUCTOR;
+            case ELITE -> EMExtraTileEntityTypes.COSMIC_DENSE_THERMODYNAMIC_CONDUCTOR;
+            case ULTIMATE -> EMExtraTileEntityTypes.INFINITE_MULTIVERSAL_THERMODYNAMIC_CONDUCTOR;
         };
     }
 }

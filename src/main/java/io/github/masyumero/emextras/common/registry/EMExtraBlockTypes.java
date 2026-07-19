@@ -38,7 +38,7 @@ import mekanism.common.tile.machine.*;
 import java.util.EnumSet;
 import java.util.function.Supplier;
 
-public class EMExtrasBlockType {
+public class EMExtraBlockTypes {
     private static final Table<EMExtraFactoryTier, EMExtraFactoryType, EMExtraFactory<?>> FACTORIES = HashBasedTable.create();
 
     private static final Table<ExtraFactoryTier, FactoryType, ExtraFactory<?>> ADVANCED_FACTORIES = HashBasedTable.create();
@@ -136,26 +136,26 @@ public class EMExtrasBlockType {
             .build();
 
     // Induction Cells
-    public static final BlockTypeTile<TileEntityEMExtraInductionCell> ABSOLUTE_OVERCLOCKED_INDUCTION_CELL = createInductionCell(EMExtraICTier.ABSOLUTE_OVERCLOCKED, () -> EMExtrasTileEntityTypes.ABSOLUTE_OVERCLOCKED_INDUCTION_CELL);
-    public static final BlockTypeTile<TileEntityEMExtraInductionCell> SUPREME_QUANTUM_INDUCTION_CELL = createInductionCell(EMExtraICTier.SUPREME_QUANTUM, () -> EMExtrasTileEntityTypes.SUPREME_QUANTUM_INDUCTION_CELL);
-    public static final BlockTypeTile<TileEntityEMExtraInductionCell> COSMIC_DENSE_INDUCTION_CELL = createInductionCell(EMExtraICTier.COSMIC_DENSE, () -> EMExtrasTileEntityTypes.COSMIC_DENSE_INDUCTION_CELL);
-    public static final BlockTypeTile<TileEntityEMExtraInductionCell> INFINITE_MULTIVERSAL_INDUCTION_CELL = createInductionCell(EMExtraICTier.INFINITE_MULTIVERSAL, () -> EMExtrasTileEntityTypes.INFINITE_MULTIVERSAL_INDUCTION_CELL);
+    public static final BlockTypeTile<TileEntityEMExtraInductionCell> ABSOLUTE_OVERCLOCKED_INDUCTION_CELL = createInductionCell(EMExtraICTier.ABSOLUTE_OVERCLOCKED, () -> EMExtraTileEntityTypes.ABSOLUTE_OVERCLOCKED_INDUCTION_CELL);
+    public static final BlockTypeTile<TileEntityEMExtraInductionCell> SUPREME_QUANTUM_INDUCTION_CELL = createInductionCell(EMExtraICTier.SUPREME_QUANTUM, () -> EMExtraTileEntityTypes.SUPREME_QUANTUM_INDUCTION_CELL);
+    public static final BlockTypeTile<TileEntityEMExtraInductionCell> COSMIC_DENSE_INDUCTION_CELL = createInductionCell(EMExtraICTier.COSMIC_DENSE, () -> EMExtraTileEntityTypes.COSMIC_DENSE_INDUCTION_CELL);
+    public static final BlockTypeTile<TileEntityEMExtraInductionCell> INFINITE_MULTIVERSAL_INDUCTION_CELL = createInductionCell(EMExtraICTier.INFINITE_MULTIVERSAL, () -> EMExtraTileEntityTypes.INFINITE_MULTIVERSAL_INDUCTION_CELL);
     // Induction Provide
-    public static final BlockTypeTile<TileEntityEMExtraInductionProvider> ABSOLUTE_OVERCLOCKED_INDUCTION_PROVIDER = createInductionProvider(EMExtraIPTier.ABSOLUTE_OVERCLOCKED, () -> EMExtrasTileEntityTypes.ABSOLUTE_OVERCLOCKED_INDUCTION_PROVIDER);
-    public static final BlockTypeTile<TileEntityEMExtraInductionProvider> SUPREME_QUANTUM_INDUCTION_PROVIDER = createInductionProvider(EMExtraIPTier.SUPREME_QUANTUM, () -> EMExtrasTileEntityTypes.SUPREME_QUANTUM_INDUCTION_PROVIDER);
-    public static final BlockTypeTile<TileEntityEMExtraInductionProvider> COSMIC_DENSE_INDUCTION_PROVIDER = createInductionProvider(EMExtraIPTier.COSMIC_DENSE, () -> EMExtrasTileEntityTypes.COSMIC_DENSE_INDUCTION_PROVIDER);
-    public static final BlockTypeTile<TileEntityEMExtraInductionProvider> INFINITE_MULTIVERSAL_INDUCTION_PROVIDER = createInductionProvider(EMExtraIPTier.INFINITE_MULTIVERSAL, () -> EMExtrasTileEntityTypes.INFINITE_MULTIVERSAL_INDUCTION_PROVIDER);
+    public static final BlockTypeTile<TileEntityEMExtraInductionProvider> ABSOLUTE_OVERCLOCKED_INDUCTION_PROVIDER = createInductionProvider(EMExtraIPTier.ABSOLUTE_OVERCLOCKED, () -> EMExtraTileEntityTypes.ABSOLUTE_OVERCLOCKED_INDUCTION_PROVIDER);
+    public static final BlockTypeTile<TileEntityEMExtraInductionProvider> SUPREME_QUANTUM_INDUCTION_PROVIDER = createInductionProvider(EMExtraIPTier.SUPREME_QUANTUM, () -> EMExtraTileEntityTypes.SUPREME_QUANTUM_INDUCTION_PROVIDER);
+    public static final BlockTypeTile<TileEntityEMExtraInductionProvider> COSMIC_DENSE_INDUCTION_PROVIDER = createInductionProvider(EMExtraIPTier.COSMIC_DENSE, () -> EMExtraTileEntityTypes.COSMIC_DENSE_INDUCTION_PROVIDER);
+    public static final BlockTypeTile<TileEntityEMExtraInductionProvider> INFINITE_MULTIVERSAL_INDUCTION_PROVIDER = createInductionProvider(EMExtraIPTier.INFINITE_MULTIVERSAL, () -> EMExtraTileEntityTypes.INFINITE_MULTIVERSAL_INDUCTION_PROVIDER);
 
     static {
         for (EMExtraFactoryTier tier : EMExtraEnumUtils.EMEXTRA_FACTORY_TIERS) {
             for (EMExtraFactoryType type : EMExtraEnumUtils.EMEXTRA_FACTORY_TYPES) {
                 if (type != EMExtraFactoryType.ADVANCED_ALLOYING) {
-                    FACTORIES.put(tier, type, EMExtraFactory.EMExtraFactoryBuilder.createFactory(() -> EMExtrasTileEntityTypes.getEMExtraFactoryTile(tier, type), type, tier).build());
+                    FACTORIES.put(tier, type, EMExtraFactory.EMExtraFactoryBuilder.createFactory(() -> EMExtraTileEntityTypes.getEMExtraFactoryTile(tier, type), type, tier).build());
                 }
             }
         }
         for (ExtraFactoryTier tier : ExtraEnumUtils.EXTRA_FACTORY_TIERS) {
-            ADVANCED_FACTORIES.put(tier, EMFactoryType.ALLOYING, ExtraFactory.AdvancedFactoryBuilder.createFactory(() -> EMExtrasTileEntityTypes.getExtraFactoryTile(tier, EMFactoryType.ALLOYING), EMFactoryType.ALLOYING, tier).build());
+            ADVANCED_FACTORIES.put(tier, EMFactoryType.ALLOYING, ExtraFactory.AdvancedFactoryBuilder.createFactory(() -> EMExtraTileEntityTypes.getExtraFactoryTile(tier, EMFactoryType.ALLOYING), EMFactoryType.ALLOYING, tier).build());
         }
     }
 

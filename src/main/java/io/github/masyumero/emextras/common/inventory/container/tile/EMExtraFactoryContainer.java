@@ -1,6 +1,6 @@
 package io.github.masyumero.emextras.common.inventory.container.tile;
 
-import io.github.masyumero.emextras.common.registry.EMExtrasContainerTypes;
+import io.github.masyumero.emextras.common.registry.EMExtraContainerTypes;
 import io.github.masyumero.emextras.common.tile.factory.TileEntityEMExtraFactory;
 import io.github.masyumero.emextras.common.tile.factory.TileEntitySawingEMExtraFactory;
 import mekanism.common.inventory.container.tile.MekanismTileContainer;
@@ -9,7 +9,7 @@ import net.minecraft.world.entity.player.Inventory;
 public class EMExtraFactoryContainer extends MekanismTileContainer<TileEntityEMExtraFactory<?>> {
 
     public EMExtraFactoryContainer(int id, Inventory inv, TileEntityEMExtraFactory<?> tile) {
-        super(EMExtrasContainerTypes.FACTORY, id, inv, tile);
+        super(EMExtraContainerTypes.FACTORY, id, inv, tile);
     }
 
     @Override
@@ -24,7 +24,6 @@ public class EMExtraFactoryContainer extends MekanismTileContainer<TileEntityEME
 
     @Override
     protected int getInventoryXOffset() {
-        int index = tile.tier.ordinal();
         return tile.tier.inventoryLabelX;
     }
 }

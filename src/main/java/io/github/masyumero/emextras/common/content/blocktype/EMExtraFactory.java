@@ -1,13 +1,13 @@
 package io.github.masyumero.emextras.common.content.blocktype;
 
+import io.github.masyumero.emextras.common.registry.EMExtraBlocks;
 import io.github.masyumero.emextras.common.tier.EMExtraFactoryTier;
 import com.jerry.mekanism_extras.common.util.ExtraEnumUtils;
 import io.github.masyumero.emextras.common.block.attribute.EMExtraAttributeFactoryType;
 import io.github.masyumero.emextras.common.block.attribute.EMExtraAttributeTier;
 import io.github.masyumero.emextras.common.block.attribute.EMExtraAttributeUpgradeable;
-import io.github.masyumero.emextras.common.registry.EMExtrasBlock;
-import io.github.masyumero.emextras.common.registry.EMExtrasBlockType;
-import io.github.masyumero.emextras.common.registry.EMExtrasContainerTypes;
+import io.github.masyumero.emextras.common.registry.EMExtraBlockTypes;
+import io.github.masyumero.emextras.common.registry.EMExtraContainerTypes;
 import io.github.masyumero.emextras.common.tile.factory.TileEntityEMExtraFactory;
 import io.github.masyumero.emextras.common.util.EMExtraEnumUtils;
 import mekanism.common.MekanismLang;
@@ -32,7 +32,7 @@ public class EMExtraFactory<TILE extends TileEntityEMExtraFactory<?>> extends EM
         setMachineData(tier);
         add(new AttributeGui(containerRegistrar, null), new EMExtraAttributeTier<>(tier));
         if (tier.ordinal() < ExtraEnumUtils.EXTRA_FACTORY_TIERS.length - 1) {
-            add(new EMExtraAttributeUpgradeable(() -> EMExtrasBlock.getEMExtraFactory(EMExtraEnumUtils.EMEXTRA_FACTORY_TIERS[tier.ordinal() + 1], origMachine.getFactoryType())));
+            add(new EMExtraAttributeUpgradeable(() -> EMExtraBlocks.getEMExtraFactory(EMExtraEnumUtils.EMEXTRA_FACTORY_TIERS[tier.ordinal() + 1], origMachine.getFactoryType())));
         }
     }
 
@@ -71,18 +71,18 @@ public class EMExtraFactory<TILE extends TileEntityEMExtraFactory<?>> extends EM
     private static <TILE extends TileEntityEMExtraFactory<?>> @NotNull EMExtraFactoryBuilder<EMExtraFactory<TILE>, TILE, ?> getAdvancedFactoryTILEAdvancedFactoryBuilder(Supplier<TileEntityTypeRegistryObject<TILE>> tileEntityRegistrar, EMExtraFactoryType type, EMExtraFactoryTier tier) {
 
         EMExtraFactoryBuilder<EMExtraFactory<TILE>, TILE, ?> builder = new EMExtraFactoryBuilder<>(new EMExtraFactory<>(tileEntityRegistrar,
-                () -> EMExtrasContainerTypes.FACTORY,
+                () -> EMExtraContainerTypes.FACTORY,
                 switch (type) {
-                    case ALLOYING, ADVANCED_ALLOYING -> EMExtrasBlockType.ALLOYER;
-                    case SMELTING -> EMExtrasBlockType.ENERGIZED_SMELTER;
-                    case ENRICHING -> EMExtrasBlockType.ENRICHMENT_CHAMBER;
-                    case CRUSHING -> EMExtrasBlockType.CRUSHER;
-                    case SAWING -> EMExtrasBlockType.PRECISION_SAWMILL;
-                    case INFUSING -> EMExtrasBlockType.METALLURGIC_INFUSER;
-                    case COMBINING -> EMExtrasBlockType.COMBINER;
-                    case INJECTING -> EMExtrasBlockType.CHEMICAL_INJECTION_CHAMBER;
-                    case PURIFYING -> EMExtrasBlockType.PURIFICATION_CHAMBER;
-                    case COMPRESSING -> EMExtrasBlockType.OSMIUM_COMPRESSOR;
+                    case ALLOYING, ADVANCED_ALLOYING -> EMExtraBlockTypes.ALLOYER;
+                    case SMELTING -> EMExtraBlockTypes.ENERGIZED_SMELTER;
+                    case ENRICHING -> EMExtraBlockTypes.ENRICHMENT_CHAMBER;
+                    case CRUSHING -> EMExtraBlockTypes.CRUSHER;
+                    case SAWING -> EMExtraBlockTypes.PRECISION_SAWMILL;
+                    case INFUSING -> EMExtraBlockTypes.METALLURGIC_INFUSER;
+                    case COMBINING -> EMExtraBlockTypes.COMBINER;
+                    case INJECTING -> EMExtraBlockTypes.CHEMICAL_INJECTION_CHAMBER;
+                    case PURIFYING -> EMExtraBlockTypes.PURIFICATION_CHAMBER;
+                    case COMPRESSING -> EMExtraBlockTypes.OSMIUM_COMPRESSOR;
                 },
                 tier)
         );

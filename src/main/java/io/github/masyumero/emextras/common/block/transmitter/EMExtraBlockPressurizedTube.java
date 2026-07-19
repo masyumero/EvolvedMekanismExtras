@@ -1,6 +1,6 @@
 package io.github.masyumero.emextras.common.block.transmitter;
 
-import io.github.masyumero.emextras.common.registry.EMExtrasTileEntityTypes;
+import io.github.masyumero.emextras.common.registry.EMExtraTileEntityTypes;
 import io.github.masyumero.emextras.common.tile.transmitter.TileEntityEMExtraPressurizedTube;
 
 import lombok.Getter;
@@ -30,10 +30,10 @@ public class EMExtraBlockPressurizedTube extends BlockSmallTransmitter implement
     @Override
     public TileEntityTypeRegistryObject<TileEntityEMExtraPressurizedTube> getTileType() {
         return switch (tier) {
-            case BASIC -> EMExtrasTileEntityTypes.ABSOLUTE_OVERCLOCKED_PRESSURIZED_TUBE;
-            case ADVANCED -> EMExtrasTileEntityTypes.SUPREME_QUANTUM_PRESSURIZED_TUBE;
-            case ELITE -> EMExtrasTileEntityTypes.COSMIC_DENSE_PRESSURIZED_TUBE;
-            case ULTIMATE -> EMExtrasTileEntityTypes.INFINITE_MULTIVERSAL_PRESSURIZED_TUBE;
+            case BASIC -> EMExtraTileEntityTypes.ABSOLUTE_OVERCLOCKED_PRESSURIZED_TUBE;
+            case ADVANCED -> EMExtraTileEntityTypes.SUPREME_QUANTUM_PRESSURIZED_TUBE;
+            case ELITE -> EMExtraTileEntityTypes.COSMIC_DENSE_PRESSURIZED_TUBE;
+            case ULTIMATE -> EMExtraTileEntityTypes.INFINITE_MULTIVERSAL_PRESSURIZED_TUBE;
         };
     }
 }

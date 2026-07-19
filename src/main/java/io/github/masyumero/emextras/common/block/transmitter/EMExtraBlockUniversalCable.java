@@ -1,6 +1,6 @@
 package io.github.masyumero.emextras.common.block.transmitter;
 
-import io.github.masyumero.emextras.common.registry.EMExtrasTileEntityTypes;
+import io.github.masyumero.emextras.common.registry.EMExtraTileEntityTypes;
 import io.github.masyumero.emextras.common.tile.transmitter.TileEntityEMExtraUniversalCable;
 
 import lombok.Getter;
@@ -30,10 +30,10 @@ public class EMExtraBlockUniversalCable extends BlockSmallTransmitter implements
     @Override
     public TileEntityTypeRegistryObject<TileEntityEMExtraUniversalCable> getTileType() {
         return switch (tier) {
-            case BASIC -> EMExtrasTileEntityTypes.ABSOLUTE_OVERCLOCKED_UNIVERSAL_CABLE;
-            case ADVANCED -> EMExtrasTileEntityTypes.SUPREME_QUANTUM_UNIVERSAL_CABLE;
-            case ELITE -> EMExtrasTileEntityTypes.COSMIC_DENSE_UNIVERSAL_CABLE;
-            case ULTIMATE -> EMExtrasTileEntityTypes.INFINITE_MULTIVERSAL_UNIVERSAL_CABLE;
+            case BASIC -> EMExtraTileEntityTypes.ABSOLUTE_OVERCLOCKED_UNIVERSAL_CABLE;
+            case ADVANCED -> EMExtraTileEntityTypes.SUPREME_QUANTUM_UNIVERSAL_CABLE;
+            case ELITE -> EMExtraTileEntityTypes.COSMIC_DENSE_UNIVERSAL_CABLE;
+            case ULTIMATE -> EMExtraTileEntityTypes.INFINITE_MULTIVERSAL_UNIVERSAL_CABLE;
         };
     }
 }

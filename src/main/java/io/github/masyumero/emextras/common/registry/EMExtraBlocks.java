@@ -44,7 +44,7 @@ import java.util.Objects;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-public class EMExtrasBlock {
+public class EMExtraBlocks {
     public static final BlockDeferredRegister BLOCK = new BlockDeferredRegister(EMExtras.MODID);
 
     private static <BLOCK extends Block, ITEM extends BlockItem> BlockRegistryObject<BLOCK, ITEM> registerTieredBlock(String tierName, String suffix, Supplier<? extends BLOCK> blockSupplier, Function<BLOCK, ITEM> itemCreator) {
@@ -65,25 +65,25 @@ public class EMExtrasBlock {
         for (EMExtraFactoryTier tier : EMExtraEnumUtils.EMEXTRA_FACTORY_TIERS) {
             for (EMExtraFactoryType type : EMExtraEnumUtils.EMEXTRA_FACTORY_TYPES) {
                 if (type != EMExtraFactoryType.ADVANCED_ALLOYING) {
-                    FACTORIES.put(tier, type, registerFactory(EMExtrasBlockType.getEMExtraFactory(tier, type)));
+                    FACTORIES.put(tier, type, registerFactory(EMExtraBlockTypes.getEMExtraFactory(tier, type)));
                 }
             }
         }
         for (ExtraFactoryTier tier : ExtraEnumUtils.EXTRA_FACTORY_TIERS) {
-            ADVANCED_FACTORIES.put(tier, EMFactoryType.ALLOYING, registerExtraAlloyingFactory(EMExtrasBlockType.getExtraFactory(tier, EMFactoryType.ALLOYING)));
+            ADVANCED_FACTORIES.put(tier, EMFactoryType.ALLOYING, registerExtraAlloyingFactory(EMExtraBlockTypes.getExtraFactory(tier, EMFactoryType.ALLOYING)));
         }
     }
 
     // Induction Cells
-    public static final BlockRegistryObject<BlockTile<TileEntityEMExtraInductionCell, BlockTypeTile<TileEntityEMExtraInductionCell>>, EMExtraItemBlockInductionCell> ABSOLUTE_OVERCLOCKED_INDUCTION_CELL = registerInductionCell("absolute_overclocked", EMExtrasBlockType.ABSOLUTE_OVERCLOCKED_INDUCTION_CELL);
-    public static final BlockRegistryObject<BlockTile<TileEntityEMExtraInductionCell, BlockTypeTile<TileEntityEMExtraInductionCell>>, EMExtraItemBlockInductionCell> SUPREME_QUANTUM_INDUCTION_CELL = registerInductionCell("supreme_quantum", EMExtrasBlockType.SUPREME_QUANTUM_INDUCTION_CELL);
-    public static final BlockRegistryObject<BlockTile<TileEntityEMExtraInductionCell, BlockTypeTile<TileEntityEMExtraInductionCell>>, EMExtraItemBlockInductionCell> COSMIC_DENSE_INDUCTION_CELL = registerInductionCell("cosmic_dense", EMExtrasBlockType.COSMIC_DENSE_INDUCTION_CELL);
-    public static final BlockRegistryObject<BlockTile<TileEntityEMExtraInductionCell, BlockTypeTile<TileEntityEMExtraInductionCell>>, EMExtraItemBlockInductionCell> INFINITE_MULTIVERSAL_INDUCTION_CELL = registerInductionCell("infinite_multiversal", EMExtrasBlockType.INFINITE_MULTIVERSAL_INDUCTION_CELL);
+    public static final BlockRegistryObject<BlockTile<TileEntityEMExtraInductionCell, BlockTypeTile<TileEntityEMExtraInductionCell>>, EMExtraItemBlockInductionCell> ABSOLUTE_OVERCLOCKED_INDUCTION_CELL = registerInductionCell("absolute_overclocked", EMExtraBlockTypes.ABSOLUTE_OVERCLOCKED_INDUCTION_CELL);
+    public static final BlockRegistryObject<BlockTile<TileEntityEMExtraInductionCell, BlockTypeTile<TileEntityEMExtraInductionCell>>, EMExtraItemBlockInductionCell> SUPREME_QUANTUM_INDUCTION_CELL = registerInductionCell("supreme_quantum", EMExtraBlockTypes.SUPREME_QUANTUM_INDUCTION_CELL);
+    public static final BlockRegistryObject<BlockTile<TileEntityEMExtraInductionCell, BlockTypeTile<TileEntityEMExtraInductionCell>>, EMExtraItemBlockInductionCell> COSMIC_DENSE_INDUCTION_CELL = registerInductionCell("cosmic_dense", EMExtraBlockTypes.COSMIC_DENSE_INDUCTION_CELL);
+    public static final BlockRegistryObject<BlockTile<TileEntityEMExtraInductionCell, BlockTypeTile<TileEntityEMExtraInductionCell>>, EMExtraItemBlockInductionCell> INFINITE_MULTIVERSAL_INDUCTION_CELL = registerInductionCell("infinite_multiversal", EMExtraBlockTypes.INFINITE_MULTIVERSAL_INDUCTION_CELL);
     // Induction Provide
-    public static final BlockRegistryObject<BlockTile<TileEntityEMExtraInductionProvider, BlockTypeTile<TileEntityEMExtraInductionProvider>>, EMExtraItemBlockInductionProvider> ABSOLUTE_OVERCLOCKED_INDUCTION_PROVIDER = registerInductionProvider("absolute_overclocked", EMExtrasBlockType.ABSOLUTE_OVERCLOCKED_INDUCTION_PROVIDER);
-    public static final BlockRegistryObject<BlockTile<TileEntityEMExtraInductionProvider, BlockTypeTile<TileEntityEMExtraInductionProvider>>, EMExtraItemBlockInductionProvider> SUPREME_QUANTUM_INDUCTION_PROVIDER = registerInductionProvider("supreme_quantum", EMExtrasBlockType.SUPREME_QUANTUM_INDUCTION_PROVIDER);
-    public static final BlockRegistryObject<BlockTile<TileEntityEMExtraInductionProvider, BlockTypeTile<TileEntityEMExtraInductionProvider>>, EMExtraItemBlockInductionProvider> COSMIC_DENSE_INDUCTION_PROVIDER = registerInductionProvider("cosmic_dense", EMExtrasBlockType.COSMIC_DENSE_INDUCTION_PROVIDER);
-    public static final BlockRegistryObject<BlockTile<TileEntityEMExtraInductionProvider, BlockTypeTile<TileEntityEMExtraInductionProvider>>, EMExtraItemBlockInductionProvider> INFINITE_MULTIVERSAL_INDUCTION_PROVIDER = registerInductionProvider("infinite_multiversal", EMExtrasBlockType.INFINITE_MULTIVERSAL_INDUCTION_PROVIDER);
+    public static final BlockRegistryObject<BlockTile<TileEntityEMExtraInductionProvider, BlockTypeTile<TileEntityEMExtraInductionProvider>>, EMExtraItemBlockInductionProvider> ABSOLUTE_OVERCLOCKED_INDUCTION_PROVIDER = registerInductionProvider("absolute_overclocked", EMExtraBlockTypes.ABSOLUTE_OVERCLOCKED_INDUCTION_PROVIDER);
+    public static final BlockRegistryObject<BlockTile<TileEntityEMExtraInductionProvider, BlockTypeTile<TileEntityEMExtraInductionProvider>>, EMExtraItemBlockInductionProvider> SUPREME_QUANTUM_INDUCTION_PROVIDER = registerInductionProvider("supreme_quantum", EMExtraBlockTypes.SUPREME_QUANTUM_INDUCTION_PROVIDER);
+    public static final BlockRegistryObject<BlockTile<TileEntityEMExtraInductionProvider, BlockTypeTile<TileEntityEMExtraInductionProvider>>, EMExtraItemBlockInductionProvider> COSMIC_DENSE_INDUCTION_PROVIDER = registerInductionProvider("cosmic_dense", EMExtraBlockTypes.COSMIC_DENSE_INDUCTION_PROVIDER);
+    public static final BlockRegistryObject<BlockTile<TileEntityEMExtraInductionProvider, BlockTypeTile<TileEntityEMExtraInductionProvider>>, EMExtraItemBlockInductionProvider> INFINITE_MULTIVERSAL_INDUCTION_PROVIDER = registerInductionProvider("infinite_multiversal", EMExtraBlockTypes.INFINITE_MULTIVERSAL_INDUCTION_PROVIDER);
     // Universal Cables
     public static final BlockRegistryObject<EMExtraBlockUniversalCable, EMExtraItemBlockUniversalCable> ABSOLUTE_OVERCLOCKED_UNIVERSAL_CABLE = registerUniversalCable("absolute_overclocked", CableTier.BASIC);
     public static final BlockRegistryObject<EMExtraBlockUniversalCable, EMExtraItemBlockUniversalCable> SUPREME_QUANTUM_UNIVERSAL_CABLE = registerUniversalCable("supreme_quantum", CableTier.ADVANCED);

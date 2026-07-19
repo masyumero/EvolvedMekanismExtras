@@ -1,6 +1,6 @@
 package io.github.masyumero.emextras.common.block.transmitter;
 
-import io.github.masyumero.emextras.common.registry.EMExtrasTileEntityTypes;
+import io.github.masyumero.emextras.common.registry.EMExtraTileEntityTypes;
 import io.github.masyumero.emextras.common.tile.transmitter.TileEntityEMExtraLogisticalTransporter;
 import io.github.masyumero.emextras.common.tile.transmitter.TileEntityEMExtraLogisticalTransporterBase;
 
@@ -31,10 +31,10 @@ public class EMExtraBlockLogisticalTransporter extends BlockLargeTransmitter imp
 
     public TileEntityTypeRegistryObject<TileEntityEMExtraLogisticalTransporter> getTileType() {
         return switch (this.tier) {
-            case BASIC -> EMExtrasTileEntityTypes.ABSOLUTE_OVERCLOCKED_LOGISTICAL_TRANSPORTER;
-            case ADVANCED -> EMExtrasTileEntityTypes.SUPREME_QUANTUM_LOGISTICAL_TRANSPORTER;
-            case ELITE -> EMExtrasTileEntityTypes.COSMIC_DENSE_LOGISTICAL_TRANSPORTER;
-            case ULTIMATE -> EMExtrasTileEntityTypes.INFINITE_MULTIVERSAL_LOGISTICAL_TRANSPORTER;
+            case BASIC -> EMExtraTileEntityTypes.ABSOLUTE_OVERCLOCKED_LOGISTICAL_TRANSPORTER;
+            case ADVANCED -> EMExtraTileEntityTypes.SUPREME_QUANTUM_LOGISTICAL_TRANSPORTER;
+            case ELITE -> EMExtraTileEntityTypes.COSMIC_DENSE_LOGISTICAL_TRANSPORTER;
+            case ULTIMATE -> EMExtraTileEntityTypes.INFINITE_MULTIVERSAL_LOGISTICAL_TRANSPORTER;
         };
     }
 }

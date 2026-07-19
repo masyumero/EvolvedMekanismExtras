@@ -15,7 +15,7 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class EMExtrasItem {
+public class EMExtraItems {
     public static final ItemDeferredRegister ITEM = new ItemDeferredRegister(EMExtras.MODID);
 
     public static final ItemRegistryObject<Item> BASE_CONTROL_CIRCUIT = ITEM.register("base_control_circuit", properties -> new Item(properties.rarity(Rarity.COMMON)));

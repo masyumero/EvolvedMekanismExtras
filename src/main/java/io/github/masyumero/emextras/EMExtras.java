@@ -30,13 +30,12 @@ public class EMExtras {
     @SuppressWarnings("removal")
     public EMExtras() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-
         LoadConfig.registerConfig(ModLoadingContext.get());
         modEventBus.addListener(this::commonSetup);
-        EMExtrasItem.register(modEventBus);
-        EMExtrasBlock.register(modEventBus);
-        EMExtrasTileEntityTypes.register(modEventBus);
-        EMExtrasContainerTypes.register(modEventBus);
+        EMExtraItems.register(modEventBus);
+        EMExtraBlocks.register(modEventBus);
+        EMExtraTileEntityTypes.register(modEventBus);
+        EMExtraContainerTypes.register(modEventBus);
         EMExtraTab.register(modEventBus);
         conditionalRegistry(modEventBus);
     }

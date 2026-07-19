@@ -8,10 +8,10 @@ import com.jerry.mekmm.common.content.blocktype.MoreMachineFactoryType;
 
 import io.github.masyumero.emextras.common.integration.mekaf.regisrty.EMExtraAdvancedFactoryBlocks;
 import io.github.masyumero.emextras.common.integration.mekmm.registry.EMExtraMoreMachineBlocks;
+import io.github.masyumero.emextras.common.registry.EMExtraBlocks;
 import io.github.masyumero.emextras.common.tier.EMExtraFactoryTier;
 import io.github.masyumero.emextras.common.block.attribute.EMExtraAttributeFactoryType;
 import io.github.masyumero.emextras.common.block.attribute.EMExtraAttributeUpgradeable;
-import io.github.masyumero.emextras.common.registry.EMExtrasBlock;
 
 import mekanism.api.Upgrade;
 import mekanism.api.text.ILangEntry;
@@ -46,7 +46,7 @@ public class EMExtraMachine<TILE extends TileEntityMekanism> extends BlockTypeTi
         public EMExtraFactoryMachine(Supplier<TileEntityTypeRegistryObject<TILE>> tileEntitySupplier, MekanismLang description, EMExtraFactoryType factoryType) {
             super(tileEntitySupplier, description);
             add(new AttributeUpgradeSupport(EnumSet.of(Upgrade.SPEED, Upgrade.ENERGY, Upgrade.MUFFLING, ExtraUpgrade.STACK, ExtraUpgrade.CREATIVE)));
-            add(new EMExtraAttributeFactoryType(factoryType), new EMExtraAttributeUpgradeable(() -> EMExtrasBlock.getEMExtraFactory(EMExtraFactoryTier.ABSOLUTE_OVERCLOCKED, getFactoryType())));
+            add(new EMExtraAttributeFactoryType(factoryType), new EMExtraAttributeUpgradeable(() -> EMExtraBlocks.getEMExtraFactory(EMExtraFactoryTier.ABSOLUTE_OVERCLOCKED, getFactoryType())));
         }
 
         public EMExtraFactoryMachine(Supplier<TileEntityTypeRegistryObject<TILE>> tileEntitySupplier, ILangEntry description, MoreMachineFactoryType factoryType) {

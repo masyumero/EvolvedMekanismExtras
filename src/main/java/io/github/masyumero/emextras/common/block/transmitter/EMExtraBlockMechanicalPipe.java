@@ -1,6 +1,6 @@
 package io.github.masyumero.emextras.common.block.transmitter;
 
-import io.github.masyumero.emextras.common.registry.EMExtrasTileEntityTypes;
+import io.github.masyumero.emextras.common.registry.EMExtraTileEntityTypes;
 import io.github.masyumero.emextras.common.tile.transmitter.TileEntityEMExtraMechanicalPipe;
 
 import lombok.Getter;
@@ -28,10 +28,10 @@ public class EMExtraBlockMechanicalPipe extends BlockLargeTransmitter implements
 
     public TileEntityTypeRegistryObject<TileEntityEMExtraMechanicalPipe> getTileType() {
         return switch (this.tier) {
-            case BASIC -> EMExtrasTileEntityTypes.ABSOLUTE_OVERCLOCKED_MECHANICAL_PIPE;
-            case ADVANCED -> EMExtrasTileEntityTypes.SUPREME_QUANTUM_MECHANICAL_PIPE;
-            case ELITE -> EMExtrasTileEntityTypes.COSMIC_DENSE_MECHANICAL_PIPE;
-            case ULTIMATE -> EMExtrasTileEntityTypes.INFINITE_MULTIVERSAL_MECHANICAL_PIPE;
+            case BASIC -> EMExtraTileEntityTypes.ABSOLUTE_OVERCLOCKED_MECHANICAL_PIPE;
+            case ADVANCED -> EMExtraTileEntityTypes.SUPREME_QUANTUM_MECHANICAL_PIPE;
+            case ELITE -> EMExtraTileEntityTypes.COSMIC_DENSE_MECHANICAL_PIPE;
+            case ULTIMATE -> EMExtraTileEntityTypes.INFINITE_MULTIVERSAL_MECHANICAL_PIPE;
         };
     }
 }

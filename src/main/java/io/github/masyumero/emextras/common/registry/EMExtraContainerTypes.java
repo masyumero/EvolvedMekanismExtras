@@ -8,7 +8,7 @@ import mekanism.common.registration.impl.ContainerTypeDeferredRegister;
 import mekanism.common.registration.impl.ContainerTypeRegistryObject;
 import net.minecraftforge.eventbus.api.IEventBus;
 
-public class EMExtrasContainerTypes {
+public class EMExtraContainerTypes {
     public static final ContainerTypeDeferredRegister CONTAINER_TYPES = new ContainerTypeDeferredRegister(EMExtras.MODID);
 
     public static final ContainerTypeRegistryObject<MekanismTileContainer<TileEntityEMExtraFactory<?>>> FACTORY = CONTAINER_TYPES.register("factory", factoryClass(), EMExtraFactoryContainer::new);

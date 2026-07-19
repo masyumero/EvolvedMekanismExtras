@@ -6,7 +6,7 @@ import com.llamalad7.mixinextras.expression.Expression;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.sugar.Local;
 import io.github.masyumero.emextras.common.content.network.transmitter.IEMExtraUpgradeableTransmitter;
-import io.github.masyumero.emextras.common.registry.EMExtrasBlock;
+import io.github.masyumero.emextras.common.registry.EMExtraBlocks;
 import mekanism.api.providers.IBlockProvider;
 import mekanism.common.Mekanism;
 import mekanism.common.content.network.transmitter.IUpgradeableTransmitter;
@@ -92,15 +92,15 @@ public abstract class MixinItemAlloyRadiance extends Item {
     private static void getiBlockProviderInject(TileEntityTransmitter transmitterTile, CallbackInfoReturnable<IBlockProvider> cir) {
         if (emextras$isEMExtra) {
             if (transmitterTile instanceof TileEntityPressurizedTube) {
-                cir.setReturnValue(EMExtrasBlock.ABSOLUTE_OVERCLOCKED_PRESSURIZED_TUBE);
+                cir.setReturnValue(EMExtraBlocks.ABSOLUTE_OVERCLOCKED_PRESSURIZED_TUBE);
             } else if (transmitterTile instanceof TileEntityUniversalCable) {
-                cir.setReturnValue(EMExtrasBlock.ABSOLUTE_OVERCLOCKED_UNIVERSAL_CABLE);
+                cir.setReturnValue(EMExtraBlocks.ABSOLUTE_OVERCLOCKED_UNIVERSAL_CABLE);
             } else if (transmitterTile instanceof TileEntityMechanicalPipe) {
-                cir.setReturnValue(EMExtrasBlock.ABSOLUTE_OVERCLOCKED_MECHANICAL_PIPE);
+                cir.setReturnValue(EMExtraBlocks.ABSOLUTE_OVERCLOCKED_MECHANICAL_PIPE);
             } else if (transmitterTile instanceof TileEntityThermodynamicConductor) {
-                cir.setReturnValue(EMExtrasBlock.ABSOLUTE_OVERCLOCKED_THERMODYNAMIC_CONDUCTOR);
+                cir.setReturnValue(EMExtraBlocks.ABSOLUTE_OVERCLOCKED_THERMODYNAMIC_CONDUCTOR);
             } else {
-                cir.setReturnValue(transmitterTile instanceof TileEntityLogisticalTransporter ? EMExtrasBlock.ABSOLUTE_OVERCLOCKED_LOGISTICAL_TRANSPORTER : null);
+                cir.setReturnValue(transmitterTile instanceof TileEntityLogisticalTransporter ? EMExtraBlocks.ABSOLUTE_OVERCLOCKED_LOGISTICAL_TRANSPORTER : null);
             }
         }
     }

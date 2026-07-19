@@ -2,7 +2,7 @@ package io.github.masyumero.emextras.common.tile.transmitter;
 
 import io.github.masyumero.emextras.api.tier.EMExtraTier;
 import io.github.masyumero.emextras.common.content.network.transmitter.EMExtraLogisticalTransporter;
-import io.github.masyumero.emextras.common.registry.EMExtrasBlock;
+import io.github.masyumero.emextras.common.registry.EMExtraBlocks;
 
 import mekanism.api.providers.IBlockProvider;
 import mekanism.client.model.data.TransmitterModelData;
@@ -46,10 +46,10 @@ public class TileEntityEMExtraLogisticalTransporter extends TileEntityEMExtraLog
     @Override
     protected BlockState upgradeResult(@NotNull BlockState current, @NotNull EMExtraTier tier) {
         return BlockStateHelper.copyStateData(current, switch (tier) {
-            case ABSOLUTE_OVERCLOCKED -> EMExtrasBlock.ABSOLUTE_OVERCLOCKED_LOGISTICAL_TRANSPORTER;
-            case SUPREME_QUANTUM -> EMExtrasBlock.SUPREME_QUANTUM_LOGISTICAL_TRANSPORTER;
-            case COSMIC_DENSE -> EMExtrasBlock.COSMIC_DENSE_LOGISTICAL_TRANSPORTER;
-            case INFINITE_MULTIVERSAL -> EMExtrasBlock.INFINITE_MULTIVERSAL_LOGISTICAL_TRANSPORTER;
+            case ABSOLUTE_OVERCLOCKED -> EMExtraBlocks.ABSOLUTE_OVERCLOCKED_LOGISTICAL_TRANSPORTER;
+            case SUPREME_QUANTUM -> EMExtraBlocks.SUPREME_QUANTUM_LOGISTICAL_TRANSPORTER;
+            case COSMIC_DENSE -> EMExtraBlocks.COSMIC_DENSE_LOGISTICAL_TRANSPORTER;
+            case INFINITE_MULTIVERSAL -> EMExtraBlocks.INFINITE_MULTIVERSAL_LOGISTICAL_TRANSPORTER;
         });
     }
 }

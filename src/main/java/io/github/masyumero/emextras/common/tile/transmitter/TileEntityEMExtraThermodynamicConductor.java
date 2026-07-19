@@ -2,7 +2,7 @@ package io.github.masyumero.emextras.common.tile.transmitter;
 
 import io.github.masyumero.emextras.api.tier.EMExtraTier;
 import io.github.masyumero.emextras.common.content.network.transmitter.EMExtraThermodynamicConductor;
-import io.github.masyumero.emextras.common.registry.EMExtrasBlock;
+import io.github.masyumero.emextras.common.registry.EMExtraBlocks;
 
 import mekanism.api.heat.IHeatCapacitor;
 import mekanism.api.heat.IMekanismHeatHandler;
@@ -72,10 +72,10 @@ public class TileEntityEMExtraThermodynamicConductor extends TileEntityEMExtraTr
     @Override
     protected BlockState upgradeResult(@NotNull BlockState current, @NotNull EMExtraTier tier) {
         return BlockStateHelper.copyStateData(current, switch (tier) {
-            case ABSOLUTE_OVERCLOCKED -> EMExtrasBlock.ABSOLUTE_OVERCLOCKED_THERMODYNAMIC_CONDUCTOR;
-            case SUPREME_QUANTUM -> EMExtrasBlock.SUPREME_QUANTUM_THERMODYNAMIC_CONDUCTOR;
-            case COSMIC_DENSE -> EMExtrasBlock.COSMIC_DENSE_THERMODYNAMIC_CONDUCTOR;
-            case INFINITE_MULTIVERSAL -> EMExtrasBlock.INFINITE_MULTIVERSAL_THERMODYNAMIC_CONDUCTOR;
+            case ABSOLUTE_OVERCLOCKED -> EMExtraBlocks.ABSOLUTE_OVERCLOCKED_THERMODYNAMIC_CONDUCTOR;
+            case SUPREME_QUANTUM -> EMExtraBlocks.SUPREME_QUANTUM_THERMODYNAMIC_CONDUCTOR;
+            case COSMIC_DENSE -> EMExtraBlocks.COSMIC_DENSE_THERMODYNAMIC_CONDUCTOR;
+            case INFINITE_MULTIVERSAL -> EMExtraBlocks.INFINITE_MULTIVERSAL_THERMODYNAMIC_CONDUCTOR;
         });
     }
 

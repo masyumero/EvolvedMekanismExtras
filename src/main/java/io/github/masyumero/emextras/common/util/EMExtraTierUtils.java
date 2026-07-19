@@ -5,7 +5,7 @@ import io.github.masyumero.emextras.api.tier.EMExtraTier;
 
 public class EMExtraTierUtils {
 
-    public static EMExtraTier advanceToEMExtraTier(AdvancedTier tier) {
+    public static EMExtraTier advancedToEMExtraTier(AdvancedTier tier) {
         return switch (tier) {
             case ABSOLUTE -> EMExtraTier.ABSOLUTE_OVERCLOCKED;
             case SUPREME -> EMExtraTier.SUPREME_QUANTUM;

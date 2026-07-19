@@ -2,7 +2,7 @@ package io.github.masyumero.emextras.common.tile.transmitter;
 
 import io.github.masyumero.emextras.api.tier.EMExtraTier;
 import io.github.masyumero.emextras.common.content.network.transmitter.EMExtraBoxedPressurizedTube;
-import io.github.masyumero.emextras.common.registry.EMExtrasBlock;
+import io.github.masyumero.emextras.common.registry.EMExtraBlocks;
 import mekanism.api.NBTConstants;
 import mekanism.api.chemical.Chemical;
 import mekanism.api.chemical.ChemicalStack;
@@ -99,10 +99,10 @@ public class TileEntityEMExtraPressurizedTube extends TileEntityEMExtraTransmitt
     @Override
     protected BlockState upgradeResult(@NotNull BlockState current, @NotNull EMExtraTier tier) {
         return BlockStateHelper.copyStateData(current, switch (tier) {
-            case ABSOLUTE_OVERCLOCKED -> EMExtrasBlock.ABSOLUTE_OVERCLOCKED_PRESSURIZED_TUBE;
-            case SUPREME_QUANTUM -> EMExtrasBlock.SUPREME_QUANTUM_PRESSURIZED_TUBE;
-            case COSMIC_DENSE -> EMExtrasBlock.COSMIC_DENSE_PRESSURIZED_TUBE;
-            case INFINITE_MULTIVERSAL -> EMExtrasBlock.INFINITE_MULTIVERSAL_PRESSURIZED_TUBE;
+            case ABSOLUTE_OVERCLOCKED -> EMExtraBlocks.ABSOLUTE_OVERCLOCKED_PRESSURIZED_TUBE;
+            case SUPREME_QUANTUM -> EMExtraBlocks.SUPREME_QUANTUM_PRESSURIZED_TUBE;
+            case COSMIC_DENSE -> EMExtraBlocks.COSMIC_DENSE_PRESSURIZED_TUBE;
+            case INFINITE_MULTIVERSAL -> EMExtraBlocks.INFINITE_MULTIVERSAL_PRESSURIZED_TUBE;
         });
     }
 
