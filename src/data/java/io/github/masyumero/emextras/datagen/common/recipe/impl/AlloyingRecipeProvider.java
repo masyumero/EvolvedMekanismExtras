@@ -80,11 +80,31 @@ public class AlloyingRecipeProvider implements ISubRecipeProvider {
         transmitters(consumer, "thermodynamic_conductor", EMExtraBlocks.INFINITE_MULTIVERSAL_THERMODYNAMIC_CONDUCTOR, EMExtraBlocks.COSMIC_DENSE_THERMODYNAMIC_CONDUCTOR, EMExtraTagUtils.ALLOYS_SPECTRUM, EMTags.Items.ALLOYS_MULTIVERSAL);
         transmitters(consumer, "universal_cable", EMExtraBlocks.INFINITE_MULTIVERSAL_UNIVERSAL_CABLE, EMExtraBlocks.COSMIC_DENSE_UNIVERSAL_CABLE, EMExtraTagUtils.ALLOYS_SPECTRUM, EMTags.Items.ALLOYS_MULTIVERSAL);
 
-        transmitters(consumer, "logistical_transporter", EMExtrasBlock.INFINITE_MULTIVERSAL_LOGISTICAL_TRANSPORTER, EMExtrasBlock.COSMIC_DENSE_LOGISTICAL_TRANSPORTER, EMExtraTagUtils.ALLOYS_SPECTRUM, EMTags.Items.ALLOYS_MULTIVERSAL);
-        transmitters(consumer, "mechanical_pipe", EMExtrasBlock.INFINITE_MULTIVERSAL_MECHANICAL_PIPE, EMExtrasBlock.COSMIC_DENSE_MECHANICAL_PIPE, EMExtraTagUtils.ALLOYS_SPECTRUM, EMTags.Items.ALLOYS_MULTIVERSAL);
-        transmitters(consumer, "pressurized_tube", EMExtrasBlock.INFINITE_MULTIVERSAL_PRESSURIZED_TUBE, EMExtrasBlock.COSMIC_DENSE_PRESSURIZED_TUBE, EMExtraTagUtils.ALLOYS_SPECTRUM, EMTags.Items.ALLOYS_MULTIVERSAL);
-        transmitters(consumer, "thermodynamic_conductor", EMExtrasBlock.INFINITE_MULTIVERSAL_THERMODYNAMIC_CONDUCTOR, EMExtrasBlock.COSMIC_DENSE_THERMODYNAMIC_CONDUCTOR, EMExtraTagUtils.ALLOYS_SPECTRUM, EMTags.Items.ALLOYS_MULTIVERSAL);
-        transmitters(consumer, "universal_cable", EMExtrasBlock.INFINITE_MULTIVERSAL_UNIVERSAL_CABLE, EMExtrasBlock.COSMIC_DENSE_UNIVERSAL_CABLE, EMExtraTagUtils.ALLOYS_SPECTRUM, EMTags.Items.ALLOYS_MULTIVERSAL);
+        // circuits
+        alloyingCircuit(consumer, basePath + "circuits/", EMExtraItems.ABSOLUTE_OVERCLOCKED_CONTROL_CIRCUIT, EMExtraTagUtils.CIRCUITS_ABSOLUTE, EMTags.Items.CIRCUITS_OVERCLOCKED, IngredientCreatorAccess.item().from(EMExtraItems.BASE_CONTROL_CIRCUIT));
+        alloyingCircuit(consumer, basePath + "circuits/", EMExtraItems.SUPREME_QUANTUM_CONTROL_CIRCUIT, EMExtraTagUtils.CIRCUITS_SUPREME, EMTags.Items.CIRCUITS_QUANTUM, IngredientCreatorAccess.item().from(EMExtraItems.BASE_CONTROL_CIRCUIT));
+        alloyingCircuit(consumer, basePath + "circuits/", EMExtraItems.COSMIC_DENSE_CONTROL_CIRCUIT, EMExtraTagUtils.CIRCUITS_COSMIC, EMTags.Items.CIRCUITS_DENSE, IngredientCreatorAccess.item().from(EMExtraItems.BASE_CONTROL_CIRCUIT));
+        alloyingCircuit(consumer, basePath + "circuits/", EMExtraItems.INFINITE_MULTIVERSAL_CONTROL_CIRCUIT, EMExtraTagUtils.CIRCUITS_INFINITE, EMTags.Items.CIRCUITS_MULTIVERSAL, IngredientCreatorAccess.item().from(EMExtraItems.BASE_CONTROL_CIRCUIT));
+
+        alloyingCircuit(consumer, basePath + "circuits/upgrade/", EMExtraItems.SUPREME_QUANTUM_CONTROL_CIRCUIT, EMExtraTagUtils.ALLOYS_THERMONUCLEAR, EMTags.Items.ALLOYS_QUANTUM, IngredientCreatorAccess.item().from(EMExtraTags.Items.ABSOLUTE_OVERCLOCKED_CONTROL_CIRCUIT));
+        alloyingCircuit(consumer, basePath + "circuits/upgrade/", EMExtraItems.COSMIC_DENSE_CONTROL_CIRCUIT, EMExtraTagUtils.ALLOYS_SHINING, EMTags.Items.ALLOYS_DENSE, IngredientCreatorAccess.item().from(EMExtraTags.Items.SUPREME_QUANTUM_CONTROL_CIRCUIT));
+        alloyingCircuit(consumer, basePath + "circuits/upgrade/", EMExtraItems.INFINITE_MULTIVERSAL_CONTROL_CIRCUIT, EMExtraTagUtils.ALLOYS_SPECTRUM, EMTags.Items.ALLOYS_MULTIVERSAL, IngredientCreatorAccess.item().from(EMExtraTags.Items.COSMIC_DENSE_CONTROL_CIRCUIT));
+
+        alloyingCircuit(consumer, basePath + "circuits/", MekanismItems.BASIC_CONTROL_CIRCUIT, MekanismTags.Items.ALLOYS_BASIC, MekanismTags.Items.PROCESSED_RESOURCES.get(ResourceType.INGOT, PrimaryResource.OSMIUM), IngredientCreatorAccess.item().from(EMExtraItems.BASE_CONTROL_CIRCUIT));
+        alloyingCircuit(consumer, basePath + "circuits/", MekanismItems.ADVANCED_CONTROL_CIRCUIT, MekanismTags.Items.ALLOYS_ADVANCED, MekanismTags.Items.CIRCUITS_BASIC, IngredientCreatorAccess.item().from(EMExtraItems.BASE_CONTROL_CIRCUIT));
+        alloyingCircuit(consumer, basePath + "circuits/", MekanismItems.ELITE_CONTROL_CIRCUIT, MekanismTags.Items.ALLOYS_ELITE, MekanismTags.Items.CIRCUITS_ADVANCED, IngredientCreatorAccess.item().from(EMExtraItems.BASE_CONTROL_CIRCUIT));
+        alloyingCircuit(consumer, basePath + "circuits/", MekanismItems.ULTIMATE_CONTROL_CIRCUIT, MekanismTags.Items.ALLOYS_ULTIMATE, MekanismTags.Items.CIRCUITS_ELITE, IngredientCreatorAccess.item().from(EMExtraItems.BASE_CONTROL_CIRCUIT));
+
+        alloyingCircuit(consumer, basePath + "circuits/", ExtraItems.ABSOLUTE_CONTROL_CIRCUIT, EMExtraTagUtils.ALLOYS_RADIANCE, MekanismTags.Items.CIRCUITS_ULTIMATE, IngredientCreatorAccess.item().from(EMExtraItems.BASE_CONTROL_CIRCUIT));
+        alloyingCircuit(consumer, basePath + "circuits/", ExtraItems.SUPREME_CONTROL_CIRCUIT, EMExtraTagUtils.ALLOYS_THERMONUCLEAR, EMExtraTagUtils.CIRCUITS_ABSOLUTE, IngredientCreatorAccess.item().from(EMExtraItems.BASE_CONTROL_CIRCUIT));
+        alloyingCircuit(consumer, basePath + "circuits/", ExtraItems.COSMIC_CONTROL_CIRCUIT, EMExtraTagUtils.ALLOYS_SHINING, EMExtraTagUtils.CIRCUITS_SUPREME, IngredientCreatorAccess.item().from(EMExtraItems.BASE_CONTROL_CIRCUIT));
+        alloyingCircuit(consumer, basePath + "circuits/", ExtraItems.INFINITE_CONTROL_CIRCUIT, EMExtraTagUtils.ALLOYS_SPECTRUM, EMExtraTagUtils.CIRCUITS_COSMIC, IngredientCreatorAccess.item().from(EMExtraItems.BASE_CONTROL_CIRCUIT));
+
+        alloyingCircuit(consumer, basePath + "circuits/", EMItems.OVERCLOCKED_CONTROL_CIRCUIT, EMTags.Items.ALLOYS_OVERCLOCKED, MekanismTags.Items.CIRCUITS_ULTIMATE, IngredientCreatorAccess.item().from(EMExtraItems.BASE_CONTROL_CIRCUIT));
+        alloyingCircuit(consumer, basePath + "circuits/", EMItems.QUANTUM_CONTROL_CIRCUIT, EMTags.Items.ALLOYS_QUANTUM, EMTags.Items.CIRCUITS_OVERCLOCKED, IngredientCreatorAccess.item().from(EMExtraItems.BASE_CONTROL_CIRCUIT));
+        alloyingCircuit(consumer, basePath + "circuits/", EMItems.DENSE_CONTROL_CIRCUIT, EMTags.Items.ALLOYS_DENSE, EMTags.Items.CIRCUITS_QUANTUM, IngredientCreatorAccess.item().from(EMExtraItems.BASE_CONTROL_CIRCUIT));
+        alloyingCircuit(consumer, basePath + "circuits/", EMItems.MULTIVERSAL_CONTROL_CIRCUIT, EMTags.Items.ALLOYS_MULTIVERSAL, EMTags.Items.CIRCUITS_DENSE, IngredientCreatorAccess.item().from(EMExtraItems.BASE_CONTROL_CIRCUIT));
+        alloyingCircuit(consumer, basePath + "circuits/", EMItems.CREATIVE_CONTROL_CIRCUIT, EMTags.Items.ALLOYS_CREATIVE, EMTags.Items.CIRCUITS_MULTIVERSAL, IngredientCreatorAccess.item().from(EMExtraItems.BASE_CONTROL_CIRCUIT));
     }
 
     private void transmitters(Consumer<FinishedRecipe> consumer, String type, BlockRegistryObject<?, ?> toTransmitter, ItemLike fromTransmitter, TagKey<Item> extraAlloy, TagKey<Item> evolvedAlloy) {
@@ -94,5 +114,13 @@ public class AlloyingRecipeProvider implements ISubRecipeProvider {
                 IngredientCreatorAccess.item().from(extraAlloy, 1),
                 IngredientCreatorAccess.item().from(evolvedAlloy, 1),
                 toTransmitter.getItemStack(8)).build(consumer, EMExtras.rl("transmitter/" + type + "/" + tier.getLowerName()));
+    }
+
+    private void alloyingCircuit(Consumer<FinishedRecipe> consumer, String path, ItemRegistryObject<?> output, TagKey<Item> extraCircuit, TagKey<Item> tertiaryExtraCircuit, ItemStackIngredient mainCircuit) {
+        AlloyerRecipeBuilder.alloying(
+                mainCircuit,
+                IngredientCreatorAccess.item().from(extraCircuit),
+                IngredientCreatorAccess.item().from(tertiaryExtraCircuit),
+                output.getItemStack()).build(consumer, EMExtras.rl(path + output.getName()));
     }
 }

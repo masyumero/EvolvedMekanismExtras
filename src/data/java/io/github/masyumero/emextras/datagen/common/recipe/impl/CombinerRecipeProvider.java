@@ -45,16 +45,16 @@ public class CombinerRecipeProvider implements ISubRecipeProvider {
         combinedTransmitter(consumer, basePath, "thermodynamic_conductor", EMExtraBlocks.COSMIC_DENSE_THERMODYNAMIC_CONDUCTOR, ExtraBlocks.COSMIC_THERMODYNAMIC_CONDUCTOR, EMBlocks.DENSE_THERMODYNAMIC_CONDUCTOR);
         combinedTransmitter(consumer, basePath, "universal_cable", EMExtraBlocks.COSMIC_DENSE_UNIVERSAL_CABLE, ExtraBlocks.COSMIC_UNIVERSAL_CABLE, EMBlocks.DENSE_UNIVERSAL_CABLE);
 
-        combinedTransmitter(consumer, basePath, "logistical_transporter", EMExtrasBlock.INFINITE_MULTIVERSAL_LOGISTICAL_TRANSPORTER, ExtraBlocks.INFINITE_LOGISTICAL_TRANSPORTER, EMBlocks.MULTIVERSAL_LOGISTICAL_TRANSPORTER);
-        combinedTransmitter(consumer, basePath, "mechanical_pipe", EMExtrasBlock.INFINITE_MULTIVERSAL_MECHANICAL_PIPE, ExtraBlocks.INFINITE_MECHANICAL_PIPE, EMBlocks.MULTIVERSAL_MECHANICAL_PIPE);
-        combinedTransmitter(consumer, basePath, "pressurized_tube", EMExtrasBlock.INFINITE_MULTIVERSAL_PRESSURIZED_TUBE, ExtraBlocks.INFINITE_PRESSURIZED_TUBE, EMBlocks.MULTIVERSAL_PRESSURIZED_TUBE);
-        combinedTransmitter(consumer, basePath, "thermodynamic_conductor", EMExtrasBlock.INFINITE_MULTIVERSAL_THERMODYNAMIC_CONDUCTOR, ExtraBlocks.INFINITE_THERMODYNAMIC_CONDUCTOR, EMBlocks.MULTIVERSAL_THERMODYNAMIC_CONDUCTOR);
-        combinedTransmitter(consumer, basePath, "universal_cable", EMExtrasBlock.INFINITE_MULTIVERSAL_UNIVERSAL_CABLE, ExtraBlocks.INFINITE_UNIVERSAL_CABLE, EMBlocks.MULTIVERSAL_UNIVERSAL_CABLE);
         combinedTransmitter(consumer, basePath, "logistical_transporter", EMExtraBlocks.INFINITE_MULTIVERSAL_LOGISTICAL_TRANSPORTER, ExtraBlocks.INFINITE_LOGISTICAL_TRANSPORTER, EMBlocks.MULTIVERSAL_LOGISTICAL_TRANSPORTER);
         combinedTransmitter(consumer, basePath, "mechanical_pipe", EMExtraBlocks.INFINITE_MULTIVERSAL_MECHANICAL_PIPE, ExtraBlocks.INFINITE_MECHANICAL_PIPE, EMBlocks.MULTIVERSAL_MECHANICAL_PIPE);
         combinedTransmitter(consumer, basePath, "pressurized_tube", EMExtraBlocks.INFINITE_MULTIVERSAL_PRESSURIZED_TUBE, ExtraBlocks.INFINITE_PRESSURIZED_TUBE, EMBlocks.MULTIVERSAL_PRESSURIZED_TUBE);
         combinedTransmitter(consumer, basePath, "thermodynamic_conductor", EMExtraBlocks.INFINITE_MULTIVERSAL_THERMODYNAMIC_CONDUCTOR, ExtraBlocks.INFINITE_THERMODYNAMIC_CONDUCTOR, EMBlocks.MULTIVERSAL_THERMODYNAMIC_CONDUCTOR);
         combinedTransmitter(consumer, basePath, "universal_cable", EMExtraBlocks.INFINITE_MULTIVERSAL_UNIVERSAL_CABLE, ExtraBlocks.INFINITE_UNIVERSAL_CABLE, EMBlocks.MULTIVERSAL_UNIVERSAL_CABLE);
+
+        CombinerRecipeBuilder.combining(
+                IngredientCreatorAccess.item().from(MekanismTags.Items.PROCESSED_RESOURCES.get(ResourceType.INGOT, PrimaryResource.OSMIUM)),
+                IngredientCreatorAccess.item().from(MekanismItems.HDPE_SHEET, 4),
+                EMExtraItems.BASE_CONTROL_CIRCUIT.getItemStack()).build(consumer, EMExtras.rl(basePath + "base_control_circuit"));
     }
 
     private void combinedTransmitter(Consumer<FinishedRecipe> consumer, String basePath, String type, BlockRegistryObject<?, ?> result, ItemLike extraTransmitter, ItemLike evolvedTransmitter) {
