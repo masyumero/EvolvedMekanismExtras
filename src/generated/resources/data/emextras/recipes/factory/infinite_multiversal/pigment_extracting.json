@@ -1,0 +1,31 @@
+{
+  "type": "mekanism:mek_data",
+  "key": {
+    "A": {
+      "tag": "forge:alloys/infinite"
+    },
+    "C": {
+      "tag": "forge:circuits/infinite_multiversal"
+    },
+    "P": {
+      "item": "mekanism_extras:infinite_pigment_extracting_factory"
+    },
+    "Q": {
+      "item": "mekmm:multiversal_pigment_extracting_factory"
+    },
+    "T": {
+      "tag": "evolvedmekanism:alloys/exoversal"
+    },
+    "X": {
+      "item": "mekanism:steel_casing"
+    }
+  },
+  "pattern": [
+    "ACT",
+    "PXQ",
+    "TCA"
+  ],
+  "result": {
+    "item": "emextras:infinite_multiversal_pigment_extracting_factory"
+  }
+}
