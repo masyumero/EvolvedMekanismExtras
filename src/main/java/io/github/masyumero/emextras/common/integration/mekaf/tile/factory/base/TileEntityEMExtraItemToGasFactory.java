@@ -1,5 +1,6 @@
 package io.github.masyumero.emextras.common.integration.mekaf.tile.factory.base;
 
+import io.github.masyumero.emextras.common.config.LoadConfig;
 import io.github.masyumero.emextras.common.integration.mekaf.inventory.slot.EMExtraAdvancedFactoryInputInventorySlot;
 
 import mekanism.api.Action;
@@ -93,9 +94,22 @@ public abstract class TileEntityEMExtraItemToGasFactory<RECIPE extends MekanismR
         outputTank = new IGasTank[tier.processes];
         gasOutputHandlers = new IOutputHandler[tier.processes];
         for (int i = 0; i < tier.processes; i++) {
-            outputTank[i] = ChemicalTankBuilder.GAS.output(MAX_CHEMICAL * tier.processes, listener);
+            outputTank[i] = ChemicalTankBuilder.GAS.output(getTankCapacity(), listener);
             builder.addTank(outputTank[i]);
             gasOutputHandlers[i] = OutputHelper.getOutputHandler(outputTank[i], RecipeError.NOT_ENOUGH_OUTPUT_SPACE);
+        }
+    }
+
+    private long getTankCapacity() {
+        if (LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.moreCapacityMode.get()) {
+            return switch (tier) {
+                case INFINITE_MULTIVERSAL -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.infiniteMultiversalOxidizing.get();
+                case COSMIC_DENSE -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.cosmicDenseOxidizing.get();
+                case SUPREME_QUANTUM -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.supremeQuantumOxidizing.get();
+                case ABSOLUTE_OVERCLOCKED -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.absoluteOverclockedOxidizing.get();
+            };
+        } else {
+            return MAX_CHEMICAL * tier.processes;
         }
     }
 

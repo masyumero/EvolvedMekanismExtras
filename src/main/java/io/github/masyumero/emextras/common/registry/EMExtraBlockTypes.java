@@ -47,7 +47,7 @@ public class EMExtraBlockTypes {
             .createEMExtraFactoryMachine(() -> EMTileEntityTypes.ALLOYER, EvolvedMekanismLang.DESCRIPTION_ALLOYER, EMExtraFactoryType.ALLOYING)
             .withGui(() -> EMContainerTypes.ALLOYER)
             .withSound(MekanismSounds.COMBINER)
-            .withEnergyConfig(LoadConfig.emExtraUsageConfig.alloyer, LoadConfig.emExtraStorageConfig.alloyer)
+            .withEnergyConfig(LoadConfig.EMEXTRA_USAGE_CONFIG.alloyer, LoadConfig.EMEXTRA_STORAGE_CONFIG.alloyer)
             .withComputerSupport("alloyer")
             .build();
 
@@ -55,7 +55,7 @@ public class EMExtraBlockTypes {
             .createExtraFactoryMachine(() -> EMTileEntityTypes.ALLOYER, EvolvedMekanismLang.DESCRIPTION_ALLOYER, EMFactoryType.ALLOYING)
             .withGui(() -> EMContainerTypes.ALLOYER)
             .withSound(MekanismSounds.COMBINER)
-            .withEnergyConfig(LoadConfig.emExtraUsageConfig.alloyer, LoadConfig.emExtraStorageConfig.alloyer)
+            .withEnergyConfig(LoadConfig.EMEXTRA_USAGE_CONFIG.alloyer, LoadConfig.EMEXTRA_STORAGE_CONFIG.alloyer)
             .withComputerSupport("alloyer")
             .build();
 

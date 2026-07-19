@@ -1,5 +1,6 @@
 package io.github.masyumero.emextras.common.integration.mekaf.tile.factory.base;
 
+import io.github.masyumero.emextras.common.config.LoadConfig;
 import mekanism.api.Action;
 import mekanism.api.IContentsListener;
 import mekanism.api.RelativeSide;
@@ -91,14 +92,40 @@ public abstract class TileEntityEMExtraSlurryToSlurryFactory<RECIPE extends Meka
         processInfoSlots = new SlurryToSlurryProcessInfo[tier.processes];
         for (int i = 0; i < tier.processes; i++) {
             int index = i;
-            outputTank[i] = ChemicalTankBuilder.SLURRY.output(MAX_CHEMICAL * tier.processes, listener);
-            inputTank[i] = ChemicalTankBuilder.SLURRY.input(MAX_CHEMICAL * tier.processes, (stack) -> isValidInputChemical(stack.getStack(1)),
+            outputTank[i] = ChemicalTankBuilder.SLURRY.output(getOutputTankCapacity(), listener);
+            inputTank[i] = ChemicalTankBuilder.SLURRY.input(getInputTankCapacity(), (stack) -> isValidInputChemical(stack.getStack(1)),
                     (stack) -> isChemicalValidForTank(stack.getStack(1)) && inputProducesOutput(index, stack.getStack(1), outputTank[index], false), recipeCacheLookupMonitors[index]);
             builder.addTank(inputTank[i]);
             builder.addTank(outputTank[i]);
             slurryInputHandlers[i] = InputHelper.getInputHandler(inputTank[i], CachedRecipe.OperationTracker.RecipeError.NOT_ENOUGH_INPUT);
             slurryOutputHandlers[i] = OutputHelper.getOutputHandler(outputTank[i], CachedRecipe.OperationTracker.RecipeError.NOT_ENOUGH_OUTPUT_SPACE);
             processInfoSlots[i] = new SlurryToSlurryProcessInfo(i, inputTank[i], outputTank[i]);
+        }
+    }
+
+    private long getInputTankCapacity() {
+        if (LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.moreCapacityMode.get()) {
+            return switch (tier) {
+                case INFINITE_MULTIVERSAL -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.infiniteMultiversalWashingInput.get();
+                case COSMIC_DENSE -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.cosmicDenseWashingInput.get();
+                case SUPREME_QUANTUM -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.supremeQuantumWashingInput.get();
+                case ABSOLUTE_OVERCLOCKED -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.absoluteOverclockedWashingInput.get();
+            };
+        } else {
+            return MAX_CHEMICAL * tier.processes;
+        }
+    }
+
+    private long getOutputTankCapacity() {
+        if (LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.moreCapacityMode.get()) {
+            return switch (tier) {
+                case INFINITE_MULTIVERSAL -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.infiniteMultiversalWashingOutput.get();
+                case COSMIC_DENSE -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.cosmicDenseWashingOutput.get();
+                case SUPREME_QUANTUM -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.supremeQuantumWashingOutput.get();
+                case ABSOLUTE_OVERCLOCKED -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.absoluteOverclockedWashingOutput.get();
+            };
+        } else {
+            return MAX_CHEMICAL * tier.processes;
         }
     }
 

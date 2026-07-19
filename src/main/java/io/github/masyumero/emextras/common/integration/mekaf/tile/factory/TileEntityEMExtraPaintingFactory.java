@@ -1,5 +1,6 @@
 package io.github.masyumero.emextras.common.integration.mekaf.tile.factory;
 
+import io.github.masyumero.emextras.common.config.LoadConfig;
 import io.github.masyumero.emextras.common.integration.mekaf.tile.factory.base.TileEntityEMExtraItemToItemAdvancedFactory;
 
 import mekanism.api.IContentsListener;
@@ -89,7 +90,20 @@ public class TileEntityEMExtraPaintingFactory extends TileEntityEMExtraItemToIte
 
     @Override
     protected void addPigmentTanks(ChemicalTankHelper<Pigment, PigmentStack, IPigmentTank> builder, IContentsListener listener, IContentsListener updateSortingListener) {
-        builder.addTank(pigmentTank = ChemicalTankBuilder.PIGMENT.input(MAX_PIGMENT * tier.processes, this::containsRecipeB, markAllMonitorsChanged(listener)));
+        builder.addTank(pigmentTank = ChemicalTankBuilder.PIGMENT.input(getTankCapacity(), this::containsRecipeB, markAllMonitorsChanged(listener)));
+    }
+
+    private long getTankCapacity() {
+        if (LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.moreCapacityMode.get()) {
+            return switch (tier) {
+                case INFINITE_MULTIVERSAL -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.infiniteMultiversalPainting.get();
+                case COSMIC_DENSE -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.cosmicDensePainting.get();
+                case SUPREME_QUANTUM -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.supremeQuantumPainting.get();
+                case ABSOLUTE_OVERCLOCKED -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.absoluteOverclockedPainting.get();
+            };
+        } else {
+            return MAX_PIGMENT * tier.processes;
+        }
     }
 
     @Override

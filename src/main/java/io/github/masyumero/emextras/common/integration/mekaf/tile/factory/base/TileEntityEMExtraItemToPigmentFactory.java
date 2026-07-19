@@ -1,5 +1,6 @@
 package io.github.masyumero.emextras.common.integration.mekaf.tile.factory.base;
 
+import io.github.masyumero.emextras.common.config.LoadConfig;
 import io.github.masyumero.emextras.common.integration.mekaf.inventory.slot.EMExtraAdvancedFactoryInputInventorySlot;
 
 import mekanism.api.Action;
@@ -93,9 +94,22 @@ public abstract class TileEntityEMExtraItemToPigmentFactory<RECIPE extends Mekan
         outputTank = new IPigmentTank[tier.processes];
         pigmentOutputHandlers = new IOutputHandler[tier.processes];
         for (int i = 0; i < tier.processes; i++) {
-            outputTank[i] = ChemicalTankBuilder.PIGMENT.output(MAX_CHEMICAL * tier.processes, listener);
+            outputTank[i] = ChemicalTankBuilder.PIGMENT.output(getTankCapacity(), listener);
             builder.addTank(outputTank[i]);
             pigmentOutputHandlers[i] = OutputHelper.getOutputHandler(outputTank[i], RecipeError.NOT_ENOUGH_OUTPUT_SPACE);
+        }
+    }
+
+    private long getTankCapacity() {
+        if (LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.moreCapacityMode.get()) {
+            return switch (tier) {
+                case INFINITE_MULTIVERSAL -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.infiniteMultiversalPigmentExtracting.get();
+                case COSMIC_DENSE -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.cosmicDensePigmentExtracting.get();
+                case SUPREME_QUANTUM -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.supremeQuantumPigmentExtracting.get();
+                case ABSOLUTE_OVERCLOCKED -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.absoluteOverclockedPigmentExtracting.get();
+            };
+        } else {
+            return MAX_CHEMICAL * tier.processes;
         }
     }
 

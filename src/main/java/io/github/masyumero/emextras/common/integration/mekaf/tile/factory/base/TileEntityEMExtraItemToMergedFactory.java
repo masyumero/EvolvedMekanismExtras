@@ -1,5 +1,6 @@
 package io.github.masyumero.emextras.common.integration.mekaf.tile.factory.base;
 
+import io.github.masyumero.emextras.common.config.LoadConfig;
 import io.github.masyumero.emextras.common.integration.mekaf.inventory.slot.EMExtraAdvancedFactoryInputInventorySlot;
 
 import mekanism.api.Action;
@@ -143,11 +144,24 @@ public abstract class TileEntityEMExtraItemToMergedFactory<RECIPE extends Mekani
         IContentsListener saveOnlyListener = this::markForSave;
         for (int i = 0; i < tier.processes; i++) {
             outputTank[i] = MergedChemicalTank.create(
-                    ChemicalTankBuilder.GAS.output(MAX_CHEMICAL * tier.processes, getListener(SubstanceType.GAS, saveOnlyListener)),
-                    ChemicalTankBuilder.INFUSION.output(MAX_CHEMICAL * tier.processes, getListener(SubstanceType.INFUSION, saveOnlyListener)),
-                    ChemicalTankBuilder.PIGMENT.output(MAX_CHEMICAL * tier.processes, getListener(SubstanceType.PIGMENT, saveOnlyListener)),
-                    ChemicalTankBuilder.SLURRY.output(MAX_CHEMICAL * tier.processes, getListener(SubstanceType.SLURRY, saveOnlyListener)));
+                    ChemicalTankBuilder.GAS.output(getTankCapacity(), getListener(SubstanceType.GAS, saveOnlyListener)),
+                    ChemicalTankBuilder.INFUSION.output(getTankCapacity(), getListener(SubstanceType.INFUSION, saveOnlyListener)),
+                    ChemicalTankBuilder.PIGMENT.output(getTankCapacity(), getListener(SubstanceType.PIGMENT, saveOnlyListener)),
+                    ChemicalTankBuilder.SLURRY.output(getTankCapacity(), getListener(SubstanceType.SLURRY, saveOnlyListener)));
             mergedOutputHandlers[i] = new BoxedChemicalOutputHandler(outputTank[i], CachedRecipe.OperationTracker.RecipeError.NOT_ENOUGH_OUTPUT_SPACE);
+        }
+    }
+
+    private long getTankCapacity() {
+        if (LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.moreCapacityMode.get()) {
+            return switch (tier) {
+                case INFINITE_MULTIVERSAL -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.infiniteMultiversalDissolvingOutput.get();
+                case COSMIC_DENSE -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.cosmicDenseDissolvingOutput.get();
+                case SUPREME_QUANTUM -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.supremeQuantumDissolvingOutput.get();
+                case ABSOLUTE_OVERCLOCKED -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.absoluteOverclockedDissolvingOutput.get();
+            };
+        } else {
+            return MAX_CHEMICAL * tier.processes;
         }
     }
 

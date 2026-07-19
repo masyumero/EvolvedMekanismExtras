@@ -1,5 +1,6 @@
 package io.github.masyumero.emextras.common.integration.mekaf.tile.factory;
 
+import io.github.masyumero.emextras.common.config.LoadConfig;
 import io.github.masyumero.emextras.common.integration.mekaf.tile.factory.base.TileEntityEMExtraMergedToItemFactory;
 
 import mekanism.api.chemical.ChemicalTankBuilder;
@@ -52,11 +53,24 @@ public class TileEntityEMExtraCrystallizingFactory extends TileEntityEMExtraMerg
 
         for (int i = 0; i < tier.processes; i++) {
             inputTank[i] = MergedChemicalTank.create(
-                    ChemicalTankBuilder.GAS.input(MAX_CHEMICAL * tier.processes, gas -> getRecipeType().getInputCache().containsInput(level, gas), recipeCacheLookupMonitors[i]),
-                    ChemicalTankBuilder.INFUSION.input(MAX_CHEMICAL * tier.processes, infuseType -> getRecipeType().getInputCache().containsInput(level, infuseType), recipeCacheLookupMonitors[i]),
-                    ChemicalTankBuilder.PIGMENT.input(MAX_CHEMICAL * tier.processes, pigment -> getRecipeType().getInputCache().containsInput(level, pigment), recipeCacheLookupMonitors[i]),
-                    ChemicalTankBuilder.SLURRY.input(MAX_CHEMICAL * tier.processes, slurry -> getRecipeType().getInputCache().containsInput(level, slurry), recipeCacheLookupMonitors[i]));
+                    ChemicalTankBuilder.GAS.input(getTankCapacity(), gas -> getRecipeType().getInputCache().containsInput(level, gas), recipeCacheLookupMonitors[i]),
+                    ChemicalTankBuilder.INFUSION.input(getTankCapacity(), infuseType -> getRecipeType().getInputCache().containsInput(level, infuseType), recipeCacheLookupMonitors[i]),
+                    ChemicalTankBuilder.PIGMENT.input(getTankCapacity(), pigment -> getRecipeType().getInputCache().containsInput(level, pigment), recipeCacheLookupMonitors[i]),
+                    ChemicalTankBuilder.SLURRY.input(getTankCapacity(), slurry -> getRecipeType().getInputCache().containsInput(level, slurry), recipeCacheLookupMonitors[i]));
             mergedInputHandlers[i] = new BoxedChemicalInputHandler(inputTank[i], RecipeError.NOT_ENOUGH_INPUT);
+        }
+    }
+
+    private long getTankCapacity() {
+        if (LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.moreCapacityMode.get()) {
+            return switch (tier) {
+                case INFINITE_MULTIVERSAL -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.infiniteMultiversalCrystallizing.get();
+                case COSMIC_DENSE -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.cosmicDenseCrystallizing.get();
+                case SUPREME_QUANTUM -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.supremeQuantumCrystallizing.get();
+                case ABSOLUTE_OVERCLOCKED -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.absoluteOverclockedCrystallizing.get();
+            };
+        } else {
+            return MAX_CHEMICAL * tier.processes;
         }
     }
 

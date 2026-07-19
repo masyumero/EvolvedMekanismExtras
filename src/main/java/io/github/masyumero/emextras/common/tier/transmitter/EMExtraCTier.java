@@ -9,10 +9,10 @@ public class EMExtraCTier {
     public static FloatingLong getCapacityAsFloatingLong(CableTier tier) {
         if (tier == null) return FloatingLong.create(8000L);
         return switch (tier) {
-            case BASIC -> LoadConfig.emExtraConfig.absoluteOverclockedUniversalCableCapacity.get();
-            case ADVANCED -> LoadConfig.emExtraConfig.supremeQuantumUniversalCableCapacity.get();
-            case ELITE -> LoadConfig.emExtraConfig.cosmicDenseUniversalCableCapacity.get();
-            case ULTIMATE -> LoadConfig.emExtraConfig.infiniteMultiversalUniversalCableCapacity.get();
+            case BASIC -> LoadConfig.EMEXTRA_CONFIG.absoluteOverclockedUniversalCableCapacity.get();
+            case ADVANCED -> LoadConfig.EMEXTRA_CONFIG.supremeQuantumUniversalCableCapacity.get();
+            case ELITE -> LoadConfig.EMEXTRA_CONFIG.cosmicDenseUniversalCableCapacity.get();
+            case ULTIMATE -> LoadConfig.EMEXTRA_CONFIG.infiniteMultiversalUniversalCableCapacity.get();
         };
     }
 }

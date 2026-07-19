@@ -1,5 +1,6 @@
 package io.github.masyumero.emextras.common.integration.mekaf.tile.factory.base;
 
+import io.github.masyumero.emextras.common.config.LoadConfig;
 import io.github.masyumero.emextras.common.integration.mekaf.inventory.slot.EMExtraAdvancedFactoryInputInventorySlot;
 
 import mekanism.api.Action;
@@ -91,9 +92,22 @@ public abstract class TileEntityEMExtraItemToFluidFactory<RECIPE extends Mekanis
         outputTank = new IExtendedFluidTank[tier.processes];
         fluidOutputHandlers = new IOutputHandler[tier.processes];
         for (int i = 0; i < tier.processes; i++) {
-            outputTank[i] = BasicFluidTank.output(MAX_FLUID * tier.processes, listener);
+            outputTank[i] = BasicFluidTank.output(getTankCapacity(), listener);
             builder.addTank(outputTank[i]);
             fluidOutputHandlers[i] = OutputHelper.getOutputHandler(outputTank[i], RecipeError.NOT_ENOUGH_OUTPUT_SPACE);
+        }
+    }
+
+    private int getTankCapacity() {
+        if (LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.moreCapacityMode.get()) {
+            return switch (tier) {
+                case INFINITE_MULTIVERSAL -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.infiniteMultiversalLiquifying.get();
+                case COSMIC_DENSE -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.cosmicDenseLiquifying.get();
+                case SUPREME_QUANTUM -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.supremeQuantumLiquifying.get();
+                case ABSOLUTE_OVERCLOCKED -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.absoluteOverclockedLiquifying.get();
+            };
+        } else {
+            return MAX_FLUID * tier.processes;
         }
     }
 

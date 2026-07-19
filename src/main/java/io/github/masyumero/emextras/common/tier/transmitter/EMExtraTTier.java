@@ -7,19 +7,19 @@ public class EMExtraTTier {
 
     public static long getTubePullAmount(TubeTier tier) {
         return switch (tier) {
-            case BASIC -> LoadConfig.emExtraConfig.absoluteOverclockedPressurizedTubePullAmount.get().longValue();
-            case ADVANCED -> LoadConfig.emExtraConfig.supremeQuantumPressurizedTubePullAmount.get().longValue();
-            case ELITE -> LoadConfig.emExtraConfig.cosmicDensePressurizedTubePullAmount.get().longValue();
-            case ULTIMATE -> LoadConfig.emExtraConfig.infiniteMultiversalPressurizedTubePullAmount.get().longValue();
+            case BASIC -> LoadConfig.EMEXTRA_CONFIG.absoluteOverclockedPressurizedTubePullAmount.get().longValue();
+            case ADVANCED -> LoadConfig.EMEXTRA_CONFIG.supremeQuantumPressurizedTubePullAmount.get().longValue();
+            case ELITE -> LoadConfig.EMEXTRA_CONFIG.cosmicDensePressurizedTubePullAmount.get().longValue();
+            case ULTIMATE -> LoadConfig.EMEXTRA_CONFIG.infiniteMultiversalPressurizedTubePullAmount.get().longValue();
         };
     }
 
     public static long getTubeCapacity(TubeTier tier) {
         return switch (tier) {
-            case BASIC -> LoadConfig.emExtraConfig.absoluteOverclockedPressurizedTubeCapacity.get().longValue();
-            case ADVANCED -> LoadConfig.emExtraConfig.supremeQuantumPressurizedTubeCapacity.get().longValue();
-            case ELITE -> LoadConfig.emExtraConfig.cosmicDensePressurizedTubeCapacity.get().longValue();
-            case ULTIMATE -> LoadConfig.emExtraConfig.infiniteMultiversalPressurizedTubeCapacity.get().longValue();
+            case BASIC -> LoadConfig.EMEXTRA_CONFIG.absoluteOverclockedPressurizedTubeCapacity.get().longValue();
+            case ADVANCED -> LoadConfig.EMEXTRA_CONFIG.supremeQuantumPressurizedTubeCapacity.get().longValue();
+            case ELITE -> LoadConfig.EMEXTRA_CONFIG.cosmicDensePressurizedTubeCapacity.get().longValue();
+            case ULTIMATE -> LoadConfig.EMEXTRA_CONFIG.infiniteMultiversalPressurizedTubeCapacity.get().longValue();
         };
     }
 }

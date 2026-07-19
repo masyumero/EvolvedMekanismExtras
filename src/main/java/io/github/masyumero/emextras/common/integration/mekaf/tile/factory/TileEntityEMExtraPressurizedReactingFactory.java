@@ -1,5 +1,6 @@
 package io.github.masyumero.emextras.common.integration.mekaf.tile.factory;
 
+import io.github.masyumero.emextras.common.config.LoadConfig;
 import io.github.masyumero.emextras.common.integration.mekaf.inventory.slot.EMExtraAdvancedFactoryInputInventorySlot;
 import io.github.masyumero.emextras.common.integration.mekaf.tile.factory.base.TileEntityEMExtraAdvancedFactoryBase;
 import mekanism.api.Action;
@@ -143,15 +144,54 @@ public class TileEntityEMExtraPressurizedReactingFactory extends TileEntityEMExt
 
     @Override
     protected void addGasTanks(ChemicalTankHelper<Gas, GasStack, IGasTank> builder, IContentsListener listener, IContentsListener updateSortingListener) {
-        builder.addTank(inputGasTank = ChemicalTankBuilder.GAS.create(MAX_GAS * tier.processes, ChemicalTankHelper.radioactiveInputTankPredicate(() -> outputGasTank),
+        builder.addTank(inputGasTank = ChemicalTankBuilder.GAS.create(getInputTankCapacity(), ChemicalTankHelper.radioactiveInputTankPredicate(() -> outputGasTank),
                 ConstantPredicates.alwaysTrueBi(), this::containsRecipeC, ChemicalAttributeValidator.ALWAYS_ALLOW, markAllMonitorsChanged(listener)));
-        builder.addTank(outputGasTank = ChemicalTankBuilder.GAS.output(MAX_GAS * tier.processes, markAllMonitorsChanged(listener)));
+        builder.addTank(outputGasTank = ChemicalTankBuilder.GAS.output(getOutputTankCapacity(), markAllMonitorsChanged(listener)));
+    }
+
+    private long getInputTankCapacity() {
+        if (LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.moreCapacityMode.get()) {
+            return switch (tier) {
+                case INFINITE_MULTIVERSAL -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.infiniteMultiversalPRCInput.get();
+                case COSMIC_DENSE -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.cosmicDensePRCInput.get();
+                case SUPREME_QUANTUM -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.supremeQuantumPRCInput.get();
+                case ABSOLUTE_OVERCLOCKED -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.absoluteOverclockedPRCInput.get();
+            };
+        } else {
+            return MAX_GAS * tier.processes;
+        }
+    }
+
+    private long getOutputTankCapacity() {
+        if (LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.moreCapacityMode.get()) {
+            return switch (tier) {
+                case INFINITE_MULTIVERSAL -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.infiniteMultiversalPRCOutput.get();
+                case COSMIC_DENSE -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.cosmicDensePRCOutput.get();
+                case SUPREME_QUANTUM -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.supremeQuantumPRCOutput.get();
+                case ABSOLUTE_OVERCLOCKED -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.absoluteOverclockedPRCOutput.get();
+            };
+        } else {
+            return MAX_GAS * tier.processes;
+        }
     }
 
     @Override
     protected void addFluidTanks(FluidTankHelper builder, IContentsListener listener, IContentsListener updateSortingListener) {
-        builder.addTank(inputFluidTank = BasicFluidTank.input(MAX_FLUID * tier.processes, ConstantPredicates.alwaysTrue(),
+        builder.addTank(inputFluidTank = BasicFluidTank.input(getInputFluidTankCapacity(), ConstantPredicates.alwaysTrue(),
                 this::containsRecipeB, markAllMonitorsChanged(listener)));
+    }
+
+    private int getInputFluidTankCapacity() {
+        if (LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.moreCapacityMode.get()) {
+            return switch (tier) {
+                case INFINITE_MULTIVERSAL -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.infiniteMultiversalPRCFluidInput.get();
+                case COSMIC_DENSE -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.cosmicDensePRCFluidInput.get();
+                case SUPREME_QUANTUM -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.supremeQuantumPRCFluidInput.get();
+                case ABSOLUTE_OVERCLOCKED -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.absoluteOverclockedPRCFluidInput.get();
+            };
+        } else {
+            return MAX_FLUID * tier.processes;
+        }
     }
 
     @Override

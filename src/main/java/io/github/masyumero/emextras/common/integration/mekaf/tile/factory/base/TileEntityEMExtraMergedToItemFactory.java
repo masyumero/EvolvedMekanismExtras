@@ -1,5 +1,6 @@
 package io.github.masyumero.emextras.common.integration.mekaf.tile.factory.base;
 
+import io.github.masyumero.emextras.common.config.LoadConfig;
 import io.github.masyumero.emextras.common.integration.mekaf.inventory.slot.EMExtraAdvancedFactoryOutputInventorySlot;
 
 import mekanism.api.Action;
@@ -281,7 +282,7 @@ public abstract class TileEntityEMExtraMergedToItemFactory<RECIPE extends Mekani
                 continue;
             }
             GasStack item = entry.getKey();
-            long maxAmount = MAX_CHEMICAL * tier.processes;
+            long maxAmount = getTankCapacity();
             long numberPerTank = recipeProcessInfo.totalAmount / processAmount;
             if (numberPerTank == maxAmount) {
                 continue;
@@ -371,7 +372,7 @@ public abstract class TileEntityEMExtraMergedToItemFactory<RECIPE extends Mekani
                 continue;
             }
             InfusionStack item = entry.getKey();
-            long maxAmount = MAX_CHEMICAL * tier.processes;
+            long maxAmount = getTankCapacity();
             long numberPerTank = recipeProcessInfo.totalAmount / processAmount;
             if (numberPerTank == maxAmount) {
                 continue;
@@ -461,7 +462,7 @@ public abstract class TileEntityEMExtraMergedToItemFactory<RECIPE extends Mekani
                 continue;
             }
             PigmentStack item = entry.getKey();
-            long maxAmount = MAX_CHEMICAL * tier.processes;
+            long maxAmount = getTankCapacity();
             long numberPerTank = recipeProcessInfo.totalAmount / processAmount;
             if (numberPerTank == maxAmount) {
                 continue;
@@ -551,7 +552,7 @@ public abstract class TileEntityEMExtraMergedToItemFactory<RECIPE extends Mekani
                 continue;
             }
             SlurryStack item = entry.getKey();
-            long maxAmount = MAX_CHEMICAL * tier.processes;
+            long maxAmount = getTankCapacity();
             long numberPerTank = recipeProcessInfo.totalAmount / processAmount;
             if (numberPerTank == maxAmount) {
                 continue;
@@ -577,6 +578,19 @@ public abstract class TileEntityEMExtraMergedToItemFactory<RECIPE extends Mekani
                     }
                 }
             }
+        }
+    }
+
+    private long getTankCapacity() {
+        if (LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.moreCapacityMode.get()) {
+            return switch (tier) {
+                case INFINITE_MULTIVERSAL -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.infiniteMultiversalCrystallizing.get();
+                case COSMIC_DENSE -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.cosmicDenseCrystallizing.get();
+                case SUPREME_QUANTUM -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.supremeQuantumCrystallizing.get();
+                case ABSOLUTE_OVERCLOCKED -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.absoluteOverclockedCrystallizing.get();
+            };
+        } else {
+            return MAX_CHEMICAL * tier.processes;
         }
     }
 

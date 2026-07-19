@@ -82,18 +82,22 @@ public class TileEntityMetallurgicInfuserEMExtraFactory extends TileEntityItemTo
         //If the tank's contents change make sure to call our extended content listener that also marks sorting as being needed
         // as maybe the valid recipes have changed, and we need to sort again and have all recipes know they may need to be rechecked
         // if they are not still valid
-        builder.addTank(infusionTank = ChemicalTankBuilder.INFUSION.create(getInfusionTankCapacity(), this::containsRecipeB,
+        builder.addTank(infusionTank = ChemicalTankBuilder.INFUSION.create(getTankCapacity(), this::containsRecipeB,
                 markAllMonitorsChanged(listener)));
         return builder.build();
     }
 
-    private long getInfusionTankCapacity() {
-        return switch (tier) {
-            case INFINITE_MULTIVERSAL -> LoadConfig.emExtraTankCapacityConfig.EMExtraInfiniteMultiversalInfusingFactory.get();
-            case COSMIC_DENSE -> LoadConfig.emExtraTankCapacityConfig.EMExtraCosmicDenseInfusingFactory.get();
-            case SUPREME_QUANTUM -> LoadConfig.emExtraTankCapacityConfig.EMExtraSupremeQuantumInfusingFactory.get();
-            case ABSOLUTE_OVERCLOCKED -> LoadConfig.emExtraTankCapacityConfig.EMExtraAbsoluteOverclockedInfusingFactory.get();
-        };
+    private long getTankCapacity() {
+        if (LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.moreCapacityMode.get()) {
+            return switch (tier) {
+                case INFINITE_MULTIVERSAL -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.infiniteMultiversalInfusingFactory.get();
+                case COSMIC_DENSE -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.cosmicDenseInfusingFactory.get();
+                case SUPREME_QUANTUM -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.supremeQuantumInfusingFactory.get();
+                case ABSOLUTE_OVERCLOCKED -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.absoluteOverclockedInfusingFactory.get();
+            };
+        } else {
+            return 1000L * tier.processes * tier.processes;
+        }
     }
 
 

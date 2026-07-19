@@ -7,19 +7,19 @@ public class EMExtraPTier {
 
     public static int getPipePullAmount(PipeTier tier) {
         return switch (tier) {
-            case BASIC -> LoadConfig.emExtraConfig.absoluteOverclockedMechanicalPipePullAmount.get().intValue();
-            case ADVANCED -> LoadConfig.emExtraConfig.supremeQuantumMechanicalPipePullAmount.get().intValue();
-            case ELITE -> LoadConfig.emExtraConfig.cosmicDenseMechanicalPipePullAmount.get().intValue();
-            case ULTIMATE -> LoadConfig.emExtraConfig.infiniteMultiversalMechanicalPipePullAmount.get().intValue();
+            case BASIC -> LoadConfig.EMEXTRA_CONFIG.absoluteOverclockedMechanicalPipePullAmount.get().intValue();
+            case ADVANCED -> LoadConfig.EMEXTRA_CONFIG.supremeQuantumMechanicalPipePullAmount.get().intValue();
+            case ELITE -> LoadConfig.EMEXTRA_CONFIG.cosmicDenseMechanicalPipePullAmount.get().intValue();
+            case ULTIMATE -> LoadConfig.EMEXTRA_CONFIG.infiniteMultiversalMechanicalPipePullAmount.get().intValue();
         };
     }
 
     public static long getPipeCapacity(PipeTier tier) {
         return switch (tier) {
-            case BASIC -> LoadConfig.emExtraConfig.absoluteOverclockedMechanicalPipeCapacity.get().longValue();
-            case ADVANCED -> LoadConfig.emExtraConfig.supremeQuantumMechanicalPipeCapacity.get().longValue();
-            case ELITE -> LoadConfig.emExtraConfig.cosmicDenseMechanicalPipeCapacity.get().longValue();
-            case ULTIMATE -> LoadConfig.emExtraConfig.infiniteMultiversalMechanicalPipeCapacity.get().longValue();
+            case BASIC -> LoadConfig.EMEXTRA_CONFIG.absoluteOverclockedMechanicalPipeCapacity.get().longValue();
+            case ADVANCED -> LoadConfig.EMEXTRA_CONFIG.supremeQuantumMechanicalPipeCapacity.get().longValue();
+            case ELITE -> LoadConfig.EMEXTRA_CONFIG.cosmicDenseMechanicalPipeCapacity.get().longValue();
+            case ULTIMATE -> LoadConfig.EMEXTRA_CONFIG.infiniteMultiversalMechanicalPipeCapacity.get().longValue();
         };
     }
 }

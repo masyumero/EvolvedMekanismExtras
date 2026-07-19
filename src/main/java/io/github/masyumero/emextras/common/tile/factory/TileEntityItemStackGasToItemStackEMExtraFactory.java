@@ -119,21 +119,40 @@ public class TileEntityItemStackGasToItemStackEMExtraFactory extends TileEntityI
     public IChemicalTankHolder<Gas, GasStack, IGasTank> getInitialGasTanks(IContentsListener listener) {
         ChemicalTankHelper<Gas, GasStack, IGasTank> builder = ChemicalTankHelper.forSideGasWithConfig(this::getDirection, this::getConfig);
         if (allowExtractingChemical()) {
-            gasTank = ChemicalTankBuilder.GAS.create(getGasTankCapacity(), this::containsRecipeB, markAllMonitorsChanged(listener));
+            gasTank = ChemicalTankBuilder.GAS.create(getTankCapacity(), this::containsRecipeB, markAllMonitorsChanged(listener));
         } else {
-            gasTank = ChemicalTankBuilder.GAS.create(getGasTankCapacity(), this::containsRecipeB, markAllMonitorsChanged(listener));
+            gasTank = ChemicalTankBuilder.GAS.create(getTankCapacity(), this::containsRecipeB, markAllMonitorsChanged(listener));
         }
         builder.addTank(gasTank);
         return builder.build();
     }
 
-    private long getGasTankCapacity() {
-        return switch (tier) {
-            case INFINITE_MULTIVERSAL -> LoadConfig.emExtraTankCapacityConfig.EMExtraInfiniteMultiversalFactories.get();
-            case COSMIC_DENSE -> LoadConfig.emExtraTankCapacityConfig.EMExtraCosmicDenseOsmiumFactories.get();
-            case SUPREME_QUANTUM -> LoadConfig.emExtraTankCapacityConfig.EMExtraSupremeQuantumOsmiumFactories.get();
-            case ABSOLUTE_OVERCLOCKED -> LoadConfig.emExtraTankCapacityConfig.EMExtraAbsoluteOverclockedFactories.get();
-        };
+    private long getTankCapacity() {
+        if (LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.moreCapacityMode.get()) {
+            return switch (type) {
+                case COMPRESSING -> switch (tier) {
+                    case ABSOLUTE_OVERCLOCKED -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.absoluteOverclockedCompressing.get();
+                    case SUPREME_QUANTUM -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.supremeQuantumCompressing.get();
+                    case COSMIC_DENSE -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.cosmicDenseCompressing.get();
+                    case INFINITE_MULTIVERSAL -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.infiniteMultiversalCompressing.get();
+                };
+                case INJECTING -> switch (tier) {
+                    case ABSOLUTE_OVERCLOCKED -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.absoluteOverclockedInjecting.get();
+                    case SUPREME_QUANTUM -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.supremeQuantumInjecting.get();
+                    case COSMIC_DENSE -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.cosmicDenseInjecting.get();
+                    case INFINITE_MULTIVERSAL -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.infiniteMultiversalInjecting.get();
+                };
+                case PURIFYING -> switch (tier) {
+                    case ABSOLUTE_OVERCLOCKED -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.absoluteOverclockedPurifying.get();
+                    case SUPREME_QUANTUM -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.supremeQuantumPurifying.get();
+                    case COSMIC_DENSE -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.cosmicDensePurifying.get();
+                    case INFINITE_MULTIVERSAL -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.infiniteMultiversalPurifying.get();
+                };
+                default -> throw new IllegalStateException("Unexpected value: " + type);
+            };
+        } else {
+            return 210L * tier.processes * tier.processes;
+        }
     }
 
     @Override

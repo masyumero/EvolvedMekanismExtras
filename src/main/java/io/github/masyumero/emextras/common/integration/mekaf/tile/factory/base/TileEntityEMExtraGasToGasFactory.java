@@ -1,5 +1,6 @@
 package io.github.masyumero.emextras.common.integration.mekaf.tile.factory.base;
 
+import io.github.masyumero.emextras.common.config.LoadConfig;
 import mekanism.api.Action;
 import mekanism.api.IContentsListener;
 import mekanism.api.Upgrade;
@@ -90,8 +91,8 @@ public abstract class TileEntityEMExtraGasToGasFactory<RECIPE extends MekanismRe
         processInfoSlots = new GasToGasProcessInfo[tier.processes];
         for (int i = 0; i < tier.processes; i++) {
             int index = i;
-            outputTank[i] = ChemicalTankBuilder.GAS.output(MAX_CHEMICAL * tier.processes, listener);
-            inputTank[i] = ChemicalTankBuilder.GAS.create(MAX_CHEMICAL * tier.processes, ChemicalTankHelper.radioactiveInputTankPredicate(() -> outputTank[index]),
+            outputTank[i] = ChemicalTankBuilder.GAS.output(getOutputTankCapacity(), listener);
+            inputTank[i] = ChemicalTankBuilder.GAS.create(getInputTankCapacity(), ChemicalTankHelper.radioactiveInputTankPredicate(() -> outputTank[index]),
                     (stack, type) -> isValidInputChemical(stack.getStack(1L)), stack -> isChemicalValidForTank(stack.getStack(1L)) && inputProducesOutput(index, stack.getStack(1L), outputTank[index], false),
                     ChemicalAttributeValidator.ALWAYS_ALLOW, recipeCacheLookupMonitors[index]);
             builder.addTank(inputTank[i]);
@@ -99,6 +100,32 @@ public abstract class TileEntityEMExtraGasToGasFactory<RECIPE extends MekanismRe
             gasInputHandlers[i] = InputHelper.getInputHandler(inputTank[i], RecipeError.NOT_ENOUGH_INPUT);
             gasOutputHandlers[i] = OutputHelper.getOutputHandler(outputTank[i], RecipeError.NOT_ENOUGH_OUTPUT_SPACE);
             processInfoSlots[i] = new GasToGasProcessInfo(i, inputTank[i], outputTank[i]);
+        }
+    }
+
+    private long getInputTankCapacity() {
+        if (LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.moreCapacityMode.get()) {
+            return switch (tier) {
+                case INFINITE_MULTIVERSAL -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.infiniteMultiversalCentrifugingInput.get();
+                case COSMIC_DENSE -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.cosmicDenseCentrifugingInput.get();
+                case SUPREME_QUANTUM -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.supremeQuantumCentrifugingInput.get();
+                case ABSOLUTE_OVERCLOCKED -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.absoluteOverclockedCentrifugingInput.get();
+            };
+        } else {
+            return MAX_CHEMICAL * tier.processes;
+        }
+    }
+
+    private long getOutputTankCapacity() {
+        if (LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.moreCapacityMode.get()) {
+            return switch (tier) {
+                case INFINITE_MULTIVERSAL -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.infiniteMultiversalCentrifugingOutput.get();
+                case COSMIC_DENSE -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.cosmicDenseCentrifugingOutput.get();
+                case SUPREME_QUANTUM -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.supremeQuantumCentrifugingOutput.get();
+                case ABSOLUTE_OVERCLOCKED -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.absoluteOverclockedCentrifugingOutput.get();
+            };
+        } else {
+            return MAX_CHEMICAL * tier.processes;
         }
     }
 

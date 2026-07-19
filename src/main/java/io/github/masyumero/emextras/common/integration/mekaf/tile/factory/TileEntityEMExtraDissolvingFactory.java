@@ -1,5 +1,6 @@
 package io.github.masyumero.emextras.common.integration.mekaf.tile.factory;
 
+import io.github.masyumero.emextras.common.config.LoadConfig;
 import io.github.masyumero.emextras.common.integration.mekaf.tile.factory.base.TileEntityEMExtraItemToMergedFactory;
 
 import mekanism.api.IContentsListener;
@@ -104,7 +105,20 @@ public class TileEntityEMExtraDissolvingFactory extends TileEntityEMExtraItemToM
     @Override
     protected void addGasTanks(ChemicalTankHelper<Gas, GasStack, IGasTank> builder, IContentsListener listener, IContentsListener updateSortingListener) {
         super.addGasTanks(builder, listener, updateSortingListener);
-        builder.addTank(injectTank = ChemicalTankBuilder.GAS.input(MAX_CHEMICAL * tier.processes, this::containsRecipeB, markAllMonitorsChanged(listener)));
+        builder.addTank(injectTank = ChemicalTankBuilder.GAS.input(getTankCapacity(), this::containsRecipeB, markAllMonitorsChanged(listener)));
+    }
+
+    private long getTankCapacity() {
+        if (LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.moreCapacityMode.get()) {
+            return switch (tier) {
+                case INFINITE_MULTIVERSAL -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.infiniteMultiversalDissolvingInput.get();
+                case COSMIC_DENSE -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.cosmicDenseDissolvingInput.get();
+                case SUPREME_QUANTUM -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.supremeQuantumDissolvingInput.get();
+                case ABSOLUTE_OVERCLOCKED -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.absoluteOverclockedDissolvingInput.get();
+            };
+        } else {
+            return MAX_CHEMICAL * tier.processes;
+        }
     }
 
     @Override

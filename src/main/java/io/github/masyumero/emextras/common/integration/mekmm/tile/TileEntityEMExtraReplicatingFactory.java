@@ -1,5 +1,6 @@
 package io.github.masyumero.emextras.common.integration.mekmm.tile;
 
+import io.github.masyumero.emextras.common.config.LoadConfig;
 import mekanism.api.IContentsListener;
 import mekanism.api.chemical.ChemicalTankBuilder;
 import mekanism.api.chemical.gas.Gas;
@@ -93,9 +94,22 @@ public class TileEntityEMExtraReplicatingFactory extends TileEntityEMExtraItemTo
     @Override
     public @Nullable IChemicalTankHolder<Gas, GasStack, IGasTank> getInitialGasTanks(IContentsListener listener) {
         ChemicalTankHelper<Gas, GasStack, IGasTank> builder = ChemicalTankHelper.forSideGasWithConfig(this::getDirection, this::getConfig);
-        gasTank = ChemicalTankBuilder.GAS.create(MAX_GAS * tier.processes, TileEntityEMExtraReplicatingFactory::isValidChemicalInput, markAllMonitorsChanged(listener));
+        gasTank = ChemicalTankBuilder.GAS.create(getTankCapacity(), TileEntityEMExtraReplicatingFactory::isValidChemicalInput, markAllMonitorsChanged(listener));
         builder.addTank(gasTank);
         return builder.build();
+    }
+
+    private long getTankCapacity() {
+        if (LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.moreCapacityMode.get()) {
+            return switch (tier) {
+                case INFINITE_MULTIVERSAL -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.infiniteMultiversalReplicating.get();
+                case COSMIC_DENSE -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.cosmicDenseReplicating.get();
+                case SUPREME_QUANTUM -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.supremeQuantumReplicating.get();
+                case ABSOLUTE_OVERCLOCKED -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.absoluteOverclockedReplicating.get();
+            };
+        } else {
+            return MAX_GAS * tier.processes;
+        }
     }
 
     @Override
