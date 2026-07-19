@@ -2,7 +2,7 @@ package io.github.masyumero.emextras.datagen.common.tag;
 
 import io.github.masyumero.emextras.EMExtras;
 import io.github.masyumero.emextras.common.EMExtraTags;
-import io.github.masyumero.emextras.common.registry.EMExtrasItem;
+import io.github.masyumero.emextras.common.registry.EMExtraItems;
 import mekanism.common.tags.MekanismTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
@@ -19,9 +19,9 @@ public class EMExtrasTagProvider extends BaseTagProvider {
 
     @Override
     protected void registerTags(HolderLookup.Provider registries) {
-        addToTag(EMExtrasItem.ABSOLUTE_OVERCLOCKED_CONTROL_CIRCUIT, MekanismTags.Items.CIRCUITS, EMExtraTags.Items.ABSOLUTE_OVERCLOCKED_CONTROL_CIRCUIT);
-        addToTag(EMExtrasItem.SUPREME_QUANTUM_CONTROL_CIRCUIT, MekanismTags.Items.CIRCUITS, EMExtraTags.Items.SUPREME_QUANTUM_CONTROL_CIRCUIT);
-        addToTag(EMExtrasItem.COSMIC_DENSE_CONTROL_CIRCUIT, MekanismTags.Items.CIRCUITS, EMExtraTags.Items.COSMIC_DENSE_CONTROL_CIRCUIT);
-        addToTag(EMExtrasItem.INFINITE_MULTIVERSAL_CONTROL_CIRCUIT, MekanismTags.Items.CIRCUITS, EMExtraTags.Items.INFINITE_MULTIVERSAL_CONTROL_CIRCUIT);
+        addToTag(EMExtraItems.ABSOLUTE_OVERCLOCKED_CONTROL_CIRCUIT, MekanismTags.Items.CIRCUITS, EMExtraTags.Items.ABSOLUTE_OVERCLOCKED_CONTROL_CIRCUIT);
+        addToTag(EMExtraItems.SUPREME_QUANTUM_CONTROL_CIRCUIT, MekanismTags.Items.CIRCUITS, EMExtraTags.Items.SUPREME_QUANTUM_CONTROL_CIRCUIT);
+        addToTag(EMExtraItems.COSMIC_DENSE_CONTROL_CIRCUIT, MekanismTags.Items.CIRCUITS, EMExtraTags.Items.COSMIC_DENSE_CONTROL_CIRCUIT);
+        addToTag(EMExtraItems.INFINITE_MULTIVERSAL_CONTROL_CIRCUIT, MekanismTags.Items.CIRCUITS, EMExtraTags.Items.INFINITE_MULTIVERSAL_CONTROL_CIRCUIT);
     }
 }

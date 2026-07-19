@@ -10,8 +10,8 @@ import io.github.masyumero.emextras.EMExtras;
 import io.github.masyumero.emextras.common.content.blocktype.EMExtraFactoryType;
 import io.github.masyumero.emextras.common.integration.mekaf.regisrty.EMExtraAdvancedFactoryBlocks;
 import io.github.masyumero.emextras.common.integration.mekmm.registry.EMExtraMoreMachineBlocks;
-import io.github.masyumero.emextras.common.registry.EMExtrasBlock;
-import io.github.masyumero.emextras.common.registry.EMExtrasItem;
+import io.github.masyumero.emextras.common.registry.EMExtraBlocks;
+import io.github.masyumero.emextras.common.registry.EMExtraItems;
 import io.github.masyumero.emextras.common.tier.EMExtraFactoryTier;
 import io.github.masyumero.emextras.common.util.EMExtraEnumUtils;
 
@@ -27,13 +27,13 @@ public class EMExtraItemModelProvider extends BaseItemModelProvider {
 
     @Override
     protected void registerModels() {
-        EMExtrasItem.ITEM.getAllItems().forEach(item -> basicItem(item.getRegistryName()));
+        EMExtraItems.ITEM.getAllItems().forEach(item -> basicItem(item.getRegistryName()));
         for (EMExtraFactoryTier tier : EMExtraEnumUtils.EMEXTRA_FACTORY_TIERS) {
             for (EMExtraFactoryType type : EMExtraEnumUtils.EMEXTRA_FACTORY_TYPES) {
                 if (type == EMExtraFactoryType.ADVANCED_ALLOYING) {
                     continue;
                 }
-                factoryBlock(EMExtrasBlock.getEMExtraFactory(tier, type));
+                factoryBlock(EMExtraBlocks.getEMExtraFactory(tier, type));
             }
             for (AdvancedFactoryType type : MoreMachineEnumUtils.ADVANCED_FACTORY_TYPES) {
                 if (type == AdvancedFactoryType.CENTRIFUGING) {
@@ -49,7 +49,7 @@ public class EMExtraItemModelProvider extends BaseItemModelProvider {
             }
         }
         for (ExtraFactoryTier tier : ExtraEnumUtils.EXTRA_FACTORY_TIERS) {
-            extraAlloyingFactoryBlock(EMExtrasBlock.getExtraFactory(tier, EMFactoryType.ALLOYING));
+            extraAlloyingFactoryBlock(EMExtraBlocks.getExtraFactory(tier, EMFactoryType.ALLOYING));
         }
     }
 }

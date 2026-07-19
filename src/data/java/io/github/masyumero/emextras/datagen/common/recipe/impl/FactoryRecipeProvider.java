@@ -19,7 +19,7 @@ import io.github.masyumero.emextras.common.block.attribute.EMExtraAttributeFacto
 import io.github.masyumero.emextras.common.content.blocktype.EMExtraFactoryType;
 import io.github.masyumero.emextras.common.integration.mekaf.regisrty.EMExtraAdvancedFactoryBlocks;
 import io.github.masyumero.emextras.common.integration.mekmm.registry.EMExtraMoreMachineBlocks;
-import io.github.masyumero.emextras.common.registry.EMExtrasBlock;
+import io.github.masyumero.emextras.common.registry.EMExtraBlocks;
 import io.github.masyumero.emextras.common.EMExtraTags;
 import io.github.masyumero.emextras.common.tier.EMExtraFactoryTier;
 import io.github.masyumero.emextras.common.util.EMExtraBlockUtils;
@@ -88,9 +88,9 @@ public class FactoryRecipeProvider implements ISubRecipeProvider {
                 EMExtraTagUtils.ALLOYS_SPECTRUM, EMTags.Items.ALLOYS_EXOVERSAL, EMExtraTags.Items.INFINITE_MULTIVERSAL_CONTROL_CIRCUIT);
 
         addExtraFactoryRecipes(consumer, basePath, MekanismBlocks.getFactory(FactoryTier.ULTIMATE, EMFactoryType.ALLOYING), EMFactoryType.ALLOYING, ExtraFactoryTier.ABSOLUTE, EMExtraTagUtils.ALLOYS_RADIANCE, EMExtraTagUtils.CIRCUITS_ABSOLUTE, Tags.Items.GEMS_EMERALD);
-        addExtraFactoryRecipes(consumer, basePath, EMExtrasBlock.getExtraFactory(ExtraFactoryTier.ABSOLUTE, EMFactoryType.ALLOYING), EMFactoryType.ALLOYING, ExtraFactoryTier.SUPREME, EMExtraTagUtils.ALLOYS_THERMONUCLEAR, EMExtraTagUtils.CIRCUITS_SUPREME, Tags.Items.INGOTS_NETHERITE);
-        addExtraFactoryRecipes(consumer, basePath, EMExtrasBlock.getExtraFactory(ExtraFactoryTier.SUPREME, EMFactoryType.ALLOYING), EMFactoryType.ALLOYING, ExtraFactoryTier.COSMIC, EMExtraTagUtils.ALLOYS_SHINING, EMExtraTagUtils.CIRCUITS_COSMIC, MekanismTags.Items.INGOTS_REFINED_OBSIDIAN);
-        var factory = EMExtrasBlock.getExtraFactory(ExtraFactoryTier.INFINITE, EMFactoryType.ALLOYING);
+        addExtraFactoryRecipes(consumer, basePath, EMExtraBlocks.getExtraFactory(ExtraFactoryTier.ABSOLUTE, EMFactoryType.ALLOYING), EMFactoryType.ALLOYING, ExtraFactoryTier.SUPREME, EMExtraTagUtils.ALLOYS_THERMONUCLEAR, EMExtraTagUtils.CIRCUITS_SUPREME, Tags.Items.INGOTS_NETHERITE);
+        addExtraFactoryRecipes(consumer, basePath, EMExtraBlocks.getExtraFactory(ExtraFactoryTier.SUPREME, EMFactoryType.ALLOYING), EMFactoryType.ALLOYING, ExtraFactoryTier.COSMIC, EMExtraTagUtils.ALLOYS_SHINING, EMExtraTagUtils.CIRCUITS_COSMIC, MekanismTags.Items.INGOTS_REFINED_OBSIDIAN);
+        var factory = EMExtraBlocks.getExtraFactory(ExtraFactoryTier.INFINITE, EMFactoryType.ALLOYING);
         MekDataShapedRecipeBuilder.shapedRecipe(factory)
                 .pattern(RecipePattern.createPattern(
                         RecipePattern.TripleLine.of(Pattern.ALLOY, Pattern.CIRCUIT, Pattern.ALLOY),
@@ -101,7 +101,7 @@ public class FactoryRecipeProvider implements ISubRecipeProvider {
                 .key(Pattern.CIRCUIT, EMExtraTagUtils.CIRCUITS_INFINITE)
                 .key(Pattern.CONSTANT, MekanismTags.Items.PELLETS_PLUTONIUM)
                 .key(Pattern.EXTRA_CONSTANT, MekanismTags.Items.PELLETS_POLONIUM)
-                .key(Pattern.PREVIOUS, EMExtrasBlock.getExtraFactory(ExtraFactoryTier.COSMIC, EMFactoryType.ALLOYING))
+                .key(Pattern.PREVIOUS, EMExtraBlocks.getExtraFactory(ExtraFactoryTier.COSMIC, EMFactoryType.ALLOYING))
                 .build(consumer, EMExtras.rl(basePath + "infinite/" + Attribute.get(factory, AttributeFactoryType.class).getFactoryType().getRegistryNameComponent()));
 
         // MoreMachine Factories
@@ -131,7 +131,7 @@ public class FactoryRecipeProvider implements ISubRecipeProvider {
 
     private void addExtraFactoryRecipes(Consumer<FinishedRecipe> consumer, String basePath, BlockRegistryObject<?, ?> toUpgrade , FactoryType type,
                                         ExtraFactoryTier tier, TagKey<Item> alloyTag, TagKey<Item> circuitTag, TagKey<Item> ingotTag) {
-        var factory = EMExtrasBlock.getExtraFactory(tier, type);
+        var factory = EMExtraBlocks.getExtraFactory(tier, type);
         MekDataShapedRecipeBuilder.shapedRecipe(factory)
                 .pattern(FACTORY_PATTERN)
                 .key(Pattern.ALLOY, alloyTag)
@@ -170,7 +170,7 @@ public class FactoryRecipeProvider implements ISubRecipeProvider {
     private void addEMExtraAlloyingFactoryRecipes(Consumer<FinishedRecipe> consumer, String basePath,
                                                   EMExtraFactoryTier tier, ExtraFactoryTier toExtraUpgradeTier, FactoryTier toUpgradeTier,
                                                   TagKey<Item> alloyTag, TagKey<Item> extraAlloyTag, TagKey<Item> circuitTag) {
-        addFactoryRecipes(consumer, basePath, tier, factoryTier -> EMExtrasBlock.getEMExtraFactory(factoryTier, EMExtraFactoryType.ALLOYING), MekanismBlocks.getFactory(toUpgradeTier, EMFactoryType.ALLOYING), EMExtrasBlock.getExtraFactory(toExtraUpgradeTier, EMFactoryType.ALLOYING), alloyTag, extraAlloyTag, circuitTag);
+        addFactoryRecipes(consumer, basePath, tier, factoryTier -> EMExtraBlocks.getEMExtraFactory(factoryTier, EMExtraFactoryType.ALLOYING), MekanismBlocks.getFactory(toUpgradeTier, EMFactoryType.ALLOYING), EMExtraBlocks.getExtraFactory(toExtraUpgradeTier, EMFactoryType.ALLOYING), alloyTag, extraAlloyTag, circuitTag);
     }
 
     private void addMoreMachineFactoryRecipes(Consumer<FinishedRecipe> consumer, String basePath, MoreMachineFactoryType type,

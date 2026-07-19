@@ -10,7 +10,7 @@ import io.github.masyumero.emextras.EMExtras;
 import io.github.masyumero.emextras.common.content.blocktype.EMExtraFactoryType;
 import io.github.masyumero.emextras.common.integration.mekaf.regisrty.EMExtraAdvancedFactoryBlocks;
 import io.github.masyumero.emextras.common.integration.mekmm.registry.EMExtraMoreMachineBlocks;
-import io.github.masyumero.emextras.common.registry.EMExtrasBlock;
+import io.github.masyumero.emextras.common.registry.EMExtraBlocks;
 import io.github.masyumero.emextras.common.tier.EMExtraFactoryTier;
 import io.github.masyumero.emextras.common.util.EMExtraEnumUtils;
 
@@ -36,7 +36,7 @@ public class EMExtraBlockModelProvider extends BaseBlockModelsProvider {
                 if (type == EMExtraFactoryType.ADVANCED_ALLOYING) {
                     continue;
                 }
-                simpleFactoryMachineBlock(EMExtrasBlock.getEMExtraFactory(tier, type));
+                simpleFactoryMachineBlock(EMExtraBlocks.getEMExtraFactory(tier, type));
             }
             for (AdvancedFactoryType type : MoreMachineEnumUtils.ADVANCED_FACTORY_TYPES) {
                 if (type == AdvancedFactoryType.CENTRIFUGING) {
@@ -52,37 +52,37 @@ public class EMExtraBlockModelProvider extends BaseBlockModelsProvider {
             }
         }
         for (ExtraFactoryTier tier : ExtraEnumUtils.EXTRA_FACTORY_TIERS) {
-            alloyingFactoryMachineBlock(EMExtrasBlock.getExtraFactory(tier, EMFactoryType.ALLOYING));
+            alloyingFactoryMachineBlock(EMExtraBlocks.getExtraFactory(tier, EMFactoryType.ALLOYING));
         }
-        inductionCellAndProvider(EMExtrasBlock.ABSOLUTE_OVERCLOCKED_INDUCTION_CELL, EMExtrasBlock.ABSOLUTE_OVERCLOCKED_INDUCTION_PROVIDER);
-        inductionCellAndProvider(EMExtrasBlock.SUPREME_QUANTUM_INDUCTION_CELL, EMExtrasBlock.SUPREME_QUANTUM_INDUCTION_PROVIDER);
-        inductionCellAndProvider(EMExtrasBlock.COSMIC_DENSE_INDUCTION_CELL, EMExtrasBlock.COSMIC_DENSE_INDUCTION_PROVIDER);
-        inductionCellAndProvider(EMExtrasBlock.INFINITE_MULTIVERSAL_INDUCTION_CELL, EMExtrasBlock.INFINITE_MULTIVERSAL_INDUCTION_PROVIDER);
+        inductionCellAndProvider(EMExtraBlocks.ABSOLUTE_OVERCLOCKED_INDUCTION_CELL, EMExtraBlocks.ABSOLUTE_OVERCLOCKED_INDUCTION_PROVIDER);
+        inductionCellAndProvider(EMExtraBlocks.SUPREME_QUANTUM_INDUCTION_CELL, EMExtraBlocks.SUPREME_QUANTUM_INDUCTION_PROVIDER);
+        inductionCellAndProvider(EMExtraBlocks.COSMIC_DENSE_INDUCTION_CELL, EMExtraBlocks.COSMIC_DENSE_INDUCTION_PROVIDER);
+        inductionCellAndProvider(EMExtraBlocks.INFINITE_MULTIVERSAL_INDUCTION_CELL, EMExtraBlocks.INFINITE_MULTIVERSAL_INDUCTION_PROVIDER);
 
-        transporter(EMExtrasBlock.ABSOLUTE_OVERCLOCKED_LOGISTICAL_TRANSPORTER);
-        transporter(EMExtrasBlock.SUPREME_QUANTUM_LOGISTICAL_TRANSPORTER);
-        transporter(EMExtrasBlock.COSMIC_DENSE_LOGISTICAL_TRANSPORTER);
-        transporter(EMExtrasBlock.INFINITE_MULTIVERSAL_LOGISTICAL_TRANSPORTER);
+        transporter(EMExtraBlocks.ABSOLUTE_OVERCLOCKED_LOGISTICAL_TRANSPORTER);
+        transporter(EMExtraBlocks.SUPREME_QUANTUM_LOGISTICAL_TRANSPORTER);
+        transporter(EMExtraBlocks.COSMIC_DENSE_LOGISTICAL_TRANSPORTER);
+        transporter(EMExtraBlocks.INFINITE_MULTIVERSAL_LOGISTICAL_TRANSPORTER);
 
-        pipe(EMExtrasBlock.ABSOLUTE_OVERCLOCKED_MECHANICAL_PIPE);
-        pipe(EMExtrasBlock.SUPREME_QUANTUM_MECHANICAL_PIPE);
-        pipe(EMExtrasBlock.COSMIC_DENSE_MECHANICAL_PIPE);
-        pipe(EMExtrasBlock.INFINITE_MULTIVERSAL_MECHANICAL_PIPE);
+        pipe(EMExtraBlocks.ABSOLUTE_OVERCLOCKED_MECHANICAL_PIPE);
+        pipe(EMExtraBlocks.SUPREME_QUANTUM_MECHANICAL_PIPE);
+        pipe(EMExtraBlocks.COSMIC_DENSE_MECHANICAL_PIPE);
+        pipe(EMExtraBlocks.INFINITE_MULTIVERSAL_MECHANICAL_PIPE);
 
-        tube(EMExtrasBlock.ABSOLUTE_OVERCLOCKED_PRESSURIZED_TUBE);
-        tube(EMExtrasBlock.SUPREME_QUANTUM_PRESSURIZED_TUBE);
-        tube(EMExtrasBlock.COSMIC_DENSE_PRESSURIZED_TUBE);
-        tube(EMExtrasBlock.INFINITE_MULTIVERSAL_PRESSURIZED_TUBE);
+        tube(EMExtraBlocks.ABSOLUTE_OVERCLOCKED_PRESSURIZED_TUBE);
+        tube(EMExtraBlocks.SUPREME_QUANTUM_PRESSURIZED_TUBE);
+        tube(EMExtraBlocks.COSMIC_DENSE_PRESSURIZED_TUBE);
+        tube(EMExtraBlocks.INFINITE_MULTIVERSAL_PRESSURIZED_TUBE);
 
-        conductor(EMExtrasBlock.ABSOLUTE_OVERCLOCKED_THERMODYNAMIC_CONDUCTOR);
-        conductor(EMExtrasBlock.SUPREME_QUANTUM_THERMODYNAMIC_CONDUCTOR);
-        conductor(EMExtrasBlock.COSMIC_DENSE_THERMODYNAMIC_CONDUCTOR);
-        conductor(EMExtrasBlock.INFINITE_MULTIVERSAL_THERMODYNAMIC_CONDUCTOR);
+        conductor(EMExtraBlocks.ABSOLUTE_OVERCLOCKED_THERMODYNAMIC_CONDUCTOR);
+        conductor(EMExtraBlocks.SUPREME_QUANTUM_THERMODYNAMIC_CONDUCTOR);
+        conductor(EMExtraBlocks.COSMIC_DENSE_THERMODYNAMIC_CONDUCTOR);
+        conductor(EMExtraBlocks.INFINITE_MULTIVERSAL_THERMODYNAMIC_CONDUCTOR);
 
-        cable(EMExtrasBlock.ABSOLUTE_OVERCLOCKED_UNIVERSAL_CABLE);
-        cable(EMExtrasBlock.SUPREME_QUANTUM_UNIVERSAL_CABLE);
-        cable(EMExtrasBlock.COSMIC_DENSE_UNIVERSAL_CABLE);
-        cable(EMExtrasBlock.INFINITE_MULTIVERSAL_UNIVERSAL_CABLE);
+        cable(EMExtraBlocks.ABSOLUTE_OVERCLOCKED_UNIVERSAL_CABLE);
+        cable(EMExtraBlocks.SUPREME_QUANTUM_UNIVERSAL_CABLE);
+        cable(EMExtraBlocks.COSMIC_DENSE_UNIVERSAL_CABLE);
+        cable(EMExtraBlocks.INFINITE_MULTIVERSAL_UNIVERSAL_CABLE);
     }
 
     private void transporter(BlockRegistryObject<?, ?> transmitter) {

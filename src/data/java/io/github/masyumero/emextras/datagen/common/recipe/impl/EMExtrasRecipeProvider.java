@@ -5,7 +5,7 @@ import fr.iglee42.evolvedmekanism.registries.EMBlocks;
 import io.github.masyumero.emextras.EMExtras;
 import io.github.masyumero.emextras.common.EMExtraTags;
 import io.github.masyumero.emextras.common.block.attribute.EMExtraAttribute;
-import io.github.masyumero.emextras.common.registry.EMExtrasBlock;
+import io.github.masyumero.emextras.common.registry.EMExtraBlocks;
 import io.github.masyumero.emextras.common.tier.EMExtraICTier;
 import io.github.masyumero.emextras.common.tier.EMExtraIPTier;
 import io.github.masyumero.emextras.datagen.common.recipe.BaseRecipeProvider;
@@ -68,61 +68,61 @@ public class EMExtrasRecipeProvider extends BaseRecipeProvider {
         Function<Block, ResourceLocation> providerPath = block -> EMExtras.rl(basePath + "provider/" + EMExtraAttribute.getTier(block, EMExtraIPTier.class).getEMExtraTier().getLowerName());
 
         // Cells
-        MekDataShapedRecipeBuilder.shapedRecipe(EMExtrasBlock.ABSOLUTE_OVERCLOCKED_INDUCTION_CELL).pattern(inductionCellPattern)
+        MekDataShapedRecipeBuilder.shapedRecipe(EMExtraBlocks.ABSOLUTE_OVERCLOCKED_INDUCTION_CELL).pattern(inductionCellPattern)
                 .key(Pattern.ENERGY, MekanismItems.ENERGY_TABLET)
                 .key(OTHER_PREVIOUS_CHAR, ExtraBlocks.ABSOLUTE_INDUCTION_CELL)
                 .key(Pattern.PREVIOUS, EMBlocks.OVERCLOCKED_INDUCTION_CELL)
                 .key(Pattern.CONSTANT, MekanismBlocks.ULTIMATE_INDUCTION_CELL)
-                .build(consumer, cellPath.apply(EMExtrasBlock.ABSOLUTE_OVERCLOCKED_INDUCTION_CELL.getBlock()));
+                .build(consumer, cellPath.apply(EMExtraBlocks.ABSOLUTE_OVERCLOCKED_INDUCTION_CELL.getBlock()));
 
-        MekDataShapedRecipeBuilder.shapedRecipe(EMExtrasBlock.SUPREME_QUANTUM_INDUCTION_CELL).pattern(inductionCellPattern)
+        MekDataShapedRecipeBuilder.shapedRecipe(EMExtraBlocks.SUPREME_QUANTUM_INDUCTION_CELL).pattern(inductionCellPattern)
                 .key(Pattern.ENERGY, MekanismItems.ENERGY_TABLET)
                 .key(OTHER_PREVIOUS_CHAR, ExtraBlocks.SUPREME_INDUCTION_CELL)
                 .key(Pattern.PREVIOUS, EMBlocks.QUANTUM_INDUCTION_CELL)
-                .key(Pattern.CONSTANT, EMExtrasBlock.ABSOLUTE_OVERCLOCKED_INDUCTION_CELL)
-                .build(consumer, cellPath.apply(EMExtrasBlock.SUPREME_QUANTUM_INDUCTION_CELL.getBlock()));
+                .key(Pattern.CONSTANT, EMExtraBlocks.ABSOLUTE_OVERCLOCKED_INDUCTION_CELL)
+                .build(consumer, cellPath.apply(EMExtraBlocks.SUPREME_QUANTUM_INDUCTION_CELL.getBlock()));
 
-        MekDataShapedRecipeBuilder.shapedRecipe(EMExtrasBlock.COSMIC_DENSE_INDUCTION_CELL).pattern(inductionCellPattern)
+        MekDataShapedRecipeBuilder.shapedRecipe(EMExtraBlocks.COSMIC_DENSE_INDUCTION_CELL).pattern(inductionCellPattern)
                 .key(Pattern.ENERGY, MekanismItems.ENERGY_TABLET)
                 .key(OTHER_PREVIOUS_CHAR, ExtraBlocks.COSMIC_INDUCTION_CELL)
                 .key(Pattern.PREVIOUS, EMBlocks.DENSE_INDUCTION_CELL)
-                .key(Pattern.CONSTANT, EMExtrasBlock.SUPREME_QUANTUM_INDUCTION_CELL)
-                .build(consumer, cellPath.apply(EMExtrasBlock.COSMIC_DENSE_INDUCTION_CELL.getBlock()));
+                .key(Pattern.CONSTANT, EMExtraBlocks.SUPREME_QUANTUM_INDUCTION_CELL)
+                .build(consumer, cellPath.apply(EMExtraBlocks.COSMIC_DENSE_INDUCTION_CELL.getBlock()));
 
-        MekDataShapedRecipeBuilder.shapedRecipe(EMExtrasBlock.INFINITE_MULTIVERSAL_INDUCTION_CELL).pattern(inductionCellPattern)
+        MekDataShapedRecipeBuilder.shapedRecipe(EMExtraBlocks.INFINITE_MULTIVERSAL_INDUCTION_CELL).pattern(inductionCellPattern)
                 .key(Pattern.ENERGY, MekanismItems.ENERGY_TABLET)
                 .key(OTHER_PREVIOUS_CHAR, ExtraBlocks.INFINITE_INDUCTION_CELL)
                 .key(Pattern.PREVIOUS, EMBlocks.MULTIVERSAL_INDUCTION_CELL)
-                .key(Pattern.CONSTANT, EMExtrasBlock.COSMIC_DENSE_INDUCTION_CELL)
-                .build(consumer, cellPath.apply(EMExtrasBlock.INFINITE_MULTIVERSAL_INDUCTION_CELL.getBlock()));
+                .key(Pattern.CONSTANT, EMExtraBlocks.COSMIC_DENSE_INDUCTION_CELL)
+                .build(consumer, cellPath.apply(EMExtraBlocks.INFINITE_MULTIVERSAL_INDUCTION_CELL.getBlock()));
 
         // Providers
-        MekDataShapedRecipeBuilder.shapedRecipe(EMExtrasBlock.ABSOLUTE_OVERCLOCKED_INDUCTION_PROVIDER).pattern(inductionProviderPattern)
+        MekDataShapedRecipeBuilder.shapedRecipe(EMExtraBlocks.ABSOLUTE_OVERCLOCKED_INDUCTION_PROVIDER).pattern(inductionProviderPattern)
                 .key(Pattern.CIRCUIT, EMExtraTags.Items.ABSOLUTE_OVERCLOCKED_CONTROL_CIRCUIT)
                 .key(OTHER_PREVIOUS_CHAR, ExtraBlocks.ABSOLUTE_INDUCTION_PROVIDER)
                 .key(Pattern.PREVIOUS, EMBlocks.OVERCLOCKED_INDUCTION_PROVIDER)
                 .key(Pattern.CONSTANT, MekanismBlocks.ULTIMATE_INDUCTION_PROVIDER)
-                .build(consumer, providerPath.apply(EMExtrasBlock.ABSOLUTE_OVERCLOCKED_INDUCTION_PROVIDER.getBlock()));
+                .build(consumer, providerPath.apply(EMExtraBlocks.ABSOLUTE_OVERCLOCKED_INDUCTION_PROVIDER.getBlock()));
 
-        MekDataShapedRecipeBuilder.shapedRecipe(EMExtrasBlock.SUPREME_QUANTUM_INDUCTION_PROVIDER).pattern(inductionProviderPattern)
+        MekDataShapedRecipeBuilder.shapedRecipe(EMExtraBlocks.SUPREME_QUANTUM_INDUCTION_PROVIDER).pattern(inductionProviderPattern)
                 .key(Pattern.CIRCUIT, EMExtraTags.Items.SUPREME_QUANTUM_CONTROL_CIRCUIT)
                 .key(OTHER_PREVIOUS_CHAR, ExtraBlocks.SUPREME_INDUCTION_PROVIDER)
                 .key(Pattern.PREVIOUS, EMBlocks.QUANTUM_INDUCTION_PROVIDER)
-                .key(Pattern.CONSTANT, EMExtrasBlock.ABSOLUTE_OVERCLOCKED_INDUCTION_PROVIDER)
-                .build(consumer, providerPath.apply(EMExtrasBlock.SUPREME_QUANTUM_INDUCTION_PROVIDER.getBlock()));
+                .key(Pattern.CONSTANT, EMExtraBlocks.ABSOLUTE_OVERCLOCKED_INDUCTION_PROVIDER)
+                .build(consumer, providerPath.apply(EMExtraBlocks.SUPREME_QUANTUM_INDUCTION_PROVIDER.getBlock()));
 
-        MekDataShapedRecipeBuilder.shapedRecipe(EMExtrasBlock.COSMIC_DENSE_INDUCTION_PROVIDER).pattern(inductionProviderPattern)
+        MekDataShapedRecipeBuilder.shapedRecipe(EMExtraBlocks.COSMIC_DENSE_INDUCTION_PROVIDER).pattern(inductionProviderPattern)
                 .key(Pattern.CIRCUIT, EMExtraTags.Items.COSMIC_DENSE_CONTROL_CIRCUIT)
                 .key(OTHER_PREVIOUS_CHAR, ExtraBlocks.COSMIC_INDUCTION_PROVIDER)
                 .key(Pattern.PREVIOUS, EMBlocks.DENSE_INDUCTION_PROVIDER)
-                .key(Pattern.CONSTANT, EMExtrasBlock.SUPREME_QUANTUM_INDUCTION_PROVIDER)
-                .build(consumer, providerPath.apply(EMExtrasBlock.COSMIC_DENSE_INDUCTION_PROVIDER.getBlock()));
+                .key(Pattern.CONSTANT, EMExtraBlocks.SUPREME_QUANTUM_INDUCTION_PROVIDER)
+                .build(consumer, providerPath.apply(EMExtraBlocks.COSMIC_DENSE_INDUCTION_PROVIDER.getBlock()));
 
-        MekDataShapedRecipeBuilder.shapedRecipe(EMExtrasBlock.INFINITE_MULTIVERSAL_INDUCTION_PROVIDER).pattern(inductionProviderPattern)
+        MekDataShapedRecipeBuilder.shapedRecipe(EMExtraBlocks.INFINITE_MULTIVERSAL_INDUCTION_PROVIDER).pattern(inductionProviderPattern)
                 .key(Pattern.CIRCUIT, EMExtraTags.Items.INFINITE_MULTIVERSAL_CONTROL_CIRCUIT)
                 .key(OTHER_PREVIOUS_CHAR, ExtraBlocks.INFINITE_INDUCTION_PROVIDER)
                 .key(Pattern.PREVIOUS, EMBlocks.MULTIVERSAL_INDUCTION_PROVIDER)
-                .key(Pattern.CONSTANT, EMExtrasBlock.COSMIC_DENSE_INDUCTION_PROVIDER)
-                .build(consumer, providerPath.apply(EMExtrasBlock.INFINITE_MULTIVERSAL_INDUCTION_PROVIDER.getBlock()));
+                .key(Pattern.CONSTANT, EMExtraBlocks.COSMIC_DENSE_INDUCTION_PROVIDER)
+                .build(consumer, providerPath.apply(EMExtraBlocks.INFINITE_MULTIVERSAL_INDUCTION_PROVIDER.getBlock()));
     }
 }
