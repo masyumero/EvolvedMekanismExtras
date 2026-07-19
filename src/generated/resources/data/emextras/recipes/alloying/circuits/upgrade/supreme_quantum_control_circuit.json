@@ -1,0 +1,21 @@
+{
+  "type": "evolvedmekanism:alloying",
+  "extraInput": {
+    "ingredient": {
+      "tag": "forge:alloys/supreme"
+    }
+  },
+  "mainInput": {
+    "ingredient": {
+      "tag": "forge:circuits/absolute_overclocked"
+    }
+  },
+  "output": {
+    "item": "emextras:supreme_quantum_control_circuit"
+  },
+  "secondExtraInput": {
+    "ingredient": {
+      "tag": "forge:alloys/quantum"
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "type": "evolvedmekanism:alloying",
+  "extraInput": {
+    "ingredient": {
+      "tag": "evolvedmekanism:alloys/creative"
+    }
+  },
+  "mainInput": {
+    "ingredient": {
+      "item": "emextras:base_control_circuit"
+    }
+  },
+  "output": {
+    "item": "evolvedmekanism:creative_control_circuit"
+  },
+  "secondExtraInput": {
+    "ingredient": {
+      "tag": "forge:circuits/multiversal"
+    }
+  }
+}

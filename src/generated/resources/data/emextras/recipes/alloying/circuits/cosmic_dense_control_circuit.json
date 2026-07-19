@@ -1,0 +1,21 @@
+{
+  "type": "evolvedmekanism:alloying",
+  "extraInput": {
+    "ingredient": {
+      "tag": "forge:circuits/cosmic"
+    }
+  },
+  "mainInput": {
+    "ingredient": {
+      "item": "emextras:base_control_circuit"
+    }
+  },
+  "output": {
+    "item": "emextras:cosmic_dense_control_circuit"
+  },
+  "secondExtraInput": {
+    "ingredient": {
+      "tag": "forge:circuits/dense"
+    }
+  }
+}

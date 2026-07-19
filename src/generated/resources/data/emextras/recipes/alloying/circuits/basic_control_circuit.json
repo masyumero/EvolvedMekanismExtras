@@ -1,0 +1,21 @@
+{
+  "type": "evolvedmekanism:alloying",
+  "extraInput": {
+    "ingredient": {
+      "tag": "mekanism:alloys/basic"
+    }
+  },
+  "mainInput": {
+    "ingredient": {
+      "item": "emextras:base_control_circuit"
+    }
+  },
+  "output": {
+    "item": "mekanism:basic_control_circuit"
+  },
+  "secondExtraInput": {
+    "ingredient": {
+      "tag": "forge:ingots/osmium"
+    }
+  }
+}

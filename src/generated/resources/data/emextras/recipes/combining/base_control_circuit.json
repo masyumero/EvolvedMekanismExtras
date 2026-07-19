@@ -1,0 +1,17 @@
+{
+  "type": "mekanism:combining",
+  "extraInput": {
+    "amount": 4,
+    "ingredient": {
+      "item": "mekanism:hdpe_sheet"
+    }
+  },
+  "mainInput": {
+    "ingredient": {
+      "tag": "forge:ingots/osmium"
+    }
+  },
+  "output": {
+    "item": "emextras:base_control_circuit"
+  }
+}

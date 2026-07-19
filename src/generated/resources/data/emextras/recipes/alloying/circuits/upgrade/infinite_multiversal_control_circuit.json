@@ -1,0 +1,21 @@
+{
+  "type": "evolvedmekanism:alloying",
+  "extraInput": {
+    "ingredient": {
+      "tag": "forge:alloys/infinite"
+    }
+  },
+  "mainInput": {
+    "ingredient": {
+      "tag": "forge:circuits/cosmic_dense"
+    }
+  },
+  "output": {
+    "item": "emextras:infinite_multiversal_control_circuit"
+  },
+  "secondExtraInput": {
+    "ingredient": {
+      "tag": "forge:alloys/multiversal"
+    }
+  }
+}
