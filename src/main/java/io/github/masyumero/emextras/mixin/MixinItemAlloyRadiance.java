@@ -70,8 +70,8 @@ public abstract class MixinItemAlloyRadiance extends Item {
         }
     }
 
-    @Inject(method = "onExtraAlloyInteraction", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;shrink(I)V"))
-    private void shirinkOffHandItemInject(Player player, ItemStack stack, Level level, BlockPos worldPosition, TileEntityTransmitter tileEntityTransmitter, CallbackInfo ci) {
+    @Inject(method = "onExtraAlloyInteraction", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;shrink(I)V"), remap = true)
+    private void shrinkOffHandItemInject(Player player, ItemStack stack, Level level, BlockPos worldPosition, TileEntityTransmitter tileEntityTransmitter, CallbackInfo ci) {
         if (emextras$isEMExtra) {
             player.getOffhandItem().shrink(1);
         }
