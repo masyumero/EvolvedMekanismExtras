@@ -1,5 +1,8 @@
 package io.github.masyumero.emextras.common.network.to_server;
 
+import io.github.masyumero.emextras.common.integration.Addons;
+import io.github.masyumero.emextras.common.integration.mekaf.tile.factory.base.TileEntityEMExtraAdvancedFactoryBase;
+import io.github.masyumero.emextras.common.integration.mekmm.tile.TileEntityEMExtraMoreMachineFactory;
 import io.github.masyumero.emextras.common.tile.factory.TileEntityEMExtraFactory;
 import mekanism.api.functions.TriConsumer;
 import mekanism.common.network.IMekanismPacket;
@@ -140,6 +143,9 @@ public class EMExtraPacketGuiInteract implements IMekanismPacket {
         AUTO_SORT_BUTTON((tile, player, extra) -> {
             if (tile instanceof TileEntityEMExtraFactory<?> factory) {
                 factory.toggleSorting();
+            }  else if (Addons.MEKMM.isLoaded()) {
+                if (tile instanceof TileEntityEMExtraAdvancedFactoryBase<?> factory) factory.toggleSorting();
+                if (tile instanceof TileEntityEMExtraMoreMachineFactory<?> factory) factory.toggleSorting();
             }
         });
 
