@@ -129,7 +129,8 @@ public class TileEntityItemStackGasToItemStackEMExtraFactory extends TileEntityI
 
     private long getTankCapacity() {
         if (LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.moreCapacityMode.get()) {
-            return switch (type) {
+            EMExtraFactoryType type = Attribute.get(getBlockType(), EMExtraAttributeFactoryType.class).getFactoryType();
+            return switch (getFactoryType()) {
                 case COMPRESSING -> switch (tier) {
                     case ABSOLUTE_OVERCLOCKED -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.absoluteOverclockedCompressing.get();
                     case SUPREME_QUANTUM -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.supremeQuantumCompressing.get();

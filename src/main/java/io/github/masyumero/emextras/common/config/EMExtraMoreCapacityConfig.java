@@ -113,9 +113,8 @@ public class EMExtraMoreCapacityConfig extends BaseMekanismConfig {
     public EMExtraMoreCapacityConfig() {
         ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
         builder.comment("Evolved Mekanism Extras More Capacity Config");
-        builder.push("More Capacity Mode");
         moreCapacityMode = CachedBooleanValue.wrap(this, builder.comment("If this is true, these configurations will be applied.").define("MoreCapacityMode", false));
-        builder.pop().push("CompressingFactoryEMExtras");
+        builder.push("CompressingFactoryEMExtras");
         absoluteOverclockedCompressing  = CachedLongValue.wrap(this, builder.comment("Chemical tank capacity (mB). Default: 3024000, Vanilla: 30240").defineInRange("AbsoluteOverclockedChemicalTankCapacity",3024000,1,Long.MAX_VALUE));
         supremeQuantumCompressing       = CachedLongValue.wrap(this, builder.comment("Chemical tank capacity (mB). Default: 4116000, Vanilla: 41160").defineInRange("SupremeQuantumChemicalTankCapacity",4116000,1,Long.MAX_VALUE));
         cosmicDenseCompressing          = CachedLongValue.wrap(this, builder.comment("Chemical tank capacity (mB). Default: 5376000, Vanilla: 53760").defineInRange("CosmicDenseChemicalTankCapacity",5376000,1,Long.MAX_VALUE));
