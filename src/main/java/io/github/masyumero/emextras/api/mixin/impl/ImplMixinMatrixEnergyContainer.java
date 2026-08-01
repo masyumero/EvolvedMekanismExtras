@@ -57,12 +57,4 @@ public class ImplMixinMatrixEnergyContainer {
             }
         }
     }
-
-    public static int emextras$getCells() {
-        return 0;
-    }
-
-    public static int emextras$getProviders() {
-        return 0;
-    }
 }
