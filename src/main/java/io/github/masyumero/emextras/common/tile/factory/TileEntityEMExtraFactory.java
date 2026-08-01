@@ -420,7 +420,10 @@ public abstract class TileEntityEMExtraFactory<RECIPE extends MekanismRecipe> ex
 
     @Override
     public void recalculateUpgrades(Upgrade upgrade) {
-        ((IMixinMachineEnergyContainer)getEnergyContainer()).mekanism_Extras$extraRecalculateUpgrades(upgrade);
+        if (getEnergyContainer() instanceof IMixinMachineEnergyContainer mixMach) {
+            mixMach.mekanism_Extras$extraRecalculateUpgrades(upgrade);
+            mixMach.mekanism_Extras$extraUpdateMaxEnergy();
+        }
         if (upgrade == Upgrade.SPEED) {
             ticksRequired = MekanismUtils.getTicks(this, BASE_TICKS_REQUIRED);
         } else if (upgrade == ExtraUpgrade.STACK) {
