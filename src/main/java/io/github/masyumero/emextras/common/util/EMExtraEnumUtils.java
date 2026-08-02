@@ -1,6 +1,5 @@
 package io.github.masyumero.emextras.common.util;
 
-import io.github.masyumero.emextras.common.content.blocktype.EMExtraFactoryType;
 import io.github.masyumero.emextras.common.tier.*;
 
 public class EMExtraEnumUtils {
@@ -9,5 +8,4 @@ public class EMExtraEnumUtils {
     }
 
     public static final EMExtraFactoryTier[] EMEXTRA_FACTORY_TIERS = EMExtraFactoryTier.values();
-    public static final EMExtraFactoryType[] EMEXTRA_FACTORY_TYPES = EMExtraFactoryType.values();
 }

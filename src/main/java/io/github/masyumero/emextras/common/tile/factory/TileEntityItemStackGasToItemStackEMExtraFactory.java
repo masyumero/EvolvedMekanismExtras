@@ -1,8 +1,6 @@
 package io.github.masyumero.emextras.common.tile.factory;
 
-import io.github.masyumero.emextras.common.block.attribute.EMExtraAttributeFactoryType;
 import io.github.masyumero.emextras.common.config.LoadConfig;
-import io.github.masyumero.emextras.common.content.blocktype.EMExtraFactoryType;
 import mekanism.api.IContentsListener;
 import mekanism.api.NBTConstants;
 import mekanism.api.RelativeSide;
@@ -22,9 +20,11 @@ import mekanism.api.recipes.inputs.ILongInputHandler;
 import mekanism.api.recipes.inputs.InputHelper;
 import mekanism.common.Mekanism;
 import mekanism.common.block.attribute.Attribute;
+import mekanism.common.block.attribute.AttributeFactoryType;
 import mekanism.common.capabilities.holder.chemical.ChemicalTankHelper;
 import mekanism.common.capabilities.holder.chemical.IChemicalTankHolder;
 import mekanism.common.capabilities.holder.slot.InventorySlotHelper;
+import mekanism.common.content.blocktype.FactoryType;
 import mekanism.common.integration.computer.ComputerException;
 import mekanism.common.integration.computer.SpecialComputerMethodWrapper;
 import mekanism.common.integration.computer.annotation.ComputerMethod;
@@ -101,7 +101,7 @@ public class TileEntityItemStackGasToItemStackEMExtraFactory extends TileEntityI
         } else {
             gasUsageMultiplier = (usedSoFar, operatingTicks) -> {
                 long baseRemaining = baseTotalUsage - usedSoFar;
-                int remainingTicks = type == EMExtraFactoryType.COMPRESSING ? 1 : getTicksRequired() - operatingTicks;
+                int remainingTicks = type == FactoryType.COMPRESSING ? 1 : getTicksRequired() - operatingTicks;
                 if (baseRemaining < remainingTicks) {
                     //If we already used more than we would need to use (due to removing speed upgrades or adding gas upgrades)
                     // then just don't use any gas this tick
@@ -129,7 +129,7 @@ public class TileEntityItemStackGasToItemStackEMExtraFactory extends TileEntityI
 
     private long getTankCapacity() {
         if (LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.moreCapacityMode.get()) {
-            EMExtraFactoryType type = Attribute.get(getBlockType(), EMExtraAttributeFactoryType.class).getFactoryType();
+            FactoryType type = Attribute.get(getBlockType(), AttributeFactoryType.class).getFactoryType();
             return switch (type) {
                 case COMPRESSING -> switch (tier) {
                     case ABSOLUTE_OVERCLOCKED -> LoadConfig.EMEXTRA_MORE_CAPACITY_CONFIG.absoluteOverclockedCompressing.get();
@@ -218,11 +218,11 @@ public class TileEntityItemStackGasToItemStackEMExtraFactory extends TileEntityI
 
     private boolean allowExtractingChemical() {
         //Note: We can't use type directly as when this is being used for creating the chemical tank the type field hasn't been set yet
-        return Attribute.get(blockProvider, EMExtraAttributeFactoryType.class).getFactoryType() == EMExtraFactoryType.COMPRESSING;
+        return Attribute.get(blockProvider, AttributeFactoryType.class).getFactoryType() == FactoryType.COMPRESSING;
     }
 
     private boolean useStatisticalMechanics() {
-        return type == EMExtraFactoryType.INJECTING || type == EMExtraFactoryType.PURIFYING;
+        return type == FactoryType.INJECTING || type == FactoryType.PURIFYING;
     }
 
     @Nullable

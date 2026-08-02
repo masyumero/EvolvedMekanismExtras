@@ -1,9 +1,9 @@
 package io.github.masyumero.emextras.common.content.blocktype;
 
+import fr.iglee42.evolvedmekanism.registries.EMFactoryType;
 import io.github.masyumero.emextras.common.registry.EMExtraBlocks;
 import io.github.masyumero.emextras.common.tier.EMExtraFactoryTier;
 import com.jerry.mekanism_extras.common.util.ExtraEnumUtils;
-import io.github.masyumero.emextras.common.block.attribute.EMExtraAttributeFactoryType;
 import io.github.masyumero.emextras.common.block.attribute.EMExtraAttributeTier;
 import io.github.masyumero.emextras.common.block.attribute.EMExtraAttributeUpgradeable;
 import io.github.masyumero.emextras.common.registry.EMExtraBlockTypes;
@@ -12,6 +12,7 @@ import io.github.masyumero.emextras.common.tile.factory.TileEntityEMExtraFactory
 import io.github.masyumero.emextras.common.util.EMExtraEnumUtils;
 import mekanism.common.MekanismLang;
 import mekanism.common.block.attribute.*;
+import mekanism.common.content.blocktype.FactoryType;
 import mekanism.common.inventory.container.MekanismContainer;
 import mekanism.common.lib.math.Pos3D;
 import mekanism.common.registration.impl.ContainerTypeRegistryObject;
@@ -37,7 +38,7 @@ public class EMExtraFactory<TILE extends TileEntityEMExtraFactory<?>> extends EM
     }
 
     private void setMachineData(EMExtraFactoryTier tier) {
-        setFrom(origMachine, AttributeSound.class, EMExtraAttributeFactoryType.class, AttributeUpgradeSupport.class);
+        setFrom(origMachine, AttributeSound.class, AttributeFactoryType.class, AttributeUpgradeSupport.class);
         AttributeEnergy origEnergy = origMachine.get(AttributeEnergy.class);
         add(new AttributeEnergy(origEnergy::getUsage, () -> origEnergy.getConfigStorage().multiply(0.5).max(origEnergy.getUsage()).multiply(tier.processes)));
     }
@@ -50,7 +51,7 @@ public class EMExtraFactory<TILE extends TileEntityEMExtraFactory<?>> extends EM
         }
 
         @SuppressWarnings("unchecked")
-        public static <TILE extends TileEntityEMExtraFactory<?>> EMExtraFactoryBuilder<EMExtraFactory<TILE>, TILE, ?> createFactory(Supplier<?> tileEntityRegistrar, EMExtraFactoryType type,
+        public static <TILE extends TileEntityEMExtraFactory<?>> EMExtraFactoryBuilder<EMExtraFactory<TILE>, TILE, ?> createFactory(Supplier<?> tileEntityRegistrar, FactoryType type,
                                                                                                                                     EMExtraFactoryTier tier) {
 
             EMExtraFactoryBuilder<EMExtraFactory<TILE>, TILE, ?> builder = getAdvancedFactoryTILEAdvancedFactoryBuilder((Supplier<TileEntityTypeRegistryObject<TILE>>) tileEntityRegistrar, type, tier);
@@ -68,12 +69,10 @@ public class EMExtraFactory<TILE extends TileEntityEMExtraFactory<?>> extends EM
         }
     }
 
-    private static <TILE extends TileEntityEMExtraFactory<?>> @NotNull EMExtraFactoryBuilder<EMExtraFactory<TILE>, TILE, ?> getAdvancedFactoryTILEAdvancedFactoryBuilder(Supplier<TileEntityTypeRegistryObject<TILE>> tileEntityRegistrar, EMExtraFactoryType type, EMExtraFactoryTier tier) {
-
+    private static <TILE extends TileEntityEMExtraFactory<?>> @NotNull EMExtraFactoryBuilder<EMExtraFactory<TILE>, TILE, ?> getAdvancedFactoryTILEAdvancedFactoryBuilder(Supplier<TileEntityTypeRegistryObject<TILE>> tileEntityRegistrar, FactoryType type, EMExtraFactoryTier tier) {
         EMExtraFactoryBuilder<EMExtraFactory<TILE>, TILE, ?> builder = new EMExtraFactoryBuilder<>(new EMExtraFactory<>(tileEntityRegistrar,
                 () -> EMExtraContainerTypes.FACTORY,
-                switch (type) {
-                    case ALLOYING, ADVANCED_ALLOYING -> EMExtraBlockTypes.ALLOYER;
+                type == EMFactoryType.ALLOYING ? EMExtraBlockTypes.ALLOYER : switch (type) {
                     case SMELTING -> EMExtraBlockTypes.ENERGIZED_SMELTER;
                     case ENRICHING -> EMExtraBlockTypes.ENRICHMENT_CHAMBER;
                     case CRUSHING -> EMExtraBlockTypes.CRUSHER;

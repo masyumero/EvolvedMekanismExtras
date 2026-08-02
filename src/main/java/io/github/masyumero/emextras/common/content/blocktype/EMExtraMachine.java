@@ -10,17 +10,14 @@ import io.github.masyumero.emextras.common.integration.mekaf.regisrty.EMExtraAdv
 import io.github.masyumero.emextras.common.integration.mekmm.registry.EMExtraMoreMachineBlocks;
 import io.github.masyumero.emextras.common.registry.EMExtraBlocks;
 import io.github.masyumero.emextras.common.tier.EMExtraFactoryTier;
-import io.github.masyumero.emextras.common.block.attribute.EMExtraAttributeFactoryType;
 import io.github.masyumero.emextras.common.block.attribute.EMExtraAttributeUpgradeable;
 
 import mekanism.api.Upgrade;
 import mekanism.api.text.ILangEntry;
 import mekanism.common.MekanismLang;
-import mekanism.common.block.attribute.AttributeParticleFX;
-import mekanism.common.block.attribute.AttributeStateFacing;
-import mekanism.common.block.attribute.AttributeUpgradeSupport;
-import mekanism.common.block.attribute.Attributes;
+import mekanism.common.block.attribute.*;
 import mekanism.common.content.blocktype.BlockTypeTile;
+import mekanism.common.content.blocktype.FactoryType;
 import mekanism.common.lib.math.Pos3D;
 import mekanism.common.registration.impl.TileEntityTypeRegistryObject;
 import mekanism.common.tile.base.TileEntityMekanism;
@@ -43,10 +40,10 @@ public class EMExtraMachine<TILE extends TileEntityMekanism> extends BlockTypeTi
 
     public static class EMExtraFactoryMachine<TILE extends TileEntityMekanism> extends EMExtraMachine<TILE> {
 
-        public EMExtraFactoryMachine(Supplier<TileEntityTypeRegistryObject<TILE>> tileEntitySupplier, MekanismLang description, EMExtraFactoryType factoryType) {
+        public EMExtraFactoryMachine(Supplier<TileEntityTypeRegistryObject<TILE>> tileEntitySupplier, MekanismLang description, FactoryType factoryType) {
             super(tileEntitySupplier, description);
             add(new AttributeUpgradeSupport(EnumSet.of(Upgrade.SPEED, Upgrade.ENERGY, Upgrade.MUFFLING, ExtraUpgrade.STACK, ExtraUpgrade.CREATIVE)));
-            add(new EMExtraAttributeFactoryType(factoryType), new EMExtraAttributeUpgradeable(() -> EMExtraBlocks.getEMExtraFactory(EMExtraFactoryTier.ABSOLUTE_OVERCLOCKED, getFactoryType())));
+            add(new AttributeFactoryType(factoryType), new EMExtraAttributeUpgradeable(() -> EMExtraBlocks.getEMExtraFactory(EMExtraFactoryTier.ABSOLUTE_OVERCLOCKED, getFactoryType())));
         }
 
         public EMExtraFactoryMachine(Supplier<TileEntityTypeRegistryObject<TILE>> tileEntitySupplier, ILangEntry description, MoreMachineFactoryType factoryType) {
@@ -61,8 +58,8 @@ public class EMExtraMachine<TILE extends TileEntityMekanism> extends BlockTypeTi
             add(new AttributeAdvancedFactoryType(factoryType), new EMExtraAttributeUpgradeable(() -> EMExtraAdvancedFactoryBlocks.getEMExtraAdvancedFactory(EMExtraFactoryTier.ABSOLUTE_OVERCLOCKED, getAdvancedFactoryType())));
         }
 
-        public EMExtraFactoryType getFactoryType() {
-            return Objects.requireNonNull(get(EMExtraAttributeFactoryType.class)).getFactoryType();
+        public FactoryType getFactoryType() {
+            return Objects.requireNonNull(get(AttributeFactoryType.class)).getFactoryType();
         }
 
         public MoreMachineFactoryType getMoreMachineFactoryType() {
@@ -81,7 +78,7 @@ public class EMExtraMachine<TILE extends TileEntityMekanism> extends BlockTypeTi
         }
 
         public static <TILE extends TileEntityMekanism> EMExtraMachineBuilder<EMExtraFactoryMachine<TILE>, TILE, ?> createEMExtraFactoryMachine(Supplier<TileEntityTypeRegistryObject<TILE>> tileEntityRegistrar,
-                                                                                                                                                MekanismLang description, EMExtraFactoryType factoryType) {
+                                                                                                                                                MekanismLang description, FactoryType factoryType) {
             return new EMExtraMachineBuilder<>(new EMExtraFactoryMachine<>(tileEntityRegistrar, description, factoryType));
         }
 

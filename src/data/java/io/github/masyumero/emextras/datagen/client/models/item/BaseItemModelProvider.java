@@ -8,10 +8,10 @@ import com.jerry.mekmm.common.block.attribute.AttributeMoreMachineFactoryType;
 import com.jerry.mekmm.common.content.blocktype.MoreMachineFactoryType;
 import io.github.masyumero.emextras.EMExtras;
 import io.github.masyumero.emextras.common.block.attribute.EMExtraAttribute;
-import io.github.masyumero.emextras.common.block.attribute.EMExtraAttributeFactoryType;
-import io.github.masyumero.emextras.common.content.blocktype.EMExtraFactoryType;
 import io.github.masyumero.emextras.common.tier.EMExtraFactoryTier;
 import mekanism.common.block.attribute.Attribute;
+import mekanism.common.block.attribute.AttributeFactoryType;
+import mekanism.common.content.blocktype.FactoryType;
 import mekanism.common.registration.impl.BlockRegistryObject;
 import net.minecraft.data.PackOutput;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
@@ -25,7 +25,7 @@ public abstract class BaseItemModelProvider extends ItemModelProvider {
     }
 
     public ItemModelBuilder factoryBlock(BlockRegistryObject<?, ?> blockRO) {
-        EMExtraFactoryType type = Attribute.get(blockRO, EMExtraAttributeFactoryType.class).getFactoryType();
+        FactoryType type = Attribute.get(blockRO, AttributeFactoryType.class).getFactoryType();
         EMExtraFactoryTier tier = EMExtraAttribute.getTier(blockRO.getBlock(), EMExtraFactoryTier.class);
 
         return this.withExistingParent(blockRO.getName(), EMExtras.rl("block/factory/" + type.getRegistryNameComponent() +  "/" + tier.getEMExtraTier().getLowerName()));

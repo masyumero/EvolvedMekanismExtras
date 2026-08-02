@@ -3,12 +3,11 @@ package io.github.masyumero.emextras.common.tile.factory;
 import com.jerry.mekanism_extras.api.ExtraUpgrade;
 import com.jerry.mekanism_extras.common.util.ExtraContainerSyncUtils;
 import fr.iglee42.evolvedmekanism.interfaces.IGetEnergySlot;
+import fr.iglee42.evolvedmekanism.registries.EMFactoryType;
 import io.github.masyumero.emextras.common.tier.EMExtraFactoryTier;
 import com.jerry.mekanism_extras.common.util.ExtraUpgradeUtils;
 import com.jerry.mekanism_extras.api.IMixinMachineEnergyContainer;
 import io.github.masyumero.emextras.common.block.attribute.EMExtraAttribute;
-import io.github.masyumero.emextras.common.block.attribute.EMExtraAttributeFactoryType;
-import io.github.masyumero.emextras.common.content.blocktype.EMExtraFactoryType;
 import io.github.masyumero.emextras.common.inventory.slot.EMExtraFactoryInputInventorySlot;
 import io.github.masyumero.emextras.common.registry.EMExtraBlockTypes;
 import io.github.masyumero.emextras.common.registry.EMExtraTileEntityTypes;
@@ -25,11 +24,13 @@ import mekanism.api.recipes.MekanismRecipe;
 import mekanism.api.recipes.cache.CachedRecipe;
 import mekanism.common.CommonWorldTickHandler;
 import mekanism.common.block.attribute.Attribute;
+import mekanism.common.block.attribute.AttributeFactoryType;
 import mekanism.common.capabilities.energy.MachineEnergyContainer;
 import mekanism.common.capabilities.holder.energy.EnergyContainerHelper;
 import mekanism.common.capabilities.holder.energy.IEnergyContainerHolder;
 import mekanism.common.capabilities.holder.slot.IInventorySlotHolder;
 import mekanism.common.capabilities.holder.slot.InventorySlotHelper;
+import mekanism.common.content.blocktype.FactoryType;
 import mekanism.common.integration.computer.ComputerException;
 import mekanism.common.integration.computer.SpecialComputerMethodWrapper;
 import mekanism.common.integration.computer.annotation.ComputerMethod;
@@ -109,7 +110,7 @@ public abstract class TileEntityEMExtraFactory<RECIPE extends MekanismRecipe> ex
      * This machine's factory type.
      */
     @NotNull
-    protected final EMExtraFactoryType type;
+    protected final FactoryType type;
 
     @Getter
     protected MachineEnergyContainer<TileEntityEMExtraFactory<?>> energyContainer;
@@ -120,7 +121,7 @@ public abstract class TileEntityEMExtraFactory<RECIPE extends MekanismRecipe> ex
 
     protected TileEntityEMExtraFactory(IBlockProvider blockProvider, BlockPos pos, BlockState state, List<CachedRecipe.OperationTracker.RecipeError> errorTypes, Set<CachedRecipe.OperationTracker.RecipeError> globalErrorTypes) {
         super(blockProvider, pos, state);
-        type = Objects.requireNonNull(Attribute.get(blockProvider, EMExtraAttributeFactoryType.class)).getFactoryType();
+        type = Objects.requireNonNull(Attribute.get(blockProvider, AttributeFactoryType.class)).getFactoryType();
         configComponent = new TileComponentConfig(this, TransmissionType.ITEM, TransmissionType.ENERGY);
         inputSlots = new ArrayList<>();
         outputSlots = new ArrayList<>();
@@ -212,7 +213,7 @@ public abstract class TileEntityEMExtraFactory<RECIPE extends MekanismRecipe> ex
         return null;
     }
 
-    public @NotNull EMExtraFactoryType getFactoryType() {
+    public @NotNull FactoryType getFactoryType() {
         return type;
     }
 
@@ -452,9 +453,7 @@ public abstract class TileEntityEMExtraFactory<RECIPE extends MekanismRecipe> ex
         }
 
         //And finally check if it is the non factory version (it will be missing sorting data, but we can gracefully ignore that)
-        return switch (type) {
-            case ADVANCED_ALLOYING -> EMExtraBlockTypes.ADVANCED_ALLOYER.getTileType().get();
-            case ALLOYING -> EMExtraBlockTypes.ALLOYER.getTileType().get();
+        return (type == EMFactoryType.ALLOYING ? EMExtraBlockTypes.ALLOYER.getTileType().get() : switch (type) {
             case SMELTING -> EMExtraBlockTypes.ENERGIZED_SMELTER.getTileType().get();
             case ENRICHING -> EMExtraBlockTypes.ENRICHMENT_CHAMBER.getTileType().get();
             case CRUSHING -> EMExtraBlockTypes.CRUSHER.getTileType().get();
@@ -464,7 +463,7 @@ public abstract class TileEntityEMExtraFactory<RECIPE extends MekanismRecipe> ex
             case COMBINING -> EMExtraBlockTypes.COMBINER.getTileType().get();
             case INFUSING -> EMExtraBlockTypes.METALLURGIC_INFUSER.getTileType().get();
             case SAWING -> EMExtraBlockTypes.PRECISION_SAWMILL.getTileType().get();
-        } == tileType;
+        }) == tileType;
     }
 
     public boolean hasSecondaryResourceBar() {

@@ -15,14 +15,11 @@ import fr.iglee42.evolvedmekanism.registries.EMFactoryType;
 import fr.iglee42.evolvedmekanism.registries.EMTags;
 import fr.iglee42.evolvedmekanism.tiers.EMFactoryTier;
 import io.github.masyumero.emextras.EMExtras;
-import io.github.masyumero.emextras.common.block.attribute.EMExtraAttributeFactoryType;
-import io.github.masyumero.emextras.common.content.blocktype.EMExtraFactoryType;
 import io.github.masyumero.emextras.common.integration.mekaf.regisrty.EMExtraAdvancedFactoryBlocks;
 import io.github.masyumero.emextras.common.integration.mekmm.registry.EMExtraMoreMachineBlocks;
 import io.github.masyumero.emextras.common.registry.EMExtraBlocks;
 import io.github.masyumero.emextras.common.EMExtraTags;
 import io.github.masyumero.emextras.common.tier.EMExtraFactoryTier;
-import io.github.masyumero.emextras.common.util.EMExtraBlockUtils;
 import io.github.masyumero.emextras.common.util.EMExtraTagUtils;
 import io.github.masyumero.emextras.datagen.common.recipe.ISubRecipeProvider;
 import io.github.masyumero.emextras.datagen.common.recipe.builder.MekDataShapedRecipeBuilder;
@@ -41,6 +38,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.common.Tags;
+import net.minecraftforge.common.crafting.conditions.ICondition;
+import net.minecraftforge.common.crafting.conditions.ModLoadedCondition;
 
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -143,34 +142,37 @@ public class FactoryRecipeProvider implements ISubRecipeProvider {
 
     private void addFactoryRecipes(Consumer<FinishedRecipe> consumer, EMExtraFactoryTier tier,
                                    Function<EMExtraFactoryTier, BlockRegistryObject<?, ?>> factory, BlockRegistryObject<?, ?> toExtraUpgrade, BlockRegistryObject<?, ?> toUpgrade,
-                                   TagKey<Item> alloyTag, TagKey<Item> extraAlloyTag, TagKey<Item> circuitTag, ResourceLocation path) {
-        MekDataShapedRecipeBuilder.shapedRecipe(factory.apply(tier))
+                                   TagKey<Item> alloyTag, TagKey<Item> extraAlloyTag, TagKey<Item> circuitTag, ResourceLocation path, ICondition... conditions) {
+        var recipe = MekDataShapedRecipeBuilder.shapedRecipe(factory.apply(tier))
                 .pattern(EMEXTRA_FACTORY_PATTERN)
                 .key(Pattern.ALLOY, alloyTag)
                 .key(Pattern.EXTRA_ALLOY, extraAlloyTag)
                 .key(Pattern.CIRCUIT, circuitTag)
                 .key(Pattern.PREVIOUS, toUpgrade)
                 .key(Pattern.EXTRA_PREVIOUS, toExtraUpgrade)
-                .key(Pattern.STEEL_CASING, MekanismBlocks.STEEL_CASING)
-                .build(consumer, path);
+                .key(Pattern.STEEL_CASING, MekanismBlocks.STEEL_CASING);
+        for (ICondition condition : conditions) {
+            recipe.addCondition(condition);
+        }
+        recipe.build(consumer, path);
     }
 
     private void addFactoryRecipes(Consumer<FinishedRecipe> consumer, String basePath, FactoryType type,
                                    EMExtraFactoryTier tier, ExtraFactoryTier toExtraUpgradeTier, FactoryTier toUpgradeTier,
                                    TagKey<Item> alloyTag, TagKey<Item> extraAlloyTag, TagKey<Item> circuitTag) {
-        addFactoryRecipes(consumer, basePath, tier, factoryTier -> EMExtraBlockUtils.getEMExtraFactory(factoryTier, type), MekanismBlocks.getFactory(toUpgradeTier, type), ExtraBlocks.getAdvancedFactory(toExtraUpgradeTier, type), alloyTag, extraAlloyTag, circuitTag);
+        addFactoryRecipes(consumer, basePath, tier, factoryTier -> EMExtraBlocks.getEMExtraFactory(factoryTier, type), MekanismBlocks.getFactory(toUpgradeTier, type), ExtraBlocks.getAdvancedFactory(toExtraUpgradeTier, type), alloyTag, extraAlloyTag, circuitTag);
     }
 
     private void addFactoryRecipes(Consumer<FinishedRecipe> consumer, String basePath, EMExtraFactoryTier tier,
                                    Function<EMExtraFactoryTier, BlockRegistryObject<?, ?>> factory, BlockRegistryObject<?, ?> toExtraUpgrade, BlockRegistryObject<?, ?> toUpgrade,
                                    TagKey<Item> alloyTag, TagKey<Item> extraAlloyTag, TagKey<Item> circuitTag) {
-        addFactoryRecipes(consumer, tier, factory, toExtraUpgrade, toUpgrade, alloyTag, extraAlloyTag, circuitTag, EMExtras.rl(basePath + tier.getEMExtraTier().getLowerName() + "/" + Attribute.get(factory.apply(tier), EMExtraAttributeFactoryType.class).getFactoryType().getRegistryNameComponent()));
+        addFactoryRecipes(consumer, tier, factory, toExtraUpgrade, toUpgrade, alloyTag, extraAlloyTag, circuitTag, EMExtras.rl(basePath + tier.getEMExtraTier().getLowerName() + "/" + Attribute.get(factory.apply(tier), AttributeFactoryType.class).getFactoryType().getRegistryNameComponent()));
     }
 
     private void addEMExtraAlloyingFactoryRecipes(Consumer<FinishedRecipe> consumer, String basePath,
                                                   EMExtraFactoryTier tier, ExtraFactoryTier toExtraUpgradeTier, FactoryTier toUpgradeTier,
                                                   TagKey<Item> alloyTag, TagKey<Item> extraAlloyTag, TagKey<Item> circuitTag) {
-        addFactoryRecipes(consumer, basePath, tier, factoryTier -> EMExtraBlocks.getEMExtraFactory(factoryTier, EMExtraFactoryType.ALLOYING), MekanismBlocks.getFactory(toUpgradeTier, EMFactoryType.ALLOYING), EMExtraBlocks.getExtraFactory(toExtraUpgradeTier, EMFactoryType.ALLOYING), alloyTag, extraAlloyTag, circuitTag);
+        addFactoryRecipes(consumer, basePath, tier, factoryTier -> EMExtraBlocks.getEMExtraFactory(factoryTier, EMFactoryType.ALLOYING), MekanismBlocks.getFactory(toUpgradeTier, EMFactoryType.ALLOYING), EMExtraBlocks.getExtraFactory(toExtraUpgradeTier, EMFactoryType.ALLOYING), alloyTag, extraAlloyTag, circuitTag);
     }
 
     private void addMoreMachineFactoryRecipes(Consumer<FinishedRecipe> consumer, String basePath, MoreMachineFactoryType type,
@@ -182,7 +184,7 @@ public class FactoryRecipeProvider implements ISubRecipeProvider {
     private void addMoreMachineFactoryRecipes(Consumer<FinishedRecipe> consumer, String basePath, EMExtraFactoryTier tier,
                                               Function<EMExtraFactoryTier, BlockRegistryObject<?, ?>> factory, BlockRegistryObject<?, ?> toExtraUpgrade, BlockRegistryObject<?, ?> toUpgrade,
                                               TagKey<Item> alloyTag, TagKey<Item> extraAlloyTag, TagKey<Item> circuitTag) {
-        addFactoryRecipes(consumer, tier, factory, toExtraUpgrade, toUpgrade, alloyTag, extraAlloyTag, circuitTag, EMExtras.rl(basePath + tier.getEMExtraTier().getLowerName() + "/" + Attribute.get(factory.apply(tier), AttributeMoreMachineFactoryType.class).getMoreMachineFactoryType().getRegistryNameComponent()));
+        addFactoryRecipes(consumer, tier, factory, toExtraUpgrade, toUpgrade, alloyTag, extraAlloyTag, circuitTag, EMExtras.rl(basePath + tier.getEMExtraTier().getLowerName() + "/" + Attribute.get(factory.apply(tier), AttributeMoreMachineFactoryType.class).getMoreMachineFactoryType().getRegistryNameComponent()), new ModLoadedCondition("mekmm"));
     }
 
     private void addAdvancedFactoryRecipes(Consumer<FinishedRecipe> consumer, String basePath, AdvancedFactoryType type,
@@ -194,6 +196,6 @@ public class FactoryRecipeProvider implements ISubRecipeProvider {
     private void addAdvancedFactoryRecipes(Consumer<FinishedRecipe> consumer, String basePath, EMExtraFactoryTier tier,
                                            Function<EMExtraFactoryTier, BlockRegistryObject<?, ?>> factory, BlockRegistryObject<?, ?> toExtraUpgrade, BlockRegistryObject<?, ?> toUpgrade,
                                            TagKey<Item> alloyTag, TagKey<Item> extraAlloyTag, TagKey<Item> circuitTag) {
-        addFactoryRecipes(consumer, tier, factory, toExtraUpgrade, toUpgrade, alloyTag, extraAlloyTag, circuitTag, EMExtras.rl(basePath + tier.getEMExtraTier().getLowerName() + "/" + Attribute.get(factory.apply(tier), AttributeAdvancedFactoryType.class).getAdvancedFactoryType().getRegistryNameComponent()));
+        addFactoryRecipes(consumer, tier, factory, toExtraUpgrade, toUpgrade, alloyTag, extraAlloyTag, circuitTag, EMExtras.rl(basePath + tier.getEMExtraTier().getLowerName() + "/" + Attribute.get(factory.apply(tier), AttributeAdvancedFactoryType.class).getAdvancedFactoryType().getRegistryNameComponent()), new ModLoadedCondition("mekmm"));
     }
 }

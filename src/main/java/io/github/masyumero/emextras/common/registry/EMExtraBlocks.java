@@ -21,7 +21,6 @@ import io.github.masyumero.emextras.EMExtras;
 import io.github.masyumero.emextras.common.block.attribute.EMExtraAttributeTier;
 import io.github.masyumero.emextras.common.block.prefab.BlockEMExtraFactoryMachine;
 import io.github.masyumero.emextras.common.content.blocktype.EMExtraFactory;
-import io.github.masyumero.emextras.common.content.blocktype.EMExtraFactoryType;
 import io.github.masyumero.emextras.common.item.block.machine.ItemBlockEMExtraFactory;
 import io.github.masyumero.emextras.common.tile.factory.TileEntityEMExtraFactory;
 import io.github.masyumero.emextras.common.tile.multiblock.TileEntityEMExtraInductionCell;
@@ -34,6 +33,7 @@ import mekanism.common.content.blocktype.FactoryType;
 import mekanism.common.registration.impl.BlockDeferredRegister;
 import mekanism.common.registration.impl.BlockRegistryObject;
 import mekanism.common.tier.*;
+import mekanism.common.util.EnumUtils;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.MapColor;
@@ -56,17 +56,15 @@ public class EMExtraBlocks {
         return BLOCK.register(registerName, () -> blockSupplier.apply(tier.getEMExtraTier().getMapColor()), itemCreator);
     }
 
-    private static final Table<EMExtraFactoryTier, EMExtraFactoryType, BlockRegistryObject<BlockEMExtraFactoryMachine.BlockEMExtraFactory<?>, ItemBlockEMExtraFactory>> FACTORIES = HashBasedTable.create();
+    private static final Table<EMExtraFactoryTier, FactoryType, BlockRegistryObject<BlockEMExtraFactoryMachine.BlockEMExtraFactory<?>, ItemBlockEMExtraFactory>> FACTORIES = HashBasedTable.create();
 
     private static final Table<ExtraFactoryTier, FactoryType, BlockRegistryObject<BlockExtraFactoryMachine.BlockExtraFactory<?>, ItemBlockExtraFactory>> ADVANCED_FACTORIES = HashBasedTable.create();
 
     static {
         // factories
         for (EMExtraFactoryTier tier : EMExtraEnumUtils.EMEXTRA_FACTORY_TIERS) {
-            for (EMExtraFactoryType type : EMExtraEnumUtils.EMEXTRA_FACTORY_TYPES) {
-                if (type != EMExtraFactoryType.ADVANCED_ALLOYING) {
-                    FACTORIES.put(tier, type, registerFactory(EMExtraBlockTypes.getEMExtraFactory(tier, type)));
-                }
+            for (FactoryType type : EnumUtils.FACTORY_TYPES) {
+                FACTORIES.put(tier, type, registerFactory(EMExtraBlockTypes.getEMExtraFactory(tier, type)));
             }
         }
         for (ExtraFactoryTier tier : ExtraEnumUtils.EXTRA_FACTORY_TIERS) {
@@ -121,7 +119,7 @@ public class EMExtraBlocks {
         return registerTieredBlock(tier.getAdvanceTier().getLowerName(), "_" + "alloying" + "_factory", () -> new BlockExtraFactoryMachine.BlockExtraFactory<>(type), ItemBlockExtraFactory::new);
     }
 
-    public static BlockRegistryObject<BlockEMExtraFactoryMachine.BlockEMExtraFactory<?>, ItemBlockEMExtraFactory>  getEMExtraFactory(@NotNull EMExtraFactoryTier tier, @NotNull EMExtraFactoryType type) {
+    public static BlockRegistryObject<BlockEMExtraFactoryMachine.BlockEMExtraFactory<?>, ItemBlockEMExtraFactory>  getEMExtraFactory(@NotNull EMExtraFactoryTier tier, @NotNull FactoryType type) {
         return FACTORIES.get(tier, type);
     }
 

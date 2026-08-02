@@ -9,7 +9,6 @@ import fr.iglee42.evolvedmekanism.registries.EMFactoryType;
 import io.github.masyumero.emextras.common.tier.EMExtraFactoryTier;
 import fr.iglee42.evolvedmekanism.registries.EMTileEntityTypes;
 import io.github.masyumero.emextras.EMExtras;
-import io.github.masyumero.emextras.common.content.blocktype.EMExtraFactoryType;
 import io.github.masyumero.emextras.common.tile.factory.*;
 import io.github.masyumero.emextras.common.tile.multiblock.TileEntityEMExtraInductionCell;
 import io.github.masyumero.emextras.common.tile.multiblock.TileEntityEMExtraInductionProvider;
@@ -28,22 +27,22 @@ public class EMExtraTileEntityTypes {
 
     public static final TileEntityTypeDeferredRegister TILE_ENTITY_TYPES = new TileEntityTypeDeferredRegister(EMExtras.MODID);
 
-    private static final Table<EMExtraFactoryTier, EMExtraFactoryType, TileEntityTypeRegistryObject<? extends TileEntityEMExtraFactory<?>>> FACTORIES = HashBasedTable.create();
+    private static final Table<EMExtraFactoryTier, FactoryType, TileEntityTypeRegistryObject<? extends TileEntityEMExtraFactory<?>>> FACTORIES = HashBasedTable.create();
 
     private static final Table<ExtraFactoryTier, FactoryType, TileEntityTypeRegistryObject<? extends TileEntityExtraFactory<?>>> ADVANCED_FACTORIES = HashBasedTable.create();
 
     static {
         for (EMExtraFactoryTier tier : EMExtraEnumUtils.EMEXTRA_FACTORY_TIERS) {
-            FACTORIES.put(tier, EMExtraFactoryType.SMELTING, TILE_ENTITY_TYPES.register(EMExtraBlocks.getEMExtraFactory(tier, EMExtraFactoryType.SMELTING), (pos, state) -> new TileEntityItemStackToItemStackEMExtraFactory(EMExtraBlocks.getEMExtraFactory(tier, EMExtraFactoryType.SMELTING), pos, state), TileEntityMekanism::tickServer, TileEntityMekanism::tickClient));
-            FACTORIES.put(tier, EMExtraFactoryType.CRUSHING, TILE_ENTITY_TYPES.register(EMExtraBlocks.getEMExtraFactory(tier, EMExtraFactoryType.CRUSHING), (pos, state) -> new TileEntityItemStackToItemStackEMExtraFactory(EMExtraBlocks.getEMExtraFactory(tier, EMExtraFactoryType.CRUSHING), pos, state), TileEntityMekanism::tickServer, TileEntityMekanism::tickClient));
-            FACTORIES.put(tier, EMExtraFactoryType.ENRICHING, TILE_ENTITY_TYPES.register(EMExtraBlocks.getEMExtraFactory(tier, EMExtraFactoryType.ENRICHING), (pos, state) -> new TileEntityItemStackToItemStackEMExtraFactory(EMExtraBlocks.getEMExtraFactory(tier, EMExtraFactoryType.ENRICHING), pos, state), TileEntityMekanism::tickServer, TileEntityMekanism::tickClient));
-            FACTORIES.put(tier, EMExtraFactoryType.COMPRESSING, TILE_ENTITY_TYPES.register(EMExtraBlocks.getEMExtraFactory(tier, EMExtraFactoryType.COMPRESSING), (pos, state) -> new TileEntityItemStackGasToItemStackEMExtraFactory(EMExtraBlocks.getEMExtraFactory(tier, EMExtraFactoryType.COMPRESSING), pos, state), TileEntityMekanism::tickServer, TileEntityMekanism::tickClient));
-            FACTORIES.put(tier, EMExtraFactoryType.INJECTING, TILE_ENTITY_TYPES.register(EMExtraBlocks.getEMExtraFactory(tier, EMExtraFactoryType.INJECTING), (pos, state) -> new TileEntityItemStackGasToItemStackEMExtraFactory(EMExtraBlocks.getEMExtraFactory(tier, EMExtraFactoryType.INJECTING), pos, state), TileEntityMekanism::tickServer, TileEntityMekanism::tickClient));
-            FACTORIES.put(tier, EMExtraFactoryType.PURIFYING, TILE_ENTITY_TYPES.register(EMExtraBlocks.getEMExtraFactory(tier, EMExtraFactoryType.PURIFYING), (pos, state) -> new TileEntityItemStackGasToItemStackEMExtraFactory(EMExtraBlocks.getEMExtraFactory(tier, EMExtraFactoryType.PURIFYING), pos, state), TileEntityMekanism::tickServer, TileEntityMekanism::tickClient));
-            FACTORIES.put(tier, EMExtraFactoryType.INFUSING, TILE_ENTITY_TYPES.register(EMExtraBlocks.getEMExtraFactory(tier, EMExtraFactoryType.INFUSING), (pos, state) -> new TileEntityMetallurgicInfuserEMExtraFactory(EMExtraBlocks.getEMExtraFactory(tier, EMExtraFactoryType.INFUSING), pos, state), TileEntityMekanism::tickServer, TileEntityMekanism::tickClient));
-            FACTORIES.put(tier, EMExtraFactoryType.COMBINING, TILE_ENTITY_TYPES.register(EMExtraBlocks.getEMExtraFactory(tier, EMExtraFactoryType.COMBINING), (pos, state) -> new TileEntityCombiningEMExtraFactory(EMExtraBlocks.getEMExtraFactory(tier, EMExtraFactoryType.COMBINING), pos, state), TileEntityMekanism::tickServer, TileEntityMekanism::tickClient));
-            FACTORIES.put(tier, EMExtraFactoryType.SAWING, TILE_ENTITY_TYPES.register(EMExtraBlocks.getEMExtraFactory(tier, EMExtraFactoryType.SAWING), (pos, state) -> new TileEntitySawingEMExtraFactory(EMExtraBlocks.getEMExtraFactory(tier, EMExtraFactoryType.SAWING), pos, state), TileEntityMekanism::tickServer, TileEntityMekanism::tickClient));
-            FACTORIES.put(tier, EMExtraFactoryType.ALLOYING, EMTileEntityTypes.TILE_ENTITY_TYPES.register(EMExtraBlocks.getEMExtraFactory(tier, EMExtraFactoryType.ALLOYING), (pos, state) -> new TileEntityEMExtraAlloyingFactory(EMExtraBlocks.getEMExtraFactory(tier, EMExtraFactoryType.ALLOYING), pos, state), TileEntityMekanism::tickServer, TileEntityMekanism::tickClient));
+            FACTORIES.put(tier, FactoryType.SMELTING, TILE_ENTITY_TYPES.register(EMExtraBlocks.getEMExtraFactory(tier, FactoryType.SMELTING), (pos, state) -> new TileEntityItemStackToItemStackEMExtraFactory(EMExtraBlocks.getEMExtraFactory(tier, FactoryType.SMELTING), pos, state), TileEntityMekanism::tickServer, TileEntityMekanism::tickClient));
+            FACTORIES.put(tier, FactoryType.CRUSHING, TILE_ENTITY_TYPES.register(EMExtraBlocks.getEMExtraFactory(tier, FactoryType.CRUSHING), (pos, state) -> new TileEntityItemStackToItemStackEMExtraFactory(EMExtraBlocks.getEMExtraFactory(tier, FactoryType.CRUSHING), pos, state), TileEntityMekanism::tickServer, TileEntityMekanism::tickClient));
+            FACTORIES.put(tier, FactoryType.ENRICHING, TILE_ENTITY_TYPES.register(EMExtraBlocks.getEMExtraFactory(tier, FactoryType.ENRICHING), (pos, state) -> new TileEntityItemStackToItemStackEMExtraFactory(EMExtraBlocks.getEMExtraFactory(tier, FactoryType.ENRICHING), pos, state), TileEntityMekanism::tickServer, TileEntityMekanism::tickClient));
+            FACTORIES.put(tier, FactoryType.COMPRESSING, TILE_ENTITY_TYPES.register(EMExtraBlocks.getEMExtraFactory(tier, FactoryType.COMPRESSING), (pos, state) -> new TileEntityItemStackGasToItemStackEMExtraFactory(EMExtraBlocks.getEMExtraFactory(tier, FactoryType.COMPRESSING), pos, state), TileEntityMekanism::tickServer, TileEntityMekanism::tickClient));
+            FACTORIES.put(tier, FactoryType.INJECTING, TILE_ENTITY_TYPES.register(EMExtraBlocks.getEMExtraFactory(tier, FactoryType.INJECTING), (pos, state) -> new TileEntityItemStackGasToItemStackEMExtraFactory(EMExtraBlocks.getEMExtraFactory(tier, FactoryType.INJECTING), pos, state), TileEntityMekanism::tickServer, TileEntityMekanism::tickClient));
+            FACTORIES.put(tier, FactoryType.PURIFYING, TILE_ENTITY_TYPES.register(EMExtraBlocks.getEMExtraFactory(tier, FactoryType.PURIFYING), (pos, state) -> new TileEntityItemStackGasToItemStackEMExtraFactory(EMExtraBlocks.getEMExtraFactory(tier, FactoryType.PURIFYING), pos, state), TileEntityMekanism::tickServer, TileEntityMekanism::tickClient));
+            FACTORIES.put(tier, FactoryType.INFUSING, TILE_ENTITY_TYPES.register(EMExtraBlocks.getEMExtraFactory(tier, FactoryType.INFUSING), (pos, state) -> new TileEntityMetallurgicInfuserEMExtraFactory(EMExtraBlocks.getEMExtraFactory(tier, FactoryType.INFUSING), pos, state), TileEntityMekanism::tickServer, TileEntityMekanism::tickClient));
+            FACTORIES.put(tier, FactoryType.COMBINING, TILE_ENTITY_TYPES.register(EMExtraBlocks.getEMExtraFactory(tier, FactoryType.COMBINING), (pos, state) -> new TileEntityCombiningEMExtraFactory(EMExtraBlocks.getEMExtraFactory(tier, FactoryType.COMBINING), pos, state), TileEntityMekanism::tickServer, TileEntityMekanism::tickClient));
+            FACTORIES.put(tier, FactoryType.SAWING, TILE_ENTITY_TYPES.register(EMExtraBlocks.getEMExtraFactory(tier, FactoryType.SAWING), (pos, state) -> new TileEntitySawingEMExtraFactory(EMExtraBlocks.getEMExtraFactory(tier, FactoryType.SAWING), pos, state), TileEntityMekanism::tickServer, TileEntityMekanism::tickClient));
+            FACTORIES.put(tier, EMFactoryType.ALLOYING, EMTileEntityTypes.TILE_ENTITY_TYPES.register(EMExtraBlocks.getEMExtraFactory(tier, EMFactoryType.ALLOYING), (pos, state) -> new TileEntityEMExtraAlloyingFactory(EMExtraBlocks.getEMExtraFactory(tier, EMFactoryType.ALLOYING), pos, state), TileEntityMekanism::tickServer, TileEntityMekanism::tickClient));
         }
         for (ExtraFactoryTier tier  : ExtraEnumUtils.EXTRA_FACTORY_TIERS) {
             ADVANCED_FACTORIES.put(tier, EMFactoryType.ALLOYING, EMTileEntityTypes.TILE_ENTITY_TYPES.register(EMExtraBlocks.getExtraFactory(tier, EMFactoryType.ALLOYING), (pos, state) -> new TileEntityAdvancedAlloyingFactory(EMExtraBlocks.getExtraFactory(tier, EMFactoryType.ALLOYING), pos, state), TileEntityMekanism::tickServer, TileEntityMekanism::tickClient));
@@ -91,7 +90,7 @@ public class EMExtraTileEntityTypes {
     public static final TileEntityTypeRegistryObject<TileEntityEMExtraThermodynamicConductor> COSMIC_DENSE_THERMODYNAMIC_CONDUCTOR = registerTransmitter(EMExtraBlocks.COSMIC_DENSE_THERMODYNAMIC_CONDUCTOR, (pos, state) -> new TileEntityEMExtraThermodynamicConductor(EMExtraBlocks.COSMIC_DENSE_THERMODYNAMIC_CONDUCTOR, pos, state));
     public static final TileEntityTypeRegistryObject<TileEntityEMExtraThermodynamicConductor> INFINITE_MULTIVERSAL_THERMODYNAMIC_CONDUCTOR = registerTransmitter(EMExtraBlocks.INFINITE_MULTIVERSAL_THERMODYNAMIC_CONDUCTOR, (pos, state) -> new TileEntityEMExtraThermodynamicConductor(EMExtraBlocks.INFINITE_MULTIVERSAL_THERMODYNAMIC_CONDUCTOR, pos, state));
     
-    public static TileEntityTypeRegistryObject<? extends TileEntityEMExtraFactory<?>> getEMExtraFactoryTile(EMExtraFactoryTier tier, EMExtraFactoryType type) {
+    public static TileEntityTypeRegistryObject<? extends TileEntityEMExtraFactory<?>> getEMExtraFactoryTile(EMExtraFactoryTier tier, FactoryType type) {
         return FACTORIES.get(tier, type);
     }
 

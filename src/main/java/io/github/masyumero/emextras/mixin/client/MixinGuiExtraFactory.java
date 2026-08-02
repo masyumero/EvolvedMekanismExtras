@@ -3,6 +3,7 @@ package io.github.masyumero.emextras.mixin.client;
 import com.jerry.mekanism_extras.client.gui.machine.GuiExtraFactory;
 import com.jerry.mekanism_extras.common.tile.factory.TileEntityExtraFactory;
 import fr.iglee42.evolvedmekanism.jei.EMJEI;
+import fr.iglee42.evolvedmekanism.registries.EMFactoryType;
 import mekanism.client.gui.GuiConfigurableTile;
 import mekanism.client.gui.element.progress.GuiProgress;
 import mekanism.client.jei.MekanismJEIRecipeType;
@@ -23,7 +24,7 @@ public abstract class MixinGuiExtraFactory extends GuiConfigurableTile<TileEntit
 
     @Inject(method = "addProgress", at = @At("HEAD"), cancellable = true)
     private void addProgressInject(GuiProgress progressBar, CallbackInfoReturnable<GuiProgress> cir) {
-        MekanismJEIRecipeType<?> jeiType = switch (tile.getFactoryType()) {
+        MekanismJEIRecipeType<?> jeiType = tile.getFactoryType() == EMFactoryType.ALLOYING ? EMJEI.ALLOYING : switch (tile.getFactoryType()) {
             case SMELTING -> MekanismJEIRecipeType.SMELTING;
             case ENRICHING -> MekanismJEIRecipeType.ENRICHING;
             case CRUSHING -> MekanismJEIRecipeType.CRUSHING;
@@ -33,7 +34,6 @@ public abstract class MixinGuiExtraFactory extends GuiConfigurableTile<TileEntit
             case INJECTING -> MekanismJEIRecipeType.INJECTING;
             case INFUSING -> MekanismJEIRecipeType.METALLURGIC_INFUSING;
             case SAWING -> MekanismJEIRecipeType.SAWING;
-            default -> EMJEI.ALLOYING;
         };
         cir.setReturnValue(addRenderableWidget(progressBar.jeiCategories(jeiType)));
     }

@@ -1,6 +1,7 @@
 package io.github.masyumero.emextras.client.gui.machine;
 
 import fr.iglee42.evolvedmekanism.jei.EMJEI;
+import fr.iglee42.evolvedmekanism.registries.EMFactoryType;
 import io.github.masyumero.emextras.client.gui.element.tab.EMExtraGuiSortingTab;
 import io.github.masyumero.emextras.common.tile.factory.TileEntityEMExtraFactory;
 import io.github.masyumero.emextras.common.tile.factory.TileEntityItemStackGasToItemStackEMExtraFactory;
@@ -76,8 +77,7 @@ public class GuiEMExtraFactory extends GuiConfigurableTile<TileEntityEMExtraFact
     }
 
     private GuiProgress addProgress(GuiProgress progressBar) {
-        MekanismJEIRecipeType<?> jeiType = switch (tile.getFactoryType()) {
-            case ALLOYING, ADVANCED_ALLOYING -> EMJEI.ALLOYING;
+        MekanismJEIRecipeType<?> jeiType = tile.getFactoryType() == EMFactoryType.ALLOYING ? EMJEI.ALLOYING : switch (tile.getFactoryType()) {
             case SMELTING -> MekanismJEIRecipeType.SMELTING;
             case ENRICHING -> MekanismJEIRecipeType.ENRICHING;
             case CRUSHING -> MekanismJEIRecipeType.CRUSHING;
