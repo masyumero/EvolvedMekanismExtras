@@ -22,7 +22,7 @@ public class EMExtraMMCatalystRegistryHelper {
 
     public static void register(IRecipeCatalystRegistration registry) {
         register(registry, false, MoreMachineJEIRecipeType.RECYCLING, MoreMachineJEIRecipeType.PLANTING, MoreMachineJEIRecipeType.CNC_STAMPING,
-                MoreMachineJEIRecipeType.CNC_LATHING, MoreMachineJEIRecipeType.CNC_ROLLING_MILL, MoreMachineJEIRecipeType.REPLICATOR);
+                MoreMachineJEIRecipeType.CNC_LATHING, MoreMachineJEIRecipeType.CNC_ROLLING_MILL, MoreMachineJEIRecipeType.REPLICATOR, MekanismJEIRecipeType.GAS_CONVERSION);
     }
 
     public static void register(IRecipeCatalystRegistration registry, boolean needOrdinary, MekanismJEIRecipeType<?>... categories) {
@@ -39,6 +39,9 @@ public class EMExtraMMCatalystRegistryHelper {
             } else if (category == MoreMachineJEIRecipeType.CNC_ROLLING_MILL) {
                 register(registry, recipeType, MoreMachineBlocks.CNC_ROLLING_MILL, needOrdinary);
             } else if (category == MoreMachineJEIRecipeType.REPLICATOR) {
+                register(registry, recipeType, MoreMachineBlocks.REPLICATOR, needOrdinary);
+            } else if (category == MekanismJEIRecipeType.GAS_CONVERSION) {
+                register(registry, recipeType, MoreMachineBlocks.PLANTING_STATION, needOrdinary);
                 register(registry, recipeType, MoreMachineBlocks.REPLICATOR, needOrdinary);
             }
         }
