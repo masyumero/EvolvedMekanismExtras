@@ -1,5 +1,11 @@
 {
   "type": "mekanism:mek_data",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "mekmm"
+    }
+  ],
   "key": {
     "A": {
       "tag": "forge:alloys/infinite"
