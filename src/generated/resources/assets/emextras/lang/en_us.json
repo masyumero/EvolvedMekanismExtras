@@ -236,6 +236,7 @@
   "container.emextras.supreme_quantum_smelting_factory": "Supreme Quantum Smelting Factory",
   "container.emextras.supreme_quantum_stamping_factory": "Supreme Quantum Stamping Factory",
   "container.emextras.supreme_quantum_washing_factory": "Supreme Quantum Washing Factory",
+  "hint.emextras.tier_installer": "You must have %1$s in your off-hand slot.",
   "item.emextras.absolute_overclocked_control_circuit": "Absolute Overclocked Control Circuit",
   "item.emextras.absolute_overclocked_tier_installer": "Absolute Overclocked Tier Installer",
   "item.emextras.base_control_circuit": "Base Control Circuit",

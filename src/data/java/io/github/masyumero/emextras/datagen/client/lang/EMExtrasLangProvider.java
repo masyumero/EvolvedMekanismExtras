@@ -28,18 +28,11 @@ public class EMExtrasLangProvider extends BaseLanguageProvider {
     }
 
     private void addItem() {
-        add(EMExtraItems.ABSOLUTE_OVERCLOCKED_TIER_INSTALLER, "Absolute Overclocked Tier Installer");
-        add(EMExtraItems.SUPREME_QUANTUM_TIER_INSTALLER, "Supreme Quantum Tier Installer");
-        add(EMExtraItems.COSMIC_DENSE_TIER_INSTALLER, "Cosmic Dense Tier Installer");
-        add(EMExtraItems.INFINITE_MULTIVERSAL_TIER_INSTALLER, "Infinite Multiversal Tier Installer");
-        add(EMExtraItems.BASE_CONTROL_CIRCUIT, "Base Control Circuit");
-        add(EMExtraItems.ABSOLUTE_OVERCLOCKED_CONTROL_CIRCUIT, "Absolute Overclocked Control Circuit");
-        add(EMExtraItems.SUPREME_QUANTUM_CONTROL_CIRCUIT, "Supreme Quantum Control Circuit");
-        add(EMExtraItems.COSMIC_DENSE_CONTROL_CIRCUIT, "Cosmic Dense Control Circuit");
-        add(EMExtraItems.INFINITE_MULTIVERSAL_CONTROL_CIRCUIT, "Infinite Multiversal Control Circuit");
+        EMExtraItems.ITEM.getAllItems().forEach(this::add);
     }
 
     private void addMisc() {
         add(EMExtrasLang.TAB, "Evolved Mekanism Extras");
+        add(EMExtrasLang.HINT_TIER_INSTALLER, "You must have %1$s in your off-hand slot.");
     }
 }

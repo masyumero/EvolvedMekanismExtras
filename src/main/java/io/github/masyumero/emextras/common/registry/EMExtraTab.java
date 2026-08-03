@@ -2,6 +2,7 @@ package io.github.masyumero.emextras.common.registry;
 
 import io.github.masyumero.emextras.EMExtras;
 import io.github.masyumero.emextras.EMExtrasLang;
+import io.github.masyumero.emextras.api.tier.EMExtraTier;
 import io.github.masyumero.emextras.common.integration.Addons;
 import io.github.masyumero.emextras.common.integration.mekaf.regisrty.EMExtraAdvancedFactoryBlocks;
 import io.github.masyumero.emextras.common.integration.mekmm.registry.EMExtraMoreMachineBlocks;
@@ -16,7 +17,7 @@ public class EMExtraTab {
     }
 
     public static final CreativeTabDeferredRegister TAB = new CreativeTabDeferredRegister(EMExtras.MODID, EMExtraTab::addToExistingTabs);
-    public static final CreativeTabRegistryObject EVOLVED_MEKANISM_EXTRAS_TAB = TAB.registerMain(EMExtrasLang.TAB, EMExtraItems.INFINITE_MULTIVERSAL_CONTROL_CIRCUIT, builder ->
+    public static final CreativeTabRegistryObject EVOLVED_MEKANISM_EXTRAS_TAB = TAB.registerMain(EMExtrasLang.TAB, EMExtraItems.getCircuit(EMExtraTier.INFINITE_MULTIVERSAL), builder ->
             builder.displayItems((displayParameters, output) -> {
                 CreativeTabDeferredRegister.addToDisplay(EMExtraBlocks.BLOCK, output);
                 CreativeTabDeferredRegister.addToDisplay(EMExtraItems.ITEM, output);

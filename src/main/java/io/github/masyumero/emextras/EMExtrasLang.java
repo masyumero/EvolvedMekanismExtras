@@ -5,7 +5,8 @@ import net.minecraft.Util;
 import org.jetbrains.annotations.NotNull;
 
 public enum EMExtrasLang implements ILangEntry {
-    TAB("constants", "mod_name");
+    TAB("constants", "mod_name"),
+    HINT_TIER_INSTALLER("hint", "tier_installer");
 
 
     private final String key;

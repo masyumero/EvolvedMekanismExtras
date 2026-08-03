@@ -1,10 +1,14 @@
 package io.github.masyumero.emextras.api.mixin.impl;
 
+import io.github.masyumero.emextras.EMExtrasLang;
 import io.github.masyumero.emextras.api.tier.EMExtraTier;
 import io.github.masyumero.emextras.common.block.attribute.EMExtraAttributeUpgradeable;
 import io.github.masyumero.emextras.common.item.EMExtraTieredItem;
+import io.github.masyumero.emextras.common.registry.EMExtraItems;
+import io.github.masyumero.emextras.common.util.EMExtraTextUtils;
 import io.github.masyumero.emextras.common.util.EMExtraTierUtils;
 
+import mekanism.api.text.TextComponentUtil;
 import mekanism.common.Mekanism;
 import mekanism.common.block.attribute.Attribute;
 import mekanism.common.tile.base.TileEntityMekanism;
@@ -13,6 +17,7 @@ import mekanism.common.tile.interfaces.ITileDirectional;
 import mekanism.common.upgrade.IUpgradeData;
 import mekanism.common.util.WorldUtils;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.TextColor;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -32,6 +37,8 @@ public class ImplMixinItemTierInstallers {
         }
         ItemStack offhandItemStack = player.getOffhandItem();
         if (!(offhandItemStack.getItem() instanceof EMExtraTieredItem item) || toTier != item.getTier()) {
+            TextColor color = TextColor.fromRgb(toTier.getRgbSupplier().getAsInt());
+            player.displayClientMessage(EMExtrasLang.HINT_TIER_INSTALLER.translateColored(color, TextComponentUtil.smartTranslate(EMExtraItems.getCircuit(toTier).getTranslationKey())), true);
             return InteractionResult.FAIL;
         }
         BlockPos pos = context.getClickedPos();

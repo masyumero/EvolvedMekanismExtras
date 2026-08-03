@@ -1,6 +1,7 @@
 package io.github.masyumero.emextras.api.tier;
 
 import io.github.masyumero.emextras.common.util.EMExtraColorUtils;
+import lombok.Getter;
 import mekanism.api.SupportsColorMap;
 import mekanism.api.math.MathUtils;
 import net.minecraft.network.chat.TextColor;
@@ -20,7 +21,9 @@ public enum EMExtraTier implements StringRepresentable, SupportsColorMap {
     private static final EMExtraTier[] TIERS = values();
 
     private final String name;
+    @Getter
     private final MapColor mapColor;
+    @Getter
     private final IntSupplier rgbSupplier;
     private TextColor textColor;
     private int[] rgbCode;
@@ -38,10 +41,6 @@ public enum EMExtraTier implements StringRepresentable, SupportsColorMap {
 
     public String getLowerName() {
         return getSimpleName().toLowerCase(Locale.ROOT);
-    }
-
-    public MapColor getMapColor() {
-        return mapColor;
     }
 
     @Override
@@ -67,9 +66,5 @@ public enum EMExtraTier implements StringRepresentable, SupportsColorMap {
 
     public static EMExtraTier byIndexStatic(int index) {
         return MathUtils.getByIndexMod(TIERS, index);
-    }
-
-    public IntSupplier getRgbSupplier() {
-        return rgbSupplier;
     }
 }
