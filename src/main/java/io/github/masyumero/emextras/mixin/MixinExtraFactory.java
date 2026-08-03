@@ -8,9 +8,14 @@ import com.jerry.mekanism_extras.common.registries.ExtraContainerTypes;
 import com.jerry.mekanism_extras.common.tier.ExtraFactoryTier;
 import com.jerry.mekanism_extras.common.tile.factory.TileEntityExtraFactory;
 import com.jerry.mekanism_extras.common.util.ExtraEnumUtils;
+
 import fr.iglee42.evolvedmekanism.registries.EMFactoryType;
+
+import io.github.masyumero.emextras.common.block.attribute.EMExtraAttributeUpgradeable;
 import io.github.masyumero.emextras.common.registry.EMExtraBlocks;
 import io.github.masyumero.emextras.common.registry.EMExtraBlockTypes;
+import io.github.masyumero.emextras.common.util.EMExtraEnumUtils;
+
 import mekanism.api.text.ILangEntry;
 import mekanism.common.content.blocktype.FactoryType;
 import mekanism.common.registration.impl.TileEntityTypeRegistryObject;
@@ -38,6 +43,7 @@ public abstract class MixinExtraFactory<TILE extends TileEntityExtraFactory<?>> 
             if (origMachine.getFactoryType() == EMFactoryType.ALLOYING) {
                 add(new ExtraAttributeUpgradeable(() -> EMExtraBlocks.getExtraFactory(ExtraEnumUtils.EXTRA_FACTORY_TIERS[tier.ordinal() + 1], EMFactoryType.ALLOYING)));
             }
+            add(new EMExtraAttributeUpgradeable(() -> EMExtraBlocks.getEMExtraFactory(EMExtraEnumUtils.EMEXTRA_FACTORY_TIERS[tier.ordinal()], origMachine.getFactoryType())));
         }
     }
 
