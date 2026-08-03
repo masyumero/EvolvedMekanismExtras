@@ -16,11 +16,11 @@ public class EMExtraTierUtils {
         };
     }
 
-    public static EMExtraTier evolvedToEvolvedTier(BaseTier tier) throws IllegalStateException {
+    public static EMExtraTier evolvedToEMExtraTier(BaseTier tier) {
         if (tier == EMBaseTier.OVERCLOCKED) return EMExtraTier.ABSOLUTE_OVERCLOCKED;
         if (tier == EMBaseTier.QUANTUM) return EMExtraTier.SUPREME_QUANTUM;
         if (tier == EMBaseTier.DENSE) return EMExtraTier.COSMIC_DENSE;
         if (tier == EMBaseTier.MULTIVERSAL) return EMExtraTier.INFINITE_MULTIVERSAL;
-        throw new IllegalStateException("Unexpected value: " + tier);
+        return null;
     }
 }

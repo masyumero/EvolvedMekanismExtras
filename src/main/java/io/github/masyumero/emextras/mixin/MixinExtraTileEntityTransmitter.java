@@ -60,7 +60,7 @@ public abstract class MixinExtraTileEntityTransmitter extends TileEntityTransmit
                 if (transmitter instanceof IExtraUpgradeableTransmitter<?> upgradeableTransmitter && ImplMixinTileEntityTransmitters.emextras$canUpgrade(upgradeableTransmitter, evolvedTier)) {
                     TileEntityTransmitter transmitterTile = transmitter.getTransmitterTile();
                     BlockState state = transmitterTile.getBlockState();
-                    BlockState upgradeState = ImplMixinTileEntityTransmitters.emextras$upgradeResult(state, EMExtraTierUtils.evolvedToEvolvedTier(evolvedTier.getBaseTier()), getTransmitterType());
+                    BlockState upgradeState = ImplMixinTileEntityTransmitters.emextras$upgradeResult(state, EMExtraTierUtils.evolvedToEMExtraTier(evolvedTier.getBaseTier()), getTransmitterType());
                     if (state == upgradeState) {
                         // Skip if it would not actually upgrade anything
                         continue;
