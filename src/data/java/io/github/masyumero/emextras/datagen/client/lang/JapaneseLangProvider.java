@@ -1,36 +1,37 @@
 package io.github.masyumero.emextras.datagen.client.lang;
 
-import io.github.masyumero.emextras.EMExtras;
+import io.github.masyumero.emextras.EMExtrasLang;
 import net.minecraft.data.PackOutput;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-import java.util.stream.Collectors;
 
-public class JapaneseLangProvider extends BaseLanguageProvider{
+public class JapaneseLangProvider extends BaseLanguageProvider implements IEnglishToAnyLanguageProvider {
 
     private static final Map<String, String> EN_JP_WORDS = new HashMap<>();
 
     public JapaneseLangProvider(PackOutput output) {
-        super(output, EMExtras.MODID, "ja_jp");
+        super(output, "ja_jp");
     }
 
-    public static void addWord(String en, String jp) {
+    public void addWord(String en, String jp) {
         EN_JP_WORDS.put(en.toLowerCase(Locale.ROOT), jp);
-    }
-
-    public static String replaceEN(String en) {
-        return Arrays.stream(en.split(" ")).map(String::toLowerCase).map(EN_JP_WORDS::get).collect(Collectors.joining());
     }
 
     @Override
     protected void addTranslations() {
-        LANGS.forEach((key, enjp) -> add(key, enjp.jp()));
+        LANGS.forEach((key, en) -> add(key, replaceEN(en)));
+
+        add(EMExtrasLang.HINT_TIER_INSTALLER, "オフハンドに%1$sを持つ必要があります。");
     }
 
-    public static void registerWords() {
+    @Override
+    public String getAnyLangWord(String enKey) {
+        return EN_JP_WORDS.get(enKey);
+    }
+
+    public void registerWords() {
         // Tier
         addWord("absolute", "絶対");
         addWord("overclocked", "超速");
