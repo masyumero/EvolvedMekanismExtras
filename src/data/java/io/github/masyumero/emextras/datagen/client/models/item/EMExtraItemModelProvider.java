@@ -35,13 +35,13 @@ public class EMExtraItemModelProvider extends BaseItemModelProvider {
             }
             for (AdvancedFactoryType type : MoreMachineEnumUtils.ADVANCED_FACTORY_TYPES) {
                 if (type == AdvancedFactoryType.CENTRIFUGING) {
-                    continue;
+                    doubleLayeredBlock(advancedFactoryBlock(EMExtraAdvancedFactoryBlocks.getEMExtraAdvancedFactory(tier, type)));
                 }
                 advancedFactoryBlock(EMExtraAdvancedFactoryBlocks.getEMExtraAdvancedFactory(tier, type));
             }
             for (MoreMachineFactoryType type : MoreMachineEnumUtils.MM_FACTORY_TYPES) {
                 if (type == MoreMachineFactoryType.PLANTING) {
-                    continue;
+                    doubleLayeredBlock(moreMachineFactoryBlock(EMExtraMoreMachineBlocks.getEMExtraMoreMachineFactory(tier, type)));
                 }
                 moreMachineFactoryBlock(EMExtraMoreMachineBlocks.getEMExtraMoreMachineFactory(tier, type));
             }

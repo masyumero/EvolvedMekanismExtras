@@ -14,6 +14,7 @@ import mekanism.common.block.attribute.AttributeFactoryType;
 import mekanism.common.content.blocktype.FactoryType;
 import mekanism.common.registration.impl.BlockRegistryObject;
 import net.minecraft.data.PackOutput;
+import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -37,7 +38,6 @@ public abstract class BaseItemModelProvider extends ItemModelProvider {
         return this.withExistingParent(blockRO.getName(), EMExtras.rl("block/factory/alloying/" + tier.getAdvanceTier().getLowerName()));
     }
 
-
     public ItemModelBuilder advancedFactoryBlock(BlockRegistryObject<?, ?> blockRO) {
         AdvancedFactoryType type = Attribute.get(blockRO, AttributeAdvancedFactoryType.class).getAdvancedFactoryType();
         EMExtraFactoryTier tier = EMExtraAttribute.getTier(blockRO.getBlock(), EMExtraFactoryTier.class);
@@ -50,5 +50,44 @@ public abstract class BaseItemModelProvider extends ItemModelProvider {
         EMExtraFactoryTier tier = EMExtraAttribute.getTier(blockRO.getBlock(), EMExtraFactoryTier.class);
 
         return this.withExistingParent(blockRO.getName(), EMExtras.rl("block/factory/" + type.getRegistryNameComponent() +  "/" + tier.getEMExtraTier().getLowerName()));
+    }
+
+    public ItemModelBuilder doubleLayeredBlock(ItemModelBuilder modelBuilder) {
+        return modelBuilder.transforms()
+                .transform(ItemDisplayContext.THIRD_PERSON_RIGHT_HAND)
+                .rotation(75,45,0)
+                .translation(0,2.5F,1.25F)
+                .scale(0.375F)
+                .end()
+                .transform(ItemDisplayContext.THIRD_PERSON_LEFT_HAND)
+                .rotation(75,45,0)
+                .translation(0,2.5F,1.25F)
+                .scale(0.375F)
+                .end()
+                .transform(ItemDisplayContext.FIRST_PERSON_RIGHT_HAND)
+                .rotation(0,45,0)
+                .scale(0.4F)
+                .end()
+                .transform(ItemDisplayContext.FIRST_PERSON_LEFT_HAND)
+                .rotation(0,225,0)
+                .scale(0.4F)
+                .end()
+                .transform(ItemDisplayContext.GROUND)
+                .translation(0, 3, 0)
+                .scale(0.25F)
+                .end()
+                .transform(ItemDisplayContext.GUI)
+                .rotation(30, 225, 0)
+                .translation(0, -2.5F, 0)
+                .scale(0.43F)
+                .end()
+                .transform(ItemDisplayContext.HEAD)
+                .translation(0, 14, 0)
+                .end()
+                .transform(ItemDisplayContext.FIXED)
+                .translation(0, -3.75F, 0)
+                .scale(0.5F)
+                .end()
+                .end();
     }
 }
