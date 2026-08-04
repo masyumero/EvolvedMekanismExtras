@@ -5,7 +5,6 @@ import io.github.masyumero.emextras.api.tier.EMExtraTier;
 import io.github.masyumero.emextras.common.block.attribute.EMExtraAttributeUpgradeable;
 import io.github.masyumero.emextras.common.item.EMExtraTieredItem;
 import io.github.masyumero.emextras.common.registry.EMExtraItems;
-import io.github.masyumero.emextras.common.util.EMExtraTextUtils;
 import io.github.masyumero.emextras.common.util.EMExtraTierUtils;
 
 import mekanism.api.text.TextComponentUtil;

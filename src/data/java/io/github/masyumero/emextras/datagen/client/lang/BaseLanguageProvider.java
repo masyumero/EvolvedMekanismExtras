@@ -1,14 +1,13 @@
 package io.github.masyumero.emextras.datagen.client.lang;
 
 import io.github.masyumero.emextras.common.util.EMExtraTextUtils;
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import mekanism.api.gear.ModuleData;
 import mekanism.api.providers.IBaseProvider;
 import mekanism.api.providers.IBlockProvider;
 import mekanism.api.providers.IModuleDataProvider;
 import mekanism.api.text.IHasTranslationKey;
-import mekanism.common.Mekanism;
 import mekanism.common.advancements.MekanismAdvancement;
-import mekanism.common.base.IModModule;
 import mekanism.common.block.attribute.Attribute;
 import mekanism.common.block.attribute.AttributeGui;
 import mekanism.common.registration.impl.FluidRegistryObject;
@@ -19,25 +18,20 @@ import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.data.LanguageProvider;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Map;
+
 public abstract class BaseLanguageProvider extends LanguageProvider {
 
-    protected final String modName;
-    protected final String basicModName;
     private final String modid;
+    public static final Map<IHasTranslationKey, ENJP> LANGS = new Object2ObjectOpenHashMap<>();
 
     protected BaseLanguageProvider(PackOutput output, String modid) {
-        this(output, modid, Mekanism.MOD_NAME);
+        this(output, modid, "en_us");
     }
 
-    protected BaseLanguageProvider(PackOutput output, String modid, IModModule module) {
-        this(output, modid, Mekanism.MOD_NAME + ": " + module.getName());
-    }
-
-    private BaseLanguageProvider(PackOutput output, String modid, String modName) {
-        super(output, modid, "en_us");
+    protected BaseLanguageProvider(PackOutput output, String modid, String locale) {
+        super(output, modid, locale);
         this.modid = modid;
-        this.modName = modName;
-        this.basicModName = modName.replaceAll(":", "");
     }
 
     @NotNull
@@ -46,9 +40,26 @@ public abstract class BaseLanguageProvider extends LanguageProvider {
         return super.getName() + ": " + modid;
     }
 
-    protected void addPackData(IHasTranslationKey name, IHasTranslationKey packDescription) {
-        add(name, modName);
-        add(packDescription, "Resources used for " + modName);
+    protected static void addENJP(IHasTranslationKey key, ENJP enjp) {
+        if (LANGS.containsKey(key)) throw new IllegalArgumentException("Duplicate key: " + key);
+        LANGS.put(key, enjp);
+    }
+
+    protected void addENJP(IHasTranslationKey key, String jp) {
+        if (key instanceof IBaseProvider provider) {
+            addENJP(key, new ENJP(EMExtraTextUtils.toEnglishName(provider.getName()), jp));
+        }
+    }
+
+    protected void addENJP(IHasTranslationKey key, String en, String jp) {
+        addENJP(key, new ENJP(en, jp));
+    }
+
+    protected void addENJP(IHasTranslationKey key) {
+        if (key instanceof IBaseProvider baseProvider) {
+            var en = EMExtraTextUtils.toEnglishName(baseProvider.getName());
+            addENJP(key, new ENJP(en, JapaneseLangProvider.replaceEN(en)));
+        }
     }
 
     protected void add(IHasTranslationKey key) {
@@ -99,5 +110,16 @@ public abstract class BaseLanguageProvider extends LanguageProvider {
             throw new IllegalArgumentException("Values containing substitutions should use explicit numbered indices: " + key + " - " + value);
         }
         super.add(key, value);
+    }
+
+    public record ENJP(String en, String jp) {
+
+        @Override
+        public boolean equals(Object o) {
+            if (o instanceof ENJP enjp) {
+                return enjp.en.equals(en) && enjp.jp.equals(jp);
+            }
+            return false;
+        }
     }
 }

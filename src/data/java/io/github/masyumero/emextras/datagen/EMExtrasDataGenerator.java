@@ -13,6 +13,7 @@ import java.nio.file.Path;
 import java.util.concurrent.CompletableFuture;
 
 import io.github.masyumero.emextras.datagen.client.lang.EMExtrasLangProvider;
+import io.github.masyumero.emextras.datagen.client.lang.JapaneseLangProvider;
 import io.github.masyumero.emextras.datagen.client.models.block.EMExtraBlockModelProvider;
 import io.github.masyumero.emextras.datagen.client.models.item.EMExtraItemModelProvider;
 import io.github.masyumero.emextras.datagen.common.loot.EMExtrasLootProvider;
@@ -50,6 +51,8 @@ public class EMExtrasDataGenerator {
         CompletableFuture<HolderLookup.Provider> lookupProvider = drProvider.getRegistryProvider();
         //Client side data generators
         addProvider(gen, event.includeClient(), EMExtrasLangProvider::new);
+        JapaneseLangProvider.registerWords();
+        addProvider(gen, event.includeClient(), JapaneseLangProvider::new);
         gen.addProvider(event.includeClient(), new EMExtraBlockModelProvider(output, existingFileHelper));
         gen.addProvider(event.includeClient(), new EMExtraItemModelProvider(output, existingFileHelper));
         //Server side data generators

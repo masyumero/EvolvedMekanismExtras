@@ -19,20 +19,22 @@ public class EMExtrasLangProvider extends BaseLanguageProvider {
         addBlocks();
         addItem();
         addMisc();
+
+        LANGS.forEach((key, enjp) -> add(key, enjp.en()));
     }
 
     private void addBlocks() {
-        EMExtraBlocks.BLOCK.getAllBlocks().forEach(this::add);
-        EMExtraAdvancedFactoryBlocks.BLOCKS.getAllBlocks().forEach(this::add);
-        EMExtraMoreMachineBlocks.BLOCKS.getAllBlocks().forEach(this::add);
+        EMExtraBlocks.BLOCK.getAllBlocks().forEach(this::addENJP);
+        EMExtraAdvancedFactoryBlocks.BLOCKS.getAllBlocks().forEach(this::addENJP);
+        EMExtraMoreMachineBlocks.BLOCKS.getAllBlocks().forEach(this::addENJP);
     }
 
     private void addItem() {
-        EMExtraItems.ITEM.getAllItems().forEach(this::add);
+        EMExtraItems.ITEM.getAllItems().forEach(this::addENJP);
     }
 
     private void addMisc() {
-        add(EMExtrasLang.TAB, "Evolved Mekanism Extras");
-        add(EMExtrasLang.HINT_TIER_INSTALLER, "You must have %1$s in your off-hand slot.");
+        addENJP(EMExtrasLang.TAB, "Evolved Mekanism Extras", "Evolved Mekanism Extras");
+        addENJP(EMExtrasLang.HINT_TIER_INSTALLER, "You must have %1$s in your off-hand slot.", "オフハンドに%1$sを持つ必要があります。");
     }
 }
