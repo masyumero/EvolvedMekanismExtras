@@ -29,6 +29,7 @@ public class ItemBlockEMExtraMoreMachineFactory extends ItemBlockEMExtraTooltip<
             case CNC_STAMPING -> AttachedSideConfig.EXTRA_MACHINE;
             case RECYCLING, CNC_LATHING, CNC_ROLLING_MILL -> AttachedSideConfig.ELECTRIC_MACHINE;
             case PLANTING_STATION, REPLICATING -> AttachedSideConfig.ADVANCED_MACHINE_INPUT_ONLY;
+            default -> throw new IllegalArgumentException("Unsupported MoreMachine factory type");
         };
     }
 

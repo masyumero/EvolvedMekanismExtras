@@ -8,6 +8,7 @@ import com.llamalad7.mixinextras.sugar.Local;
 import dev.emi.emi.api.EmiRegistry;
 import dev.emi.emi.api.recipe.EmiRecipeCategory;
 import dev.emi.emi.api.stack.EmiStack;
+import io.github.masyumero.emextras.common.integration.mekmm.EMExtraMoreMachineFactoryTypes;
 import io.github.masyumero.emextras.common.integration.mekmm.registries.EMExtraMoreMachineBlocks;
 import io.github.masyumero.emextras.common.tier.EMExtraFactoryTier;
 import io.github.masyumero.emextras.common.util.EMExtraEnumUtils;
@@ -28,8 +29,10 @@ public class MixinMoreMachineEMI {
     @Expression("factoryType != null")
     @Inject(method = "addWorkstations", at = @At(value = "MIXINEXTRAS:EXPRESSION", shift = At.Shift.AFTER))
     private static void addWorkstationsInject(EmiRegistry registry, EmiRecipeCategory category, List<ItemLike> workstations, CallbackInfo ci, @Local(name = "factoryType") MoreMachineAttributeFactoryType factoryType) {
-        for (EMExtraFactoryTier tier : EMExtraEnumUtils.EMEXTRA_FACTORY_TIERS) {
-            registry.addWorkstation(category, EmiStack.of(EMExtraMoreMachineBlocks.getEMExtraMoreMachineFactory(tier, factoryType.getMoreMachineFactoryType())));
+        if (EMExtraMoreMachineFactoryTypes.isSupported(factoryType.getMoreMachineFactoryType())) {
+            for (EMExtraFactoryTier tier : EMExtraEnumUtils.EMEXTRA_FACTORY_TIERS) {
+                registry.addWorkstation(category, EmiStack.of(EMExtraMoreMachineBlocks.getEMExtraMoreMachineFactory(tier, factoryType.getMoreMachineFactoryType())));
+            }
         }
     }
 }

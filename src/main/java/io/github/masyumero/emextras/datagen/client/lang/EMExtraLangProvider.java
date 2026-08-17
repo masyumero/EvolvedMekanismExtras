@@ -6,6 +6,7 @@ import com.jerry.mekextras.common.util.ExtraEnumUtils;
 import com.jerry.mekmm.common.content.blocktype.MoreMachineFactoryType;
 import com.jerry.mekmm.common.util.MoreMachineEnumUtils;
 import fr.iglee42.evolvedmekanism.registries.EMFactoryType;
+import io.github.masyumero.emextras.common.integration.mekmm.EMExtraMoreMachineFactoryTypes;
 import io.github.masyumero.emextras.EMExtras;
 import io.github.masyumero.emextras.EMExtrasLang;
 import io.github.masyumero.emextras.common.config.EMExtraConfigTranslations;
@@ -56,7 +57,7 @@ public class EMExtraLangProvider extends BaseLanguageProvider {
                 }
                 add(EMExtraAdvancedFactoryBlocks.getEMExtraAdvancedFactory(tier, type), name);
             }
-            for (MoreMachineFactoryType type : MoreMachineEnumUtils.MM_FACTORY_TYPES) {
+            for (MoreMachineFactoryType type : EMExtraMoreMachineFactoryTypes.SUPPORTED_FACTORY_TYPES) {
                 String name;
                 if (type == MoreMachineFactoryType.CNC_ROLLING_MILL) {
                     name = base + " Rolling Mill Factory";

@@ -67,6 +67,7 @@ public class EMExtraMoreMachineFactory<TILE extends TileEntityEMExtraMoreMachine
             builder.with(switch (type) {
                 case RECYCLING, CNC_STAMPING, CNC_LATHING, CNC_ROLLING_MILL -> AttributeSideConfig.ELECTRIC_MACHINE;
                 case PLANTING_STATION, REPLICATING -> AttributeSideConfig.ADVANCED_ELECTRIC_MACHINE;
+                default -> throw new IllegalArgumentException("Unsupported MoreMachine factory type: " + type);
             });
             // 如果有Bounding属性就添加，但或许会有更复杂的形状
             if (getBaseMachine(type).has(AttributeHasBounding.class)) {
@@ -96,6 +97,7 @@ public class EMExtraMoreMachineFactory<TILE extends TileEntityEMExtraMoreMachine
                 case CNC_LATHING -> EMExtraMoreMachineBlockTypes.CNC_LATHE;
                 case CNC_ROLLING_MILL -> EMExtraMoreMachineBlockTypes.CNC_ROLLING_MILL;
                 case REPLICATING -> EMExtraMoreMachineBlockTypes.REPLICATOR;
+                default -> throw new IllegalArgumentException("Unsupported MoreMachine factory type: " + type);
             };
         }
     }

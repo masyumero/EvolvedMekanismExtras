@@ -6,6 +6,7 @@ import com.jerry.mekextras.common.util.ExtraEnumUtils;
 import com.jerry.mekmm.common.content.blocktype.MoreMachineFactoryType;
 import com.jerry.mekmm.common.util.MoreMachineEnumUtils;
 import fr.iglee42.evolvedmekanism.registries.EMFactoryType;
+import io.github.masyumero.emextras.common.integration.mekmm.EMExtraMoreMachineFactoryTypes;
 import io.github.masyumero.emextras.EMExtras;
 import io.github.masyumero.emextras.common.content.blocktype.EMExtraFactoryType;
 import io.github.masyumero.emextras.common.integration.mekaf.registries.EMExtraAdvancedFactoryBlocks;
@@ -36,7 +37,7 @@ public class EMExtraItemModelProvider extends BaseItemModelProvider{
                 }
                 advancedFactoryBlock(EMExtraAdvancedFactoryBlocks.getEMExtraAdvancedFactory(tier, type));
             }
-            for (MoreMachineFactoryType type : MoreMachineEnumUtils.MM_FACTORY_TYPES) {
+            for (MoreMachineFactoryType type : EMExtraMoreMachineFactoryTypes.SUPPORTED_FACTORY_TYPES) {
                 if (type == MoreMachineFactoryType.PLANTING_STATION) {
                     continue;
                 }

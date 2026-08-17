@@ -16,6 +16,7 @@ import fr.iglee42.evolvedmekanism.registries.EMBlocks;
 import fr.iglee42.evolvedmekanism.registries.EMFactoryType;
 import fr.iglee42.evolvedmekanism.registries.EMTags;
 import fr.iglee42.evolvedmekanism.tiers.EMFactoryTier;
+import io.github.masyumero.emextras.common.integration.mekmm.EMExtraMoreMachineFactoryTypes;
 import io.github.masyumero.emextras.EMExtras;
 import io.github.masyumero.emextras.common.block.attribute.EMExtraAttributeFactoryType;
 import io.github.masyumero.emextras.common.integration.mekaf.registries.EMExtraAdvancedFactoryBlocks;
@@ -102,7 +103,7 @@ public class FactoryRecipeProvider implements ISubRecipeProvider {
                 .build(consumer, EMExtras.rl(basePath + "infinite/" + Attribute.getOrThrow(factory, AttributeFactoryType.class).getFactoryType().getRegistryNameComponent()));
 
         // MoreMachine Factories
-        for (MoreMachineFactoryType type : MoreMachineEnumUtils.MM_FACTORY_TYPES) {
+        for (MoreMachineFactoryType type : EMExtraMoreMachineFactoryTypes.SUPPORTED_FACTORY_TYPES) {
             addMoreMachineFactoryRecipes(consumer, basePath, type, EMExtraFactoryTier.ABSOLUTE_OVERCLOCKED, ExtraFactoryTier.ABSOLUTE, EMFactoryTier.OVERCLOCKED,
                     ExtraTags.Items.ALLOYS_RADIANCE, EMTags.Items.ALLOYS_HYPERCHARGED, EMExtraTags.Items.CIRCUITS_ABSOLUTE_OVERCLOCKED);
             addMoreMachineFactoryRecipes(consumer, basePath, type, EMExtraFactoryTier.SUPREME_QUANTUM, ExtraFactoryTier.SUPREME, EMFactoryTier.QUANTUM,

@@ -2,6 +2,7 @@ package io.github.masyumero.emextras.client.recipe_viewer.jei;
 
 import com.jerry.mekmm.common.block.attribute.MoreMachineAttributeFactoryType;
 
+import io.github.masyumero.emextras.common.integration.mekmm.EMExtraMoreMachineFactoryTypes;
 import io.github.masyumero.emextras.common.integration.mekmm.registries.EMExtraMoreMachineBlocks;
 import io.github.masyumero.emextras.common.tier.EMExtraFactoryTier;
 import io.github.masyumero.emextras.common.util.EMExtraEnumUtils;
@@ -30,7 +31,7 @@ public class EMExtraMMCatalystRegistryHelper {
             Item item = workstation.asItem();
             if (item instanceof BlockItem blockItem) {
                 MoreMachineAttributeFactoryType factoryType = Attribute.get(blockItem.getBlock(), MoreMachineAttributeFactoryType.class);
-                if (factoryType != null) {
+                if (factoryType != null && EMExtraMoreMachineFactoryTypes.isSupported(factoryType.getMoreMachineFactoryType())) {
                     for (EMExtraFactoryTier tier : EMExtraEnumUtils.EMEXTRA_FACTORY_TIERS) {
                         registry.addRecipeCatalyst(EMExtraMoreMachineBlocks.getEMExtraMoreMachineFactory(tier, factoryType.getMoreMachineFactoryType()), recipeType);
                     }

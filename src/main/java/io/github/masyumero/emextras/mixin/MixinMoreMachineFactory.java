@@ -6,6 +6,7 @@ import com.jerry.mekmm.common.content.blocktype.MoreMachineMachine;
 import com.jerry.mekmm.common.tile.factory.TileEntityMoreMachineFactory;
 
 import io.github.masyumero.emextras.common.block.attribute.EMExtraAttributeUpgradeable;
+import io.github.masyumero.emextras.common.integration.mekmm.EMExtraMoreMachineFactoryTypes;
 import io.github.masyumero.emextras.common.integration.mekmm.registries.EMExtraMoreMachineBlocks;
 import io.github.masyumero.emextras.common.tier.EMExtraFactoryTier;
 
@@ -28,7 +29,7 @@ public class MixinMoreMachineFactory<TILE extends TileEntityMoreMachineFactory<?
 
     @Inject(method = "<init>", at = @At(value = "RETURN"))
     private void initInject(Supplier tileEntityRegistrar, Supplier containerRegistrar, MoreMachineFactoryMachine origMachine, FactoryTier tier, CallbackInfo ci) {
-        if (tier == FactoryTier.ULTIMATE) {
+        if (tier == FactoryTier.ULTIMATE && EMExtraMoreMachineFactoryTypes.isSupported(origMachine.getMoreMachineFactoryType())) {
             add(new EMExtraAttributeUpgradeable(() -> EMExtraMoreMachineBlocks.getEMExtraMoreMachineFactory(EMExtraFactoryTier.ABSOLUTE_OVERCLOCKED, origMachine.getMoreMachineFactoryType())));
         }
     }

@@ -2,6 +2,7 @@ package io.github.masyumero.emextras.common.integration.mekmm.registries;
 
 import com.jerry.mekextras.common.block.attribute.ExtraAttributeUpgradeSupport;
 
+import io.github.masyumero.emextras.common.integration.mekmm.EMExtraMoreMachineFactoryTypes;
 import io.github.masyumero.emextras.common.content.blocktype.EMExtraMachine;
 import io.github.masyumero.emextras.common.integration.mekmm.content.blocktype.EMExtraMoreMachineFactory;
 import io.github.masyumero.emextras.common.tier.EMExtraFactoryTier;
@@ -83,7 +84,7 @@ public class EMExtraMoreMachineBlockTypes {
 
     static {
         for (EMExtraFactoryTier tier : EMExtraEnumUtils.EMEXTRA_FACTORY_TIERS) {
-            for (MoreMachineFactoryType type : MoreMachineEnumUtils.MM_FACTORY_TYPES) {
+            for (MoreMachineFactoryType type : EMExtraMoreMachineFactoryTypes.SUPPORTED_FACTORY_TYPES) {
                 MM_FACTORIES.put(tier, type, EMExtraMoreMachineFactory.EMExtraMoreMachineFactoryBuilder.createMoreMachineFactory(() -> EMExtraMoreMachineTileEntityTypes.getEMExtraMoreMachineFactoryTile(tier, type), type, tier).build());
             }
         }

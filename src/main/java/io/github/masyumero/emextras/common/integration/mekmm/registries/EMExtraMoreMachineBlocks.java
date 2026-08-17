@@ -1,5 +1,6 @@
 package io.github.masyumero.emextras.common.integration.mekmm.registries;
 
+import io.github.masyumero.emextras.common.integration.mekmm.EMExtraMoreMachineFactoryTypes;
 import io.github.masyumero.emextras.EMExtras;
 import io.github.masyumero.emextras.api.tier.IEMExtraTier;
 import io.github.masyumero.emextras.common.block.attribute.EMExtraAttributeTier;
@@ -50,7 +51,7 @@ public class EMExtraMoreMachineBlocks {
     static {
         // factories
         for (EMExtraFactoryTier tier : EMExtraEnumUtils.EMEXTRA_FACTORY_TIERS) {
-            for (MoreMachineFactoryType type : MoreMachineEnumUtils.MM_FACTORY_TYPES) {
+            for (MoreMachineFactoryType type : EMExtraMoreMachineFactoryTypes.SUPPORTED_FACTORY_TYPES) {
                 MM_FACTORIES.put(tier, type, registerMoreMachineFactory(EMExtraMoreMachineBlockTypes.getEMExtraMoreMachineFactory(tier, type)));
             }
         }
@@ -68,6 +69,7 @@ public class EMExtraMoreMachineBlocks {
                 case CNC_LATHING -> s -> MoreMachineRecipeType.LATHING.getInputCache().containsInput(null, s);
                 case CNC_ROLLING_MILL -> s -> MoreMachineRecipeType.ROLLING_MILL.getInputCache().containsInput(null, s);
                 case REPLICATING -> TileEntityReplicator::isValidItemInput;
+                default -> throw new IllegalArgumentException("Unsupported MoreMachine factory type: " + type.getMoreMachineFactoryType());
             };
             switch (type.getMoreMachineFactoryType()) {
                 case CNC_STAMPING -> holder.addAttachmentOnlyContainers(ContainerType.ITEM, () -> ItemSlotsBuilder.builder()
@@ -98,6 +100,7 @@ public class EMExtraMoreMachineBlocks {
                         .addChemicalFillOrConvertSlot(0)
                         .addEnergy()
                         .build());
+                default -> throw new IllegalArgumentException("Unsupported MoreMachine factory type: " + type.getMoreMachineFactoryType());
             }
         });
         return factory;
