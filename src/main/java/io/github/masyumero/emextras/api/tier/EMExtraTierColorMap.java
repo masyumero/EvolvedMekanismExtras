@@ -7,7 +7,8 @@ import java.util.function.IntSupplier;
 
 public class EMExtraTierColorMap {
 
-    private static final FloatSupplier spot = () -> {float spot = (float) ((System.currentTimeMillis() / 250) % 10) / 10;
+    private static FloatSupplier spot = () -> {
+        float spot = (float) ((System.currentTimeMillis() / 25) % 100) / 100;
         if (spot > 0.5) {
             spot = 1 - spot;
         }
