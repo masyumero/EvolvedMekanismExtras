@@ -20,7 +20,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.function.Supplier;
 
 @Mixin(value = AdvancedFactory.class, remap = false)
-public class MixinAdvancedFactory<TILE extends TileEntityAdvancedFactoryBase<?>> extends MoreMachineMachine.MoreMachineFactoryMachine<TILE> {
+public class MixinAdvancedFactory<TILE extends TileEntityAdvancedFactoryBase<?, ?>> extends MoreMachineMachine.MoreMachineFactoryMachine<TILE> {
 
     public MixinAdvancedFactory(Supplier<TileEntityTypeRegistryObject<TILE>> tileEntitySupplier, ILangEntry description, MoreMachineFactoryType factoryType) {
         super(tileEntitySupplier, description, factoryType);
