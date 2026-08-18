@@ -417,7 +417,10 @@ public abstract class TileEntityEMExtraAdvancedFactoryBase<RECIPE extends Mekani
 
     @Override
     public void recalculateUpgrades(Upgrade upgrade) {
-        ((IMixinMachineEnergyContainer) getEnergyContainer()).mekanism_Extras$extraRecalculateUpgrades(upgrade);
+        if (getEnergyContainer() instanceof IMixinMachineEnergyContainer mixMach) {
+            mixMach.mekanism_Extras$extraRecalculateUpgrades(upgrade);
+            mixMach.mekanism_Extras$extraUpdateMaxEnergy();
+        }
         if (upgrade == Upgrade.SPEED) {
             ticksRequired = MekanismUtils.getTicks(this, BASE_TICKS_REQUIRED);
             operationsPerTick = MekanismUtils.getOperationsPerTick(this, BASE_TICKS_REQUIRED, upgradeMaxOperations);
