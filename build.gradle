@@ -43,6 +43,13 @@ java {
     toolchain.languageVersion = JavaLanguageVersion.of(21)
 }
 
+sourceSets {
+    data {
+        compileClasspath += main.output + main.compileClasspath
+        runtimeClasspath += main.output + main.runtimeClasspath
+    }
+}
+
 neoForge {
     // Specify the version of NeoForge to use.
     version = libs.versions.neoForge.get()
@@ -98,6 +105,12 @@ neoForge {
                     '--existing-mod', 'mekmm',
                     '--existing-mod', 'evolvedmekanism',
                     '--existing-mod', 'mekanism_extras'
+
+            mods {
+                "${mod_id}" {
+                    sourceSet(sourceSets.data)
+                }
+            }
         }
 
         // applies to all the run configs above
