@@ -1,6 +1,6 @@
 package io.github.masyumero.emextras.client.recipe_viewer.jei;
 
-import com.jerry.mekmm.client.recipe_viewer.MMRecipeViewerRecipeType;
+import com.jerry.mekmm.client.recipe_viewer.MoreMachineRecipeViewerRecipeType;
 import fr.iglee42.evolvedmekanism.jei.JEIRecipeTypes;
 import io.github.masyumero.emextras.EMExtras;
 import mekanism.client.recipe_viewer.jei.MekanismJEI;
@@ -33,8 +33,8 @@ public class EMExtraJEI implements IModPlugin {
         EMExtraCatalystRegistryHelper.register(registry, RecipeTypes.SMELTING, RecipeViewerRecipeType.VANILLA_SMELTING.workstations());
 
         if (EMExtras.hooks.mekmm.isLoaded()) {
-            EMExtraMMCatalystRegistryHelper.register(registry, MMRecipeViewerRecipeType.RECYCLER, MMRecipeViewerRecipeType.PLANTING_STATION, MMRecipeViewerRecipeType.REPLICATOR,
-                    MMRecipeViewerRecipeType.FLUID_REPLICATOR, MMRecipeViewerRecipeType.CHEMICAL_REPLICATOR, MMRecipeViewerRecipeType.STAMPING, MMRecipeViewerRecipeType.LATHE, MMRecipeViewerRecipeType.ROLLING_MILL);
+            EMExtraMMCatalystRegistryHelper.register(registry, MoreMachineRecipeViewerRecipeType.RECYCLER, MoreMachineRecipeViewerRecipeType.PLANTING_STATION, MoreMachineRecipeViewerRecipeType.REPLICATOR, MoreMachineRecipeViewerRecipeType.PRESSING,
+                    MoreMachineRecipeViewerRecipeType.FLUID_REPLICATOR, MoreMachineRecipeViewerRecipeType.CHEMICAL_REPLICATOR, MoreMachineRecipeViewerRecipeType.STAMPING, MoreMachineRecipeViewerRecipeType.LATHE, MoreMachineRecipeViewerRecipeType.ROLLING_MILL);
             EMExtraAFCatalystRegistryHelper.register(registry, RecipeViewerRecipeType.OXIDIZING, RecipeViewerRecipeType.DISSOLUTION, RecipeViewerRecipeType.WASHING, RecipeViewerRecipeType.CRYSTALLIZING,
                     RecipeViewerRecipeType.REACTION, RecipeViewerRecipeType.CENTRIFUGING, RecipeViewerRecipeType.NUTRITIONAL_LIQUIFICATION, RecipeViewerRecipeType.PIGMENT_EXTRACTING, RecipeViewerRecipeType.PAINTING);
         }

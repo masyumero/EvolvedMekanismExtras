@@ -72,6 +72,16 @@ public class EMExtraMoreMachineBlockTypes {
             .withSound(MekanismSounds.COMBINER)
             .build();
 
+    // Presser
+    public static final EMExtraMachine.EMExtraFactoryMachine<TileEntityPresser> PRESSER = EMExtraMachine.EMExtraMachineBuilder
+            .createEMExtraMoreMachineFactoryMachine(() -> MoreMachineTileEntityTypes.PRESSER, MoreMachineLang.DESCRIPTION_PRESSER, MoreMachineFactoryType.PRESSING)
+            .withGui(() -> MoreMachineContainerTypes.PRESSER)
+            .withSound(MekanismSounds.COMBINER)
+            .withEnergyConfig(MoreMachineConfig.usage.presser, MoreMachineConfig.storage.presser)
+            .with(AttributeSideConfig.ELECTRIC_MACHINE)
+            .withComputerSupport("presser")
+            .build();
+
     // Replicator
     public static final EMExtraMachine.EMExtraFactoryMachine<TileEntityReplicator> REPLICATOR = EMExtraMachine.EMExtraMachineBuilder
             .createEMExtraMoreMachineFactoryMachine(() -> MoreMachineTileEntityTypes.REPLICATOR, MoreMachineLang.DESCRIPTION_REPLICATOR, MoreMachineFactoryType.REPLICATING)

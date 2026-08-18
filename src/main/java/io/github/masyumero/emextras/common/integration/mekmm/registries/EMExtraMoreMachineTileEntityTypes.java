@@ -40,6 +40,7 @@ public class EMExtraMoreMachineTileEntityTypes {
             registerFactory(tier, MoreMachineFactoryType.CNC_STAMPING, TileEntityEMExtraStampingFactory::new);
             registerFactory(tier, MoreMachineFactoryType.CNC_LATHING, TileEntityEMExtraItemStackToItemStackMoreMachineFactory::new);
             registerFactory(tier, MoreMachineFactoryType.CNC_ROLLING_MILL, TileEntityEMExtraItemStackToItemStackMoreMachineFactory::new);
+            registerFactory(tier, MoreMachineFactoryType.PRESSING, TileEntityEMExtraPressingFactory::new);
             registerFactory(tier, MoreMachineFactoryType.REPLICATING, TileEntityEMExtraReplicatingFactory::new);
         }
     }

@@ -139,7 +139,9 @@ public abstract class TileEntityEMExtraMoreMachineFactory<RECIPE extends Mekanis
                 outputSlots.add(info.secondaryOutputSlot());
             }
         }
-        configComponent.setupItemIOConfig(inputSlots, outputSlots, energySlot, false);
+        if (defaultsIOConfig()) {
+            configComponent.setupItemIOConfig(inputSlots, outputSlots, energySlot, false);
+        }
         IInventorySlot extraSlot = getExtraSlot();
         if (extraSlot != null) {
             ConfigInfo itemConfig = configComponent.getConfig(TransmissionType.ITEM);
@@ -227,6 +229,10 @@ public abstract class TileEntityEMExtraMoreMachineFactory<RECIPE extends Mekanis
     @Nullable
     protected IInventorySlot getExtraSlot() {
         return null;
+    }
+
+    protected boolean defaultsIOConfig() {
+        return true;
     }
 
     public MoreMachineFactoryType getMMFactoryType() {
@@ -452,7 +458,10 @@ public abstract class TileEntityEMExtraMoreMachineFactory<RECIPE extends Mekanis
 
     @Override
     public void recalculateUpgrades(Upgrade upgrade) {
-        ((IMixinMachineEnergyContainer) getEnergyContainer()).mekanism_Extras$extraRecalculateUpgrades(upgrade);
+        if (getEnergyContainer() instanceof IMixinMachineEnergyContainer mixMach) {
+            mixMach.mekanism_Extras$extraRecalculateUpgrades(upgrade);
+            mixMach.mekanism_Extras$extraUpdateMaxEnergy();
+        }
         if (upgrade == Upgrade.SPEED) {
             ticksRequired = MekanismUtils.getTicks(this, BASE_TICKS_REQUIRED);
             operationsPerTick = MekanismUtils.getOperationsPerTick(this, BASE_TICKS_REQUIRED, upgradeMaxOperations);

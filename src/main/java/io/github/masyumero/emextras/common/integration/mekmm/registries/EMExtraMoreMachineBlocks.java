@@ -1,5 +1,7 @@
 package io.github.masyumero.emextras.common.integration.mekmm.registries;
 
+import com.jerry.mekmm.common.recipe.lookup.cache.MoreMachineInputRecipeCache.TripleItem;
+
 import io.github.masyumero.emextras.EMExtras;
 import io.github.masyumero.emextras.api.tier.IEMExtraTier;
 import io.github.masyumero.emextras.common.block.attribute.EMExtraAttributeTier;
@@ -67,6 +69,7 @@ public class EMExtraMoreMachineBlocks {
                 case CNC_STAMPING -> s -> MoreMachineRecipeType.STAMPING.getInputCache().containsInputA(null, s);
                 case CNC_LATHING -> s -> MoreMachineRecipeType.LATHING.getInputCache().containsInput(null, s);
                 case CNC_ROLLING_MILL -> s -> MoreMachineRecipeType.ROLLING_MILL.getInputCache().containsInput(null, s);
+                case PRESSING -> s -> MoreMachineRecipeType.PRESSING.getInputCache().containsInputA(null, s);
                 case REPLICATING -> TileEntityReplicator::isValidItemInput;
             };
             switch (type.getMoreMachineFactoryType()) {
@@ -91,6 +94,12 @@ public class EMExtraMoreMachineBlocks {
                                 .addChemicalFillOrConvertSlot(1)
                                 .addEnergy()
                                 .build());
+                case PRESSING -> holder.addAttachmentOnlyContainers(ContainerType.ITEM, () -> ItemSlotsBuilder.builder()
+                        .addBasicFactorySlots(processes, recipeInputPredicate)
+                        .addInput(MoreMachineRecipeType.PRESSING, TripleItem::containsInputB)
+                        .addInput(MoreMachineRecipeType.PRESSING, TripleItem::containsInputC)
+                        .addEnergy()
+                        .build());
                 case REPLICATING -> holder.addAttachmentOnlyContainers(ContainerType.CHEMICAL, () -> ChemicalTanksBuilder.builder()
                         .addBasic(TileEntityReplicatingFactory.MAX_GAS * processes * processes, TileEntityReplicatingFactory::isValidChemicalInput)
                         .build()).addAttachmentOnlyContainers(ContainerType.ITEM, () -> ItemSlotsBuilder.builder()

@@ -31,7 +31,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import com.jerry.mekmm.api.recipes.StamperRecipe;
 import com.jerry.mekmm.api.recipes.cache.StamperCachedRecipe;
-import com.jerry.mekmm.client.recipe_viewer.MMRecipeViewerRecipeType;
+import com.jerry.mekmm.client.recipe_viewer.MoreMachineRecipeViewerRecipeType;
 import com.jerry.mekmm.common.recipe.MoreMachineRecipeType;
 import com.jerry.mekmm.common.upgrade.StamperUpgradeData;
 import org.jetbrains.annotations.NotNull;
@@ -114,7 +114,7 @@ public class TileEntityEMExtraStampingFactory extends TileEntityEMExtraItemToIte
 
     @Override
     public IRecipeViewerRecipeType<StamperRecipe> recipeViewerType() {
-        return MMRecipeViewerRecipeType.STAMPING;
+        return MoreMachineRecipeViewerRecipeType.STAMPING;
     }
 
     @Nullable

@@ -1,5 +1,6 @@
 package io.github.masyumero.emextras.common.integration.mekmm.item.block.machine;
 
+import com.jerry.mekmm.common.attachments.component.MoreMachineAttachedSideConfig;
 import com.jerry.mekmm.common.block.attribute.MoreMachineAttributeFactoryType;
 
 import io.github.masyumero.emextras.common.block.attribute.EMExtraAttribute;
@@ -29,6 +30,7 @@ public class ItemBlockEMExtraMoreMachineFactory extends ItemBlockEMExtraTooltip<
             case CNC_STAMPING -> AttachedSideConfig.EXTRA_MACHINE;
             case RECYCLING, CNC_LATHING, CNC_ROLLING_MILL -> AttachedSideConfig.ELECTRIC_MACHINE;
             case PLANTING_STATION, REPLICATING -> AttachedSideConfig.ADVANCED_MACHINE_INPUT_ONLY;
+            case PRESSING -> MoreMachineAttachedSideConfig.PRESSER;
         };
     }
 

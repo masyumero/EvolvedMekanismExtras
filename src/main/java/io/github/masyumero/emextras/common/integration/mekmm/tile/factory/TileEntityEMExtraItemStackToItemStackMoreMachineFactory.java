@@ -22,7 +22,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.common.util.TriPredicate;
 
-import com.jerry.mekmm.client.recipe_viewer.MMRecipeViewerRecipeType;
+import com.jerry.mekmm.client.recipe_viewer.MoreMachineRecipeViewerRecipeType;
 import com.jerry.mekmm.common.recipe.MoreMachineRecipeType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -86,9 +86,9 @@ public class TileEntityEMExtraItemStackToItemStackMoreMachineFactory extends Til
     @Override
     public IRecipeViewerRecipeType<ItemStackToItemStackRecipe> recipeViewerType() {
         return switch (type) {
-            case CNC_LATHING -> MMRecipeViewerRecipeType.LATHE;
+            case CNC_LATHING -> MoreMachineRecipeViewerRecipeType.LATHE;
             // TODO: Make it so that it throws an error if it is not one of the three types
-            default -> MMRecipeViewerRecipeType.ROLLING_MILL;
+            default -> MoreMachineRecipeViewerRecipeType.ROLLING_MILL;
         };
     }
 
