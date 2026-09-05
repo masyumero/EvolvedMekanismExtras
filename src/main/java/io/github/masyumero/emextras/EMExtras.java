@@ -10,18 +10,17 @@ import io.github.masyumero.emextras.common.integration.mekmm.registries.EMExtraM
 import io.github.masyumero.emextras.common.integration.mekmm.registries.EMExtraMoreMachineContainerTypes;
 import io.github.masyumero.emextras.common.integration.mekmm.registries.EMExtraMoreMachineTileEntityTypes;
 import io.github.masyumero.emextras.common.network.EMExtraPacketHandler;
-import io.github.masyumero.emextras.common.registry.EMExtraBlocks;
-import io.github.masyumero.emextras.common.registry.EMExtraContainerTypes;
-import io.github.masyumero.emextras.common.registry.EMExtraItems;
-import io.github.masyumero.emextras.common.registry.EMExtraTabs;
-import io.github.masyumero.emextras.common.registry.EMExtraTileEntityTypes;
+import io.github.masyumero.emextras.common.registry.*;
 import mekanism.common.base.IModModule;
+import mekanism.common.content.blocktype.FactoryType;
 import mekanism.common.lib.Version;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import org.slf4j.Logger;
+
+import java.util.Arrays;
 
 @Mod(EMExtras.MODID)
 public class EMExtras implements IModModule {
@@ -42,6 +41,7 @@ public class EMExtras implements IModModule {
     public EMExtras(ModContainer modContainer, IEventBus modEventBus) {
         instance = this;
         versionNumber = new Version(modContainer);
+        LOGGER.info(Arrays.toString(FactoryType.values()));
         LoadConfig.registerConfig(modContainer);
         modEventBus.addListener(LoadConfig::onConfigLoad);
         addRegistrationListeners(modEventBus);

@@ -1,8 +1,5 @@
 package io.github.masyumero.emextras.common.tile.factory;
 
-import java.util.List;
-import java.util.Set;
-
 import fr.iglee42.evolvedmekanism.interfaces.EMInputRecipeCache;
 import fr.iglee42.evolvedmekanism.interfaces.ThreeInputCachedRecipe;
 import fr.iglee42.evolvedmekanism.interfaces.TripleItemRecipeLookupHandler;
@@ -43,6 +40,9 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
+import java.util.Set;
 
 
 public class TileEntityEMExtraAlloyingFactory extends TileEntityEMExtraItemToItemFactory<AlloyerRecipe> implements TripleItemRecipeLookupHandler<AlloyerRecipe> {

@@ -1,7 +1,14 @@
 package io.github.masyumero.emextras.common.integration.mekmm.registries;
 
+import com.google.common.collect.HashBasedTable;
+import com.google.common.collect.Table;
+import com.jerry.mekmm.common.content.blocktype.MoreMachineFactoryType;
+import com.jerry.mekmm.common.recipe.MoreMachineRecipeType;
 import com.jerry.mekmm.common.recipe.lookup.cache.MoreMachineInputRecipeCache.TripleItem;
-
+import com.jerry.mekmm.common.tile.factory.TileEntityReplicatingFactory;
+import com.jerry.mekmm.common.tile.machine.TileEntityPlantingStation;
+import com.jerry.mekmm.common.tile.machine.TileEntityReplicator;
+import com.jerry.mekmm.common.util.MoreMachineEnumUtils;
 import io.github.masyumero.emextras.EMExtras;
 import io.github.masyumero.emextras.api.tier.IEMExtraTier;
 import io.github.masyumero.emextras.common.block.attribute.EMExtraAttributeTier;
@@ -11,7 +18,6 @@ import io.github.masyumero.emextras.common.integration.mekmm.item.block.machine.
 import io.github.masyumero.emextras.common.integration.mekmm.tile.factory.TileEntityEMExtraMoreMachineFactory;
 import io.github.masyumero.emextras.common.tier.EMExtraFactoryTier;
 import io.github.masyumero.emextras.common.util.EMExtraEnumUtils;
-
 import mekanism.common.attachments.containers.ContainerType;
 import mekanism.common.attachments.containers.chemical.ChemicalTanksBuilder;
 import mekanism.common.attachments.containers.item.ItemSlotsBuilder;
@@ -19,20 +25,10 @@ import mekanism.common.recipe.MekanismRecipeType;
 import mekanism.common.recipe.lookup.cache.InputRecipeCache;
 import mekanism.common.registration.impl.BlockDeferredRegister;
 import mekanism.common.registration.impl.BlockRegistryObject;
-
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
-
-import com.google.common.collect.HashBasedTable;
-import com.google.common.collect.Table;
-import com.jerry.mekmm.common.content.blocktype.MoreMachineFactoryType;
-import com.jerry.mekmm.common.recipe.MoreMachineRecipeType;
-import com.jerry.mekmm.common.tile.factory.TileEntityReplicatingFactory;
-import com.jerry.mekmm.common.tile.machine.TileEntityPlantingStation;
-import com.jerry.mekmm.common.tile.machine.TileEntityReplicator;
-import com.jerry.mekmm.common.util.MoreMachineEnumUtils;
 import net.neoforged.bus.api.IEventBus;
 import org.jetbrains.annotations.NotNull;
 

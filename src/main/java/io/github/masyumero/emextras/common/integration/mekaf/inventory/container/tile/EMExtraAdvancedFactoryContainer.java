@@ -1,14 +1,12 @@
 package io.github.masyumero.emextras.common.integration.mekaf.inventory.container.tile;
 
 import io.github.masyumero.emextras.common.integration.mekaf.registries.EMExtraAdvancedFactoryContainerTypes;
+import io.github.masyumero.emextras.common.integration.mekaf.tile.factory.TileEntityEMExtraLiquifyingFactory;
+import io.github.masyumero.emextras.common.integration.mekaf.tile.factory.TileEntityEMExtraPRCFactory;
 import io.github.masyumero.emextras.common.integration.mekaf.tile.factory.TileEntityEMExtraPaintingFactory;
 import io.github.masyumero.emextras.common.integration.mekaf.tile.factory.base.TileEntityEMExtraAdvancedFactoryBase;
 import io.github.masyumero.emextras.common.integration.mekaf.tile.factory.base.TileEntityEMExtraChemicalToChemicalFactory;
-import io.github.masyumero.emextras.common.integration.mekaf.tile.factory.TileEntityEMExtraLiquifyingFactory;
-import io.github.masyumero.emextras.common.integration.mekaf.tile.factory.TileEntityEMExtraPRCFactory;
-
 import mekanism.common.inventory.container.tile.MekanismTileContainer;
-
 import net.minecraft.world.entity.player.Inventory;
 
 public class EMExtraAdvancedFactoryContainer extends MekanismTileContainer<TileEntityEMExtraAdvancedFactoryBase<?>> {

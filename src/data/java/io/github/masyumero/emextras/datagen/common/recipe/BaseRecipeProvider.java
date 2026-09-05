@@ -1,11 +1,5 @@
 package io.github.masyumero.emextras.datagen.common.recipe;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
-import java.util.concurrent.CompletableFuture;
-import java.util.stream.Stream;
 import mekanism.api.annotations.NothingNullByDefault;
 import mekanism.common.resource.PrimaryResource;
 import mekanism.common.resource.ResourceType;
@@ -29,6 +23,13 @@ import net.neoforged.neoforge.common.conditions.ICondition;
 import net.neoforged.neoforge.common.crafting.DifferenceIngredient;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
+import java.util.concurrent.CompletableFuture;
+import java.util.stream.Stream;
 
 @NothingNullByDefault
 public abstract class BaseRecipeProvider extends RecipeProvider {

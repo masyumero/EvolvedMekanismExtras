@@ -1,8 +1,8 @@
 package io.github.masyumero.emextras.common.integration.mekaf.tile.factory;
 
+import com.jerry.mekaf.common.upgrade.ItemChemicalToChemicalUpgradeData;
 import com.jerry.mekextras.api.recipes.cache.StackableItemStackConstantChemicalToObjectCachedRecipe;
 import com.jerry.mekextras.api.recipes.cache.StackableItemStackConstantChemicalToObjectCachedRecipe.StackableChemicalUsageMultiplier;
-
 import io.github.masyumero.emextras.common.integration.mekaf.tile.factory.base.TileEntityEMExtraItemToChemicalFactory;
 import mekanism.api.IContentsListener;
 import mekanism.api.SerializationConstants;
@@ -39,7 +39,6 @@ import mekanism.common.tile.interfaces.IHasDumpButton;
 import mekanism.common.upgrade.IUpgradeData;
 import mekanism.common.util.MekanismUtils;
 import mekanism.common.util.StatUtils;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
@@ -48,8 +47,6 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-
-import com.jerry.mekaf.common.upgrade.ItemChemicalToChemicalUpgradeData;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

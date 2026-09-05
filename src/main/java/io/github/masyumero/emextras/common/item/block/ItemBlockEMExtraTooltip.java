@@ -20,11 +20,13 @@ import mekanism.common.capabilities.energy.BasicEnergyContainer;
 import mekanism.common.capabilities.security.SecurityObject;
 import mekanism.common.config.MekanismConfig;
 import mekanism.common.registries.MekanismDataComponents;
-import mekanism.common.util.*;
+import mekanism.common.util.InventoryUtils;
+import mekanism.common.util.MekanismUtils;
+import mekanism.common.util.StorageUtils;
+import mekanism.common.util.WorldUtils;
 import mekanism.common.util.text.BooleanStateDisplay;
 import mekanism.common.util.text.TextUtils;
 import mekanism.common.util.text.UpgradeDisplay;
-
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -37,7 +39,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.fluids.FluidStack;
-
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;

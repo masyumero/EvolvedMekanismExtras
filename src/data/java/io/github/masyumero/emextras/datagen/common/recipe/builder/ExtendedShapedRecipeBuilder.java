@@ -5,9 +5,6 @@ import it.unimi.dsi.fastutil.chars.Char2ObjectArrayMap;
 import it.unimi.dsi.fastutil.chars.Char2ObjectMap;
 import it.unimi.dsi.fastutil.chars.CharOpenHashSet;
 import it.unimi.dsi.fastutil.chars.CharSet;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 import mekanism.api.annotations.NothingNullByDefault;
 import mekanism.common.registration.impl.BlockRegistryObject;
 import net.minecraft.core.Holder;
@@ -19,6 +16,10 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.world.item.crafting.ShapedRecipePattern;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 @NothingNullByDefault
 public class ExtendedShapedRecipeBuilder extends BaseRecipeBuilder<ExtendedShapedRecipeBuilder> {

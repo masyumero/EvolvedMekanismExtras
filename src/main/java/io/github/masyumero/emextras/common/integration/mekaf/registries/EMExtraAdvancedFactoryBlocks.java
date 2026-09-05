@@ -1,5 +1,13 @@
 package io.github.masyumero.emextras.common.integration.mekaf.registries;
 
+import com.google.common.collect.HashBasedTable;
+import com.google.common.collect.Table;
+import com.jerry.mekaf.common.attachments.containers.chemical.AFChemicalTanksBuilder;
+import com.jerry.mekaf.common.attachments.containers.item.AFItemSlotsBuilder;
+import com.jerry.mekaf.common.content.blocktype.AdvancedFactoryType;
+import com.jerry.mekaf.common.tile.factory.TileEntityLiquifyingFactory;
+import com.jerry.mekaf.common.tile.factory.base.TileEntityAdvancedFactoryBase;
+import com.jerry.mekmm.common.util.MoreMachineEnumUtils;
 import io.github.masyumero.emextras.EMExtras;
 import io.github.masyumero.emextras.api.tier.IEMExtraTier;
 import io.github.masyumero.emextras.common.block.attribute.EMExtraAttributeTier;
@@ -9,7 +17,6 @@ import io.github.masyumero.emextras.common.integration.mekaf.item.block.machine.
 import io.github.masyumero.emextras.common.integration.mekaf.tile.factory.base.TileEntityEMExtraAdvancedFactoryBase;
 import io.github.masyumero.emextras.common.tier.EMExtraFactoryTier;
 import io.github.masyumero.emextras.common.util.EMExtraEnumUtils;
-
 import mekanism.api.chemical.ChemicalStack;
 import mekanism.common.attachments.containers.ContainerType;
 import mekanism.common.attachments.containers.fluid.FluidTanksBuilder;
@@ -18,20 +25,10 @@ import mekanism.common.recipe.MekanismRecipeType;
 import mekanism.common.recipe.lookup.cache.InputRecipeCache;
 import mekanism.common.registration.impl.BlockDeferredRegister;
 import mekanism.common.registration.impl.BlockRegistryObject;
-
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
-
-import com.google.common.collect.HashBasedTable;
-import com.google.common.collect.Table;
-import com.jerry.mekaf.common.attachments.containers.chemical.AFChemicalTanksBuilder;
-import com.jerry.mekaf.common.attachments.containers.item.AFItemSlotsBuilder;
-import com.jerry.mekaf.common.content.blocktype.AdvancedFactoryType;
-import com.jerry.mekaf.common.tile.factory.base.TileEntityAdvancedFactoryBase;
-import com.jerry.mekaf.common.tile.factory.TileEntityLiquifyingFactory;
-import com.jerry.mekmm.common.util.MoreMachineEnumUtils;
 import net.neoforged.bus.api.IEventBus;
 import org.jetbrains.annotations.NotNull;
 

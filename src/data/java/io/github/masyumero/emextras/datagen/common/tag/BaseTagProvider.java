@@ -2,14 +2,6 @@ package io.github.masyumero.emextras.datagen.common.tag;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ReferenceOpenHashSet;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.concurrent.CompletableFuture;
 import mekanism.common.Mekanism;
 import mekanism.common.registration.impl.BlockRegistryObject;
 import mekanism.common.registration.impl.FluidDeferredRegister;
@@ -24,11 +16,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.FluidTags;
-import net.minecraft.tags.ItemTags;
-import net.minecraft.tags.TagBuilder;
-import net.minecraft.tags.TagKey;
+import net.minecraft.tags.*;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -38,6 +26,9 @@ import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.*;
+import java.util.concurrent.CompletableFuture;
 
 public abstract class BaseTagProvider implements DataProvider {
 
@@ -115,6 +106,14 @@ public abstract class BaseTagProvider implements DataProvider {
     protected <TYPE> EMExtraTagBuilder<TYPE> getBuilder(TagKey<TYPE> tag) {
         Map<TagKey<?>, TagBuilder> tagTypeMap = supportedTagTypes.computeIfAbsent(tag.registry(), type -> new Object2ObjectLinkedOpenHashMap<>());
         return new EMExtraTagBuilder<>(tagTypeMap.computeIfAbsent(tag, ignored -> TagBuilder.create()));
+    }
+
+    @SafeVarargs
+    protected final void addToHarvestOptionalTag(TagKey<Block> tag, Holder<Block>... blockProviders) {
+        for (Holder<Block> block : blockProviders) {
+            getBuilder(tag).addOptional(Objects.requireNonNull(block.getKey()).location());
+            knownHarvestRequirements.add(block.value());
+        }
     }
 
     @SafeVarargs

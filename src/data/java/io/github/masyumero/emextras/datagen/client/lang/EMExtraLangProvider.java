@@ -10,13 +10,13 @@ import io.github.masyumero.emextras.EMExtras;
 import io.github.masyumero.emextras.EMExtrasLang;
 import io.github.masyumero.emextras.common.config.EMExtraConfigTranslations;
 import io.github.masyumero.emextras.common.config.LoadConfig;
-import io.github.masyumero.emextras.common.content.blocktype.EMExtraFactoryType;
 import io.github.masyumero.emextras.common.integration.mekaf.registries.EMExtraAdvancedFactoryBlocks;
 import io.github.masyumero.emextras.common.integration.mekmm.registries.EMExtraMoreMachineBlocks;
 import io.github.masyumero.emextras.common.registry.EMExtraBlocks;
 import io.github.masyumero.emextras.common.registry.EMExtraItems;
 import io.github.masyumero.emextras.common.tier.EMExtraFactoryTier;
 import io.github.masyumero.emextras.common.util.EMExtraEnumUtils;
+import mekanism.common.content.blocktype.FactoryType;
 import net.minecraft.data.PackOutput;
 
 public class EMExtraLangProvider extends BaseLanguageProvider {
@@ -41,7 +41,7 @@ public class EMExtraLangProvider extends BaseLanguageProvider {
     private void addBlocks() {
         for (EMExtraFactoryTier tier : EMExtraEnumUtils.EMEXTRA_FACTORY_TIERS) {
             var base = tier.getEMExtraTier().getSimpleName().replace("_", " ");
-            for (EMExtraFactoryType type : EMExtraEnumUtils.EMEXTRA_FACTORY_TYPES) {
+            for (FactoryType type : EMExtraEnumUtils.FACTORY_TYPES) {
                 var name = base + " " + type.getRegistryNameComponentCapitalized() + " Factory";
                 add(EMExtraBlocks.getEMExtraFactory(tier, type), name);
             }

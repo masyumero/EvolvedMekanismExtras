@@ -1,9 +1,6 @@
 package io.github.masyumero.emextras.datagen.common.registries;
 
 import it.unimi.dsi.fastutil.booleans.Boolean2ObjectFunction;
-import java.util.List;
-import java.util.Set;
-import java.util.concurrent.CompletableFuture;
 import net.minecraft.core.Holder.Reference;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
@@ -21,6 +18,10 @@ import net.neoforged.neoforge.common.world.BiomeModifier;
 import net.neoforged.neoforge.common.world.StructureModifier;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
+import java.util.Set;
+import java.util.concurrent.CompletableFuture;
 
 public abstract class BaseDatapackRegistryProvider extends DatapackBuiltinEntriesProvider {
 

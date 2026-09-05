@@ -3,11 +3,14 @@ package io.github.masyumero.emextras.common.integration.mekmm.tile.factory;
 import com.jerry.mekextras.api.ExtraUpgrade;
 import com.jerry.mekextras.api.mixin.IMixinMachineEnergyContainer;
 import com.jerry.mekextras.common.util.ExtraUpgradeUtils;
-
+import com.jerry.mekmm.common.block.attribute.MoreMachineAttributeFactoryType;
+import com.jerry.mekmm.common.content.blocktype.MoreMachineFactoryType;
+import com.jerry.mekmm.common.util.MoreMachineUtils;
 import io.github.masyumero.emextras.common.block.attribute.EMExtraAttribute;
 import io.github.masyumero.emextras.common.integration.mekmm.inventory.slot.EMExtraMoreMachineFactoryInputInventorySlot;
 import io.github.masyumero.emextras.common.tier.EMExtraFactoryTier;
-
+import it.unimi.dsi.fastutil.ints.IntArraySet;
+import it.unimi.dsi.fastutil.ints.IntSet;
 import mekanism.api.Action;
 import mekanism.api.IContentsListener;
 import mekanism.api.SerializationConstants;
@@ -49,7 +52,6 @@ import mekanism.common.upgrade.MachineUpgradeData;
 import mekanism.common.util.MekanismUtils;
 import mekanism.common.util.NBTUtils;
 import mekanism.common.util.UpgradeUtils;
-
 import net.minecraft.SharedConstants;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
@@ -63,12 +65,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.common.util.ItemStackMap;
-
-import com.jerry.mekmm.common.block.attribute.MoreMachineAttributeFactoryType;
-import com.jerry.mekmm.common.content.blocktype.MoreMachineFactoryType;
-import com.jerry.mekmm.common.util.MoreMachineUtils;
-import it.unimi.dsi.fastutil.ints.IntArraySet;
-import it.unimi.dsi.fastutil.ints.IntSet;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

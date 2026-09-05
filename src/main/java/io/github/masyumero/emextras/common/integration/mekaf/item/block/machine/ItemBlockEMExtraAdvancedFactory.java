@@ -1,10 +1,10 @@
 package io.github.masyumero.emextras.common.integration.mekaf.item.block.machine;
 
+import com.jerry.mekaf.common.block.attribute.AttributeAdvancedFactoryType;
 import io.github.masyumero.emextras.common.block.attribute.EMExtraAttribute;
 import io.github.masyumero.emextras.common.block.prefab.BlockEMExtraAdvancedFactoryMachine;
 import io.github.masyumero.emextras.common.item.block.ItemBlockEMExtraTooltip;
 import io.github.masyumero.emextras.common.tier.EMExtraFactoryTier;
-
 import mekanism.api.text.EnumColor;
 import mekanism.common.MekanismLang;
 import mekanism.common.attachments.component.AttachedEjector;
@@ -12,13 +12,10 @@ import mekanism.common.attachments.component.AttachedSideConfig;
 import mekanism.common.block.attribute.Attribute;
 import mekanism.common.block.prefab.BlockTile;
 import mekanism.common.registries.MekanismDataComponents;
-
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-
-import com.jerry.mekaf.common.block.attribute.AttributeAdvancedFactoryType;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;

@@ -1,5 +1,12 @@
 package io.github.masyumero.emextras.common.integration.mekmm.tile.factory;
 
+import com.jerry.mekmm.api.recipes.basic.MMBasicItemStackChemicalToItemStackRecipe;
+import com.jerry.mekmm.api.recipes.cache.ReplicatorCachedRecipe;
+import com.jerry.mekmm.client.recipe_viewer.MoreMachineRecipeViewerRecipeType;
+import com.jerry.mekmm.common.config.MoreMachineConfig;
+import com.jerry.mekmm.common.recipe.impl.ReplicatorIRecipeSingle;
+import com.jerry.mekmm.common.registries.MoreMachineChemicals;
+import com.jerry.mekmm.common.util.ValidatorUtils;
 import lombok.Getter;
 import mekanism.api.IContentsListener;
 import mekanism.api.chemical.BasicChemicalTank;
@@ -29,7 +36,6 @@ import mekanism.common.upgrade.AdvancedMachineUpgradeData;
 import mekanism.common.upgrade.IUpgradeData;
 import mekanism.common.util.InventoryUtils;
 import mekanism.common.util.RegistryUtils;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
@@ -38,14 +44,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.fluids.FluidType;
-
-import com.jerry.mekmm.api.recipes.basic.MMBasicItemStackChemicalToItemStackRecipe;
-import com.jerry.mekmm.api.recipes.cache.ReplicatorCachedRecipe;
-import com.jerry.mekmm.client.recipe_viewer.MoreMachineRecipeViewerRecipeType;
-import com.jerry.mekmm.common.config.MoreMachineConfig;
-import com.jerry.mekmm.common.recipe.impl.ReplicatorIRecipeSingle;
-import com.jerry.mekmm.common.registries.MoreMachineChemicals;
-import com.jerry.mekmm.common.util.ValidatorUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

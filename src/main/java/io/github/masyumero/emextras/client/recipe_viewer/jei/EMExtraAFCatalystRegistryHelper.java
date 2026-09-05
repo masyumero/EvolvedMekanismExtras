@@ -1,20 +1,17 @@
 package io.github.masyumero.emextras.client.recipe_viewer.jei;
 
+import com.jerry.mekaf.common.block.attribute.AttributeAdvancedFactoryType;
 import io.github.masyumero.emextras.common.integration.mekaf.registries.EMExtraAdvancedFactoryBlocks;
 import io.github.masyumero.emextras.common.tier.EMExtraFactoryTier;
 import io.github.masyumero.emextras.common.util.EMExtraEnumUtils;
-
 import mekanism.client.recipe_viewer.jei.MekanismJEI;
 import mekanism.client.recipe_viewer.type.IRecipeViewerRecipeType;
 import mekanism.common.block.attribute.Attribute;
-
+import mezz.jei.api.recipe.RecipeType;
+import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
-
-import com.jerry.mekaf.common.block.attribute.AttributeAdvancedFactoryType;
-import mezz.jei.api.recipe.RecipeType;
-import mezz.jei.api.registration.IRecipeCatalystRegistration;
 
 import java.util.List;
 

@@ -17,7 +17,6 @@ import fr.iglee42.evolvedmekanism.registries.EMFactoryType;
 import fr.iglee42.evolvedmekanism.registries.EMTags;
 import fr.iglee42.evolvedmekanism.tiers.EMFactoryTier;
 import io.github.masyumero.emextras.EMExtras;
-import io.github.masyumero.emextras.common.block.attribute.EMExtraAttributeFactoryType;
 import io.github.masyumero.emextras.common.integration.mekaf.registries.EMExtraAdvancedFactoryBlocks;
 import io.github.masyumero.emextras.common.integration.mekmm.registries.EMExtraMoreMachineBlocks;
 import io.github.masyumero.emextras.common.registry.EMExtraBlocks;
@@ -161,7 +160,7 @@ public class FactoryRecipeProvider implements ISubRecipeProvider {
     private void addFactoryRecipes(RecipeOutput consumer, String basePath, EMExtraFactoryTier tier,
                                    Function<EMExtraFactoryTier, BlockRegistryObject<?, ?>> factory, BlockRegistryObject<?, ?> toExtraUpgrade, BlockRegistryObject<?, ?> toUpgrade,
                                    TagKey<Item> alloyTag, TagKey<Item> extraAlloyTag, TagKey<Item> circuitTag) {
-        addFactoryRecipes(consumer, tier, factory, toExtraUpgrade, toUpgrade, alloyTag, extraAlloyTag, circuitTag, EMExtras.rl(basePath + tier.getEMExtraTier().getLowerName() + "/" + Attribute.getOrThrow(factory.apply(tier), EMExtraAttributeFactoryType.class).getFactoryType().getRegistryNameComponent()));
+        addFactoryRecipes(consumer, tier, factory, toExtraUpgrade, toUpgrade, alloyTag, extraAlloyTag, circuitTag, EMExtras.rl(basePath + tier.getEMExtraTier().getLowerName() + "/" + Attribute.getOrThrow(factory.apply(tier), AttributeFactoryType.class).getFactoryType().getRegistryNameComponent()));
     }
 
     private void addEMExtraAlloyingFactoryRecipes(RecipeOutput consumer, String basePath,

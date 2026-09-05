@@ -1,17 +1,8 @@
 package io.github.masyumero.emextras.common.integration.mekmm.registries;
 
-import com.jerry.mekextras.common.block.attribute.ExtraAttributeUpgradeSupport;
-
-import io.github.masyumero.emextras.common.content.blocktype.EMExtraMachine;
-import io.github.masyumero.emextras.common.integration.mekmm.content.blocktype.EMExtraMoreMachineFactory;
-import io.github.masyumero.emextras.common.tier.EMExtraFactoryTier;
-import io.github.masyumero.emextras.common.util.EMExtraEnumUtils;
-
-import mekanism.common.block.attribute.*;
-import mekanism.common.registries.MekanismSounds;
-
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
+import com.jerry.mekextras.common.block.attribute.ExtraAttributeUpgradeSupport;
 import com.jerry.mekmm.common.MoreMachineLang;
 import com.jerry.mekmm.common.config.MoreMachineConfig;
 import com.jerry.mekmm.common.content.blocktype.MoreMachineFactoryType;
@@ -19,6 +10,13 @@ import com.jerry.mekmm.common.registries.MoreMachineContainerTypes;
 import com.jerry.mekmm.common.registries.MoreMachineTileEntityTypes;
 import com.jerry.mekmm.common.tile.machine.*;
 import com.jerry.mekmm.common.util.MoreMachineEnumUtils;
+import io.github.masyumero.emextras.common.content.blocktype.EMExtraMachine;
+import io.github.masyumero.emextras.common.integration.mekmm.content.blocktype.EMExtraMoreMachineFactory;
+import io.github.masyumero.emextras.common.tier.EMExtraFactoryTier;
+import io.github.masyumero.emextras.common.util.EMExtraEnumUtils;
+import mekanism.common.block.attribute.AttributeHasBounding;
+import mekanism.common.block.attribute.AttributeSideConfig;
+import mekanism.common.registries.MekanismSounds;
 
 public class EMExtraMoreMachineBlockTypes {
 

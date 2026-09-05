@@ -5,10 +5,10 @@ import com.jerry.mekextras.api.mixin.IMixinMachineEnergyContainer;
 import com.jerry.mekextras.common.util.ExtraUpgradeUtils;
 import fr.iglee42.evolvedmekanism.interfaces.IGetEnergySlot;
 import io.github.masyumero.emextras.common.block.attribute.EMExtraAttribute;
-import io.github.masyumero.emextras.common.block.attribute.EMExtraAttributeFactoryType;
-import io.github.masyumero.emextras.common.content.blocktype.EMExtraFactoryType;
 import io.github.masyumero.emextras.common.inventory.slot.EMExtraFactoryInputInventorySlot;
 import io.github.masyumero.emextras.common.tier.EMExtraFactoryTier;
+import it.unimi.dsi.fastutil.ints.IntArraySet;
+import it.unimi.dsi.fastutil.ints.IntSet;
 import lombok.Getter;
 import mekanism.api.Action;
 import mekanism.api.IContentsListener;
@@ -20,11 +20,13 @@ import mekanism.api.recipes.cache.CachedRecipe;
 import mekanism.api.recipes.cache.CachedRecipe.OperationTracker.RecipeError;
 import mekanism.common.CommonWorldTickHandler;
 import mekanism.common.block.attribute.Attribute;
+import mekanism.common.block.attribute.AttributeFactoryType;
 import mekanism.common.capabilities.energy.MachineEnergyContainer;
 import mekanism.common.capabilities.holder.energy.EnergyContainerHelper;
 import mekanism.common.capabilities.holder.energy.IEnergyContainerHolder;
 import mekanism.common.capabilities.holder.slot.IInventorySlotHolder;
 import mekanism.common.capabilities.holder.slot.InventorySlotHelper;
+import mekanism.common.content.blocktype.FactoryType;
 import mekanism.common.integration.computer.ComputerException;
 import mekanism.common.integration.computer.SpecialComputerMethodWrapper.ComputerIInventorySlotWrapper;
 import mekanism.common.integration.computer.annotation.ComputerMethod;
@@ -51,7 +53,6 @@ import mekanism.common.upgrade.MachineUpgradeData;
 import mekanism.common.util.MekanismUtils;
 import mekanism.common.util.NBTUtils;
 import mekanism.common.util.UpgradeUtils;
-
 import net.minecraft.SharedConstants;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
@@ -65,9 +66,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.common.util.ItemStackMap;
-
-import it.unimi.dsi.fastutil.ints.IntArraySet;
-import it.unimi.dsi.fastutil.ints.IntSet;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -116,7 +114,7 @@ public abstract class TileEntityEMExtraFactory<RECIPE extends MekanismRecipe<?>>
      * This machine's factory type.
      */
     @NotNull
-    protected final EMExtraFactoryType type;
+    protected final FactoryType type;
 
     @Getter
     protected MachineEnergyContainer<TileEntityEMExtraFactory<?>> energyContainer;
@@ -128,7 +126,7 @@ public abstract class TileEntityEMExtraFactory<RECIPE extends MekanismRecipe<?>>
 
     protected TileEntityEMExtraFactory(Holder<Block> blockProvider, BlockPos pos, BlockState state, List<RecipeError> errorTypes, Set<RecipeError> globalErrorTypes) {
         super(blockProvider, pos, state);
-        type = Attribute.getOrThrow(blockProvider, EMExtraAttributeFactoryType.class).getFactoryType();
+        type = Attribute.getOrThrow(blockProvider, AttributeFactoryType.class).getFactoryType();
         inputSlots = new ArrayList<>();
         outputSlots = new ArrayList<>();
 
@@ -225,7 +223,7 @@ public abstract class TileEntityEMExtraFactory<RECIPE extends MekanismRecipe<?>>
         return null;
     }
 
-    public EMExtraFactoryType getFactoryType() {
+    public FactoryType getFactoryType() {
         return type;
     }
 

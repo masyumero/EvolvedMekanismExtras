@@ -1,7 +1,8 @@
 package io.github.masyumero.emextras.common.util;
 
-import io.github.masyumero.emextras.common.content.blocktype.EMExtraFactoryType;
+import fr.iglee42.evolvedmekanism.registries.EMFactoryType;
 import io.github.masyumero.emextras.common.tier.EMExtraFactoryTier;
+import mekanism.common.content.blocktype.FactoryType;
 
 public class EMExtraEnumUtils {
 
@@ -9,5 +10,16 @@ public class EMExtraEnumUtils {
     }
 
     public static final EMExtraFactoryTier[] EMEXTRA_FACTORY_TIERS = EMExtraFactoryTier.values();
-    public static final EMExtraFactoryType[] EMEXTRA_FACTORY_TYPES = EMExtraFactoryType.values();
+    public static final FactoryType[] FACTORY_TYPES = new FactoryType[] {
+            FactoryType.SMELTING,
+            FactoryType.ENRICHING,
+            FactoryType.CRUSHING,
+            FactoryType.COMPRESSING,
+            FactoryType.COMBINING,
+            FactoryType.PURIFYING,
+            FactoryType.INJECTING,
+            FactoryType.INFUSING,
+            FactoryType.SAWING,
+            EMFactoryType.ALLOYING
+    };
 }

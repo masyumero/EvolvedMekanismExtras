@@ -1,28 +1,25 @@
 package io.github.masyumero.emextras.common.integration.mekmm.registries;
 
+import com.google.common.collect.HashBasedTable;
+import com.google.common.collect.Table;
+import com.jerry.mekmm.common.content.blocktype.MoreMachineFactoryType;
+import com.jerry.mekmm.common.tile.factory.TileEntityMoreMachineFactory;
 import io.github.masyumero.emextras.EMExtras;
 import io.github.masyumero.emextras.common.integration.mekmm.block.prefab.EMExtraMoreMachineBlockFactoryMachine;
 import io.github.masyumero.emextras.common.integration.mekmm.item.block.machine.ItemBlockEMExtraMoreMachineFactory;
 import io.github.masyumero.emextras.common.integration.mekmm.tile.factory.*;
 import io.github.masyumero.emextras.common.tier.EMExtraFactoryTier;
 import io.github.masyumero.emextras.common.util.EMExtraEnumUtils;
-
 import mekanism.common.capabilities.Capabilities;
 import mekanism.common.registration.impl.BlockRegistryObject;
 import mekanism.common.registration.impl.TileEntityTypeDeferredRegister;
 import mekanism.common.registration.impl.TileEntityTypeRegistryObject;
 import mekanism.common.tile.base.TileEntityMekanism;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-
-import com.google.common.collect.HashBasedTable;
-import com.google.common.collect.Table;
-import com.jerry.mekmm.common.content.blocktype.MoreMachineFactoryType;
-import com.jerry.mekmm.common.tile.factory.TileEntityMoreMachineFactory;
 import net.neoforged.bus.api.IEventBus;
 
 public class EMExtraMoreMachineTileEntityTypes {

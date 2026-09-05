@@ -1,9 +1,7 @@
 package io.github.masyumero.emextras.common.tile.factory;
 
 import com.jerry.mekextras.api.recipes.cache.StackableItemStackConstantChemicalToObjectCachedRecipe;
-import io.github.masyumero.emextras.common.block.attribute.EMExtraAttributeFactoryType;
 import io.github.masyumero.emextras.common.config.LoadConfig;
-import io.github.masyumero.emextras.common.content.blocktype.EMExtraFactoryType;
 import io.github.masyumero.emextras.common.inventory.slot.chemical.EMExtraFactoryChemicalInventorySlot;
 import lombok.Getter;
 import mekanism.api.IContentsListener;
@@ -26,10 +24,12 @@ import mekanism.client.recipe_viewer.type.IRecipeViewerRecipeType;
 import mekanism.client.recipe_viewer.type.RecipeViewerRecipeType;
 import mekanism.common.Mekanism;
 import mekanism.common.block.attribute.Attribute;
+import mekanism.common.block.attribute.AttributeFactoryType;
 import mekanism.common.capabilities.holder.chemical.ChemicalTankHelper;
 import mekanism.common.capabilities.holder.chemical.IChemicalTankHolder;
 import mekanism.common.capabilities.holder.slot.InventorySlotHelper;
 import mekanism.common.config.MekanismConfig;
+import mekanism.common.content.blocktype.FactoryType;
 import mekanism.common.integration.computer.ComputerException;
 import mekanism.common.integration.computer.SpecialComputerMethodWrapper.ComputerChemicalTankWrapper;
 import mekanism.common.integration.computer.SpecialComputerMethodWrapper.ComputerIInventorySlotWrapper;
@@ -50,7 +50,6 @@ import mekanism.common.upgrade.IUpgradeData;
 import mekanism.common.util.InventoryUtils;
 import mekanism.common.util.MekanismUtils;
 import mekanism.common.util.StatUtils;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
@@ -59,7 +58,6 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -127,7 +125,7 @@ public class TileEntityEMExtraItemStackChemicalToItemStackFactory extends TileEn
         // as maybe the valid recipes have changed, and we need to sort again and have all recipes know they may need to
         // be rechecked
         // if they are not still valid
-        long capacity = Attribute.getOrThrow(getBlockHolder(), EMExtraAttributeFactoryType.class).getFactoryType() == EMExtraFactoryType.INFUSING ? TileEntityMetallurgicInfuser.MAX_INFUSE : TileEntityAdvancedElectricMachine.MAX_GAS;
+        long capacity = Attribute.getOrThrow(getBlockHolder(), AttributeFactoryType.class).getFactoryType() == FactoryType.INFUSING ? TileEntityMetallurgicInfuser.MAX_INFUSE : TileEntityAdvancedElectricMachine.MAX_GAS;
         if (allowExtractingChemical()) {
             chemicalTank = BasicChemicalTank.createModern(capacity * tier.processes * tier.processes, this::containsRecipeB, markAllMonitorsChanged(listener));
         } else {
@@ -221,12 +219,12 @@ public class TileEntityEMExtraItemStackChemicalToItemStackFactory extends TileEn
     private boolean allowExtractingChemical() {
         // Note: We can't use type directly as when this is being used for creating the chemical tank the type field
         // hasn't been set yet
-        EMExtraFactoryType factoryType = Attribute.getOrThrow(getBlockHolder(), EMExtraAttributeFactoryType.class).getFactoryType();
-        return factoryType == EMExtraFactoryType.COMPRESSING || factoryType == EMExtraFactoryType.INFUSING;
+        FactoryType factoryType = Attribute.getOrThrow(getBlockHolder(), AttributeFactoryType.class).getFactoryType();
+        return factoryType == FactoryType.COMPRESSING || factoryType == FactoryType.INFUSING;
     }
 
     private boolean useStatisticalMechanics() {
-        return MekanismConfig.usage.randomizedConsumption.get() && (type == EMExtraFactoryType.INJECTING || type == EMExtraFactoryType.PURIFYING);
+        return MekanismConfig.usage.randomizedConsumption.get() && (type == FactoryType.INJECTING || type == FactoryType.PURIFYING);
     }
 
     @Nullable

@@ -1,8 +1,9 @@
 package io.github.masyumero.emextras.client.gui.machine;
 
 import io.github.masyumero.emextras.client.gui.element.tab.EMExtraMoreMachineGuiSortingTab;
-import io.github.masyumero.emextras.common.integration.mekmm.tile.factory.*;
-
+import io.github.masyumero.emextras.common.integration.mekmm.tile.factory.TileEntityEMExtraMoreMachineFactory;
+import io.github.masyumero.emextras.common.integration.mekmm.tile.factory.TileEntityEMExtraPlantingFactory;
+import io.github.masyumero.emextras.common.integration.mekmm.tile.factory.TileEntityEMExtraReplicatingFactory;
 import mekanism.api.recipes.cache.CachedRecipe;
 import mekanism.client.gui.GuiConfigurableTile;
 import mekanism.client.gui.element.GuiDumpButton;
@@ -14,11 +15,9 @@ import mekanism.client.gui.element.tab.GuiEnergyTab;
 import mekanism.common.inventory.container.tile.MekanismTileContainer;
 import mekanism.common.inventory.warning.WarningTracker;
 import mekanism.common.tile.interfaces.IHasDumpButton;
-
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
-
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

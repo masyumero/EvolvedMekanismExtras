@@ -1,11 +1,14 @@
 package io.github.masyumero.emextras.common.integration.mekaf.registries;
 
+import com.google.common.collect.HashBasedTable;
+import com.google.common.collect.Table;
+import com.jerry.mekaf.common.content.blocktype.AdvancedFactoryType;
 import com.jerry.mekextras.common.block.attribute.ExtraAttributeUpgradeSupport;
+import com.jerry.mekmm.common.util.MoreMachineEnumUtils;
 import io.github.masyumero.emextras.common.content.blocktype.EMExtraMachine;
 import io.github.masyumero.emextras.common.integration.mekaf.content.blocktype.EMExtraAdvancedFactory;
 import io.github.masyumero.emextras.common.tier.EMExtraFactoryTier;
 import io.github.masyumero.emextras.common.util.EMExtraEnumUtils;
-
 import mekanism.common.MekanismLang;
 import mekanism.common.block.attribute.AttributeHasBounding;
 import mekanism.common.block.attribute.AttributeSideConfig;
@@ -15,11 +18,6 @@ import mekanism.common.registries.MekanismContainerTypes;
 import mekanism.common.registries.MekanismSounds;
 import mekanism.common.registries.MekanismTileEntityTypes;
 import mekanism.common.tile.machine.*;
-
-import com.google.common.collect.HashBasedTable;
-import com.google.common.collect.Table;
-import com.jerry.mekaf.common.content.blocktype.AdvancedFactoryType;
-import com.jerry.mekmm.common.util.MoreMachineEnumUtils;
 
 public class EMExtraAdvancedFactoryBlockTypes {
 

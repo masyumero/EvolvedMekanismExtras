@@ -1,5 +1,8 @@
 package io.github.masyumero.emextras.datagen.client.lang;
 
+import lombok.Getter;
+import org.jetbrains.annotations.Nullable;
+
 import java.text.ChoiceFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -8,9 +11,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import lombok.Getter;
-import org.jetbrains.annotations.Nullable;
 
 public class FormatSplitter {
 

@@ -1,7 +1,5 @@
 package io.github.masyumero.emextras.common.block.prefab;
 
-import java.util.function.UnaryOperator;
-
 import io.github.masyumero.emextras.common.content.blocktype.EMExtraFactory;
 import io.github.masyumero.emextras.common.content.blocktype.EMExtraMachine;
 import io.github.masyumero.emextras.common.tile.factory.TileEntityEMExtraFactory;
@@ -10,6 +8,8 @@ import mekanism.common.block.states.IStateFluidLoggable;
 import mekanism.common.resource.BlockResourceInfo;
 import mekanism.common.tile.base.TileEntityMekanism;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+
+import java.util.function.UnaryOperator;
 
 public class BlockEMExtraFactoryMachine<TILE extends TileEntityMekanism, MACHINE extends EMExtraMachine.EMExtraFactoryMachine<TILE>> extends BlockTile<TILE, MACHINE> {
 

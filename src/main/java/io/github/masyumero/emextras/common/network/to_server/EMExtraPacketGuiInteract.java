@@ -4,12 +4,11 @@ import io.github.masyumero.emextras.EMExtras;
 import io.github.masyumero.emextras.common.integration.mekaf.tile.factory.base.TileEntityEMExtraAdvancedFactoryBase;
 import io.github.masyumero.emextras.common.integration.mekmm.tile.factory.TileEntityEMExtraMoreMachineFactory;
 import io.github.masyumero.emextras.common.tile.factory.TileEntityEMExtraFactory;
-
+import io.netty.buffer.ByteBuf;
 import mekanism.api.functions.TriConsumer;
 import mekanism.common.network.IMekanismPacket;
 import mekanism.common.tile.base.TileEntityMekanism;
 import mekanism.common.util.WorldUtils;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -20,8 +19,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
-
-import io.netty.buffer.ByteBuf;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.function.IntFunction;

@@ -4,9 +4,10 @@ import com.jerry.mekaf.common.block.attribute.AttributeAdvancedFactoryType;
 import com.jerry.mekaf.common.content.blocktype.AdvancedFactoryType;
 import com.jerry.mekmm.common.block.attribute.MoreMachineAttributeFactoryType;
 import com.jerry.mekmm.common.content.blocktype.MoreMachineFactoryType;
-import io.github.masyumero.emextras.common.block.attribute.EMExtraAttributeFactoryType;
 import mekanism.api.text.ILangEntry;
+import mekanism.common.block.attribute.AttributeFactoryType;
 import mekanism.common.content.blocktype.BlockTypeTile;
+import mekanism.common.content.blocktype.FactoryType;
 import mekanism.common.content.blocktype.Machine;
 import mekanism.common.registration.impl.TileEntityTypeRegistryObject;
 import mekanism.common.tile.base.TileEntityMekanism;
@@ -18,9 +19,9 @@ public class EMExtraMachine {
 
     public static class EMExtraFactoryMachine<TILE extends TileEntityMekanism> extends Machine<TILE> {
 
-        public EMExtraFactoryMachine(Supplier<TileEntityTypeRegistryObject<TILE>> tileEntitySupplier, ILangEntry description, EMExtraFactoryType factoryType) {
+        public EMExtraFactoryMachine(Supplier<TileEntityTypeRegistryObject<TILE>> tileEntitySupplier, ILangEntry description, FactoryType factoryType) {
             super(tileEntitySupplier, description);
-            add(new EMExtraAttributeFactoryType(factoryType));
+            add(new AttributeFactoryType(factoryType));
         }
 
         public EMExtraFactoryMachine(Supplier<TileEntityTypeRegistryObject<TILE>> tileEntitySupplier, ILangEntry description, AdvancedFactoryType factoryType) {
@@ -33,8 +34,8 @@ public class EMExtraMachine {
             add(new MoreMachineAttributeFactoryType(factoryType));
         }
 
-        public EMExtraFactoryType getFactoryType() {
-            return Objects.requireNonNull(get(EMExtraAttributeFactoryType.class)).getFactoryType();
+        public FactoryType getFactoryType() {
+            return Objects.requireNonNull(get(AttributeFactoryType.class)).getFactoryType();
         }
 
         public AdvancedFactoryType getAdvancedFactoryType() {
@@ -53,7 +54,7 @@ public class EMExtraMachine {
         }
 
         public static <TILE extends TileEntityMekanism> EMExtraMachineBuilder<EMExtraFactoryMachine<TILE>, TILE, ?> createEMExtraFactoryMachine(Supplier<TileEntityTypeRegistryObject<TILE>> tileEntityRegistrar,
-                                                                                                                                                ILangEntry description, EMExtraFactoryType factoryType) {
+                                                                                                                                                ILangEntry description, FactoryType factoryType) {
             return new EMExtraMachineBuilder<>(new EMExtraFactoryMachine<>(tileEntityRegistrar, description, factoryType));
         }
 

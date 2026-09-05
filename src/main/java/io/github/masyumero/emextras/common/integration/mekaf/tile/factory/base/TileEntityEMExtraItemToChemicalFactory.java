@@ -1,7 +1,7 @@
 package io.github.masyumero.emextras.common.integration.mekaf.tile.factory.base;
 
+import com.jerry.mekaf.common.upgrade.ItemToChemicalUpgradeData;
 import io.github.masyumero.emextras.common.integration.mekaf.inventory.slot.EMExtraAdvancedFactoryInputInventorySlot;
-
 import mekanism.api.Action;
 import mekanism.api.IContentsListener;
 import mekanism.api.chemical.BasicChemicalTank;
@@ -29,7 +29,6 @@ import mekanism.common.tile.component.config.DataType;
 import mekanism.common.tile.component.config.slot.ChemicalSlotInfo;
 import mekanism.common.upgrade.IUpgradeData;
 import mekanism.common.util.MekanismUtils;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
@@ -37,8 +36,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.common.util.ItemStackMap;
-
-import com.jerry.mekaf.common.upgrade.ItemToChemicalUpgradeData;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

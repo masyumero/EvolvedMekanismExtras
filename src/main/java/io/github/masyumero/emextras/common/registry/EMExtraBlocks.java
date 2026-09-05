@@ -13,14 +13,13 @@ import com.jerry.mekextras.common.util.ExtraEnumUtils;
 import fr.iglee42.evolvedmekanism.interfaces.EMInputRecipeCache;
 import fr.iglee42.evolvedmekanism.registries.EMFactoryType;
 import fr.iglee42.evolvedmekanism.registries.EMRecipeType;
-import io.github.masyumero.emextras.api.tier.IEMExtraTier;
-import io.github.masyumero.emextras.common.tier.EMExtraFactoryTier;
 import io.github.masyumero.emextras.EMExtras;
+import io.github.masyumero.emextras.api.tier.IEMExtraTier;
 import io.github.masyumero.emextras.common.block.attribute.EMExtraAttributeTier;
 import io.github.masyumero.emextras.common.block.prefab.BlockEMExtraFactoryMachine;
 import io.github.masyumero.emextras.common.content.blocktype.EMExtraFactory;
-import io.github.masyumero.emextras.common.content.blocktype.EMExtraFactoryType;
 import io.github.masyumero.emextras.common.item.block.machine.ItemBlockEMExtraFactory;
+import io.github.masyumero.emextras.common.tier.EMExtraFactoryTier;
 import io.github.masyumero.emextras.common.tile.factory.TileEntityEMExtraFactory;
 import io.github.masyumero.emextras.common.util.EMExtraEnumUtils;
 import mekanism.common.attachments.containers.ContainerType;
@@ -47,14 +46,14 @@ import java.util.function.Supplier;
 public class EMExtraBlocks {
     public static final BlockDeferredRegister BLOCK = new BlockDeferredRegister(EMExtras.MODID);
 
-    private static final Table<EMExtraFactoryTier, EMExtraFactoryType, BlockRegistryObject<BlockEMExtraFactoryMachine.BlockEMExtraFactory<?>, ItemBlockEMExtraFactory>> FACTORIES = HashBasedTable.create();
+    private static final Table<EMExtraFactoryTier, FactoryType, BlockRegistryObject<BlockEMExtraFactoryMachine.BlockEMExtraFactory<?>, ItemBlockEMExtraFactory>> FACTORIES = HashBasedTable.create();
 
     private static final Table<ExtraFactoryTier, FactoryType, BlockRegistryObject<BlockExtraFactoryMachine.BlockExtraFactory<?>, ItemBlockExtraFactory>> EXTRA_FACTORIES = HashBasedTable.create();
 
     static {
         // factories
         for (EMExtraFactoryTier tier : EMExtraEnumUtils.EMEXTRA_FACTORY_TIERS) {
-            for (EMExtraFactoryType type : EMExtraEnumUtils.EMEXTRA_FACTORY_TYPES) {
+            for (FactoryType type : EMExtraEnumUtils.FACTORY_TYPES) {
                 FACTORIES.put(tier, type, registerEMExtraFactory(EMExtraBlockTypes.getEMExtraFactory(tier, type)));
             }
         }
@@ -78,7 +77,9 @@ public class EMExtraBlocks {
         BlockRegistryObject<BlockExtraFactoryMachine.BlockExtraFactory<?>, ItemBlockExtraFactory> factory = registerTieredBlock(tier, "_" + type.getFactoryType().getRegistryNameComponent() + "_factory", () -> new BlockExtraFactoryMachine.BlockExtraFactory<>(type), ItemBlockExtraFactory::new);
         factory.forItemHolder(holder -> {
             int processes = tier.processes;
-            Predicate<ItemStack> recipeInputPredicate = type.getFactoryType().equals(EMFactoryType.ALLOYING) ? s -> EMRecipeType.ALLOYING.getInputCache().containsInputA(null, s) : switch (type.getFactoryType()) {
+            Predicate<ItemStack> recipeInputPredicate = type.getFactoryType().equals(EMFactoryType.ALLOYING) ?
+                    s -> EMRecipeType.ALLOYING.getInputCache().containsInputA(null, s) :
+                    switch (type.getFactoryType()) {
                 case SMELTING -> s -> MekanismRecipeType.SMELTING.getInputCache().containsInput(null, s);
                 case ENRICHING -> s -> MekanismRecipeType.ENRICHING.getInputCache().containsInput(null, s);
                 case CRUSHING -> s -> MekanismRecipeType.CRUSHING.getInputCache().containsInput(null, s);
@@ -96,44 +97,45 @@ public class EMExtraBlocks {
                         .addInput(EMRecipeType.ALLOYING, EMInputRecipeCache.TripleItem::containsInputC)
                         .addEnergy()
                         .build());
-            }
-            switch (type.getFactoryType()) {
-                case SMELTING, ENRICHING, CRUSHING -> holder.addAttachmentOnlyContainers(ContainerType.ITEM, () -> ItemSlotsBuilder.builder()
-                        .addBasicFactorySlots(processes, recipeInputPredicate)
-                        .addEnergy()
-                        .build());
-                case COMPRESSING, INJECTING, PURIFYING -> holder
-                        .addAttachmentOnlyContainers(ContainerType.CHEMICAL, () -> ChemicalTanksBuilder.builder()
-                                .addBasic(TileEntityAdvancedElectricMachine.MAX_GAS * processes * processes, switch (type.getFactoryType()) {
-                                    case COMPRESSING -> MekanismRecipeType.COMPRESSING;
-                                    case INJECTING -> MekanismRecipeType.INJECTING;
-                                    case PURIFYING -> MekanismRecipeType.PURIFYING;
-                                    default -> throw new IllegalStateException("Factory type doesn't have a known gas recipe");
-                                }, InputRecipeCache.ItemChemical::containsInputB)
-                                .build())
-                        .addAttachmentOnlyContainers(ContainerType.ITEM, () -> ItemSlotsBuilder.builder()
-                                .addBasicFactorySlots(processes, recipeInputPredicate)
-                                .addChemicalFillOrConvertSlot(0)
-                                .addEnergy()
-                                .build());
-                case COMBINING -> holder.addAttachmentOnlyContainers(ContainerType.ITEM, () -> ItemSlotsBuilder.builder()
-                        .addBasicFactorySlots(processes, recipeInputPredicate)
-                        .addInput(MekanismRecipeType.COMBINING, InputRecipeCache.DoubleItem::containsInputB)
-                        .addEnergy()
-                        .build());
-                case INFUSING -> holder
-                        .addAttachmentOnlyContainers(ContainerType.CHEMICAL, () -> ChemicalTanksBuilder.builder()
-                                .addBasic(TileEntityMetallurgicInfuser.MAX_INFUSE * processes * processes, MekanismRecipeType.METALLURGIC_INFUSING, InputRecipeCache.ItemChemical::containsInputB)
-                                .build())
-                        .addAttachmentOnlyContainers(ContainerType.ITEM, () -> ItemSlotsBuilder.builder()
-                                .addBasicFactorySlots(processes, recipeInputPredicate)
-                                .addInfusionFillOrConvertSlot(0)
-                                .addEnergy()
-                                .build());
-                case SAWING -> holder.addAttachmentOnlyContainers(ContainerType.ITEM, () -> ItemSlotsBuilder.builder()
-                        .addBasicFactorySlots(processes, recipeInputPredicate, true)
-                        .addEnergy()
-                        .build());
+            } else {
+                switch (type.getFactoryType()) {
+                    case SMELTING, ENRICHING, CRUSHING -> holder.addAttachmentOnlyContainers(ContainerType.ITEM, () -> ItemSlotsBuilder.builder()
+                            .addBasicFactorySlots(processes, recipeInputPredicate)
+                            .addEnergy()
+                            .build());
+                    case COMPRESSING, INJECTING, PURIFYING -> holder
+                            .addAttachmentOnlyContainers(ContainerType.CHEMICAL, () -> ChemicalTanksBuilder.builder()
+                                    .addBasic(TileEntityAdvancedElectricMachine.MAX_GAS * processes * processes, switch (type.getFactoryType()) {
+                                        case COMPRESSING -> MekanismRecipeType.COMPRESSING;
+                                        case INJECTING -> MekanismRecipeType.INJECTING;
+                                        case PURIFYING -> MekanismRecipeType.PURIFYING;
+                                        default -> throw new IllegalStateException("Factory type doesn't have a known gas recipe");
+                                    }, InputRecipeCache.ItemChemical::containsInputB)
+                                    .build())
+                            .addAttachmentOnlyContainers(ContainerType.ITEM, () -> ItemSlotsBuilder.builder()
+                                    .addBasicFactorySlots(processes, recipeInputPredicate)
+                                    .addChemicalFillOrConvertSlot(0)
+                                    .addEnergy()
+                                    .build());
+                    case COMBINING -> holder.addAttachmentOnlyContainers(ContainerType.ITEM, () -> ItemSlotsBuilder.builder()
+                            .addBasicFactorySlots(processes, recipeInputPredicate)
+                            .addInput(MekanismRecipeType.COMBINING, InputRecipeCache.DoubleItem::containsInputB)
+                            .addEnergy()
+                            .build());
+                    case INFUSING -> holder
+                            .addAttachmentOnlyContainers(ContainerType.CHEMICAL, () -> ChemicalTanksBuilder.builder()
+                                    .addBasic(TileEntityMetallurgicInfuser.MAX_INFUSE * processes * processes, MekanismRecipeType.METALLURGIC_INFUSING, InputRecipeCache.ItemChemical::containsInputB)
+                                    .build())
+                            .addAttachmentOnlyContainers(ContainerType.ITEM, () -> ItemSlotsBuilder.builder()
+                                    .addBasicFactorySlots(processes, recipeInputPredicate)
+                                    .addInfusionFillOrConvertSlot(0)
+                                    .addEnergy()
+                                    .build());
+                    case SAWING -> holder.addAttachmentOnlyContainers(ContainerType.ITEM, () -> ItemSlotsBuilder.builder()
+                            .addBasicFactorySlots(processes, recipeInputPredicate, true)
+                            .addEnergy()
+                            .build());
+                }
             }
         });
         return factory;
@@ -144,8 +146,9 @@ public class EMExtraBlocks {
         BlockRegistryObject<BlockEMExtraFactoryMachine.BlockEMExtraFactory<?>, ItemBlockEMExtraFactory> factory = registerTieredBlock(tier, "_" + type.getFactoryType().getRegistryNameComponent() + "_factory", () -> new BlockEMExtraFactoryMachine.BlockEMExtraFactory<>(type), ItemBlockEMExtraFactory::new);
         factory.forItemHolder(holder -> {
             int processes = tier.processes;
-            Predicate<ItemStack> recipeInputPredicate = switch (type.getFactoryType()) {
-                case ALLOYING -> s -> EMRecipeType.ALLOYING.getInputCache().containsInputA(null, s);
+            Predicate<ItemStack> recipeInputPredicate = type.getFactoryType() == EMFactoryType.ALLOYING ?
+                    s -> EMRecipeType.ALLOYING.getInputCache().containsInputA(null, s) :
+                    switch (type.getFactoryType()) {
                 case SMELTING -> s -> MekanismRecipeType.SMELTING.getInputCache().containsInput(null, s);
                 case ENRICHING -> s -> MekanismRecipeType.ENRICHING.getInputCache().containsInput(null, s);
                 case CRUSHING -> s -> MekanismRecipeType.CRUSHING.getInputCache().containsInput(null, s);
@@ -156,60 +159,72 @@ public class EMExtraBlocks {
                 case INFUSING -> s -> MekanismRecipeType.METALLURGIC_INFUSING.getInputCache().containsInputA(null, s);
                 case SAWING -> s -> MekanismRecipeType.SAWING.getInputCache().containsInput(null, s);
             };
-            switch (type.getFactoryType()) {
-                case ALLOYING -> holder.addAttachmentOnlyContainers(ContainerType.ITEM, () -> ItemSlotsBuilder.builder()
+            if (type.getFactoryType() == EMFactoryType.ALLOYING) {
+                holder.addAttachmentOnlyContainers(ContainerType.ITEM, () -> ItemSlotsBuilder.builder()
                         .addBasicFactorySlots(processes, recipeInputPredicate)
                         .addInput(EMRecipeType.ALLOYING, EMInputRecipeCache.TripleItem::containsInputB)
                         .addInput(EMRecipeType.ALLOYING, EMInputRecipeCache.TripleItem::containsInputC)
                         .addEnergy()
                         .build());
-                case SMELTING, ENRICHING, CRUSHING -> holder.addAttachmentOnlyContainers(ContainerType.ITEM, () -> ItemSlotsBuilder.builder()
-                        .addBasicFactorySlots(processes, recipeInputPredicate)
-                        .addEnergy()
-                        .build());
-                case COMPRESSING, INJECTING, PURIFYING -> holder
-                        .addAttachmentOnlyContainers(ContainerType.CHEMICAL, () -> ChemicalTanksBuilder.builder()
-                                .addBasic(TileEntityAdvancedElectricMachine.MAX_GAS * processes * processes, switch (type.getFactoryType()) {
-                                    case COMPRESSING -> MekanismRecipeType.COMPRESSING;
-                                    case INJECTING -> MekanismRecipeType.INJECTING;
-                                    case PURIFYING -> MekanismRecipeType.PURIFYING;
-                                    default -> throw new IllegalStateException("Factory type doesn't have a known gas recipe");
-                                }, InputRecipeCache.ItemChemical::containsInputB)
-                                .build())
-                        .addAttachmentOnlyContainers(ContainerType.ITEM, () -> ItemSlotsBuilder.builder()
-                                .addBasicFactorySlots(processes, recipeInputPredicate)
-                                .addChemicalFillOrConvertSlot(0)
-                                .addEnergy()
-                                .build());
-                case COMBINING -> holder.addAttachmentOnlyContainers(ContainerType.ITEM, () -> ItemSlotsBuilder.builder()
-                        .addBasicFactorySlots(processes, recipeInputPredicate)
-                        .addInput(MekanismRecipeType.COMBINING, InputRecipeCache.DoubleItem::containsInputB)
-                        .addEnergy()
-                        .build());
-                case INFUSING -> holder
-                        .addAttachmentOnlyContainers(ContainerType.CHEMICAL, () -> ChemicalTanksBuilder.builder()
-                                .addBasic(TileEntityMetallurgicInfuser.MAX_INFUSE * processes * processes, MekanismRecipeType.METALLURGIC_INFUSING, InputRecipeCache.ItemChemical::containsInputB)
-                                .build())
-                        .addAttachmentOnlyContainers(ContainerType.ITEM, () -> ItemSlotsBuilder.builder()
-                                .addBasicFactorySlots(processes, recipeInputPredicate)
-                                .addInfusionFillOrConvertSlot(0)
-                                .addEnergy()
-                                .build());
-                case SAWING -> holder.addAttachmentOnlyContainers(ContainerType.ITEM, () -> ItemSlotsBuilder.builder()
-                        .addBasicFactorySlots(processes, recipeInputPredicate, true)
-                        .addEnergy()
-                        .build());
+            } else {
+                switch (type.getFactoryType()) {
+                    case SMELTING, ENRICHING, CRUSHING ->
+                            holder.addAttachmentOnlyContainers(ContainerType.ITEM, () -> ItemSlotsBuilder.builder()
+                                    .addBasicFactorySlots(processes, recipeInputPredicate)
+                                    .addEnergy()
+                                    .build());
+                    case COMPRESSING, INJECTING, PURIFYING -> holder
+                            .addAttachmentOnlyContainers(ContainerType.CHEMICAL, () -> ChemicalTanksBuilder.builder()
+                                    .addBasic(TileEntityAdvancedElectricMachine.MAX_GAS * processes * processes, switch (type.getFactoryType()) {
+                                        case COMPRESSING -> MekanismRecipeType.COMPRESSING;
+                                        case INJECTING -> MekanismRecipeType.INJECTING;
+                                        case PURIFYING -> MekanismRecipeType.PURIFYING;
+                                        default ->
+                                                throw new IllegalStateException("Factory type doesn't have a known gas recipe");
+                                    }, InputRecipeCache.ItemChemical::containsInputB)
+                                    .build())
+                            .addAttachmentOnlyContainers(ContainerType.ITEM, () -> ItemSlotsBuilder.builder()
+                                    .addBasicFactorySlots(processes, recipeInputPredicate)
+                                    .addChemicalFillOrConvertSlot(0)
+                                    .addEnergy()
+                                    .build());
+                    case COMBINING ->
+                            holder.addAttachmentOnlyContainers(ContainerType.ITEM, () -> ItemSlotsBuilder.builder()
+                                    .addBasicFactorySlots(processes, recipeInputPredicate)
+                                    .addInput(MekanismRecipeType.COMBINING, InputRecipeCache.DoubleItem::containsInputB)
+                                    .addEnergy()
+                                    .build());
+                    case INFUSING -> holder
+                            .addAttachmentOnlyContainers(ContainerType.CHEMICAL, () -> ChemicalTanksBuilder.builder()
+                                    .addBasic(TileEntityMetallurgicInfuser.MAX_INFUSE * processes * processes, MekanismRecipeType.METALLURGIC_INFUSING, InputRecipeCache.ItemChemical::containsInputB)
+                                    .build())
+                            .addAttachmentOnlyContainers(ContainerType.ITEM, () -> ItemSlotsBuilder.builder()
+                                    .addBasicFactorySlots(processes, recipeInputPredicate)
+                                    .addInfusionFillOrConvertSlot(0)
+                                    .addEnergy()
+                                    .build());
+                    case SAWING ->
+                            holder.addAttachmentOnlyContainers(ContainerType.ITEM, () -> ItemSlotsBuilder.builder()
+                                    .addBasicFactorySlots(processes, recipeInputPredicate, true)
+                                    .addEnergy()
+                                    .build());
+                }
             }
         });
         return factory;
     }
 
-    public static BlockRegistryObject<BlockEMExtraFactoryMachine.BlockEMExtraFactory<?>, ItemBlockEMExtraFactory>  getEMExtraFactory(@NotNull EMExtraFactoryTier tier, @NotNull EMExtraFactoryType type) {
+    public static BlockRegistryObject<BlockEMExtraFactoryMachine.BlockEMExtraFactory<?>, ItemBlockEMExtraFactory>  getEMExtraFactory(@NotNull EMExtraFactoryTier tier, @NotNull FactoryType type) {
         return FACTORIES.get(tier, type);
     }
 
     public static BlockRegistryObject<BlockExtraFactoryMachine.BlockExtraFactory<?>, ItemBlockExtraFactory> getExtraFactory(@NotNull ExtraFactoryTier tier, @NotNull FactoryType type) {
         return EXTRA_FACTORIES.get(tier, type);
+    }
+
+    @SuppressWarnings("unchecked")
+    public static BlockRegistryObject<BlockEMExtraFactoryMachine.BlockEMExtraFactory<?>, ItemBlockEMExtraFactory>[] getEMExtraFactoryBlocks() {
+        return FACTORIES.values().toArray(new BlockRegistryObject[0]);
     }
 
     public static void register(IEventBus modEventBus) {

@@ -1,8 +1,8 @@
 package io.github.masyumero.emextras.common.integration.mekaf.tile.factory;
 
+import com.jerry.mekaf.common.upgrade.NutritionLiquifyingUpgradeData;
 import io.github.masyumero.emextras.common.integration.mekaf.inventory.slot.EMExtraAdvancedFactoryInputInventorySlot;
 import io.github.masyumero.emextras.common.integration.mekaf.inventory.slot.EMExtraAdvancedFactoryOutputInventorySlot;
-
 import io.github.masyumero.emextras.common.integration.mekaf.tile.factory.base.TileEntityEMExtraAdvancedFactoryBase;
 import mekanism.api.Action;
 import mekanism.api.IContentsListener;
@@ -38,7 +38,6 @@ import mekanism.common.tile.component.ITileComponent;
 import mekanism.common.tile.component.TileComponentEjector;
 import mekanism.common.upgrade.IUpgradeData;
 import mekanism.common.util.MekanismUtils;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
@@ -47,8 +46,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.common.util.ItemStackMap;
-
-import com.jerry.mekaf.common.upgrade.NutritionLiquifyingUpgradeData;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

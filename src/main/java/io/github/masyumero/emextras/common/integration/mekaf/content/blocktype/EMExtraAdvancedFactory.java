@@ -1,5 +1,8 @@
 package io.github.masyumero.emextras.common.integration.mekaf.content.blocktype;
 
+import com.jerry.mekaf.common.block.attribute.AttributeAdvancedFactoryType;
+import com.jerry.mekaf.common.content.blocktype.AdvancedFactoryBlockShapes;
+import com.jerry.mekaf.common.content.blocktype.AdvancedFactoryType;
 import io.github.masyumero.emextras.common.block.attribute.EMExtraAttributeTier;
 import io.github.masyumero.emextras.common.block.attribute.EMExtraAttributeUpgradeable;
 import io.github.masyumero.emextras.common.content.blocktype.EMExtraMachine;
@@ -9,7 +12,6 @@ import io.github.masyumero.emextras.common.integration.mekaf.registries.EMExtraA
 import io.github.masyumero.emextras.common.integration.mekaf.tile.factory.base.TileEntityEMExtraAdvancedFactoryBase;
 import io.github.masyumero.emextras.common.tier.EMExtraFactoryTier;
 import io.github.masyumero.emextras.common.util.EMExtraEnumUtils;
-
 import mekanism.api.math.MathUtils;
 import mekanism.common.MekanismLang;
 import mekanism.common.block.attribute.*;
@@ -18,12 +20,7 @@ import mekanism.common.lib.math.Pos3D;
 import mekanism.common.lib.transmitter.TransmissionType;
 import mekanism.common.registration.impl.ContainerTypeRegistryObject;
 import mekanism.common.registration.impl.TileEntityTypeRegistryObject;
-
 import net.minecraft.core.particles.ParticleTypes;
-
-import com.jerry.mekaf.common.block.attribute.AttributeAdvancedFactoryType;
-import com.jerry.mekaf.common.content.blocktype.AdvancedFactoryBlockShapes;
-import com.jerry.mekaf.common.content.blocktype.AdvancedFactoryType;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Supplier;

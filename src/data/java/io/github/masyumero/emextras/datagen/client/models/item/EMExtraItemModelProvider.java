@@ -7,13 +7,13 @@ import com.jerry.mekmm.common.content.blocktype.MoreMachineFactoryType;
 import com.jerry.mekmm.common.util.MoreMachineEnumUtils;
 import fr.iglee42.evolvedmekanism.registries.EMFactoryType;
 import io.github.masyumero.emextras.EMExtras;
-import io.github.masyumero.emextras.common.content.blocktype.EMExtraFactoryType;
 import io.github.masyumero.emextras.common.integration.mekaf.registries.EMExtraAdvancedFactoryBlocks;
 import io.github.masyumero.emextras.common.integration.mekmm.registries.EMExtraMoreMachineBlocks;
 import io.github.masyumero.emextras.common.registry.EMExtraBlocks;
 import io.github.masyumero.emextras.common.registry.EMExtraItems;
 import io.github.masyumero.emextras.common.tier.EMExtraFactoryTier;
 import io.github.masyumero.emextras.common.util.EMExtraEnumUtils;
+import mekanism.common.content.blocktype.FactoryType;
 import net.minecraft.data.PackOutput;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
@@ -27,7 +27,7 @@ public class EMExtraItemModelProvider extends BaseItemModelProvider{
     protected void registerModels() {
         EMExtraItems.ITEM.getEntries().forEach(item -> basicItem(item.get()));
         for (EMExtraFactoryTier tier : EMExtraEnumUtils.EMEXTRA_FACTORY_TIERS) {
-            for (EMExtraFactoryType type : EMExtraEnumUtils.EMEXTRA_FACTORY_TYPES) {
+            for (FactoryType type : EMExtraEnumUtils.FACTORY_TYPES) {
                 factoryBlock(EMExtraBlocks.getEMExtraFactory(tier, type));
             }
             for (AdvancedFactoryType type : MoreMachineEnumUtils.ADVANCED_FACTORY_TYPES) {

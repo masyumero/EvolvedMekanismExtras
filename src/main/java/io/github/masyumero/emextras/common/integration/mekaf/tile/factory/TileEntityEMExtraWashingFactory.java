@@ -1,5 +1,6 @@
 package io.github.masyumero.emextras.common.integration.mekaf.tile.factory;
 
+import com.jerry.mekaf.common.upgrade.FluidChemicalToChemicalUpgradeData;
 import io.github.masyumero.emextras.common.integration.mekaf.tile.factory.base.TileEntityEMExtraChemicalToChemicalFactory;
 import mekanism.api.IContentsListener;
 import mekanism.api.Upgrade;
@@ -36,7 +37,6 @@ import mekanism.common.tile.component.config.slot.InventorySlotInfo;
 import mekanism.common.tile.interfaces.IHasDumpButton;
 import mekanism.common.upgrade.IUpgradeData;
 import mekanism.common.util.UpgradeUtils;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
@@ -44,8 +44,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.fluids.FluidStack;
-
-import com.jerry.mekaf.common.upgrade.FluidChemicalToChemicalUpgradeData;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

@@ -3,18 +3,16 @@ package io.github.masyumero.emextras.mixin.client;
 import com.jerry.mekaf.common.block.attribute.AttributeAdvancedFactoryType;
 import com.jerry.mekextras.common.tier.ExtraFactoryTier;
 import com.jerry.mekextras.common.util.ExtraEnumUtils;
-
+import dev.emi.emi.api.EmiRegistry;
+import dev.emi.emi.api.recipe.EmiRecipeCategory;
+import dev.emi.emi.api.stack.EmiStack;
+import fr.iglee42.evolvedmekanism.registries.EMFactoryType;
 import io.github.masyumero.emextras.EMExtras;
 import io.github.masyumero.emextras.common.integration.mekaf.registries.EMExtraAdvancedFactoryBlocks;
 import io.github.masyumero.emextras.common.registry.EMExtraBlocks;
 import io.github.masyumero.emextras.common.tier.EMExtraFactoryTier;
 import io.github.masyumero.emextras.common.util.EMExtraBlockUtils;
 import io.github.masyumero.emextras.common.util.EMExtraEnumUtils;
-
-import dev.emi.emi.api.EmiRegistry;
-import dev.emi.emi.api.recipe.EmiRecipeCategory;
-import dev.emi.emi.api.stack.EmiStack;
-import fr.iglee42.evolvedmekanism.registries.EMFactoryType;
 import mekanism.client.recipe_viewer.emi.MekanismEmi;
 import mekanism.common.block.attribute.Attribute;
 import mekanism.common.block.attribute.AttributeFactoryType;

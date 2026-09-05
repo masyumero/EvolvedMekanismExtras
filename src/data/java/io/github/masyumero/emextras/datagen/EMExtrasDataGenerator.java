@@ -6,20 +6,6 @@ import com.electronwill.nightconfig.core.concurrent.SynchronizedConfig;
 import com.google.common.hash.Hashing;
 import com.google.common.hash.HashingOutputStream;
 import com.google.gson.JsonElement;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Method;
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.EnumMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Set;
-import java.util.concurrent.CompletableFuture;
-import java.util.function.Function;
-
 import io.github.masyumero.emextras.EMExtras;
 import io.github.masyumero.emextras.datagen.client.lang.EMExtraLangProvider;
 import io.github.masyumero.emextras.datagen.client.models.block.EMExtraBlockModelProvider;
@@ -28,7 +14,6 @@ import io.github.masyumero.emextras.datagen.common.loot.EMExtraLootProvider;
 import io.github.masyumero.emextras.datagen.common.recipe.impl.EMExtraRecipeProvider;
 import io.github.masyumero.emextras.datagen.common.registries.EMExtraDatapackRegistryProvider;
 import io.github.masyumero.emextras.datagen.common.tag.EMExtraTagProvider;
-
 import mekanism.common.Mekanism;
 import mekanism.common.lib.FieldReflectionHelper;
 import net.minecraft.Util;
@@ -50,6 +35,16 @@ import net.neoforged.fml.event.lifecycle.InterModProcessEvent;
 import net.neoforged.fml.util.ObfuscationReflectionHelper;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
+import java.nio.file.Path;
+import java.util.*;
+import java.util.concurrent.CompletableFuture;
+import java.util.function.Function;
 
 @EventBusSubscriber(modid = EMExtras.MODID)
 public class EMExtrasDataGenerator {

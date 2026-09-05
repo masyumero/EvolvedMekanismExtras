@@ -1,12 +1,14 @@
 package io.github.masyumero.emextras.client.gui.machine;
 
+import com.jerry.mekaf.common.tile.factory.TileEntityPressurizedReactingFactory;
 import io.github.masyumero.emextras.client.gui.element.tab.EMExtraAdvancedFactoryGuiSortingTab;
-import io.github.masyumero.emextras.common.integration.mekaf.tile.factory.*;
+import io.github.masyumero.emextras.common.integration.mekaf.tile.factory.TileEntityEMExtraLiquifyingFactory;
+import io.github.masyumero.emextras.common.integration.mekaf.tile.factory.TileEntityEMExtraPRCFactory;
+import io.github.masyumero.emextras.common.integration.mekaf.tile.factory.TileEntityEMExtraWashingFactory;
 import io.github.masyumero.emextras.common.integration.mekaf.tile.factory.base.TileEntityEMExtraAdvancedFactoryBase;
 import io.github.masyumero.emextras.common.integration.mekaf.tile.factory.base.TileEntityEMExtraChemicalToChemicalFactory;
 import io.github.masyumero.emextras.common.integration.mekaf.tile.factory.base.TileEntityEMExtraChemicalToItemFactory;
 import io.github.masyumero.emextras.common.integration.mekaf.tile.factory.base.TileEntityEMExtraItemToChemicalFactory;
-
 import mekanism.api.recipes.cache.CachedRecipe.OperationTracker.RecipeError;
 import mekanism.client.SpecialColors;
 import mekanism.client.gui.GuiConfigurableTile;
@@ -25,12 +27,9 @@ import mekanism.client.gui.element.tab.GuiEnergyTab;
 import mekanism.common.inventory.container.tile.MekanismTileContainer;
 import mekanism.common.inventory.warning.WarningTracker.WarningType;
 import mekanism.common.tile.interfaces.IHasDumpButton;
-
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
-
-import com.jerry.mekaf.common.tile.factory.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

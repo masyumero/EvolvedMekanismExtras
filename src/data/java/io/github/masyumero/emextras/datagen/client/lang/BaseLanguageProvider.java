@@ -1,10 +1,5 @@
 package io.github.masyumero.emextras.datagen.client.lang;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Locale;
-import java.util.concurrent.CompletableFuture;
-
 import io.github.masyumero.emextras.EMExtras;
 import mekanism.api.gear.ModuleData;
 import mekanism.api.text.IHasTranslationKey;
@@ -28,6 +23,11 @@ import net.minecraft.world.entity.EntityType;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.LanguageProvider;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Collection;
+import java.util.List;
+import java.util.Locale;
+import java.util.concurrent.CompletableFuture;
 
 public abstract class BaseLanguageProvider extends LanguageProvider {
 

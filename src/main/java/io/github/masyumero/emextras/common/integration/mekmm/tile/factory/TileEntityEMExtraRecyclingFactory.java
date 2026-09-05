@@ -1,5 +1,10 @@
 package io.github.masyumero.emextras.common.integration.mekmm.tile.factory;
 
+import com.jerry.mekmm.api.recipes.RecyclerRecipe;
+import com.jerry.mekmm.api.recipes.cache.MoreMachineOneInputCachedRecipe;
+import com.jerry.mekmm.api.recipes.outputs.MoreMachineOutputHelper;
+import com.jerry.mekmm.client.recipe_viewer.MoreMachineRecipeViewerRecipeType;
+import com.jerry.mekmm.common.recipe.MoreMachineRecipeType;
 import io.github.masyumero.emextras.common.integration.mekmm.inventory.slot.EMExtraMoreMachineFactoryInputInventorySlot;
 import io.github.masyumero.emextras.common.integration.mekmm.inventory.slot.EMExtraMoreMachineFactoryOutputInventorySlot;
 import mekanism.api.IContentsListener;
@@ -19,7 +24,6 @@ import mekanism.common.recipe.lookup.cache.InputRecipeCache.SingleItem;
 import mekanism.common.recipe.lookup.monitor.FactoryRecipeCacheLookupMonitor;
 import mekanism.common.upgrade.MachineUpgradeData;
 import mekanism.common.util.InventoryUtils;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
@@ -28,12 +32,6 @@ import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.common.util.TriPredicate;
-
-import com.jerry.mekmm.api.recipes.RecyclerRecipe;
-import com.jerry.mekmm.api.recipes.cache.MoreMachineOneInputCachedRecipe;
-import com.jerry.mekmm.api.recipes.outputs.MoreMachineOutputHelper;
-import com.jerry.mekmm.client.recipe_viewer.MoreMachineRecipeViewerRecipeType;
-import com.jerry.mekmm.common.recipe.MoreMachineRecipeType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

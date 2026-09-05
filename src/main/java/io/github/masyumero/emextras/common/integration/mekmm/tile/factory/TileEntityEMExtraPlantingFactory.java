@@ -2,10 +2,14 @@ package io.github.masyumero.emextras.common.integration.mekmm.tile.factory;
 
 import com.jerry.mekextras.api.recipes.cache.StackableItemStackConstantChemicalToObjectCachedRecipe;
 import com.jerry.mekextras.api.recipes.cache.StackablePlantingCachedRecipe;
-
+import com.jerry.mekmm.api.recipes.PlantingRecipe;
+import com.jerry.mekmm.api.recipes.cache.PlantingNoPerTickUsageCacheRecipe;
+import com.jerry.mekmm.client.recipe_viewer.MoreMachineRecipeViewerRecipeType;
+import com.jerry.mekmm.common.recipe.MoreMachineRecipeType;
+import com.jerry.mekmm.common.tile.machine.TileEntityPlantingStation;
+import com.jerry.mekmm.common.upgrade.PlantingUpgradeData;
 import io.github.masyumero.emextras.common.integration.mekmm.inventory.slot.EMExtraMoreMachineFactoryInputInventorySlot;
 import io.github.masyumero.emextras.common.integration.mekmm.inventory.slot.EMExtraMoreMachineFactoryOutputInventorySlot;
-
 import lombok.Getter;
 import mekanism.api.IContentsListener;
 import mekanism.api.RelativeSide;
@@ -45,7 +49,6 @@ import mekanism.common.upgrade.IUpgradeData;
 import mekanism.common.util.InventoryUtils;
 import mekanism.common.util.MekanismUtils;
 import mekanism.common.util.StatUtils;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
@@ -54,13 +57,6 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-
-import com.jerry.mekmm.api.recipes.PlantingRecipe;
-import com.jerry.mekmm.api.recipes.cache.PlantingNoPerTickUsageCacheRecipe;
-import com.jerry.mekmm.client.recipe_viewer.MoreMachineRecipeViewerRecipeType;
-import com.jerry.mekmm.common.recipe.MoreMachineRecipeType;
-import com.jerry.mekmm.common.tile.machine.TileEntityPlantingStation;
-import com.jerry.mekmm.common.upgrade.PlantingUpgradeData;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
