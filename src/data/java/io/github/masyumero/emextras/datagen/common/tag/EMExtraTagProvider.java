@@ -1,11 +1,17 @@
 package io.github.masyumero.emextras.datagen.common.tag;
 
 import io.github.masyumero.emextras.EMExtras;
+import io.github.masyumero.emextras.common.integration.mekaf.registries.EMExtraAdvancedFactoryBlocks;
+import io.github.masyumero.emextras.common.integration.mekmm.registries.EMExtraMoreMachineBlocks;
+import io.github.masyumero.emextras.common.registry.EMExtraBlocks;
 import io.github.masyumero.emextras.common.registry.EMExtraItems;
 import io.github.masyumero.emextras.common.tags.EMExtraTags;
 import mekanism.common.tags.MekanismTags;
+import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.Nullable;
 
@@ -20,6 +26,22 @@ public class EMExtraTagProvider extends BaseTagProvider {
     @Override
     protected void registerTags(HolderLookup.Provider registries) {
         addCircuits();
+
+        addMineablePickaxeTag(EMExtraBlocks.getEMExtraFactoryBlocks());
+        if (EMExtras.hooks.mekmm.isLoaded()) {
+            addMineablePickaxeOptionalTag(EMExtraAdvancedFactoryBlocks.getEMExtraAdvancedFactoryBlocks());
+            addMineablePickaxeOptionalTag(EMExtraMoreMachineBlocks.getEMExtraMoreMachineFactoryBlocks());
+        }
+    }
+
+    @SafeVarargs
+    private void addMineablePickaxeOptionalTag(Holder<Block>... provider) {
+        addToHarvestOptionalTag(BlockTags.MINEABLE_WITH_PICKAXE, provider);
+    }
+
+    @SafeVarargs
+    private void addMineablePickaxeTag(Holder<Block>... provider) {
+        addToHarvestTag(BlockTags.MINEABLE_WITH_PICKAXE, provider);
     }
 
     private void addCircuits() {
