@@ -1,0 +1,300 @@
+{
+  "values": [
+    "emextras:absolute_overclocked_smelting_factory",
+    "emextras:absolute_overclocked_enriching_factory",
+    "emextras:absolute_overclocked_crushing_factory",
+    "emextras:absolute_overclocked_compressing_factory",
+    "emextras:absolute_overclocked_combining_factory",
+    "emextras:absolute_overclocked_purifying_factory",
+    "emextras:absolute_overclocked_injecting_factory",
+    "emextras:absolute_overclocked_infusing_factory",
+    "emextras:absolute_overclocked_sawing_factory",
+    "emextras:absolute_overclocked_alloying_factory",
+    "emextras:supreme_quantum_smelting_factory",
+    "emextras:supreme_quantum_enriching_factory",
+    "emextras:supreme_quantum_crushing_factory",
+    "emextras:supreme_quantum_compressing_factory",
+    "emextras:supreme_quantum_combining_factory",
+    "emextras:supreme_quantum_purifying_factory",
+    "emextras:supreme_quantum_injecting_factory",
+    "emextras:supreme_quantum_infusing_factory",
+    "emextras:supreme_quantum_sawing_factory",
+    "emextras:supreme_quantum_alloying_factory",
+    "emextras:cosmic_dense_smelting_factory",
+    "emextras:cosmic_dense_enriching_factory",
+    "emextras:cosmic_dense_crushing_factory",
+    "emextras:cosmic_dense_compressing_factory",
+    "emextras:cosmic_dense_combining_factory",
+    "emextras:cosmic_dense_purifying_factory",
+    "emextras:cosmic_dense_injecting_factory",
+    "emextras:cosmic_dense_infusing_factory",
+    "emextras:cosmic_dense_sawing_factory",
+    "emextras:cosmic_dense_alloying_factory",
+    "emextras:infinite_multiversal_smelting_factory",
+    "emextras:infinite_multiversal_enriching_factory",
+    "emextras:infinite_multiversal_crushing_factory",
+    "emextras:infinite_multiversal_compressing_factory",
+    "emextras:infinite_multiversal_combining_factory",
+    "emextras:infinite_multiversal_purifying_factory",
+    "emextras:infinite_multiversal_injecting_factory",
+    "emextras:infinite_multiversal_infusing_factory",
+    "emextras:infinite_multiversal_sawing_factory",
+    "emextras:infinite_multiversal_alloying_factory",
+    {
+      "id": "emextras:absolute_overclocked_oxidizing_factory",
+      "required": false
+    },
+    {
+      "id": "emextras:absolute_overclocked_dissolving_factory",
+      "required": false
+    },
+    {
+      "id": "emextras:absolute_overclocked_washing_factory",
+      "required": false
+    },
+    {
+      "id": "emextras:absolute_overclocked_crystallizing_factory",
+      "required": false
+    },
+    {
+      "id": "emextras:absolute_overclocked_pressurised_reacting_factory",
+      "required": false
+    },
+    {
+      "id": "emextras:absolute_overclocked_centrifuging_factory",
+      "required": false
+    },
+    {
+      "id": "emextras:absolute_overclocked_liquifying_factory",
+      "required": false
+    },
+    {
+      "id": "emextras:absolute_overclocked_pigment_extracting_factory",
+      "required": false
+    },
+    {
+      "id": "emextras:absolute_overclocked_painting_factory",
+      "required": false
+    },
+    {
+      "id": "emextras:supreme_quantum_oxidizing_factory",
+      "required": false
+    },
+    {
+      "id": "emextras:supreme_quantum_dissolving_factory",
+      "required": false
+    },
+    {
+      "id": "emextras:supreme_quantum_washing_factory",
+      "required": false
+    },
+    {
+      "id": "emextras:supreme_quantum_crystallizing_factory",
+      "required": false
+    },
+    {
+      "id": "emextras:supreme_quantum_pressurised_reacting_factory",
+      "required": false
+    },
+    {
+      "id": "emextras:supreme_quantum_centrifuging_factory",
+      "required": false
+    },
+    {
+      "id": "emextras:supreme_quantum_liquifying_factory",
+      "required": false
+    },
+    {
+      "id": "emextras:supreme_quantum_pigment_extracting_factory",
+      "required": false
+    },
+    {
+      "id": "emextras:supreme_quantum_painting_factory",
+      "required": false
+    },
+    {
+      "id": "emextras:cosmic_dense_oxidizing_factory",
+      "required": false
+    },
+    {
+      "id": "emextras:cosmic_dense_dissolving_factory",
+      "required": false
+    },
+    {
+      "id": "emextras:cosmic_dense_washing_factory",
+      "required": false
+    },
+    {
+      "id": "emextras:cosmic_dense_crystallizing_factory",
+      "required": false
+    },
+    {
+      "id": "emextras:cosmic_dense_pressurised_reacting_factory",
+      "required": false
+    },
+    {
+      "id": "emextras:cosmic_dense_centrifuging_factory",
+      "required": false
+    },
+    {
+      "id": "emextras:cosmic_dense_liquifying_factory",
+      "required": false
+    },
+    {
+      "id": "emextras:cosmic_dense_pigment_extracting_factory",
+      "required": false
+    },
+    {
+      "id": "emextras:cosmic_dense_painting_factory",
+      "required": false
+    },
+    {
+      "id": "emextras:infinite_multiversal_oxidizing_factory",
+      "required": false
+    },
+    {
+      "id": "emextras:infinite_multiversal_dissolving_factory",
+      "required": false
+    },
+    {
+      "id": "emextras:infinite_multiversal_washing_factory",
+      "required": false
+    },
+    {
+      "id": "emextras:infinite_multiversal_crystallizing_factory",
+      "required": false
+    },
+    {
+      "id": "emextras:infinite_multiversal_pressurised_reacting_factory",
+      "required": false
+    },
+    {
+      "id": "emextras:infinite_multiversal_centrifuging_factory",
+      "required": false
+    },
+    {
+      "id": "emextras:infinite_multiversal_liquifying_factory",
+      "required": false
+    },
+    {
+      "id": "emextras:infinite_multiversal_pigment_extracting_factory",
+      "required": false
+    },
+    {
+      "id": "emextras:infinite_multiversal_painting_factory",
+      "required": false
+    },
+    {
+      "id": "emextras:absolute_overclocked_recycling_factory",
+      "required": false
+    },
+    {
+      "id": "emextras:absolute_overclocked_planting_factory",
+      "required": false
+    },
+    {
+      "id": "emextras:absolute_overclocked_stamping_factory",
+      "required": false
+    },
+    {
+      "id": "emextras:absolute_overclocked_lathing_factory",
+      "required": false
+    },
+    {
+      "id": "emextras:absolute_overclocked_rolling_mill_factory",
+      "required": false
+    },
+    {
+      "id": "emextras:absolute_overclocked_pressing_factory",
+      "required": false
+    },
+    {
+      "id": "emextras:absolute_overclocked_replicating_factory",
+      "required": false
+    },
+    {
+      "id": "emextras:supreme_quantum_recycling_factory",
+      "required": false
+    },
+    {
+      "id": "emextras:supreme_quantum_planting_factory",
+      "required": false
+    },
+    {
+      "id": "emextras:supreme_quantum_stamping_factory",
+      "required": false
+    },
+    {
+      "id": "emextras:supreme_quantum_lathing_factory",
+      "required": false
+    },
+    {
+      "id": "emextras:supreme_quantum_rolling_mill_factory",
+      "required": false
+    },
+    {
+      "id": "emextras:supreme_quantum_pressing_factory",
+      "required": false
+    },
+    {
+      "id": "emextras:supreme_quantum_replicating_factory",
+      "required": false
+    },
+    {
+      "id": "emextras:cosmic_dense_recycling_factory",
+      "required": false
+    },
+    {
+      "id": "emextras:cosmic_dense_planting_factory",
+      "required": false
+    },
+    {
+      "id": "emextras:cosmic_dense_stamping_factory",
+      "required": false
+    },
+    {
+      "id": "emextras:cosmic_dense_lathing_factory",
+      "required": false
+    },
+    {
+      "id": "emextras:cosmic_dense_rolling_mill_factory",
+      "required": false
+    },
+    {
+      "id": "emextras:cosmic_dense_pressing_factory",
+      "required": false
+    },
+    {
+      "id": "emextras:cosmic_dense_replicating_factory",
+      "required": false
+    },
+    {
+      "id": "emextras:infinite_multiversal_recycling_factory",
+      "required": false
+    },
+    {
+      "id": "emextras:infinite_multiversal_planting_factory",
+      "required": false
+    },
+    {
+      "id": "emextras:infinite_multiversal_stamping_factory",
+      "required": false
+    },
+    {
+      "id": "emextras:infinite_multiversal_lathing_factory",
+      "required": false
+    },
+    {
+      "id": "emextras:infinite_multiversal_rolling_mill_factory",
+      "required": false
+    },
+    {
+      "id": "emextras:infinite_multiversal_pressing_factory",
+      "required": false
+    },
+    {
+      "id": "emextras:infinite_multiversal_replicating_factory",
+      "required": false
+    }
+  ]
+}
