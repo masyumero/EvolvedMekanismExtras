@@ -108,7 +108,6 @@ public class EMExtraBlocks {
     public static final BlockRegistryObject<EMExtraBlockThermodynamicConductor, EMExtraItemBlockThermodynamicConductor> COSMIC_DENSE_THERMODYNAMIC_CONDUCTOR = registerThermodynamicConductor("cosmic_dense", ConductorTier.ELITE);
     public static final BlockRegistryObject<EMExtraBlockThermodynamicConductor, EMExtraItemBlockThermodynamicConductor> INFINITE_MULTIVERSAL_THERMODYNAMIC_CONDUCTOR = registerThermodynamicConductor("infinite_multiversal", ConductorTier.ULTIMATE);
 
-
     private static <TILE extends TileEntityEMExtraFactory<?>> BlockRegistryObject<BlockEMExtraFactoryMachine.BlockEMExtraFactory<?>, ItemBlockEMExtraFactory> registerFactory(EMExtraFactory<TILE> type) {
         IEMExtraTier tier = Objects.requireNonNull(type.get(EMExtraAttributeTier.class)).tier();
         return registerTieredBlock(tier.getEMExtraTier().getLowerName(), "_" + type.getFactoryType().getRegistryNameComponent() + "_factory", () -> new BlockEMExtraFactoryMachine.BlockEMExtraFactory<>(type), ItemBlockEMExtraFactory::new);

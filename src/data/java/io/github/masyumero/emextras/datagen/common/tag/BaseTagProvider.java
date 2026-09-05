@@ -204,6 +204,15 @@ public abstract class BaseTagProvider implements DataProvider {
         }
     }
 
+    protected void addToHarvestOptionalTag(TagKey<Block> tag, IBlockProvider... blockProviders) {
+        IntrinsicMekanismTagBuilder<Block> tagBuilder = getBlockBuilder(tag);
+        for (IBlockProvider blockProvider : blockProviders) {
+            Block block = blockProvider.getBlock();
+            tagBuilder.addOptional(block);
+            hasHarvestData(block);
+        }
+    }
+
     protected void addToHarvestTag(TagKey<Block> tag, IBlockProvider... blockProviders) {
         IntrinsicMekanismTagBuilder<Block> tagBuilder = getBlockBuilder(tag);
         for (IBlockProvider blockProvider : blockProviders) {
