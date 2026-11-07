@@ -40,9 +40,6 @@ public class EMExtraMMCatalystRegistryHelper {
                 register(registry, recipeType, MoreMachineBlocks.CNC_ROLLING_MILL, needOrdinary);
             } else if (category == MoreMachineJEIRecipeType.REPLICATOR) {
                 register(registry, recipeType, MoreMachineBlocks.REPLICATOR, needOrdinary);
-            } else if (category == MekanismJEIRecipeType.GAS_CONVERSION) {
-                register(registry, recipeType, MoreMachineBlocks.PLANTING_STATION, needOrdinary);
-                register(registry, recipeType, MoreMachineBlocks.REPLICATOR, needOrdinary);
             }
         }
     }
