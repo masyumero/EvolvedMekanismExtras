@@ -25,7 +25,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(value = ExtraItemTierInstaller.class, remap = false)
+@Mixin(value = ExtraItemTierInstaller.class)
 public class MixinExtraItemTierInstaller {
 
     @Mutable
@@ -38,7 +38,7 @@ public class MixinExtraItemTierInstaller {
         emextras$toTier = EMExtraTierUtils.advancedToEMExtraTier(toTier);
     }
 
-    @Inject(method = "useOn", at = @At("TAIL"), remap = true, cancellable = true)
+    @Inject(method = "useOn", at = @At("TAIL"), cancellable = true)
     private void useOnInject(UseOnContext context, CallbackInfoReturnable<InteractionResult> cir, @Local(name = "pos") BlockPos pos, @Local(name = "world") Level world) {
         if (WorldUtils.getTileEntity(world, pos) instanceof TileEntityFactory) {
             cir.setReturnValue(ImplMixinItemTierInstallers.emextras$useOn(context, emextras$toTier));
