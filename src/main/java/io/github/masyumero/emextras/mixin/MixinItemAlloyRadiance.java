@@ -31,7 +31,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(value = ItemAlloyRadiance.class, remap = false)
+@Mixin(value = ItemAlloyRadiance.class)
 public abstract class MixinItemAlloyRadiance {
 
     @Unique
@@ -47,13 +47,13 @@ public abstract class MixinItemAlloyRadiance {
     @Definition(id = "world", local = @Local(type = Level.class, name = "world"))
     @Definition(id = "isClientSide", field = "Lnet/minecraft/world/level/Level;isClientSide:Z")
     @Expression("world.isClientSide")
-    @Inject(method = "useOn", at = @At(value = "MIXINEXTRAS:EXPRESSION"), remap = true)
+    @Inject(method = "useOn", at = @At(value = "MIXINEXTRAS:EXPRESSION"))
     private void useOnInject(UseOnContext context, CallbackInfoReturnable<InteractionResult> cir, @Local(name = "player") Player player) {
         emextras$isEMExtra = player.getOffhandItem().getItem() instanceof ItemAlloy alloy && alloy.getTier().ordinal() > 2;
         emextras$beforeTier = null;
     }
 
-    @Inject(method = "onExtraAlloyInteraction", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;shrink(I)V"), remap = true)
+    @Inject(method = "onExtraAlloyInteraction", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;shrink(I)V"))
     private void shrinkOffHandItemInject(Player player, ItemStack stack, Level level, BlockPos worldPosition, TileEntityTransmitter tileEntityTransmitter, CallbackInfo ci) {
         if (emextras$isEMExtra) {
             player.getOffhandItem().shrink(1);
@@ -65,10 +65,10 @@ public abstract class MixinItemAlloyRadiance {
     @Definition(id = "getTier", method = "Lmekanism/common/content/network/transmitter/IUpgradeableTransmitter;getTier()Lmekanism/api/tier/ITier;")
     @Definition(id = "getBaseTier", method = "Lmekanism/api/tier/ITier;getBaseTier()Lmekanism/api/tier/BaseTier;")
     @Expression("upgradeableTransmitter.getTier().getBaseTier() == ?")
-    @ModifyExpressionValue(method = "onExtraAlloyInteraction", at = @At("MIXINEXTRAS:EXPRESSION"))
+    @ModifyExpressionValue(method = "onExtraAlloyInteraction", at = @At("MIXINEXTRAS:EXPRESSION"), remap = false)
     private boolean checkIsUpgradeableModifyExpressionValue(boolean original, @Local(name = "upgradeableTransmitter") IUpgradeableTransmitter<?> upgradeableTransmitter) {
         BaseTier transmitterBaseTier = upgradeableTransmitter.getTier().getBaseTier();
-        emextras$isEvolved = transmitterBaseTier  == EMBaseTier.OVERCLOCKED;
+        emextras$isEvolved = transmitterBaseTier == EMBaseTier.OVERCLOCKED;
         if (emextras$isEvolved) {
             emextras$isEMExtra = false;
         }
@@ -88,7 +88,7 @@ public abstract class MixinItemAlloyRadiance {
     @Definition(id = "upgradedTransmitter", local = @Local(type = Transmitter.class, name = "upgradedTransmitter"))
     @Definition(id = "IUpgradeableTransmitter", type = IUpgradeableTransmitter.class)
     @Expression("upgradedTransmitter instanceof IUpgradeableTransmitter")
-    @ModifyExpressionValue(method = "onExtraAlloyInteraction", at = @At("MIXINEXTRAS:EXPRESSION"))
+    @ModifyExpressionValue(method = "onExtraAlloyInteraction", at = @At("MIXINEXTRAS:EXPRESSION"), remap = false)
     private boolean onExtraAlloyInteractionModifyExpressionValue(boolean original) {
         return original && !emextras$isEMExtra && !emextras$isEvolved;
     }
@@ -96,7 +96,7 @@ public abstract class MixinItemAlloyRadiance {
     @Definition(id = "upgradedTransmitter", local = @Local(type = Transmitter.class, name = "upgradedTransmitter"))
     @Definition(id = "IUpgradeableTransmitter", type = IUpgradeableTransmitter.class)
     @Expression("upgradedTransmitter instanceof IUpgradeableTransmitter")
-    @Inject(method = "onExtraAlloyInteraction", at = @At(value = "MIXINEXTRAS:EXPRESSION"))
+    @Inject(method = "onExtraAlloyInteraction", at = @At(value = "MIXINEXTRAS:EXPRESSION"), remap = false)
     private void onExtraAlloyInteractionInject(Player player, ItemStack stack, Level level, BlockPos worldPosition, TileEntityTransmitter tileEntityTransmitter, CallbackInfo ci, @Local(name = "upgradedTransmitter") Transmitter<?, ?, ?> upgradedTransmitter, @Local(name = "upgradeData") TransmitterUpgradeData upgradeData) {
         if (emextras$isEMExtra || emextras$isEvolved) {
             if (upgradedTransmitter instanceof IUpgradeableTransmitter) {
@@ -111,14 +111,14 @@ public abstract class MixinItemAlloyRadiance {
     @Definition(id = "warn", method = "Lorg/slf4j/Logger;warn(Ljava/lang/String;Ljava/lang/Throwable;)V")
     @Definition(id = "IllegalStateException", type = IllegalStateException.class)
     @Expression("logger.warn('Unhandled upgrade data.', new IllegalStateException())")
-    @Redirect(method = "onExtraAlloyInteraction", at = @At("MIXINEXTRAS:EXPRESSION"))
+    @Redirect(method = "onExtraAlloyInteraction", at = @At("MIXINEXTRAS:EXPRESSION"), remap = false)
     private void loggerRedirect(Logger instance, String s, Throwable throwable) {
         if (!emextras$isEMExtra && !emextras$isEvolved) {
             instance.warn(s, throwable);
         }
     }
 
-    @Inject(method = "getiBlockProvider", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "getiBlockProvider", at = @At("HEAD"), cancellable = true, remap = false)
     private static void getiBlockProviderInject(TileEntityTransmitter transmitterTile, CallbackInfoReturnable<IBlockProvider> cir) {
         if (emextras$isEMExtra || emextras$isEvolved) {
             if (transmitterTile instanceof TileEntityPressurizedTube) {
